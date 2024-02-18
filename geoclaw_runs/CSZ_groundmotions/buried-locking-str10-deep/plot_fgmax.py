@@ -10,7 +10,7 @@ from clawpack.geoclaw import fgmax_tools
 from clawpack.visclaw import geoplot, plottools
 from matplotlib import colors
 
-name = os.path.split(os.getcwd())[-1]
+event = os.path.split(os.getcwd())[-1]
 
 bounds_eta = [0.1] + list(numpy.linspace(0.5,12,6))
 
@@ -29,6 +29,8 @@ norm_eta = colors.BoundaryNorm(bounds_eta, cmap_eta.N)
 
 def plot_fgmax_grid(outdir,plotdir):
 
+    os.system('mkdir -p %s' % plotdir)
+
     fg = fgmax_tools.FGmaxGrid()
     fg.outdir = outdir
     data_file = os.path.join(outdir, 'fgmax_grids.data')
@@ -38,7 +40,7 @@ def plot_fgmax_grid(outdir,plotdir):
 
     clines_zeta = list(numpy.linspace(0,3,7)) + [10]
     colors = geoplot.discrete_cmap_1(clines_zeta)
-    plt.figure(1)
+    plt.figure(1, figsize=(5,8))
     plt.clf()
     zeta = numpy.where(fg.B>0, fg.h, fg.h+fg.B)   # surface elevation in ocean
     #plt.contourf(fg.X,fg.Y,zeta,clines_zeta,colors=colors)
@@ -48,7 +50,7 @@ def plot_fgmax_grid(outdir,plotdir):
     cb = plt.colorbar(pc, extend='max', shrink=0.7)
     cb.set_label('meters')
     plt.contour(fg.X,fg.Y,fg.B,[0.],colors='k')  # coastline
-    plt.title("Maximum amplitude\n%s" % name)
+    plt.title("Maximum amplitude\n%s" % event)
 
     if 0:
         # plot arrival time contours and label:
@@ -58,7 +60,7 @@ def plot_fgmax_grid(outdir,plotdir):
         clines_t_colors = ([.5,.5,.5],)
         con_t = plt.contour(fg.X,fg.Y,arrival_t, clines_t,colors=clines_t_colors) 
         plt.clabel(con_t, clines_t_label)
-        plt.title("Maximum amplitude / arrival times\n%s" % name)
+        plt.title("Maximum amplitude / arrival times\n%s" % event)
 
     # fix axes:
     plt.ticklabel_format(style='plain',useOffset=False)
@@ -67,9 +69,9 @@ def plot_fgmax_grid(outdir,plotdir):
 
     if not os.path.isdir(plotdir): 
         os.mkdir(plotdir)
-    fname = os.path.join(plotdir, "amplitude_times.png")
+    fname = os.path.join(plotdir, "%s_amplitude.png" % event)
     plt.savefig(fname)
     print("Created ",fname)
 
 if __name__=="__main__":
-    plot_fgmax_grid(outdir='_output', plotdir='.')
+    plot_fgmax_grid(outdir='_output', plotdir='_plots')

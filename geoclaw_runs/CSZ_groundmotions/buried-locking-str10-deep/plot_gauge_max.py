@@ -8,7 +8,7 @@ from pylab import *
 
 import clawpack.pyclaw.gauges as gauges
 from clawpack.geoclaw import topotools
-from clawpack.visclaw import plottools, geoplot
+from clawpack.visclaw import plottools, geoplot, gaugetools
 from clawpack.geoclaw import fgout_tools
 
 event = os.path.split(os.getcwd())[-1]
@@ -22,9 +22,13 @@ etopo = topotools.Topography('/Users/rjl/topo/topofiles/etopo1_-163_-122_38_63.a
 
 plot_eta = True
 
-gaugenos = range(1,642,20)
+#gaugenos = range(1,642,20)
 
-def read_gauges(outdir):
+def read_gauges(outdir, gaugenos=None):
+    if gaugenos is None:
+        setgauges = gaugetools.read_setgauges(outdir)
+        gaugenos = setgauges.gauge_numbers
+    
     xg = []
     yg = []
     gmax = []
@@ -35,9 +39,17 @@ def read_gauges(outdir):
         xg.append(gauge.location[0])
         yg.append(gauge.location[1])
 
+    # sort gauges from south to north
+    isort = argsort(yg)
+    gaugenos = [gaugenos[i] for i in isort]
+    print('+++ gaugenos sorted S to N:\n  ',gaugenos)
     gmax = array(gmax)
     xg = array(xg)
     yg = array(yg)
+    xg = xg[isort]
+    yg = yg[isort]
+    gmax = gmax[isort]
+
     return xg,yg,gmax
 
 outdir = '_output'
@@ -72,6 +84,7 @@ else:
                     linestyles='-', linewidths=0.5, colors='gray')
     #clabel(CS)
     
+ax.grid(linewidth=0.3,color='w')
 ax.plot(xg,yg,'ko',markersize=3)  # gauge locations
 
 xlimits = [-130,-122]
@@ -88,21 +101,24 @@ ax.set_ylabel('latitude')
 ax2 = axes([0.1,0.1,0.3,0.8])
 #ax2 = axes([0.75,0.1,0.2,0.8], sharey=ax)
 
+plot_line = False  # plot horiz line at each gauge amplitude
 
 if outdir_instant is not None:
     xgi,ygi,gmaxi = read_gauges(outdir_instant)
     base = zeros(len(gmaxi))
     ampl = base + gmaxi
     ax2.plot(ampl,ygi,'r-', label='instantaneous')
-    for k in range(len(ygi)):
-        ax2.plot([base[k],ampl[k]], [ygi[k],ygi[k]], 'r-')    
+    if plot_line:
+        for k in range(len(ygi)):
+            ax2.plot([base[k],ampl[k]], [ygi[k],ygi[k]], 'r-')    
 
 
 base = zeros(len(gmax))
 ampl = base + gmax
 ax2.plot(ampl,yg,'b-', label='time-dependent')
-for k in range(len(yg)):
-    ax2.plot([base[k],ampl[k]], [yg[k],yg[k]], 'b-')
+if plot_line:
+    for k in range(len(yg)):
+        ax2.plot([base[k],ampl[k]], [yg[k],yg[k]], 'b-')
     
 ax2.set_title('maximum amplitude at gauges\n%s' % event)
 ax2.grid(True)

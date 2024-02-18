@@ -305,7 +305,7 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # max number of refinement levels:
-    amrdata.amr_levels_max = 4
+    amrdata.amr_levels_max = 3
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -313,7 +313,10 @@ def setrun(claw_pkg='geoclaw'):
     # refinement_ratios = [10,2,4,5,3,3,3]
 
     # dx = dy = 1deg, 6', 1', 15"
-    refinement_ratios = [10,6,4]
+    #refinement_ratios = [10,6,4]
+
+    # dx = dy = 1deg, 6', 30", 15"
+    refinement_ratios = [10,12,2]
     amrdata.refinement_ratios_x = refinement_ratios
     amrdata.refinement_ratios_y = refinement_ratios
     amrdata.refinement_ratios_t = refinement_ratios
@@ -440,19 +443,20 @@ def setrun(claw_pkg='geoclaw'):
                                  clawdata.upper[1]+0.1]
     flagregions.append(flagregion)
 
+    if 0:
     # Source Variable Region - 3min to 45sec:
-    flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_dtopo'
-    flagregion.minlevel = 3
-    flagregion.maxlevel = 4
-    flagregion.t1 = 0.
-    flagregion.t2 = 30.
-    flagregion.spatial_region_type = 1  # Rectangle
-    source_region = [-129,-122.1,38.5,50]
-    flagregion.spatial_region = source_region
-    flagregions.append(flagregion)
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_dtopo'
+        flagregion.minlevel = 3
+        flagregion.maxlevel = 4
+        flagregion.t1 = 0.
+        flagregion.t2 = 30.
+        flagregion.spatial_region_type = 1  # Rectangle
+        source_region = [-129,-122.1,38.5,50]
+        flagregion.spatial_region = source_region
+        flagregions.append(flagregion)
 
-    # Continential shelf Variable Region - 45sec:
+    # Continential shelf Variable Region 
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_46_51'
     flagregion.minlevel = 4
@@ -464,7 +468,7 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_46_51.data')
     flagregions.append(flagregion)
     
-    # Continential shelf Variable Region - 45sec:
+    # Continential shelf Variable Region
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_40_46'
     flagregion.minlevel = 4
@@ -535,13 +539,19 @@ def setrun(claw_pkg='geoclaw'):
 
     asce_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/asce_values.txt'
     asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
-    for k in range(0,len(asce_gauges),20):
+    for k in range(0,len(asce_gauges),10):
         gaugeno = int(asce_gauges[k,0])
         gx = float(asce_gauges[k,1])
         gy = float(asce_gauges[k,2])
         if gy >= 40:
             rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
-    
+    VI_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/gaugesVI.txt'
+    VI_gauges = np.loadtxt(VI_gagues_file, skiprows=1)
+    for k in range(0,len(VI_gauges),1):
+        gaugeno = int(VI_gauges[k,0])
+        gx = float(VI_gauges[k,1])
+        gy = float(VI_gauges[k,2])
+        rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
 
 
     # == fgmax_grids.data values ==
@@ -574,9 +584,9 @@ def setrun(claw_pkg='geoclaw'):
     fg.dy = dx_fine
     fg.tstart_max =  0.      # when to start monitoring max values
     fg.tend_max = 1.e10       # when to stop monitoring max values
-    fg.dt_check = 30.         # target time (sec) increment between updating
+    fg.dt_check = 10.         # target time (sec) increment between updating
                               # max values
-    fg.min_level_check = 4    # which levels to monitor max on
+    fg.min_level_check = 3    # which levels to monitor max on
     fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
 
     fg.interp_method = 0      # 0 ==> pw const in cells, recommended

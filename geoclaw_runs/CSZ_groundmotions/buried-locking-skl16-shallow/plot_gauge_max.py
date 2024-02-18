@@ -12,8 +12,8 @@ from clawpack.visclaw import plottools, geoplot, gaugetools
 from clawpack.geoclaw import fgout_tools
 
 event = os.path.split(os.getcwd())[-1]
-#outdir_instant = '../%s_instant/_output' % event
-outdir_instant = None
+outdir_instant = '../%s_instant/_output' % event
+#outdir_instant = None
 
 plotdir = '_plots'
 os.system('mkdir -p %s' % plotdir)
@@ -22,7 +22,7 @@ etopo = topotools.Topography('/Users/rjl/topo/topofiles/etopo1_-163_-122_38_63.a
 
 plot_eta = True
 
-gaugenos = range(1,642,20)
+#gaugenos = range(1,642,20)
 
 def read_gauges(outdir, gaugenos=None):
     if gaugenos is None:
@@ -101,21 +101,24 @@ ax.set_ylabel('latitude')
 ax2 = axes([0.1,0.1,0.3,0.8])
 #ax2 = axes([0.75,0.1,0.2,0.8], sharey=ax)
 
+plot_line = False  # plot horiz line at each gauge amplitude
 
 if outdir_instant is not None:
     xgi,ygi,gmaxi = read_gauges(outdir_instant)
     base = zeros(len(gmaxi))
     ampl = base + gmaxi
     ax2.plot(ampl,ygi,'r-', label='instantaneous')
-    for k in range(len(ygi)):
-        ax2.plot([base[k],ampl[k]], [ygi[k],ygi[k]], 'r-')    
+    if plot_line:
+        for k in range(len(ygi)):
+            ax2.plot([base[k],ampl[k]], [ygi[k],ygi[k]], 'r-')    
 
 
 base = zeros(len(gmax))
 ampl = base + gmax
 ax2.plot(ampl,yg,'b-', label='time-dependent')
-for k in range(len(yg)):
-    ax2.plot([base[k],ampl[k]], [yg[k],yg[k]], 'b-')
+if plot_line:
+    for k in range(len(yg)):
+        ax2.plot([base[k],ampl[k]], [yg[k],yg[k]], 'b-')
     
 ax2.set_title('maximum amplitude at gauges\n%s' % event)
 ax2.grid(True)

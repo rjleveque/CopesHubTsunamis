@@ -56,7 +56,7 @@ eta = ma.masked_where(fgout1.h<0.001, fgout1.eta)
 
 eta_plot = plottools.pcolorcells(fgout1.X,fgout1.Y,eta,
                                  cmap=geoplot.tsunami_colormap)
-clim(-5,5)
+clim(-2,2)
 cb = colorbar(eta_plot, extend='both', shrink=0.5)
 cb.set_label('meters')
 title_text = title('Surface at time %s\n%s' \
