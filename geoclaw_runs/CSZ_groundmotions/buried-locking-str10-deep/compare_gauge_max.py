@@ -12,10 +12,12 @@ from clawpack.visclaw import plottools, geoplot, gaugetools
 from clawpack.geoclaw import fgout_tools
 
 event = os.path.split(os.getcwd())[-1]
+#outdir_instant = '../%s_instant/_output' % event
+outdir_instant = None
 
-outdir = '_output6'
-outdir_instant = '../%s_instant/_output3' % event
-#outdir_instant = None
+outdir1 = '_output6'
+outdir2 = '_output4'
+outdir3 = '_output5'
 
 plotdir = '_plots'
 os.system('mkdir -p %s' % plotdir)
@@ -54,6 +56,7 @@ def read_gauges(outdir, gaugenos=None):
 
     return xg,yg,gmax
 
+outdir = outdir1
 xg,yg,gmax = read_gauges(outdir)
 
 figure(201, figsize=(11,8))
@@ -113,22 +116,33 @@ if outdir_instant is not None:
         for k in range(len(ygi)):
             ax2.plot([base[k],ampl[k]], [ygi[k],ygi[k]], 'r-')    
 
+if outdir1 is not None:
+    xgi,ygi,gmaxi = read_gauges(outdir1)
+    base = zeros(len(gmaxi))
+    ampl = base + gmaxi
+    ax2.plot(ampl,ygi,'b-', label=outdir1.replace('_',''))
 
-base = zeros(len(gmax))
-ampl = base + gmax
-ax2.plot(ampl,yg,'b-', label='time-dependent')
-if plot_line:
-    for k in range(len(yg)):
-        ax2.plot([base[k],ampl[k]], [yg[k],yg[k]], 'b-')
-    
+if outdir2 is not None:
+    xgi,ygi,gmaxi = read_gauges(outdir2)
+    base = zeros(len(gmaxi))
+    ampl = base + gmaxi
+    ax2.plot(ampl,ygi,'r-', label=outdir2.replace('_',''))
+
+if outdir3 is not None:
+    xgi,ygi,gmaxi = read_gauges(outdir3)
+    base = zeros(len(gmaxi))
+    ampl = base + gmaxi
+    ax2.plot(ampl,ygi,'g-', label=outdir3.replace('_',''))
+
+
 ax2.set_title('maximum amplitude at gauges\n%s' % event)
 ax2.grid(True)
-ax2.set_xlim(14,0)
+ax2.set_xlim(15,0)
 ax2.set_xlabel('meters')
 ax2.set_ylim(ylimits)
 ax2.legend(loc='upper left')
 
 
-fname = '%s/map_gauge_amplitudes.png' % plotdir
+fname = '%s/map_gauge_comparisons.png' % plotdir
 savefig(fname)
 print('Created %s' % fname)

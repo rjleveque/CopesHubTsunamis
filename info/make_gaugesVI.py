@@ -3,7 +3,7 @@ from clawpack.geoclaw import topotools
 
 topo = topotools.Topography('/Users/rjl/topo/topofiles/etopo1_-163_-122_38_63.asc',3)
 
-ygs = arange(48.75,50.9,0.15)
+ygs = arange(48.7,50.9,0.15)
 topovi = topo.crop([-130,-124,48.5,52])
 xgs = zeros(ygs.shape)
 for k,yg in enumerate(ygs):
@@ -23,5 +23,6 @@ fname = 'gaugesVI.txt'
 with open(fname,'w') as f:
     f.write('# 100m depth gauges along Vancouver Island\n')
     for k in range(len(xgs)):
-        f.write('%12.4f  %10.4f\n' % (xgs[k],ygs[k]))
+        gaugeno = 2000+k
+        f.write('%5i  %12.4f  %10.4f\n' % (gaugeno,xgs[k],ygs[k]))
     

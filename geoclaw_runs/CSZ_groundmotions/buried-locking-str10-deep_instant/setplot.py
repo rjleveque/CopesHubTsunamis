@@ -72,16 +72,16 @@ def setplot(plotdata):
     #-----------------------------------------
     # Figure for surface
     #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name='Surface', figno=0)
+    plotfigure = plotdata.new_plotfigure(name='Domain', figno=0)
     #plotfigure.show = False
-    plotfigure.kwargs = {'figsize':(8,7)}
+    plotfigure.figsize = (6,9)
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('pcolor')
     plotaxes.title = 'Surface'
     plotaxes.scaled = False
-    plotaxes.xlimits = [-127,-122]
-    plotaxes.ylimits = [45,49.5]
+    #plotaxes.xlimits = [-127,-122]
+    #plotaxes.ylimits = [45,49.5]
 
     def fixup(current_data):
         from pylab import title, ticklabel_format, gca, cos, pi
@@ -99,15 +99,16 @@ def setplot(plotdata):
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
-    #plotitem.plot_var = geoplot.surface
-    plotitem.plot_var = surface_or_depth_feet
+    plotitem.plot_var = geoplot.surface
+    #plotitem.plot_var = surface_or_depth_feet
     plotitem.pcolor_cmap = geoplot.tsunami_colormap
-    plotitem.pcolor_cmin = -1. 
-    plotitem.pcolor_cmax = 1. 
+    plotitem.pcolor_cmin = -4. 
+    plotitem.pcolor_cmax = 4. 
     plotitem.add_colorbar = True
     plotitem.colorbar_shrink = 0.7
+    plotitem.colorbar_extend = 'both'
     plotitem.celledges_show = 0
-    plotitem.patchedges_show = 0
+    plotitem.patchedges_show = 1
 
     # Land
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
@@ -118,17 +119,57 @@ def setplot(plotdata):
     plotitem.add_colorbar = False
     plotitem.celledges_show = 0
     plotitem.patchedges_show = 0
-    #plotaxes.xlimits = [-120,-60]
-    #plotaxes.ylimits = [-60,0]
 
-    # add contour lines of bathy if desired:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    plotitem.contour_levels = linspace(-3000,-3000,1)
-    plotitem.amr_contour_colors = ['y']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid','linewidths':2}
-    plotitem.amr_contour_show = [1,0,0]  
+
+    #-----------------------------------------
+    # Figure for surface
+    #-----------------------------------------
+    plotfigure = plotdata.new_plotfigure(name='CSZ', figno=1)
+    #plotfigure.show = False
+    plotfigure.figsize = (8,8)
+
+    # Set up for axes in this figure:
+    plotaxes = plotfigure.new_plotaxes('pcolor')
+    plotaxes.title = 'Surface'
+    plotaxes.scaled = False
+    plotaxes.xlimits = [-130,-122.5]
+    plotaxes.ylimits = [38.5,50.5]
+
+
+    def fixup(current_data):
+        from pylab import title, ticklabel_format, gca, cos, pi
+        import pylab
+        #addgauges(current_data)
+        t = current_data.t
+        t = t / 3600.  # hours
+        title('Surface at %4.2f hours' % t, fontsize=10)
+        #pylab.xticks(fontsize=15)
+        #pylab.yticks(fontsize=15)
+        ticklabel_format(useOffset=False)
+        gca().set_aspect(1./cos(48*pi/180.))
+        title_hours(current_data)
+    plotaxes.afteraxes = fixup
+
+    # Water
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
+    plotitem.plot_var = geoplot.surface
+    #plotitem.plot_var = surface_or_depth_feet
+    plotitem.pcolor_cmap = geoplot.tsunami_colormap
+    plotitem.pcolor_cmin = -4. 
+    plotitem.pcolor_cmax = 4. 
+    plotitem.add_colorbar = True
+    plotitem.colorbar_shrink = 0.7
+    plotitem.colorbar_extend = 'both'
+    plotitem.celledges_show = 0
+    plotitem.patchedges_show = 0
+
+    # Land
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
+    plotitem.plot_var = geoplot.land
+    plotitem.pcolor_cmap = geoplot.land1_colormap
+    plotitem.pcolor_cmin = 0.0
+    plotitem.pcolor_cmax = 2000.0
+    plotitem.add_colorbar = False
     plotitem.celledges_show = 0
     plotitem.patchedges_show = 0
 

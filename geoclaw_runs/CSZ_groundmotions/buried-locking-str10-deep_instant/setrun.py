@@ -27,6 +27,14 @@ print('setting input_files_dir = ',input_files_dir)
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
 
+instant = ('instant' in rundir)  # is this instantaneous uplift?
+
+if instant:
+    tmax_dtopo_region = 10.  # force fine grids up to this time
+else:
+    tmax_dtopo_region = 300.  # force fine grids up to this time
+
+
 if '/projects' in rundir:
     topodir = '/projects/rale6846/topo/topofiles'  # on CU
     dtopodir = '/projects/rale6846/dtopo/dtopofiles'  # on CU
@@ -305,7 +313,7 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # max number of refinement levels:
-    amrdata.amr_levels_max = 3
+    amrdata.amr_levels_max = 4
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -457,12 +465,37 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
 
+
+    # Continential shelf extended to cover dtopo
+    flagregion = FlagRegion(num_dim=2)
+    flagregion.name = 'Region_Coast_46_51b'
+    flagregion.minlevel = 4
+    flagregion.maxlevel = 4
+    flagregion.t1 = 0.
+    flagregion.t2 = tmax_dtopo_region
+    flagregion.spatial_region_type = 2  # Ruled Rectangle
+    flagregion.spatial_region_file = os.path.abspath(RRdir + \
+            '/RuledRectangle_Coast_46_51.data')
+    flagregions.append(flagregion)
+    
+    # Continential shelf extended to cover dtopo
+    flagregion = FlagRegion(num_dim=2)
+    flagregion.name = 'Region_Coast_40_46b'
+    flagregion.minlevel = 4
+    flagregion.maxlevel = 4
+    flagregion.t1 = 0.
+    flagregion.t2 = tmax_dtopo_region
+    flagregion.spatial_region_type = 2  # Ruled Rectangle
+    flagregion.spatial_region_file = os.path.abspath(RRdir + \
+            '/RuledRectangle_Coast_40_46.data')
+    flagregions.append(flagregion)
+
     # Continential shelf Variable Region 
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_46_51'
-    flagregion.minlevel = 4
+    flagregion.minlevel = 3
     flagregion.maxlevel = 4
-    flagregion.t1 = 0.*3600.
+    flagregion.t1 = tmax_dtopo_region
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
@@ -472,9 +505,9 @@ def setrun(claw_pkg='geoclaw'):
     # Continential shelf Variable Region
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_40_46'
-    flagregion.minlevel = 4
+    flagregion.minlevel = 3
     flagregion.maxlevel = 4
-    flagregion.t1 = 0.*3600.
+    flagregion.t1 = tmax_dtopo_region
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
@@ -587,7 +620,7 @@ def setrun(claw_pkg='geoclaw'):
     fg.tend_max = 1.e10       # when to stop monitoring max values
     fg.dt_check = 10.         # target time (sec) increment between updating
                               # max values
-    fg.min_level_check = 3    # which levels to monitor max on
+    fg.min_level_check = amrdata.amr_levels_max    # monitor on finest level
     fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
 
     fg.interp_method = 0      # 0 ==> pw const in cells, recommended
