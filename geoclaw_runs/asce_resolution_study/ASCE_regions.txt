@@ -1,0 +1,21 @@
+From Yong Wei, 10/18/21
+
+Reg 1: 47.3 -48.6N
+Reg 2: 46.335 - 47.3N
+Reg 3: 45.445 46.335N
+Reg 4: 44.5 45.445N
+Reg 5: 43.2 – 44.5N
+Reg 6: 42.1 - 43.2N
+Reg 7 : 41.4 – 42.1 N
+Reg 8: 40.1 – 41.4 N
+
+Python:
+
+#asce_region = 1; y1region = 47.3; y2region = 48.6
+asce_region = 2; y1region = 46.335; y2region = 47.3
+#asce_region = 3; y1region = 45.445; y2region = 46.335
+#asce_region = 4; y1region = 44.5; y2region = 45.445
+#asce_region = 5; y1region = 43.2; y2region = 44.5
+#asce_region = 6; y1region = 42.1; y2region = 43.2
+#asce_region = 7; y1region = 41.4; y2region = 42.1
+#asce_region = 8; y1region = 40.1; y2region = 41.4
