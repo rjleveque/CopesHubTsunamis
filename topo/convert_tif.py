@@ -1,6 +1,6 @@
 from pylab import *
 
-def read_tif(path):
+def read_tif(path, transpose=False):
     """
     Read a geotiff topography DEM and return a topotools.Topography object.
     """
@@ -23,14 +23,19 @@ def read_tif(path):
     dx = transform[1]
     dy = transform[5]
     
+    if transpose:
+        print('+++ z.shape = ',z.shape)
+        z = z.T
+        print('+++ after transpose, z.shape = ',z.shape)
+
     dy = -dy
     Z = flipud(z)
     
-    x = linspace(xOrigin, xOrigin + (z.shape[0]-1)*dx, z.shape[0])
-    y = linspace(yOrigin - (z.shape[1]-1)*dy, yOrigin, z.shape[1])
+    x = linspace(xOrigin, xOrigin + (z.shape[1]-1)*dx, z.shape[1])
+    y = linspace(yOrigin - (z.shape[0]-1)*dy, yOrigin, z.shape[0])
     print('DEM has shape ', z.shape)
-    print('x range:  %.6f, %.6f' % (x[0], x[-1]))
-    print('y range:  %.6f, %.6f' % (y[0], y[-1]))
+    print('x has length %s and range:  %.6f, %.6f' % (len(x), x[0], x[-1]))
+    print('y has length %s and range:  %.6f, %.6f' % (len(y), y[0], y[-1]))
     
     topo = topotools.Topography()
     topo.set_xyZ(x,y,Z)

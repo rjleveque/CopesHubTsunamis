@@ -39,7 +39,8 @@ if '/projects' in rundir:
     topodir = '/projects/rale6846/topo/topofiles'  # on CU
     dtopodir = '/projects/rale6846/dtopo/dtopofiles'  # on CU
 else:
-    topodir = '/Users/rjl/topo/topofiles'        # on Randys laptop
+    #topodir = '/Users/rjl/topo/topofiles'        # on Randys laptop
+    topodir = root_dir + '/topo/topofiles'   # on Randys laptop
     #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'   # on Randys laptop
     dtopodir = root_dir + '/dtopo/CSZ_groundmotions'   # on Randys laptop
 
@@ -328,6 +329,10 @@ def setrun(claw_pkg='geoclaw'):
 
     # dx = dy = 1deg, 6', 30", 15"
     refinement_ratios = [10,12,2]
+
+    # dx = dy = 1deg, 6', 30", 6"
+    #refinement_ratios = [10,12,5]
+
     amrdata.refinement_ratios_x = refinement_ratios
     amrdata.refinement_ratios_y = refinement_ratios
     amrdata.refinement_ratios_t = refinement_ratios
@@ -385,11 +390,19 @@ def setrun(claw_pkg='geoclaw'):
     # for topography, append lines of the form
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
-    #topodir = '/Users/rjl/topo/topofiles/'
     topofiles = topo_data.topofiles
 
     # 1-minute topo:
-    topofiles.append([3, topodir + '/etopo1_-163_-122_38_63.asc'])
+    #topodir = '/Users/rjl/topo/topofiles/'
+    #topofiles.append([3, topodir + '/etopo1_-163_-122_38_63.asc'])
+
+    # 15-second etopo22:
+    topodir = root_dir + '/topo/topofiles'
+    topofiles.append([3, topodir + '/etopo22_1min_-163_-122_38_63.asc'])
+
+    # 15-second gebco:
+    #topodir = root_dir + '/topo/topofiles'
+    #topofiles.append([3, topodir + '/gebco_2021_n54.0_s38.0_w-137.0_e-122.0.asc'])
 
     if 0:
         # 2-second topo:
@@ -573,21 +586,26 @@ def setrun(claw_pkg='geoclaw'):
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     #rundata.gaugedata.gauges.append([1,-122.4, 47.781, 0., 1.e10])
 
+    rundata.gaugedata.file_format = 'binary32'
+
     asce_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/asce_values.txt'
     asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
-    for k in range(0,len(asce_gauges),10):
+    #for k in range(0,len(asce_gauges),10):
+    for k in range(0,len(asce_gauges),1):
         gaugeno = int(asce_gauges[k,0])
         gx = float(asce_gauges[k,1])
         gy = float(asce_gauges[k,2])
         if gy >= 40:
             rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
-    VI_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/gaugesVI.txt'
-    VI_gauges = np.loadtxt(VI_gagues_file, skiprows=1)
-    for k in range(0,len(VI_gauges),1):
-        gaugeno = int(VI_gauges[k,0])
-        gx = float(VI_gauges[k,1])
-        gy = float(VI_gauges[k,2])
-        rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
+
+    if 1:
+        VI_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/gaugesVI.txt'
+        VI_gauges = np.loadtxt(VI_gagues_file, skiprows=1)
+        for k in range(0,len(VI_gauges),1):
+            gaugeno = int(VI_gauges[k,0])
+            gx = float(VI_gauges[k,1])
+            gy = float(VI_gauges[k,2])
+            rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
 
 
     # == fgmax_grids.data values ==
