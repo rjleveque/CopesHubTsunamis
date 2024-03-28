@@ -22,22 +22,25 @@ import dtopotools # local version, makes smaller files
 # ## Select an event:
 
 
-event = 'buried-locking-skl16-shallow'
+event = 'buried-locking-mur13-shallow'
+#event = 'buried-locking-mur13-deep'
+#event = 'buried-locking-skl16-shallow'
 #event = 'buried-random-str10-shallow'
 #event = 'buried-locking-str10-deep'
 print('Rupture name: ',event)
 
 
-## Read static displacement
+if 1:
+    ## Read static displacement  (Need lon, lat from these)
 
-datadir = 'vertical_displacements'
-fname_orig = 'vert_displacements_all_xgrid_' + event
-path_orig = os.path.join(datadir, fname_orig)
-lon,lat,zdisp = loadtxt(path_orig, skiprows=1,usecols=[1,2,3],unpack=True)
+    datadir = 'vertical_displacements'
+    fname_orig = 'vert_displacements_all_xgrid_' + event
+    path_orig = os.path.join(datadir, fname_orig)
+    lon,lat,zdisp = loadtxt(path_orig, skiprows=1,usecols=[1,2,3],unpack=True)
 
-ii = argmax(zdisp)
-print('max zdisp[%i] = %.1f m at x = %.4f, y = %.4f' \
-      % (ii,zdisp[ii],lon[ii],lat[ii]))
+    ii = argmax(zdisp)
+    print('max zdisp[%i] = %.1f m at x = %.4f, y = %.4f' \
+          % (ii,zdisp[ii],lon[ii],lat[ii]))
 
 
 # ## Read waveforms
@@ -149,6 +152,7 @@ if 1:
 if 1:
     # ## plot transect of dz at a sequence of times:
 
+    figure(figsize=(10,7))
     y0 = 47.5
     j = where(y<y0)[0].max()
     for k in range(6,15):
