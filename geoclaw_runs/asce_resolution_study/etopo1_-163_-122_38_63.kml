@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document><name>etopo1_-163_-122_38_63.kml</name>
+
+<Style id="Path">
+<LineStyle><color>FF00FF00</color><width>3</width></LineStyle>
+<PolyStyle><color>00000000</color></PolyStyle>
+</Style>
+<Placemark><name>etopo1_-163_-122_38_63</name>
+<description>  x1 = -163., x2 = -122.
+  y1 = 38., y2 = 63.</description>
+<styleUrl>#Path</styleUrl>
+<Polygon>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs><LinearRing><coordinates>
+
+-163.000000000,38.000000000,0.000000000
+-122.000000000,38.000000000,0.000000000
+-122.000000000,63.000000000,0.000000000
+-163.000000000,63.000000000,0.000000000
+-163.000000000,38.000000000,0.000000000
+
+</coordinates></LinearRing></outerBoundaryIs>
+</Polygon>
+</Placemark>
+
+</Document>
+</kml>

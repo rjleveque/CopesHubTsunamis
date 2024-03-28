@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document><name>Region_domain.kml</name>
+
+<Style id="Path">
+<LineStyle><color>FF00FFFF</color><width>2</width></LineStyle>
+<PolyStyle><color>00000000</color></PolyStyle>
+</Style>
+<Placemark><name>Region_domain</name>
+<description>minlevel = 1, maxlevel = 3
+  t1 = 0., t2 = 1000000000.
+  Bounding box: 
+  x1_bb = -135.1, x2_bb = -121.9
+  y1_bb = 38.4, y2_bb = 53.6
+
+Level 1 resolution:  
+dy = 1 deg, 0 min, 0 sec 
+= 111000 meters
+
+Level 3 resolution:  
+dy = 0 deg, 0 min, 30 sec 
+= 925 meters
+</description>
+<styleUrl>#Path</styleUrl>
+<Polygon>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs><LinearRing><coordinates>
+
+-135.1,38.4,0.
+-135.1,53.6,0.
+-121.9,53.6,0.
+-121.9,38.4,0.
+-135.1,38.4,0.
+-135.1,38.4,0.
+
+</coordinates></LinearRing></outerBoundaryIs>
+</Polygon>
+</Placemark>
+
+</Document>
+</kml>

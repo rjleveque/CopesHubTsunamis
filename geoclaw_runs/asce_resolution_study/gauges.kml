@@ -1,0 +1,8095 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document><name>gauges.kml</name>
+
+<Placemark><name>Gauge 1</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.119, y1 = 48.613
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.119000000,48.613000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.1, y1 = 48.607
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.100000000,48.607000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 3</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.087, y1 = 48.603
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.087000000,48.603000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 4</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.074, y1 = 48.593
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.074000000,48.593000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 5</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.067, y1 = 48.58
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.067000000,48.580000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 6</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.074, y1 = 48.567
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.074000000,48.567000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 7</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.08, y1 = 48.553
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.080000000,48.553000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 8</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.073, y1 = 48.544
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.073000000,48.544000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 9</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.06, y1 = 48.534
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.060000000,48.534000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 10</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.052, y1 = 48.527
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.052000000,48.527000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 11</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.041, y1 = 48.513
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.041000000,48.513000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 12</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.033, y1 = 48.506
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.033000000,48.506000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 13</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.021, y1 = 48.493
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.021000000,48.493000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 14</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.008, y1 = 48.487
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.008000000,48.487000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 15</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.001, y1 = 48.473
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.001000000,48.473000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 16</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.987, y1 = 48.47
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.987000000,48.470000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 17</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.814, y1 = 48.373
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.814000000,48.373000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 18</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.827, y1 = 48.362
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.827000000,48.362000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 19</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.836, y1 = 48.353
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.836000000,48.353000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 20</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.847, y1 = 48.343
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.847000000,48.343000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 21</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.855, y1 = 48.333
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.855000000,48.333000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 22</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.865, y1 = 48.32
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.865000000,48.320000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 23</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.873, y1 = 48.31
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.873000000,48.310000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 24</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.881, y1 = 48.3
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.881000000,48.300000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 25</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.89, y1 = 48.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.890000000,48.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 26</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.9, y1 = 48.274
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.900000000,48.274000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 27</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.907, y1 = 48.264
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.907000000,48.264000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 28</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.913, y1 = 48.247
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.913000000,48.247000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 29</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.917, y1 = 48.233
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.917000000,48.233000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 30</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.92, y1 = 48.217
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.920000000,48.217000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 31</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.927, y1 = 48.207
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.927000000,48.207000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 32</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.933, y1 = 48.187
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.933000000,48.187000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 33</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.934, y1 = 48.173
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.934000000,48.173000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 34</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.936, y1 = 48.153
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.936000000,48.153000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 35</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.94, y1 = 48.139
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.940000000,48.139000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 36</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.944, y1 = 48.12
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.944000000,48.120000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 37</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.953, y1 = 48.0967
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.953000000,48.096700000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 38</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.9604, y1 = 48.0774
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.960400000,48.077400000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 39</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.9642, y1 = 48.0449
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.964200000,48.044900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 40</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.9646, y1 = 48.015
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.964600000,48.015000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 41</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.964, y1 = 47.987
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.964000000,47.987000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 42</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.958, y1 = 47.973
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.958000000,47.973000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 43</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.95, y1 = 47.96
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.950000000,47.960000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 44</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.946, y1 = 47.947
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.946000000,47.947000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 45</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.94, y1 = 47.93
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.940000000,47.930000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 46</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.938, y1 = 47.913
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.938000000,47.913000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 47</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.933, y1 = 47.9
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.933000000,47.900000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 48</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.927, y1 = 47.886
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.927000000,47.886000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 49</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.916, y1 = 47.873
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.916000000,47.873000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 50</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.907, y1 = 47.862
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.907000000,47.862000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 51</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.907, y1 = 47.852
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.907000000,47.852000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 52</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.913, y1 = 47.838
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.913000000,47.838000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 53</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.913, y1 = 47.826
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.913000000,47.826000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 54</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.912, y1 = 47.8149
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.912000000,47.814900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 55</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.908, y1 = 47.8049
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.908000000,47.804900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 56</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.904, y1 = 47.7863
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.904000000,47.786300000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 57</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.898, y1 = 47.7687
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.898000000,47.768700000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 58</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.892, y1 = 47.7532
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.892000000,47.753200000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 59</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.884, y1 = 47.7353
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.884000000,47.735300000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 60</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.874, y1 = 47.7219
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.874000000,47.721900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 61</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.866, y1 = 47.7069
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.866000000,47.706900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 62</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.856, y1 = 47.6951
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.856000000,47.695100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 63</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.847, y1 = 47.6833
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.847000000,47.683300000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 64</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.84, y1 = 47.6749
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.840000000,47.674900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 65</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.838, y1 = 47.667
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.838000000,47.667000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 66</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.833, y1 = 47.653
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.833000000,47.653000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 67</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.83, y1 = 47.633
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.830000000,47.633000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 68</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.824, y1 = 47.62
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.824000000,47.620000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 69</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.813, y1 = 47.607
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.813000000,47.607000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 70</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.807, y1 = 47.597
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.807000000,47.597000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 71</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.795, y1 = 47.587
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.795000000,47.587000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 72</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.788, y1 = 47.573
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.788000000,47.573000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 73</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.78, y1 = 47.56
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.780000000,47.560000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 74</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.774, y1 = 47.547
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.774000000,47.547000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 75</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.77, y1 = 47.533
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.770000000,47.533000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 76</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.76, y1 = 47.521
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.760000000,47.521000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 77</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.753, y1 = 47.513
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.753000000,47.513000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 78</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.745, y1 = 47.5
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.745000000,47.500000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 79</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.733, y1 = 47.488
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.733000000,47.488000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 80</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.731, y1 = 47.473
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.731000000,47.473000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 81</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.734, y1 = 47.46
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.734000000,47.460000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 82</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.727, y1 = 47.447
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.727000000,47.447000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 83</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.719, y1 = 47.44
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.719000000,47.440000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 84</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.709, y1 = 47.427
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.709000000,47.427000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 85</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.701, y1 = 47.413
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.701000000,47.413000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 86</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.693, y1 = 47.404
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.693000000,47.404000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 87</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.689, y1 = 47.387
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.689000000,47.387000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 88</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.686, y1 = 47.373
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.686000000,47.373000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 89</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.678, y1 = 47.36
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.678000000,47.360000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 90</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.677, y1 = 47.34
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.677000000,47.340000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 91</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.673, y1 = 47.322
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.673000000,47.322000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 92</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.672, y1 = 47.307
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.672000000,47.307000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 93</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.672, y1 = 47.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.672000000,47.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 94</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.673, y1 = 47.272
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.673000000,47.272000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 95</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.672, y1 = 47.26
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.672000000,47.260000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 96</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.67, y1 = 47.24
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.670000000,47.240000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 97</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.676, y1 = 47.227
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.676000000,47.227000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 98</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.681, y1 = 47.213
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.681000000,47.213000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 99</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.679, y1 = 47.2
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.679000000,47.200000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 100</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.677, y1 = 47.18
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.677000000,47.180000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 101</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.68, y1 = 47.16
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.680000000,47.160000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 102</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.68, y1 = 47.153
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.680000000,47.153000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 103</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.673, y1 = 47.133
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.673000000,47.133000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 104</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.68, y1 = 47.127
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.680000000,47.127000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 105</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.682, y1 = 47.113
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.682000000,47.113000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 106</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.682, y1 = 47.093
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.682000000,47.093000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 107</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.678, y1 = 47.08
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.678000000,47.080000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 108</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.671, y1 = 47.067
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.671000000,47.067000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 109</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.666, y1 = 47.053
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.666000000,47.053000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 110</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.66, y1 = 47.036
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.660000000,47.036000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 111</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.655, y1 = 47.02
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.655000000,47.020000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 112</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.653, y1 = 47.003
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.653000000,47.003000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 113</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.647, y1 = 46.992
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.647000000,46.992000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 114</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.635, y1 = 46.98
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.635000000,46.980000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 115</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.627, y1 = 46.969
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.627000000,46.969000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 116</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.621, y1 = 46.953
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.621000000,46.953000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 117</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.613, y1 = 46.94
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.613000000,46.940000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 118</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.607, y1 = 46.932
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.607000000,46.932000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 119</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.593, y1 = 46.922
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.593000000,46.922000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 120</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.586, y1 = 46.913
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.586000000,46.913000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 121</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.582, y1 = 46.893
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.582000000,46.893000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 122</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 46.88
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,46.880000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 123</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.566, y1 = 46.873
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.566000000,46.873000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 124</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.565, y1 = 46.853
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.565000000,46.853000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 125</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.56, y1 = 46.833
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.560000000,46.833000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 126</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.557, y1 = 46.82
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.557000000,46.820000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 127</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.547, y1 = 46.813
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.547000000,46.813000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 128</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.533, y1 = 46.803
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.533000000,46.803000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 129</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.528, y1 = 46.787
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.528000000,46.787000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 130</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.522, y1 = 46.773
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.522000000,46.773000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 131</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.521, y1 = 46.753
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.521000000,46.753000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 132</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.513, y1 = 46.74
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.513000000,46.740000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 133</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.507, y1 = 46.731
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.507000000,46.731000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 134</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.499, y1 = 46.72
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.499000000,46.720000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 135</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.493, y1 = 46.707
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.493000000,46.707000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 136</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.486, y1 = 46.693
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.486000000,46.693000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 137</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.476, y1 = 46.68
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.476000000,46.680000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 138</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.474, y1 = 46.66
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.474000000,46.660000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 139</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 46.649
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,46.649000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 140</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.453, y1 = 46.641
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.453000000,46.641000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 141</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.445, y1 = 46.633
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.445000000,46.633000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 142</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.44, y1 = 46.62
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.440000000,46.620000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 143</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.434, y1 = 46.6
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.434000000,46.600000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 144</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.432, y1 = 46.587
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.432000000,46.587000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 145</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.433, y1 = 46.567
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.433000000,46.567000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 146</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.433, y1 = 46.555
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.433000000,46.555000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 147</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.429, y1 = 46.54
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.429000000,46.540000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 148</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.425, y1 = 46.527
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.425000000,46.527000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 149</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.42, y1 = 46.515
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.420000000,46.515000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 150</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.42, y1 = 46.5
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.420000000,46.500000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 151</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.415, y1 = 46.487
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.415000000,46.487000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 152</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.414, y1 = 46.467
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.414000000,46.467000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 153</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.412, y1 = 46.453
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.412000000,46.453000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 154</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.41, y1 = 46.433
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.410000000,46.433000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 155</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.407, y1 = 46.417
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.407000000,46.417000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 156</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.402, y1 = 46.4
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.402000000,46.400000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 157</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.393, y1 = 46.389
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.393000000,46.389000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 158</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.385, y1 = 46.38
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.385000000,46.380000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 159</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.377, y1 = 46.367
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.377000000,46.367000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 160</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.37, y1 = 46.353
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.370000000,46.353000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 161</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.36, y1 = 46.343
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.360000000,46.343000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 162</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.348, y1 = 46.333
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.348000000,46.333000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 163</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.34, y1 = 46.326
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.340000000,46.326000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 164</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.33, y1 = 46.313
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.330000000,46.313000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 165</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.322, y1 = 46.3
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.322000000,46.300000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 166</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.316, y1 = 46.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.316000000,46.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 167</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.31, y1 = 46.273
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.310000000,46.273000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 168</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.304, y1 = 46.26
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.304000000,46.260000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 169</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.302, y1 = 46.24
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.302000000,46.240000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 170</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.299, y1 = 46.227
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.299000000,46.227000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 171</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.293, y1 = 46.207
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.293000000,46.207000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 172</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.284, y1 = 46.2
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.284000000,46.200000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 173</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.288, y1 = 46.187
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.288000000,46.187000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 174</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.297, y1 = 46.173
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.297000000,46.173000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 175</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.29, y1 = 46.16
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.290000000,46.160000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 176</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.287, y1 = 46.147
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.287000000,46.147000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 177</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.292, y1 = 46.133
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.292000000,46.133000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 178</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.295, y1 = 46.12
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.295000000,46.120000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 179</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.29, y1 = 46.107
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.290000000,46.107000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 180</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.284, y1 = 46.093
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.284000000,46.093000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 181</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.276, y1 = 46.08
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.276000000,46.080000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 182</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.27, y1 = 46.067
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.270000000,46.067000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 183</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.265, y1 = 46.053
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.265000000,46.053000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 184</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.26, y1 = 46.04
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.260000000,46.040000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 185</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.253, y1 = 46.026
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.253000000,46.026000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 186</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.243, y1 = 46.013
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.243000000,46.013000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 187</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.237, y1 = 46.
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.237000000,46.000000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 188</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.228, y1 = 45.987
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.228000000,45.987000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 189</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.22, y1 = 45.973
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.220000000,45.973000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 190</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.216, y1 = 45.96
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.216000000,45.960000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 191</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.213, y1 = 45.946
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.213000000,45.946000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 192</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.205, y1 = 45.933
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.205000000,45.933000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 193</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2, y1 = 45.917
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.200000000,45.917000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 194</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.193, y1 = 45.903
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.193000000,45.903000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 195</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.189, y1 = 45.887
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.189000000,45.887000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 196</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.182, y1 = 45.873
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.182000000,45.873000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 197</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.18, y1 = 45.853
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.180000000,45.853000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 198</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.179, y1 = 45.84
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.179000000,45.840000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 199</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.18, y1 = 45.831
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.180000000,45.831000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 200</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.175, y1 = 45.813
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.175000000,45.813000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 201</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.173, y1 = 45.798
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.173000000,45.798000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 202</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.168, y1 = 45.78
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.168000000,45.780000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 203</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.166, y1 = 45.767
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.166000000,45.767000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 204</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.164, y1 = 45.747
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.164000000,45.747000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 205</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.164, y1 = 45.727
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.164000000,45.727000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 206</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.16, y1 = 45.711
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.160000000,45.711000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 207</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.161, y1 = 45.7
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.161000000,45.700000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 208</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.162, y1 = 45.68
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.162000000,45.680000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 209</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.161, y1 = 45.66
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.161000000,45.660000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 210</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.163, y1 = 45.64
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.163000000,45.640000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 211</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.16, y1 = 45.627
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.160000000,45.627000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 212</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.154, y1 = 45.607
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.154000000,45.607000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 213</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.153, y1 = 45.597
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.153000000,45.597000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 214</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.151, y1 = 45.587
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.151000000,45.587000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 215</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.147, y1 = 45.572
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.147000000,45.572000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 216</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.142, y1 = 45.553
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.142000000,45.553000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 217</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.139, y1 = 45.54
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.139000000,45.540000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 218</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.137, y1 = 45.52
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.137000000,45.520000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 219</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.136, y1 = 45.5
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.136000000,45.500000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 220</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.135, y1 = 45.48
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.135000000,45.480000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 221</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.132, y1 = 45.467
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.132000000,45.467000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 222</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.133, y1 = 45.447
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.133000000,45.447000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 223</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.133, y1 = 45.439
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.133000000,45.439000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 224</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.125, y1 = 45.427
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.125000000,45.427000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 225</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.127, y1 = 45.409
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.127000000,45.409000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 226</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.128, y1 = 45.393
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.128000000,45.393000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 227</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.125, y1 = 45.38
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.125000000,45.380000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 228</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.128, y1 = 45.367
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.128000000,45.367000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 229</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.126, y1 = 45.353
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.126000000,45.353000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 230</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.128, y1 = 45.34
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.128000000,45.340000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 231</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.13, y1 = 45.32
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.130000000,45.320000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 232</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.127, y1 = 45.301
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.127000000,45.301000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 233</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.126, y1 = 45.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.126000000,45.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 234</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.127, y1 = 45.273
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.127000000,45.273000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 235</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.129, y1 = 45.253
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.129000000,45.253000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 236</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.129, y1 = 45.233
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.129000000,45.233000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 237</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.128, y1 = 45.213
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.128000000,45.213000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 238</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.129, y1 = 45.193
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.129000000,45.193000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 239</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.133, y1 = 45.176
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.133000000,45.176000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 240</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.136, y1 = 45.16
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.136000000,45.160000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 241</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.138, y1 = 45.14
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.138000000,45.140000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 242</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.14, y1 = 45.127
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.140000000,45.127000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 243</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.139, y1 = 45.113
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.139000000,45.113000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 244</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.143, y1 = 45.1
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.143000000,45.100000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 245</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.14, y1 = 45.08
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.140000000,45.080000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 246</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.142, y1 = 45.073
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.142000000,45.073000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 247</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.147, y1 = 45.06
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.147000000,45.060000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 248</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.152, y1 = 45.04
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.152000000,45.040000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 249</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.152, y1 = 45.02
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.152000000,45.020000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 250</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.16, y1 = 45.007
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.160000000,45.007000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 251</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.167, y1 = 44.999
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.167000000,44.999000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 252</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.17, y1 = 44.98
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.170000000,44.980000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 253</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.171, y1 = 44.96
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.171000000,44.960000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 254</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.18, y1 = 44.947
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.180000000,44.947000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 255</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.18, y1 = 44.938
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.180000000,44.938000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 256</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.18, y1 = 44.924
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.180000000,44.924000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 257</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.187, y1 = 44.912
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.187000000,44.912000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 258</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.193, y1 = 44.899
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.193000000,44.899000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 259</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2, y1 = 44.88
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.200000000,44.880000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 260</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.205, y1 = 44.867
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.205000000,44.867000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 261</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.213, y1 = 44.855
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.213000000,44.855000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 262</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.22, y1 = 44.845
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.220000000,44.845000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 263</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.227, y1 = 44.832
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.227000000,44.832000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 264</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.235, y1 = 44.82
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.235000000,44.820000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 265</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.246, y1 = 44.807
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.246000000,44.807000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 266</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.253, y1 = 44.799
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.253000000,44.799000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 267</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.262, y1 = 44.787
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.262000000,44.787000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 268</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.269, y1 = 44.773
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.269000000,44.773000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 269</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.28, y1 = 44.762
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.280000000,44.762000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 270</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.29, y1 = 44.753
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.290000000,44.753000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 271</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 44.746
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,44.746000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 272</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.314, y1 = 44.74
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.314000000,44.740000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 273</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.327, y1 = 44.727
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.327000000,44.727000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 274</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.36, y1 = 44.725
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.360000000,44.725000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 275</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.34, y1 = 44.723
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.340000000,44.723000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 276</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.379, y1 = 44.72
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.379000000,44.720000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 277</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.387, y1 = 44.713
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.387000000,44.713000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 278</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4, y1 = 44.707
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.400000000,44.707000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 279</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.413, y1 = 44.697
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.413000000,44.697000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 280</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.427, y1 = 44.691
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.427000000,44.691000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 281</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.44, y1 = 44.68
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.440000000,44.680000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 282</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.44, y1 = 44.672
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.440000000,44.672000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 283</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.44, y1 = 44.658
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.440000000,44.658000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 284</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.455, y1 = 44.653
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.455000000,44.653000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 285</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.462, y1 = 44.64
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.462000000,44.640000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 286</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 44.627
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,44.627000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 287</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.477, y1 = 44.613
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.477000000,44.613000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 288</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.48, y1 = 44.596
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.480000000,44.596000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 289</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.484, y1 = 44.58
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.484000000,44.580000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 290</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.492, y1 = 44.567
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.492000000,44.567000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 291</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.5, y1 = 44.559
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.500000000,44.559000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 292</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.506, y1 = 44.54
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.506000000,44.540000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 293</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.506, y1 = 44.52
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.506000000,44.520000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 294</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.515, y1 = 44.513
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.515000000,44.513000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 295</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.524, y1 = 44.5
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.524000000,44.500000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 296</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.533, y1 = 44.49
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.533000000,44.490000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 297</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.541, y1 = 44.48
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.541000000,44.480000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 298</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.548, y1 = 44.467
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.548000000,44.467000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 299</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.548, y1 = 44.447
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.548000000,44.447000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 300</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.54, y1 = 44.436
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.540000000,44.436000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 301</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.538, y1 = 44.42
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.538000000,44.420000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 302</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.547, y1 = 44.409
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.547000000,44.409000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 303</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.56, y1 = 44.403
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.560000000,44.403000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 304</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 44.4
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,44.400000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 305</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.593, y1 = 44.396
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.593000000,44.396000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 306</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.607, y1 = 44.391
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.607000000,44.391000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 307</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.62, y1 = 44.383
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.620000000,44.383000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 308</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.633, y1 = 44.376
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.633000000,44.376000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 309</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.647, y1 = 44.37
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.647000000,44.370000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 310</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.658, y1 = 44.36
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.658000000,44.360000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 311</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.667, y1 = 44.348
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.667000000,44.348000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 312</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.665, y1 = 44.34
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.665000000,44.340000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 313</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.673, y1 = 44.327
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.673000000,44.327000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 314</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.682, y1 = 44.32
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.682000000,44.320000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 315</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.693, y1 = 44.312
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.693000000,44.312000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 316</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.711, y1 = 44.307
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.711000000,44.307000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 317</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.72, y1 = 44.299
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.720000000,44.299000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 318</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.581, y1 = 44.293
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.581000000,44.293000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 319</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.6, y1 = 44.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.600000000,44.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 320</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.578, y1 = 44.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.578000000,44.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 321</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.721, y1 = 44.28
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.721000000,44.280000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 322</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.611, y1 = 44.28
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.611000000,44.280000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 323</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.5, y1 = 44.277
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.500000000,44.277000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 324</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.567, y1 = 44.275
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.567000000,44.275000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 325</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.486, y1 = 44.273
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.486000000,44.273000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 326</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.553, y1 = 44.271
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.553000000,44.271000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 327</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.513, y1 = 44.27
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.513000000,44.270000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 328</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.533, y1 = 44.268
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.533000000,44.268000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 329</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.716, y1 = 44.267
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.716000000,44.267000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 330</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.613, y1 = 44.26
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.613000000,44.260000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 331</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 44.26
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,44.260000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 332</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.707, y1 = 44.258
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.707000000,44.258000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 333</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.48, y1 = 44.258
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.480000000,44.258000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 334</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.693, y1 = 44.252
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.693000000,44.252000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 335</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.46, y1 = 44.251
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.460000000,44.251000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 336</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.619, y1 = 44.247
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.619000000,44.247000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 337</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.68, y1 = 44.243
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.680000000,44.243000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 338</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.629, y1 = 44.24
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.629000000,44.240000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 339</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.667, y1 = 44.239
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.667000000,44.239000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 340</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.647, y1 = 44.238
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.647000000,44.238000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 341</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.453, y1 = 44.233
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.453000000,44.233000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 342</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.447, y1 = 44.227
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.447000000,44.227000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 343</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.487, y1 = 44.221
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.487000000,44.221000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 344</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.473, y1 = 44.22
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.473000000,44.220000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 345</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.453, y1 = 44.22
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.453000000,44.220000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 346</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.481, y1 = 44.213
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.481000000,44.213000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 347</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.473, y1 = 44.205
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.473000000,44.205000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 348</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.46, y1 = 44.194
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.460000000,44.194000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 349</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.45, y1 = 44.187
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.450000000,44.187000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 350</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.44, y1 = 44.179
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.440000000,44.179000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 351</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.429, y1 = 44.167
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.429000000,44.167000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 352</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.42, y1 = 44.16
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.420000000,44.160000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 353</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.406, y1 = 44.153
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.406000000,44.153000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 354</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.394, y1 = 44.14
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.394000000,44.140000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 355</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.387, y1 = 44.127
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.387000000,44.127000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 356</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3887, y1 = 44.1071
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.388700000,44.107100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 357</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3674, y1 = 44.0691
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.367400000,44.069100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 358</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.345, y1 = 44.0355
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.345000000,44.035500000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 359</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3232, y1 = 44.0031
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.323200000,44.003100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 360</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.317, y1 = 43.98
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.317000000,43.980000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 361</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.31, y1 = 43.967
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.310000000,43.967000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 362</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.954
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.954000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 363</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.293, y1 = 43.945
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.293000000,43.945000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 364</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.288, y1 = 43.927
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.288000000,43.927000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 365</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.284, y1 = 43.913
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.284000000,43.913000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 366</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.28, y1 = 43.9
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.280000000,43.900000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 367</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.279, y1 = 43.88
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.279000000,43.880000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 368</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.273, y1 = 43.867
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.273000000,43.867000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 369</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.28, y1 = 43.855
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.280000000,43.855000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 370</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.289, y1 = 43.847
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.289000000,43.847000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 371</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.291, y1 = 43.827
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.291000000,43.827000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 372</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.293, y1 = 43.811
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.293000000,43.811000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 373</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.795
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.795000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 374</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.785
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.785000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 375</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.293, y1 = 43.773
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.293000000,43.773000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 376</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.76
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.760000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 377</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.306, y1 = 43.747
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.306000000,43.747000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 378</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.733
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.733000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 379</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.302, y1 = 43.72
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.302000000,43.720000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 380</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.706
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.706000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 381</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.688
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.688000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 382</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 43.673
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,43.673000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 383</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.303, y1 = 43.653
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.303000000,43.653000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 384</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.307, y1 = 43.64
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.307000000,43.640000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 385</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.313, y1 = 43.622
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.313000000,43.622000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 386</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.317, y1 = 43.607
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.317000000,43.607000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 387</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.32, y1 = 43.593
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.320000000,43.593000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 388</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.327, y1 = 43.577
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.327000000,43.577000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 389</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.33, y1 = 43.56
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.330000000,43.560000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 390</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.337, y1 = 43.547
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.337000000,43.547000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 391</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.347, y1 = 43.537
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.347000000,43.537000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 392</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.354, y1 = 43.527
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.354000000,43.527000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 393</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.36, y1 = 43.507
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.360000000,43.507000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 394</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.367, y1 = 43.498
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.367000000,43.498000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 395</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.377, y1 = 43.487
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.377000000,43.487000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 396</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.387, y1 = 43.475
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.387000000,43.475000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 397</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.409, y1 = 43.453
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.409000000,43.453000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 398</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.42, y1 = 43.445
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.420000000,43.445000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 399</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.428, y1 = 43.433
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.428000000,43.433000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 400</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.435, y1 = 43.42
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.435000000,43.420000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 401</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.44, y1 = 43.406
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.440000000,43.406000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 402</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.453, y1 = 43.394
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.453000000,43.394000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 403</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.461, y1 = 43.387
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.461000000,43.387000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 404</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.469, y1 = 43.373
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.469000000,43.373000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 405</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.48, y1 = 43.364
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.480000000,43.364000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 406</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.487, y1 = 43.352
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.487000000,43.352000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 407</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.498, y1 = 43.34
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.498000000,43.340000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 408</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.507, y1 = 43.33
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.507000000,43.330000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 409</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.513, y1 = 43.315
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.513000000,43.315000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 410</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.52, y1 = 43.307
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.520000000,43.307000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 411</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.527, y1 = 43.293
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.527000000,43.293000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 412</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.54, y1 = 43.286
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.540000000,43.286000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 413</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.553, y1 = 43.276
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.553000000,43.276000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 414</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.562, y1 = 43.267
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.562000000,43.267000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 415</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.572, y1 = 43.253
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.572000000,43.253000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 416</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.58, y1 = 43.245
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.580000000,43.245000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 417</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.587, y1 = 43.233
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.587000000,43.233000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 418</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.593, y1 = 43.216
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.593000000,43.216000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 419</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.593, y1 = 43.205
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.593000000,43.205000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 420</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.586, y1 = 43.193
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.586000000,43.193000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 421</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.576, y1 = 43.18
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.576000000,43.180000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 422</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 43.166
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,43.166000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 423</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.576, y1 = 43.153
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.576000000,43.153000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 424</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 43.138
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,43.138000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 425</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.572, y1 = 43.12
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.572000000,43.120000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 426</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.575, y1 = 43.107
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.575000000,43.107000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 427</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.572, y1 = 43.093
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.572000000,43.093000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 428</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.568, y1 = 43.073
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.568000000,43.073000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 429</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.567, y1 = 43.066
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.567000000,43.066000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 430</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 43.049
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,43.049000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 431</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.576, y1 = 43.033
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.576000000,43.033000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 432</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.581, y1 = 43.02
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.581000000,43.020000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 433</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.587, y1 = 43.007
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.587000000,43.007000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 434</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.596, y1 = 42.993
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.596000000,42.993000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 435</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.61, y1 = 42.987
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.610000000,42.987000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 436</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.62, y1 = 42.979
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.620000000,42.979000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 437</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.627, y1 = 42.967
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.627000000,42.967000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 438</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.64, y1 = 42.958
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.640000000,42.958000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 439</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.653, y1 = 42.947
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.653000000,42.947000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 440</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.658, y1 = 42.933
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.658000000,42.933000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 441</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.664, y1 = 42.92
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.664000000,42.920000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 442</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.668, y1 = 42.907
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.668000000,42.907000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 443</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.673, y1 = 42.889
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.673000000,42.889000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 444</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.676, y1 = 42.873
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.676000000,42.873000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 445</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.68, y1 = 42.859
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.680000000,42.859000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 446</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.687, y1 = 42.84
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.687000000,42.840000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 447</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.689, y1 = 42.827
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.689000000,42.827000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 448</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.683, y1 = 42.813
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.683000000,42.813000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 449</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.673, y1 = 42.801
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.673000000,42.801000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 450</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.67, y1 = 42.787
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.670000000,42.787000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 451</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.671, y1 = 42.767
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.671000000,42.767000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 452</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.66, y1 = 42.755
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.660000000,42.755000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 453</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.652, y1 = 42.747
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.652000000,42.747000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 454</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.64, y1 = 42.739
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.640000000,42.739000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 455</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.627, y1 = 42.729
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.627000000,42.729000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 456</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.617, y1 = 42.72
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.617000000,42.720000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 457</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.611, y1 = 42.707
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.611000000,42.707000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 458</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.6, y1 = 42.695
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.600000000,42.695000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 459</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.587, y1 = 42.689
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.587000000,42.689000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 460</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.589, y1 = 42.68
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.589000000,42.680000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 461</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.59, y1 = 42.66
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.590000000,42.660000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 462</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.593, y1 = 42.647
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.593000000,42.647000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 463</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.592, y1 = 42.633
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.592000000,42.633000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 464</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.589, y1 = 42.613
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.589000000,42.613000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 465</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.589, y1 = 42.593
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.589000000,42.593000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 466</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.593, y1 = 42.579
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.593000000,42.579000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 467</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.601, y1 = 42.567
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.601000000,42.567000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 468</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.609, y1 = 42.553
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.609000000,42.553000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 469</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.62, y1 = 42.541
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.620000000,42.541000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 470</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.622, y1 = 42.527
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.622000000,42.527000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 471</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.627, y1 = 42.511
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.627000000,42.511000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 472</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.64, y1 = 42.503
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.640000000,42.503000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 473</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.659, y1 = 42.5
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.659000000,42.500000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 474</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.669, y1 = 42.493
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.669000000,42.493000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 475</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.666, y1 = 42.48
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.666000000,42.480000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 476</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.653, y1 = 42.467
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.653000000,42.467000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 477</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.653, y1 = 42.46
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.653000000,42.460000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 478</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.66, y1 = 42.445
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.660000000,42.445000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 479</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.661, y1 = 42.427
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.661000000,42.427000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 480</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.64, y1 = 42.424
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.640000000,42.424000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 481</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.653, y1 = 42.417
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.653000000,42.417000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 482</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.628, y1 = 42.413
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.628000000,42.413000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 483</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.62, y1 = 42.403
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.620000000,42.403000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 484</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.611, y1 = 42.393
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.611000000,42.393000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 485</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.6, y1 = 42.384
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.600000000,42.384000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 486</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.587, y1 = 42.378
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.587000000,42.378000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 487</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 42.373
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,42.373000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 488</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.559, y1 = 42.367
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.559000000,42.367000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 489</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.544, y1 = 42.36
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.544000000,42.360000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 490</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.533, y1 = 42.351
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.533000000,42.351000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 491</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.522, y1 = 42.34
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.522000000,42.340000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 492</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.516, y1 = 42.327
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.516000000,42.327000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 493</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.507, y1 = 42.315
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.507000000,42.315000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 494</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.5, y1 = 42.301
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.500000000,42.301000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 495</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.493, y1 = 42.293
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.493000000,42.293000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 496</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.491, y1 = 42.273
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.491000000,42.273000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 497</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.481, y1 = 42.26
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.481000000,42.260000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 498</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.476, y1 = 42.247
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.476000000,42.247000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 499</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.472, y1 = 42.233
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.472000000,42.233000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 500</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 42.213
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,42.213000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 501</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.46, y1 = 42.2
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.460000000,42.200000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 502</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.454, y1 = 42.187
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.454000000,42.187000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 503</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.458, y1 = 42.167
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.458000000,42.167000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 504</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.465, y1 = 42.153
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.465000000,42.153000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 505</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.454, y1 = 42.14
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.454000000,42.140000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 506</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.452, y1 = 42.127
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.452000000,42.127000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 507</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.455, y1 = 42.113
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.455000000,42.113000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 508</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.46, y1 = 42.1
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.460000000,42.100000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 509</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.458, y1 = 42.087
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.458000000,42.087000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 510</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.453, y1 = 42.073
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.453000000,42.073000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 511</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.456, y1 = 42.06
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.456000000,42.060000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 512</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.447, y1 = 42.052
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.447000000,42.052000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 513</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.431, y1 = 42.047
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.431000000,42.047000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 514</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.42, y1 = 42.037
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.420000000,42.037000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 515</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.413, y1 = 42.027
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.413000000,42.027000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 516</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.405, y1 = 42.013
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.405000000,42.013000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 517</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4, y1 = 42.
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.400000000,42.000000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 518</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.395, y1 = 41.98
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.395000000,41.980000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 519</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.392, y1 = 41.967
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.392000000,41.967000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 520</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.388, y1 = 41.947
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.388000000,41.947000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 521</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.388, y1 = 41.927
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.388000000,41.927000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 522</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.391, y1 = 41.907
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.391000000,41.907000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 523</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.394, y1 = 41.893
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.394000000,41.893000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 524</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.399, y1 = 41.873
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.399000000,41.873000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 525</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.402, y1 = 41.86
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.402000000,41.860000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 526</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.405, y1 = 41.84
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.405000000,41.840000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 527</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.405, y1 = 41.82
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.405000000,41.820000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 528</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.403, y1 = 41.8
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.403000000,41.800000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 529</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4, y1 = 41.786
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.400000000,41.786000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 530</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.393, y1 = 41.773
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.393000000,41.773000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 531</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 41.761
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,41.761000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 532</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.371, y1 = 41.753
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.371000000,41.753000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 533</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.36, y1 = 41.74
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.360000000,41.740000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 534</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.361, y1 = 41.733
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.361000000,41.733000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 535</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.373, y1 = 41.722
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.373000000,41.722000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 536</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 41.707
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,41.707000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 537</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.381, y1 = 41.693
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.381000000,41.693000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 538</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 41.675
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,41.675000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 539</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.381, y1 = 41.667
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.381000000,41.667000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 540</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.383, y1 = 41.647
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.383000000,41.647000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 541</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.383, y1 = 41.627
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.383000000,41.627000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 542</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 41.613
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,41.613000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 543</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.382, y1 = 41.6
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.382000000,41.600000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 544</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 41.587
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,41.587000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 545</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.379, y1 = 41.567
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.379000000,41.567000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 546</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.383, y1 = 41.553
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.383000000,41.553000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 547</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.384, y1 = 41.533
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.384000000,41.533000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 548</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.383, y1 = 41.513
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.383000000,41.513000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 549</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.385, y1 = 41.493
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.385000000,41.493000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 550</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.387, y1 = 41.48
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.387000000,41.480000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 551</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.387, y1 = 41.46
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.387000000,41.460000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 552</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.385, y1 = 41.447
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.385000000,41.447000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 553</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 41.428
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,41.428000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 554</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.377, y1 = 41.413
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.377000000,41.413000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 555</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.37, y1 = 41.4
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.370000000,41.400000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 556</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.36, y1 = 41.388
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.360000000,41.388000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 557</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.353, y1 = 41.38
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.353000000,41.380000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 558</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.346, y1 = 41.367
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.346000000,41.367000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 559</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.337, y1 = 41.353
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.337000000,41.353000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 560</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.333, y1 = 41.337
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.333000000,41.337000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 561</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.32, y1 = 41.329
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.320000000,41.329000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 562</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.313, y1 = 41.32
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.313000000,41.320000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 563</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.307, y1 = 41.3
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.307000000,41.300000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 564</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.304, y1 = 41.287
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.304000000,41.287000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 565</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.302, y1 = 41.267
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.302000000,41.267000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 566</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.293, y1 = 41.254
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.293000000,41.254000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 567</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.29, y1 = 41.24
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.290000000,41.240000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 568</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.285, y1 = 41.227
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.285000000,41.227000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 569</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.287, y1 = 41.212
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.287000000,41.212000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 570</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.289, y1 = 41.193
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.289000000,41.193000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 571</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.283, y1 = 41.18
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.283000000,41.180000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 572</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.278, y1 = 41.167
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.278000000,41.167000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 573</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.28, y1 = 41.152
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.280000000,41.152000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 574</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.284, y1 = 41.133
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.284000000,41.133000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 575</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.287, y1 = 41.12
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.287000000,41.120000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 576</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.289, y1 = 41.1
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.289000000,41.100000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 577</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.291, y1 = 41.08
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.291000000,41.080000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 578</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.293, y1 = 41.062
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.293000000,41.062000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 579</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.295, y1 = 41.047
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.295000000,41.047000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 580</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3, y1 = 41.031
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.300000000,41.031000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 581</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.304, y1 = 41.013
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.304000000,41.013000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 582</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.307, y1 = 41.
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.307000000,41.000000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 583</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.314, y1 = 40.987
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.314000000,40.987000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 584</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.318, y1 = 40.967
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.318000000,40.967000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 585</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.322, y1 = 40.953
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.322000000,40.953000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 586</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.329, y1 = 40.94
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.329000000,40.940000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 587</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.333, y1 = 40.923
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.333000000,40.923000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 588</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.337, y1 = 40.907
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.337000000,40.907000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 589</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.342, y1 = 40.893
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.342000000,40.893000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 590</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.349, y1 = 40.88
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.349000000,40.880000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 591</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.356, y1 = 40.867
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.356000000,40.867000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 592</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.364, y1 = 40.853
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.364000000,40.853000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 593</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.373, y1 = 40.84
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.373000000,40.840000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 594</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.38, y1 = 40.831
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.380000000,40.831000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 595</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.391, y1 = 40.82
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.391000000,40.820000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 596</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4, y1 = 40.811
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.400000000,40.811000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 597</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.411, y1 = 40.8
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.411000000,40.800000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 598</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.42, y1 = 40.788
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.420000000,40.788000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 599</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.427, y1 = 40.78
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.427000000,40.780000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 600</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.437, y1 = 40.767
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.437000000,40.767000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 601</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.447, y1 = 40.755
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.447000000,40.755000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 602</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.453, y1 = 40.746
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.453000000,40.746000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 603</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.46, y1 = 40.733
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.460000000,40.733000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 604</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.468, y1 = 40.72
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.468000000,40.720000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 605</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.475, y1 = 40.707
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.475000000,40.707000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 606</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.478, y1 = 40.687
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.478000000,40.687000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 607</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.478, y1 = 40.667
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.478000000,40.667000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 608</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 40.653
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,40.653000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 609</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 40.641
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,40.641000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 610</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.471, y1 = 40.627
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.471000000,40.627000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 611</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.461, y1 = 40.613
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.461000000,40.613000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 612</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.467, y1 = 40.6
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.467000000,40.600000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 613</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.478, y1 = 40.587
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.478000000,40.587000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 614</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.485, y1 = 40.573
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.485000000,40.573000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 615</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.493, y1 = 40.564
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.493000000,40.564000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 616</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.513, y1 = 40.562
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.513000000,40.562000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 617</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.527, y1 = 40.556
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.527000000,40.556000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 618</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.54, y1 = 40.549
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.540000000,40.549000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 619</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.551, y1 = 40.54
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.551000000,40.540000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 620</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.56, y1 = 40.532
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.560000000,40.532000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 621</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.572, y1 = 40.52
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.572000000,40.520000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 622</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.578, y1 = 40.507
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.578000000,40.507000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 623</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.579, y1 = 40.487
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.579000000,40.487000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 624</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.58, y1 = 40.48
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.580000000,40.480000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 625</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.573, y1 = 40.467
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.573000000,40.467000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 626</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.566, y1 = 40.453
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.566000000,40.453000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 627</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.5329, y1 = 40.4291
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.532900000,40.429100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 628</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4983, y1 = 40.4101
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.498300000,40.410100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 629</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4765, y1 = 40.4045
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.476500000,40.404500000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 630</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4556, y1 = 40.3964
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.455600000,40.396400000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 631</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4313, y1 = 40.3852
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.431300000,40.385200000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 632</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4135, y1 = 40.3754
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.413500000,40.375400000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 633</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4255, y1 = 40.3651
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.425500000,40.365100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 634</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4476, y1 = 40.3446
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.447600000,40.344600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 635</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4397, y1 = 40.3246
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.439700000,40.324600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 636</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4278, y1 = 40.3071
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.427800000,40.307100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 637</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4106, y1 = 40.2899
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.410600000,40.289900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 638</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4411, y1 = 40.2699
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.441100000,40.269900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 639</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4494, y1 = 40.2509
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.449400000,40.250900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 640</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4332, y1 = 40.2329
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.433200000,40.232900000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 641</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.4097, y1 = 40.2176
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.409700000,40.217600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 642</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3784, y1 = 40.2116
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.378400000,40.211600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 643</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3559, y1 = 40.1954
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.355900000,40.195400000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 644</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.3325, y1 = 40.1801
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.332500000,40.180100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 645</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.309, y1 = 40.164
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.309000000,40.164000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 646</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2884, y1 = 40.1583
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.288400000,40.158300000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 647</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2687, y1 = 40.1502
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.268700000,40.150200000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 648</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2477, y1 = 40.138
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.247700000,40.138000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 649</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2411, y1 = 40.1204
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.241100000,40.120400000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 650</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.2241, y1 = 40.104
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.224100000,40.104000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 651</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.201, y1 = 40.0928
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.201000000,40.092800000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 652</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1435, y1 = 40.0926
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.143500000,40.092600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 653</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1293, y1 = 40.0874
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.129300000,40.087400000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 654</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1738, y1 = 40.0841
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.173800000,40.084100000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 655</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.12, y1 = 40.0756
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.120000000,40.075600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 656</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1324, y1 = 40.0532
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.132400000,40.053200000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 657</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1407, y1 = 40.035
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.140700000,40.035000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 658</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1395, y1 = 40.0163
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.139500000,40.016300000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 659</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -124.1399, y1 = 40.0066
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-124.139900000,40.006600000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2000</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.5, y1 = 48.7
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.500000000,48.700000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2001</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -125.9667, y1 = 48.85
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-125.966700000,48.850000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2002</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -126.2333, y1 = 49.
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-126.233300000,49.000000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2003</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -126.4167, y1 = 49.15
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-126.416700000,49.150000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2004</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -126.6833, y1 = 49.3
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-126.683300000,49.300000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2005</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -126.85, y1 = 49.45
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-126.850000000,49.450000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2006</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -127.0167, y1 = 49.6
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-127.016700000,49.600000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2007</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -127.4667, y1 = 49.75
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-127.466700000,49.750000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2008</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -127.65, y1 = 49.9
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-127.650000000,49.900000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2009</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -127.85, y1 = 50.05
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-127.850000000,50.050000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2010</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -128.0667, y1 = 50.2
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-128.066700000,50.200000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2011</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -128.1167, y1 = 50.35
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-128.116700000,50.350000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2012</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -128.3167, y1 = 50.5
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-128.316700000,50.500000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2013</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -128.4833, y1 = 50.65
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-128.483300000,50.650000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+<Placemark><name>Gauge 2014</name>
+<description>  t1 = 0., t2 = 1000000000.
+  x1 = -129.0167, y1 = 50.8
+</description>
+<styleUrl>#markerstyle</styleUrl>
+<Point>
+<coordinates>
+-129.016700000,50.800000000,0.000000000
+</coordinates>
+</Point>
+</Placemark>
+
+</Document>
+</kml>
