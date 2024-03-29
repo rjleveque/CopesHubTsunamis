@@ -292,6 +292,16 @@ if plot_gauge_timeseries:
         ylabel('surface elevation (m)')
         legend(framealpha=1)
         title('Gauge %s at (%.4f, %.4f)' % (gaugeno,xg,yg))
+###
+### Loyce's note
+### eta_asce[gaugeno-1] would be the asce value for this gaugeno. 
+### eta_asce starts with gaugeno = 1 in location eta_asce[0] and
+### goes sequentially.  It would be good for this ASCE SIFT Region 2 source
+### to put this value in the title like:
+###
+###     asceval=eta_asce[gaugeno-1]        
+###     title('Gauge %s at (%.4f, %.4f) had ASCE 2500yr. amp.: %.4f' % (gaugeno,xg,yg,asceval))
+###
         
         fname = '%s/gauge%s_comparison.png' \
                     % (plotdir,str(gaugeno).zfill(5))
