@@ -35,13 +35,8 @@ else:
     tmax_dtopo_region = 300.  # force fine grids up to this time
 
 
-if '/projects' in rundir:
-    topodir = '/projects/rale6846/topo/topofiles'  # on CU
-    dtopodir = '/projects/rale6846/dtopo/dtopofiles'  # on CU
-else:
-    topodir = '/Users/rjl/topo/topofiles'        # on Randys laptop
-    #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'   # on Randys laptop
-    dtopodir = root_dir + '/dtopo/CSZ_groundmotions'   # on Randys laptop
+topodir = os.path.join(CHT, 'topo/topofiles')
+dtopodir = os.path.join(CHT, 'dtopo/dtopofiles')
 
 
 #------------------------------
@@ -385,25 +380,10 @@ def setrun(claw_pkg='geoclaw'):
     # for topography, append lines of the form
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
-    #topodir = '/Users/rjl/topo/topofiles/'
     topofiles = topo_data.topofiles
 
-    # 1-minute topo:
-    topofiles.append([3, topodir + '/etopo1_-163_-122_38_63.asc'])
-
-    if 0:
-        # 2-second topo:
-        topofiles.append([3, topodir + '/PT_2sec_center.asc'])
-        topofiles.append([3, topodir + '/PS_2sec_center.asc'])
-        topofiles.append([3, topodir + '/SJdF_2sec_center.asc'])
-
-    if 0:
-        # 1/3-second topo:
-        topofiles.append([3, topodir + '/GH_13sec.asc'])
-        topofiles.append([3, topodir + '/WB_13sec.asc'])
-
-    #topofiles.append([3, '/Users/rjl/topo/WA/astoria_13_mhw_2012/GH_13sec.asc'])
-    #topofiles.append([3, '/Users/rjl/topo/WA/astoria_13_mhw_2012/WB_13sec.asc'])
+    # 15-second topo:
+    topofiles.append([3, topodir + '/etopo22_15s_-137_-121_37_55.asc'])
 
 
     # == setdtopo.data values ==
