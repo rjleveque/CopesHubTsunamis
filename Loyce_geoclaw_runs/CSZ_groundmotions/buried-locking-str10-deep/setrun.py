@@ -32,7 +32,9 @@ instant = ('instant' in rundir)  # is this instantaneous uplift?
 if instant:
     tmax_dtopo_region = 10.  # force fine grids up to this time
 else:
-    tmax_dtopo_region = 300.  # force fine grids up to this time
+    #tmax_dtopo_region = 300.   # force fine grids up to this time
+    tmax_dtopo_region = 15*60.  # force fine grids up to this time
+                                # 15 minutes for wave to propagate
 
 
 if '/projects' in rundir:
@@ -161,8 +163,9 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         ## ADJUST:
-        clawdata.num_output_times = 4
-        clawdata.tfinal = 2*3600.
+        clawdata.num_output_times = 9    #output every 5 minutes
+        #clawdata.tfinal = 2*3600.
+        clawdata.tfinal = 2700.          #run for 45 minutes
         clawdata.output_t0 = True  # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
@@ -519,7 +522,33 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_40_46.data')
     flagregions.append(flagregion)
 
-    if 0:
+    if 1: #For 15" run around region of interest
+        # Rectangular region that encompasses gauges 94-137, offshore OSVES
+        # or gauges 98-143, offshore Westport.
+        # Make this region 15" for all time thinking gauge plots will be better
+        # and tsunami propagating in our sliver of interest.
+        # This rectangle goes out to the Ruled Rectangle (without the b) above.
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_15sec'
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 4
+        flagregion.t1 = tmax_dtopo_region
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 1  # Rectangle for now
+
+        ## for Ocean Shores, encompasses gauges 94 to 137
+        #latitudes below are for 93 in north to 138 in south
+        #gauges_region = [-125.9,-124.1,46.66,47.287]
+
+        ## for Westport, encompasses gauges 98 to 143
+        #latitudes below are for 97 in north to 144 in south
+        gauges_region = [-125.9,-124.1,46.587,47.227]
+
+        flagregion.spatial_region = gauges_region
+        flagregions.append(flagregion)
+
+
+    if 0: #For the 5" runs
         # Rectangular region out to the b coastal region from the destination
         # area for the time the source is moving to get the peak at 5".
         flagregion = FlagRegion(num_dim=2)
@@ -539,7 +568,6 @@ def setrun(claw_pkg='geoclaw'):
         source_region = [-126.58,-124.1,46.587,47.227]
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
-
 
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.

@@ -12,7 +12,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from clawpack.geoclaw import topotools
+from clawpack.amrclaw import region_tools
+from clawpack.visclaw import plottools
+
 event = os.path.split(os.getcwd())[-1]
+
+root_dir = os.environ['CHT']
+RRdir = root_dir + '/topo/regions/'
 
 if 0:
     image = plt.imread('GE_PA2.png')
@@ -71,6 +77,21 @@ def setplot(plotdata):
         return sdf
     
 
+    def plot_RR(current_data):
+        from pylab import plot
+        RRs = ['RuledRectangle_Coast_40_46',
+               'RuledRectangle_Coast_40_46b',
+               'RuledRectangle_Coast_46_51',
+               'RuledRectangle_Coast_46_51b']
+        for RR in RRs:
+                RRfile = os.path.abspath(RRdir + '/%s.data' % RR)
+                RR = region_tools.RuledRectangle()
+                RR.read(RRfile)
+                xr,yr = RR.vertices()
+                plot(xr,yr,'k')
+        # also add a rectangle:
+        plottools.plotbox([-126,-124, 44, 45])
+
     #-----------------------------------------
     # Figure for surface
     #-----------------------------------------
@@ -97,6 +118,7 @@ def setplot(plotdata):
         ticklabel_format(useOffset=False)
         gca().set_aspect(1./cos(48*pi/180.))
         title_hours(current_data)
+        plot_RR(current_data)
     plotaxes.afteraxes = fixup
 
     # Water
@@ -110,7 +132,7 @@ def setplot(plotdata):
     plotitem.colorbar_shrink = 0.7
     plotitem.colorbar_extend = 'both'
     plotitem.celledges_show = 0
-    plotitem.patchedges_show = 1
+    plotitem.patchedges_show = 0
 
     # Land
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
@@ -137,7 +159,6 @@ def setplot(plotdata):
     plotaxes.xlimits = [-130,-122.5]
     plotaxes.ylimits = [38.5,50.5]
 
-
     def fixup(current_data):
         from pylab import title, ticklabel_format, gca, cos, pi
         import pylab
@@ -150,6 +171,8 @@ def setplot(plotdata):
         ticklabel_format(useOffset=False)
         gca().set_aspect(1./cos(48*pi/180.))
         title_hours(current_data)
+        plot_RR(current_data)
+
     plotaxes.afteraxes = fixup
 
     # Water
