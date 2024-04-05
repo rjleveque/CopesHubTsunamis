@@ -320,8 +320,8 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # max number of refinement levels:
-    amrdata.amr_levels_max = 4
-    #amrdata.amr_levels_max = 5
+    #amrdata.amr_levels_max = 4
+    amrdata.amr_levels_max = 5
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -522,7 +522,7 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_40_46.data')
     flagregions.append(flagregion)
 
-    if 1: #For 15" run around region of interest
+    if 0: #For 15" run around region of interest
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 15" for all time thinking gauge plots will be better
@@ -532,7 +532,8 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.name = 'Region_15sec'
         flagregion.minlevel = 4
         flagregion.maxlevel = 4
-        flagregion.t1 = tmax_dtopo_region
+        #flagregion.t1 = tmax_dtopo_region
+        flagregion.t1 = 0.0
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle for now
 
@@ -548,7 +549,7 @@ def setrun(claw_pkg='geoclaw'):
         flagregions.append(flagregion)
 
 
-    if 0: #For the 5" runs
+    if 0: #For the 5" runs (Trying to keep this at 15" from the coastal region b)
         # Rectangular region out to the b coastal region from the destination
         # area for the time the source is moving to get the peak at 5".
         flagregion = FlagRegion(num_dim=2)
@@ -569,6 +570,7 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
 
+    if 1:
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 5" for all time to check if gauge values change
@@ -578,7 +580,7 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.name = 'Region_5sec'
         flagregion.minlevel = 5
         flagregion.maxlevel = 5
-        flagregion.t1 = tmax_dtopo_region
+        flagregion.t1 = 0.0
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle for now
 
