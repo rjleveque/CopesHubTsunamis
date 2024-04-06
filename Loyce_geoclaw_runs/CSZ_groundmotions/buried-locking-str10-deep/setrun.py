@@ -320,8 +320,9 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # max number of refinement levels:
-    #amrdata.amr_levels_max = 4
-    amrdata.amr_levels_max = 5
+    #HERE
+    amrdata.amr_levels_max = 4
+    #amrdata.amr_levels_max = 5
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -337,8 +338,11 @@ def setrun(claw_pkg='geoclaw'):
     # dx = dy = 1deg, 6', 30", 15", 5"
     #refinement_ratios = [10,12,2,3]
 
+    #HERE
     # dx = dy = 4', 1', 30", 15", 5", 1", 1/3", 1/9"
-    refinement_ratios = [4,2,2,3,5,3,3]
+    #refinement_ratios = [4,2,2,3,5,3,3]
+    # dx = dy = 4', 1', 30", 10", 5", 1", 1/3", 1/9"
+    refinement_ratios = [4,2,3,2,5,3,3]
 
 
     amrdata.refinement_ratios_x = refinement_ratios
@@ -476,7 +480,9 @@ def setrun(claw_pkg='geoclaw'):
 
     # Continential shelf extended to cover dtopo, 15"
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_46_51b_15sec'
+    #HERE
+    #flagregion.name = 'Region_Coast_46_51b_15sec'
+    flagregion.name = 'Region_Coast_46_51b_10sec'
     flagregion.minlevel = 4
     flagregion.maxlevel = 4
     flagregion.t1 = 0.
@@ -488,7 +494,9 @@ def setrun(claw_pkg='geoclaw'):
     
     # Continential shelf extended to cover dtopo, 15"
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_40_46b_15sec'
+    #HERE
+    #flagregion.name = 'Region_Coast_40_46b_15sec'
+    flagregion.name = 'Region_Coast_40_46b_10sec'
     flagregion.minlevel = 4
     flagregion.maxlevel = 4
     flagregion.t1 = 0.
@@ -500,7 +508,9 @@ def setrun(claw_pkg='geoclaw'):
 
     # Continential shelf Variable Region, 30" to 15"
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_46_51_30to15sec'
+    #HERE
+    #flagregion.name = 'Region_Coast_46_51_30to15sec'
+    flagregion.name = 'Region_Coast_46_51_30to10sec'
     flagregion.minlevel = 3
     flagregion.maxlevel = 4
     flagregion.t1 = tmax_dtopo_region
@@ -512,7 +522,9 @@ def setrun(claw_pkg='geoclaw'):
     
     # Continential shelf Variable Region, 30" to 15"
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_40_46_30to15sec'
+    #HERE
+    #flagregion.name = 'Region_Coast_40_46_30to15sec'
+    flagregion.name = 'Region_Coast_40_46_30to10sec'
     flagregion.minlevel = 3
     flagregion.maxlevel = 4
     flagregion.t1 = tmax_dtopo_region
@@ -522,14 +534,18 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_40_46.data')
     flagregions.append(flagregion)
 
-    if 0: #For 15" run around region of interest
+    #HERE
+    #if 0: #For 15" run around region of interest
+    if 1: #For 10" run around region of interest
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 15" for all time thinking gauge plots will be better
         # and tsunami propagating in our sliver of interest.
         # This rectangle goes out to the Ruled Rectangle (without the b) above.
         flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_15sec'
+        #HERE
+        #flagregion.name = 'Region_15sec'
+        flagregion.name = 'Region_10sec'
         flagregion.minlevel = 4
         flagregion.maxlevel = 4
         #flagregion.t1 = tmax_dtopo_region
@@ -570,7 +586,9 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
 
-    if 1:
+    #HERE
+    #if 1:
+    if 0:
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 5" for all time to check if gauge values change
@@ -718,8 +736,8 @@ def setrun(claw_pkg='geoclaw'):
     fg.tstart_max =  0.       # when to start monitoring max values 
     fg.tend_max = 1.e10       # when to stop monitoring max values
     fg.dt_check = 10.         # target time (sec) increment between updating
-    #fg.min_level_check = 5    # monitor on finest level
-    fg.min_level_check = 3     # Coastal regions are 3,4 after 300 sec, and 4,4 for 300 sec 
+    #fg.min_level_check = 5   # monitor on finest level
+    fg.min_level_check = 3    # Coastal regions are 3,4 after tmax sec 
     fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
     fg.interp_method = 0      # 0 ==> pw const in cells, recommended
     fgmax_grids.append(fg)    # written to fgmax_grids.data
