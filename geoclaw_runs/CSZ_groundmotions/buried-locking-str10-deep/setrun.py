@@ -35,8 +35,8 @@ else:
     tmax_dtopo_region = 300.  # force fine grids up to this time
 
 
-topodir = os.path.join(CHT, 'topo/topofiles')
-dtopodir = os.path.join(CHT, 'dtopo/dtopofiles')
+topodir = os.path.join(root_dir, 'topo/topofiles')
+dtopodir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
 
 
 #------------------------------
@@ -457,7 +457,7 @@ def setrun(claw_pkg='geoclaw'):
     flagregion.t2 = tmax_dtopo_region
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
-            '/RuledRectangle_Coast_46_51.data')
+            '/RuledRectangle_Coast_46_51b.data')
     flagregions.append(flagregion)
     
     # Continential shelf extended to cover dtopo
@@ -469,7 +469,7 @@ def setrun(claw_pkg='geoclaw'):
     flagregion.t2 = tmax_dtopo_region
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
-            '/RuledRectangle_Coast_40_46.data')
+            '/RuledRectangle_Coast_40_46b.data')
     flagregions.append(flagregion)
 
     # Continential shelf Variable Region 
@@ -553,16 +553,16 @@ def setrun(claw_pkg='geoclaw'):
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     #rundata.gaugedata.gauges.append([1,-122.4, 47.781, 0., 1.e10])
 
-    asce_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/asce_values.txt'
-    asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
+    asce_gauges_file = os.path.join(root_dir,'info','asce_values.txt')
+    asce_gauges = np.loadtxt(asce_gauges_file, skiprows=1)
     for k in range(0,len(asce_gauges),10):
         gaugeno = int(asce_gauges[k,0])
         gx = float(asce_gauges[k,1])
         gy = float(asce_gauges[k,2])
         if gy >= 40:
             rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
-    VI_gagues_file = '/Users/rjl/git/CopesHubTsunamis/info/gaugesVI.txt'
-    VI_gauges = np.loadtxt(VI_gagues_file, skiprows=1)
+    VI_gauges_file = os.path.join(root_dir,'info','gaugesVI.txt')
+    VI_gauges = np.loadtxt(VI_gauges_file, skiprows=1)
     for k in range(0,len(VI_gauges),1):
         gaugeno = int(VI_gauges[k,0])
         gx = float(VI_gauges[k,1])
