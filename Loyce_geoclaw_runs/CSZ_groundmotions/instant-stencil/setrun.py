@@ -454,7 +454,7 @@ def setrun(claw_pkg='geoclaw'):
     # for moving topography, append lines of the form :   (<= 1 allowed for now!)
     #   [topotype, fname]
 
-    dtopo_data.dtopofiles = [[3, dtopodir + '/' + event]]
+    dtopo_data.dtopofiles = [[3, dtopodir + '/' + event + '.dtt3']]
 
     if instant: #instantaneous rupture
         dtopo_data.dt_max_dtopo = .2
@@ -774,7 +774,7 @@ def setrun(claw_pkg='geoclaw'):
         fgout.x1 = -130.   # specify edges (fgout pts will be cell centers)
         fgout.x2 = -122.   # edge of a cell, edges are whole numbers in this domain
         fgout.y1 = 38.5    # edge of a cell
-        fgout.y2 = 50.5 h  # edge of a cell
+        fgout.y2 = 50.5    # edge of a cell
         fgout.tstart = 0.
         fgout.tend = 1*3600
         fgout.nout = int(np.floor(fgout.tend)/30) + 1
