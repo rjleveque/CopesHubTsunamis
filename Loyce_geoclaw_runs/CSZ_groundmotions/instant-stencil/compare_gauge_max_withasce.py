@@ -28,8 +28,8 @@ asce_region = 2; y1region = 46.335; y2region = 47.3
 #asce_region = 7; y1region = 41.4; y2region = 42.1
 #asce_region = 8; y1region = 40.1; y2region = 41.4
 
-zoom =  True
-plot_gauge_timeseries = False
+zoom =  False
+plot_gauge_timeseries = True
 
 ### Examples, assuming you are running this code from one of
 ### the instant event directories to compare the instant with
@@ -40,27 +40,36 @@ plot_gauge_timeseries = False
 
 print(' COMPARING THE INSTANT (and COMPANION DYNAMIC) OUTPUTS ')
 print(' ')
+
 outdir1 =  '_output'
-print('eventname             : ',eventname)
+eventname1 = eventname
+print('eventname             : ',eventname1)
 print('event output directory: ',outdir1)
 print(' ')
 #
 outdir2 = '../' + eventname[0:-8] + '/_output'
-print('companion eventname             : ',eventname[0:-8])
+eventname2 = eventname[0:-8]
+print('companion eventname             : ',eventname2)
 print('companion event output directory: ',outdir2)
 print(' ')
 
 outdir3 = None
+eventname3 = None
 outdir4 = None
+eventname4 = None
 outdir5 = None
+eventname5 = None
 outdir6 = None
+eventname6 = None
 
 #Make this directory for the comparison plot here in this 
 #instant directory to compare with its dynamic counterpart
-plotdir = '_plots_instant_vs_dynamic_10sec'
+plotdir = '_plots_instant_vs_dynamic_12sec'
 os.system('mkdir -p %s' % plotdir)
 
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
+eventname_list = [eventname1,eventname2,eventname3,eventname4,eventname5,eventname6]
+
 color_list = ['r','b','g','r','m','r']
 linestyle_list = ['-','-','-','--','--','--']
 
@@ -172,7 +181,8 @@ if 0:
             try:
                 label = open(outdir + '/label.txt').readline().strip()
             except:
-                label = outdir.replace('_','')
+                label = eventname_list[k]
+                #label = outdir.replace('_','')
             ax2.plot(ampl,yg,color=color_list[k], linestyle=linestyle_list[k],
                       linewidth=lw, label=label)
         
@@ -267,7 +277,8 @@ for k,outdir in enumerate(outdir_list):
         try:
             label = open(outdir + '/label.txt').readline().strip()
         except:
-            label = outdir.replace('_','')
+            label = eventname_list[k]
+            #label = outdir.replace('_','')
         ax2.plot(yg,ampl,color=color_list[k], linestyle=linestyle_list[k],
                   linewidth=lw, label=label)
 
@@ -317,7 +328,8 @@ if plot_gauge_timeseries:
             try:
                 label = open(outdir + '/label.txt').readline().strip()
             except:
-                label = outdir.replace('_','')
+                label = eventname_list[k]
+                #label = outdir.replace('_','')
             gmax = eta.max()
             label = 'max = %.1fm, ' % gmax + label
             plot(t/60., eta, color=color_list[k], 
