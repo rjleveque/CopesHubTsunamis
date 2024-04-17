@@ -7,38 +7,35 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 #   make .help
 # at the unix prompt.
 
-# =========================
-# For also running on UW Hyak cluster, add these lines
-# (Also need to add new target scrdir and modify other targets below)
-
-# Set SCRATCH to scratch diretory, output will be sent to $SCRATCH/_output
-# on laptop, set SCRATCH to CURDIR so _output is in run directory:
+# on laptop, set SCRATCH to CURDIR so _output is in run directory
 #SCRATCH = $(CURDIR)
-# Executing the line below should also do this ok on laptop,
-# provided "mmfs1/home" isn't in your path:
+# executing either one of the lines below will do this ok on laptop
+# provided "projects" or "home1" isn't in your path
 
-# on UW hyak cluster this redirects output to scratch disk:
-SCRATCH = $(subst /mmfs1/home/,/gscratch/tsunami/,$(CURDIR))
-
-# Environment variable CHT should be set to point to the
-# top of git repository, in order to use the same executable in all directories.
-# Otherwise, use xgeoclaw in the the current run directory:
-CHT ?= $(CURDIR)
-EXE ?= $(CHT)/xgeoclaw
-# Note ?= since on HPC cluster EXE is set in slurm script to proper location
-# =========================
-
-
+# on CU cluster this redirects output to scratch disk:
+SCRATCH = $(subst /projects/,/rc_scratch/,$(CURDIR))
+# on TACC this redirects output to scratch disk:
+#SCRATCH = $(subst /home1/,/scratch/,$(CURDIR))
 
 # Adjust these variables if desired:
 # ----------------------------------
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
-#EXE = xgeoclaw                 # Executable to create
-SETRUN_FILE = setrun.py        # File containing function to make data
+
+# Environment variable COPEVIS should be set to 
+# top of git repository (perhaps in shared locaation on HPC cluster)
+
+# for laptop:
+EXE ?= $(CHT)/geoclaw_runs/xgeoclaw
+
+# on CU HPC cluster set EXE as environment variable, so we don't need this:
+#EXE = /projects/$(USER)/WA_EMD_Snoho2/cu_cluster/xgeoclaw
+
+SETRUN_FILE = setrun.py             # File containing function to make data
 OUTDIR = $(SCRATCH)/_output         # Directory for output
-SETPLOT_FILE = setplot.py      # File containing function to set plots
+SETPLOT_FILE = setplot.py 
 PLOTDIR = $(SCRATCH)/_plots         # Directory for plots
+
 
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 
@@ -51,6 +48,7 @@ FFLAGS ?=
 
 GEOLIB = $(CLAW)/geoclaw/src/2d/shallow
 include $(GEOLIB)/Makefile.geoclaw
+
 
 # ---------------------------------------
 # package sources specifically to exclude
@@ -78,8 +76,9 @@ SOURCES = \
 # Include Makefile containing standard definitions and make options:
 include $(CLAWMAKE)
 
-.PHONY: all scrdir
-	
+# Construct the topography data
+.PHONY: run all scrdir only_plots
+
 scrdir: 
 	mkdir -p $(SCRATCH)
 	@echo Using data in RUNDIR = $(CURDIR)
@@ -93,9 +92,14 @@ run:
 	$(MAKE) scrdir
 	$(MAKE) data
 	$(MAKE) output
-	
-all:
-	$(MAKE) scrdir 
-	$(MAKE) .plots
-	$(MAKE) .htmls
+
+all: 
+	$(MAKE) scrdir
+	$(MAKE) data
+	$(MAKE) output
+	$(MAKE) plots
+	#python process_fgout.py
+
+only_plots:
+	$(MAKE) plots
 
