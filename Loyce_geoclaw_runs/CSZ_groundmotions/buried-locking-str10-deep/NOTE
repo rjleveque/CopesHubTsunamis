@@ -1,0 +1,88 @@
+Done:   5" off shore roughly +_32.2km around Westport. This
+   5" extends west for 300 seconds initially to capture the deformation.
+   These 5" rectangular regions are inside the Coastal RRs below.
+
+   All output stored in _plots_with5sec, _output_with5sec
+
+   Well, the 5" makes a big difference.  The source's peak is narrow it seems.
+
+Could run:  5" off shore roughly +-32.2km around Westport without the
+   5" extenstion west for 300 seconds initially.  This one 5" rectangular
+   region is inside the Coastal RRs below.  (Not doing yet.)
+
+Next to run: 30" to 15" variable Coastal RR, and 15" fixed Coastal RR
+   for 300 seconds initially to start the deformation.
+   Done
+
+Compare the 5 vs 15:
+   Well, the 5" makes a big difference.  The source's peak is narrow it seems.
+   We think we need the 5" around the source area as well as the gauges.
+
+Now doing an experiment:
+   Running 15" again, this time for 45 minutes.  Have the outer Coastal region
+on for tmax_dtopo is 15 minutes, rather than 300 sec.  Also addeded a 15" rectangular
+region like the 5" one that goes from the inner Coastal region to shore that is
+4,4 always, so the gauge plots in a fixed region and this is our sliver of interest.
+Also outputting every 5 minutes, so get 9 plots.  Will see if the tsunami clears the
+region between the two Coastal areas in this 15 minute period and if the Coastal
+regions are good enough to capture the source.
+
+   Result:  Got the same amplitude maximums for the 15" (using tmax=300sec) vs. using
+            tmax = 15 minutes.  Max graphs on topo of each other.  Hinting at the
+            problem being the wave steepening as it propogates.  Going to now look at
+            the time series plots to see if they are nearly the same.
+
+   Result: (Time Series)  As we go further south (rupture was north to south), it is
+           starting to matter that the region was let go after 5 minutes.  
+
+Now doing another experiment:
+    Want to compare holding on the the outer Coastal rectangle as a 15" region, and
+    having the 5sec rectangle from time 0 to infinity. Then compare to old 5sec run which
+    had 5sec resolution in inner and outer coastal for 300sec and then 5sec in inner coastal
+    for the rest.  (Is the need for 5sec due to the wave at the gauge being steeper?)
+    (Can we do 15 around the source until it comes into the inner slider?)
+    which had 5 minutes on outer Coastal at 
+    this change over holding on to it for just 300 seconds? 
+
+    Answer:  Using 15sec in the outer Coastal region is fine.  Start the inner region at time 0
+    to infinity at 5sec resolution.  The wave steepens up as it comes onto the shelf near the
+    gauges and 5sec resolution (at least more than 15sec) is needed.  I could try 10sec resolution
+    for the inner resolution, but haven't done that yet.  Kind of feel we should stick with 5sec.
+    
+Now doing a last experiment:
+    Can 5sec in the slider inner window, be reduced to 10"?  Started with changing the refinement
+    to go from 30 to 10 to 5.  Not using the 5 for this experiment.  30 is still level 3, and 10
+    is level 4.  Then have an inner slider at 4,4 for all time. Using 10,10 for the outer as well
+    but just for 15 minutes, then let it go.  Want to see how that compares to 15" in the outer 
+    coastal for 15 minutes, then 5sec in the inner coastal for all time.  That is do we need the
+    5sec?
+
+    Well, 10",10" for 900 sec and 10",30" in the outer after 900 sec gets the peaks better that 
+    15",15" for 900 sec and 15",30" in the outer after 900 sec  as one would expect.  They are
+    however, pretty close, biggest difference is at the peaks for the gauges outside our slider.
+   
+    The 5",5" slider is probably needed instead of the 10",10" slider around the gauges of
+    interest.  There are some gauges of interest where difference is now around 1 meter rather
+    than the 2 meter difference if we used a 15",15" slider.  We could keep going and see how
+    4",4" slider would compare to 5",5" or we could stop and adopt the following:
+
+         THE PLAN:
+
+         Use 15" DEM everywhere for the noninundation part.  All these comparisons were with
+         the 15" DEM.  (I think that is the best we have.)  Then use the following:
+
+         outer big coastal RR:  10",10" for 20 minutes then let it go. (This includes inner coastal RR.)
+         inner coastal RR:      30",10" starting at 20 minutes to infinity.
+         slider around around gauges of interest (sliver of the inner coastal RR): 5",5" all time
+
+         So, for our region around a community (roughly +-32.2 km in latitude) we are computing in
+         an area around the community's gauges of interest at the 5" level in a fixed region.  The
+         tsunami comes to this region from level 10",10" computation in the big outer RR which also
+         includes the inner coastal RR, and the slider 5",5" described below.  Simulations show
+         20 minutes is enough time for the waves travelling toward shore to all enter this
+         5",5" fixed region.  Then the 10",10" outer region is let go.  The remaining Coastal inner RR
+         is 30",10" except for the slider which remains at 5",5".  The values of gauges outside
+         the slider area are computed on another job run with a different slider.
+        
+ 
+  

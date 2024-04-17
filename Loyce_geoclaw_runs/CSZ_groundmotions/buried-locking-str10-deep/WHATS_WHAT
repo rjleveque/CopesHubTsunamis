@@ -1,0 +1,58 @@
+Need to check all this!
+
+JOB RUNS:
+--------
+
+_output_15sec: outer and inner coastal on at 15",15" for 300sec;  inner coastal for 30",15 onward; No slider.
+_plots_15sec:
+
+_output_with5sec: Same as _output_15sec with addition of 5",5" slider in inner and outer for first 300sec
+                  and then inner for the rest.
+_plots_with5sec:
+
+_output15DEM_15tmax15Grid: outer and inner coastal on at 15",15" for 900sec; inner coastal for 30",15 onward.
+                           Also had a 15",15" slider inner region from 900sec to end.  (Should have been from
+                           0sec to the end, but probably doesn't matter since the underlying coastal was 30",15"
+                           which allowed for 15".   
+_plots_15tmax15Grid
+
+_output15DEM_5innerGrid:  outer and inner coastal on at 15",15" for 900sec; inner coastal for 30",15 onward.
+                          5",5" inner slider for all time.  No slider in outer. Means can use 15" in outer 
+                          (but not inner) for 900sec then let go.  Using 5" slider inner only.
+_plots15DEM_5innerGrid:
+
+_output_10sec:            outer and inner coastal on at 10",10" for 900sec; inner coastal for 30",10" onward.
+                          10:,10" inner slider for all time.  No slider in outer. Investigating whether can
+                          use 10" computational grid around gauges in the inner and use 10" in the outer and
+                          let that go after 900sec.  Using 10" slider inner only.
+_plots_10sec:
+
+_output_5sec:             This is the level 5 run (5sec is level 5) when 10sec is level 4.
+                          Keeping outer for 900sec.  5sec slider just covering inner coastal RR around Westport.
+_plots_5sec:
+
+
+COMPARISONS:
+-----------
+
+_plots_5vs15: _output_with5sec, _output_15sec
+              Shows that 5sec calculation can give as much as around 2 meter more amplitude
+              for some gauges when we compute with 5 in the inner and let go the outer region
+              after 300sec.  (Main thing is the computation as evidenced by  more experiments
+              below.)
+
+_plots_5inner_vs_5: Compares _output15DEM_5innerGrid, _output_with5sec
+                    Shows the outer coastal can be at 15", but the inner coastal has to be
+                    finer around the gauges.
+
+_plots_5vs15vs15tmax15: Compares _output_with5sec, _output_15sec, _output15DEM_15tmax15Grid
+                        (Shows the 2 15" ones almost identical except for gauges further south where
+                         giving up the outer coastal after 300sec is a bad idea.  Need it for at least 900
+                         sec in the south and maybe a bit longer.  The difference to the with5sec one is
+                         in the computation around the gauges.
+
+_plots_5inner_vs_10: Compares _output15DEM_5innerGrid with _output_10ssec
+
+_plots_5_vs_5inner_vs_10: Compares level 5 (5sec) to level 4 (10sec). Using output_10sec and _output_5sec above.
+                          Also compares to 5inner which used 15sec outside instead of 10, I believe.
+

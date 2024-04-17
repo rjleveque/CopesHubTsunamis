@@ -24,8 +24,8 @@ asce_region = 2; y1region = 46.335; y2region = 47.3
 #asce_region = 7; y1region = 41.4; y2region = 42.1
 #asce_region = 8; y1region = 40.1; y2region = 41.4
 
-zoom =  False
-plot_gauge_timeseries = False
+zoom =  True
+plot_gauge_timeseries = False 
 
 #outdir1 = '_output60DEM_15Grid'
 outdir1 = None
@@ -39,7 +39,7 @@ outdir2 = '_output15DEM_5innerGrid'
 
 #outdir3 = '_output15GEBDEM_15Grid'
 #outdir3 = '_output15DEM_15tmax15Grid'
-outdir3 = None
+outdir3 = '_output_5sec'
 
 #outdir4 = '_output60DEM_30Grid'
 outdir4 = None
@@ -68,7 +68,8 @@ eta_asce = d[:,4]  #*0.3048  # convert from feet to meters
 #plotdir = '_plots_5vs15'
 #plotdir = '_plots_5vs15vs15tmax15'
 #plotdir = '_plots_5inner_vs_5'
-plotdir = '_plots_5inner_vs_10'
+#plotdir = '_plots_5inner_vs_10'
+plotdir = '_plots_5_vs_5inner_vs_10'
 os.system('mkdir -p %s' % plotdir)
 
 fname = root_dir + '/topo/topofiles/etopo22_15s_-137_-121_37_55.asc'

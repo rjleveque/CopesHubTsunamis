@@ -321,8 +321,8 @@ def setrun(claw_pkg='geoclaw'):
 
     # max number of refinement levels:
     #HERE
-    amrdata.amr_levels_max = 4
-    #amrdata.amr_levels_max = 5
+    #amrdata.amr_levels_max = 4
+    amrdata.amr_levels_max = 5
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -536,7 +536,7 @@ def setrun(claw_pkg='geoclaw'):
 
     #HERE
     #if 0: #For 15" run around region of interest
-    if 1: #For 10" run around region of interest
+    if 0: #For 10" run around region of interest
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 15" for all time thinking gauge plots will be better
@@ -587,8 +587,8 @@ def setrun(claw_pkg='geoclaw'):
         flagregions.append(flagregion)
 
     #HERE
-    #if 1:
-    if 0:
+    if 1:
+    #if 0:
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 5" for all time to check if gauge values change
