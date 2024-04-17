@@ -8,7 +8,7 @@ if 'matplotlib' not in sys.modules:
     matplotlib.use('Agg')  # Use an image backend
 
 from pylab import *
-import os
+import os, glob
 from clawpack.visclaw import plottools, geoplot, gridtools
 from clawpack.visclaw import animation_tools, colormaps
 from matplotlib import animation, colors
@@ -36,8 +36,17 @@ xtrans = linspace(x1trans, x2trans, 1000)
 ytrans = linspace(y1trans, y2trans, 1000)
 
 # fgout frames to include in animation:
-fgframes1 = range(1,241)
+
+if 1:
+    # all frames found in outdir:
+    fgout_frames = glob.glob(os.path.join(outdir, 'fgout0001.t*'))
+    fgframes1 = range(1, len(fgout_frames)+1)
+    print('Found %i fgout frames' % len(fgout_frames))
+
+# or set explicitly:
+#fgframes1 = range(1,481)
 #fgframes1 = [20,40,60] # testing
+
 fgframes2 = fgframes1
 
 fgframe1 = fgframes1[0] # start with first frame
