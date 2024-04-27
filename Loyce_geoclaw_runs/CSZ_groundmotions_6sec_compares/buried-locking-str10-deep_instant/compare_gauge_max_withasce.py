@@ -1,3 +1,6 @@
+""" This compares the instantaneous results of this directory to
+    the dynamic results of its counterpart which lives one directory up.
+"""
 
 import sys, os
 if 'matplotlib' not in sys.modules:
@@ -13,8 +16,9 @@ from clawpack.geoclaw import topotools
 from clawpack.visclaw import plottools, geoplot, gaugetools
 from clawpack.geoclaw import fgout_tools
 
-event = os.path.split(os.getcwd())[-1]
-event = '%s, Varying DEM and/or Grid  Resolution' % event
+eventname = os.path.split(os.getcwd())[-1]
+event = '%s, Varying DEM and/or Grid  Resolution' % eventname
+
 #asce_region = 1; y1region = 47.3; y2region = 48.6
 asce_region = 2; y1region = 46.335; y2region = 47.3
 #asce_region = 3; y1region = 45.445; y2region = 46.335
@@ -25,56 +29,75 @@ asce_region = 2; y1region = 46.335; y2region = 47.3
 #asce_region = 8; y1region = 40.1; y2region = 41.4
 
 zoom =  True
-plot_gauge_timeseries = False 
+plot_gauge_timeseries = False
 
-#outdir1 = '_output60DEM_15Grid'
-outdir1 = None
+### Examples, assuming you are running this code from one of
+### the instant event directories to compare the instant with
+### its dynamic counterpart. Then eventname above has '_instant' in
+### its last 8 characters.  Then eventname[0:-8] will be the directory
+### name of its dynamic counterpart up one level.
+###
 
-#outdir2 = '_output15DEM_15Grid_again'
-#outdir2 = '_output15DEM_15Grid_large15DEM'
-#outdir2 = '_output_15sec'
-#outdir2 = None
-#the inner outer one had 5sec grid from 0 to infinity; 15sec outer grid for 15min.
-outdir2 = '_output15DEM_5innerGrid'
+print(' COMPARING THE INSTANT (and COMPANION DYNAMIC) OUTPUTS ')
+print(' ')
 
-#outdir3 = '_output15GEBDEM_15Grid'
-#outdir3 = '_output15DEM_15tmax15Grid'
-outdir3 = '_output_5sec'
+compare_6sec_to_12sec_also = True
 
-#outdir4 = '_output60DEM_30Grid'
-outdir4 = None
+outdir1 =  '_output'
+eventname1 = eventname + ' (6sec)'
+print('eventname             : ',eventname1)
+print('event output directory: ',outdir1)
+print(' ')
+#
+outdir2 = '../' + eventname[0:-8] + '/_output'
+eventname2 = eventname[0:-8] + ' (6sec)'
+print('companion eventname             : ',eventname2)
+print('companion event output directory: ',outdir2)
+print(' ')
 
-#outdir5 = '_output15DEM_30Grid'
+if (compare_6sec_to_12sec_also):
+    #12sec instant in outdir3, 12sec dynamic in outdir4
+    outdir3 = '../../CSZ_groundmotions_12sec_compares/' + eventname + '/_output'                     
+    eventname3 = eventname + ' (12sec)'
+    outdir4 = '../../CSZ_groundmotions_12sec_compares/' + eventname[0:-8] + '/_output'                     
+    eventname4 = eventname[0:-8] + ' (12sec)'
+else:
+    outdir3 = None
+    eventname3 = None
+    outdir4 = None
+    eventname4 = None
+
 outdir5 = None
+eventname5 = None
+outdir6 = None
+eventname6 = None
 
-#outdir6 = '_output15DEM_5Grid_large15DEM'
-#outdir6 = '_output_with5sec'
-#outdir6 = None
-outdir6 = '_output_10sec'
+#Make this directory for the comparison plot here in this 
+#instant directory to compare with its dynamic counterpart
 
+if (compare_6sec_to_12sec_also):
+    plotdir = '_plots_instant_vs_dynamic_and_6sec_vs_12sec'
+    os.system('mkdir -p %s' % plotdir)
+else:
+    plotdir = '_plots_instant_vs_dynamic_6sec'
+    os.system('mkdir -p %s' % plotdir)
 
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
-color_list = ['r','b','g','r','m','r']
-linestyle_list = ['-','-','-','--','--','--']
+eventname_list = [eventname1,eventname2,eventname3,eventname4,eventname5,eventname6]
+
+#6sec instant; 6sec dynamic; 12sec instant; 12sec dynamic
+color_list = ['r','b','g','m','r','b']
+linestyle_list = ['-','-','--','--','--','--']
 
 fname = root_dir + '/info/asce_values.txt'
 d = loadtxt(fname,skiprows=1)
 y_asce = d[:,2]
 eta_asce = d[:,4]  #*0.3048  # convert from feet to meters
 
-#plotdir = '_plots_with5sec'
-#plotdir = '_plots_15Grid_vs_5Grid_large15DEM'
-#plotdir = '_plots_15Grid_vs_5Grid_large15DEM'
-#plotdir = '_plots_5vs15'
-#plotdir = '_plots_5vs15vs15tmax15'
-#plotdir = '_plots_5inner_vs_5'
-#plotdir = '_plots_5inner_vs_10'
-plotdir = '_plots_5_vs_5inner_vs_10'
-os.system('mkdir -p %s' % plotdir)
-
 fname = root_dir + '/topo/topofiles/etopo22_15s_-137_-121_37_55.asc'
 etopo = topotools.Topography(fname,3)
 
+#If set to true, it uses fgout data, see below
 plot_eta = True
 
 #gaugenos = range(1,642,20)
@@ -108,11 +131,11 @@ def read_gauges(outdir, gaugenos=None):
     return xg,yg,gmax,gaugenos
 
     
-outdir = outdir2
+outdir = outdir1
 xg,yg,gmax,gaugenos = read_gauges(outdir)
 
 #============================
-# side-by-side plots
+# side-by-side plots, not using
 
 if 0:
     figure(201, figsize=(11,8))
@@ -174,7 +197,8 @@ if 0:
             try:
                 label = open(outdir + '/label.txt').readline().strip()
             except:
-                label = outdir.replace('_','')
+                label = eventname_list[k]
+                #label = outdir.replace('_','')
             ax2.plot(ampl,yg,color=color_list[k], linestyle=linestyle_list[k],
                       linewidth=lw, label=label)
         
@@ -269,7 +293,8 @@ for k,outdir in enumerate(outdir_list):
         try:
             label = open(outdir + '/label.txt').readline().strip()
         except:
-            label = outdir.replace('_','')
+            label = eventname_list[k]
+            #label = outdir.replace('_','')
         ax2.plot(yg,ampl,color=color_list[k], linestyle=linestyle_list[k],
                   linewidth=lw, label=label)
 
@@ -319,7 +344,8 @@ if plot_gauge_timeseries:
             try:
                 label = open(outdir + '/label.txt').readline().strip()
             except:
-                label = outdir.replace('_','')
+                label = eventname_list[k]
+                #label = outdir.replace('_','')
             gmax = eta.max()
             label = 'max = %.1fm, ' % gmax + label
             plot(t/60., eta, color=color_list[k], 

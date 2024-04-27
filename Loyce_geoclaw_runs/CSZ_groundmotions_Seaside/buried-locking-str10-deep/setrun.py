@@ -536,14 +536,14 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_40_46b.data')
     flagregions.append(flagregion)
 
-    # Continential shelf Variable Region, 24" to 12", changed to 6" fixed
+    # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_46_51_6sec'
+    flagregion.name = 'Region_Coast_46_51_12sec'
     #flagregion.minlevel = 3
     #flagregion.maxlevel = 4
     #flagregion.t1 = tmax_dtopo_region
-    flagregion.minlevel = 5
-    flagregion.maxlevel = 5
+    flagregion.minlevel = 4
+    flagregion.maxlevel = 4
     flagregion.t1 = 0.0
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
@@ -551,14 +551,14 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_46_51.data')
     flagregions.append(flagregion)
     
-    # Continential shelf Variable Region, 24" to 12", changed to 6" fixed
+    # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_40_46_6sec'
+    flagregion.name = 'Region_Coast_40_46_12sec'
     #flagregion.minlevel = 3
     #flagregion.maxlevel = 4
     #flagregion.t1 = tmax_dtopo_region
-    flagregion.minlevel = 5
-    flagregion.maxlevel = 5
+    flagregion.minlevel = 4
+    flagregion.maxlevel = 4
     flagregion.t1 = 0.0
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
@@ -616,9 +616,9 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
 
-    if 0: ### Not needed now since we have the Coastal Region at fixed 6sec.
+    if 1: ### Not needed now since we have the Coastal Region at fixed 6sec.
         ### Will use this for the inundation runs. (6" slider window)
-        ##### Probably not needed now since Coastal Region for whole margin is 6" fixed
+        ##### Probably not needed if Coastal Region for whole margin is 6" fixed
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
         # Make this region 6" for all time to check if gauge values change
@@ -638,7 +638,10 @@ def setrun(claw_pkg='geoclaw'):
 
         ## for Westport, encompasses gauges 98 to 143
         #latitudes below are for 97 in north to 144 in south
-        gauges_region = [-125.9,-124.1,46.587,47.227]
+        #gauges_region = [-125.9,-124.1,46.587,47.227]
+
+        ## for Seaside, encompasses gauges 166 to 208 
+        gauges_region = [-125.65,-123.76,45.69,46.43]
 
         flagregion.spatial_region = gauges_region
         flagregions.append(flagregion)

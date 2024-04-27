@@ -26,23 +26,37 @@ print('setting input_files_dir = ',input_files_dir)
 
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
+event = os.path.split(os.getcwd())[-1]
+print('The event is  %s' % event)
 
 instant = ('instant' in rundir)  # is this instantaneous uplift?
 
+#Note, we are forcing the outer RR to stay on, not just because of the
+#dtopo, but because we want the wave to propogate to the inner RR region
+#before letting go of the outer RR.
+
 if instant:
-    tmax_dtopo_region = 10.  # force fine grids up to this time
-else:
-    #tmax_dtopo_region = 300.   # force fine grids up to this time
     tmax_dtopo_region = 15*60.  # force fine grids up to this time
                                 # 15 minutes for wave to propagate
+                                # into inner RR before letting go of
+                                # outer RR. Even in South, waves start
+                                # to propogate immediately
+    print ('assuming this is an instantaneous rupture')
+    print (' ')
+else:
+    tmax_dtopo_region = 20*60.  # force fine grids up to this time
+                                # 20 minutes for wave to propagate
+                                # into inner RR in the South
+    print ('assuming this is a dynamic rupture')
+    print (' ')
 
 
 if '/projects' in rundir:
-    topodir = '/projects/rale6846/topo/topofiles'  # on CU
-    dtopodir = '/projects/rale6846/dtopo/dtopofiles'  # on CU
+    topodir = '/projects/rale6846/topo/topofiles'      # on CU
+    dtopodir = '/projects/rale6846/dtopo/dtopofiles'   # on CU
 else:
-    #topodir = '/Users/rjl/topo/topofiles'        # on Randys laptop
-    #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'   # on Randys laptop
+    #topodir = '/Users/rjl/topo/topofiles'             # on Randys laptop
+    #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'        # on Randys laptop
     topodir = root_dir + '/topo/topofiles'             # on Loyces laptop
     dtopodir = root_dir + '/dtopo/CSZ_groundmotions'   # on Loyces laptop
 
@@ -109,10 +123,10 @@ def setrun(claw_pkg='geoclaw'):
 
 
     #Shift the domain so the center of cells align with the etopo22 data
-    clawdata.lower[0] = -135. - one_sixth      # west longitude
-    clawdata.upper[0] = -122. - one_sixth      # east longitude
-    clawdata.lower[1] = 38.5  - one_sixth      # south latitude
-    clawdata.upper[1] = 53.5  - one_sixth      # north latitude
+    clawdata.lower[0] = -135.       # west longitude
+    clawdata.upper[0] = -122.       # east longitude
+    clawdata.lower[1] = 38.5        # south latitude
+    clawdata.upper[1] = 53.5        # north latitude
 
     clawdata.num_cells[0] = 13*15
     clawdata.num_cells[1] = 15*15
@@ -163,10 +177,9 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         ## ADJUST:
-        clawdata.num_output_times = 9    #output every 5 minutes
-        #clawdata.tfinal = 2*3600.
-        clawdata.tfinal = 2700.          #run for 45 minutes
-        clawdata.output_t0 = True  # output at initial (or restart) time?
+        clawdata.num_output_times = 8    #output every 5 minutes
+        clawdata.tfinal = 40.*60         #run for 40 minutes
+        clawdata.output_t0 = True        # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -208,7 +221,11 @@ def setrun(claw_pkg='geoclaw'):
 
     # Initial time step for variable dt.
     # If dt_variable==0 then dt=dt_initial for all steps:
-    clawdata.dt_initial = 10.0
+
+    if instant: #instantaneous rupture
+        clawdata.dt_initial = 0.2
+    else:       #dynamic rupture
+        clawdata.dt_initial = 10.0
 
     # Max time step to be allowed if variable dt used:
     clawdata.dt_max = 1e+99
@@ -320,7 +337,6 @@ def setrun(claw_pkg='geoclaw'):
     amrdata = rundata.amrdata
 
     # max number of refinement levels:
-    #HERE
     #amrdata.amr_levels_max = 4
     amrdata.amr_levels_max = 5
 
@@ -338,11 +354,14 @@ def setrun(claw_pkg='geoclaw'):
     # dx = dy = 1deg, 6', 30", 15", 5"
     #refinement_ratios = [10,12,2,3]
 
-    #HERE
     # dx = dy = 4', 1', 30", 15", 5", 1", 1/3", 1/9"
     #refinement_ratios = [4,2,2,3,5,3,3]
+
     # dx = dy = 4', 1', 30", 10", 5", 1", 1/3", 1/9"
-    refinement_ratios = [4,2,3,2,5,3,3]
+    #refinement_ratios = [4,2,3,2,5,3,3]
+
+    # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
+    refinement_ratios = [2,5,2,2,2,3,3,3]
 
 
     amrdata.refinement_ratios_x = refinement_ratios
@@ -435,9 +454,12 @@ def setrun(claw_pkg='geoclaw'):
     # for moving topography, append lines of the form :   (<= 1 allowed for now!)
     #   [topotype, fname]
 
-    dtopo_data.dtopofiles = [[3, dtopodir + '/buried-locking-str10-deep.dtt3']]
+    dtopo_data.dtopofiles = [[3, dtopodir + '/' + event + '.dtt3']]
 
-    dtopo_data.dt_max_dtopo = 10
+    if instant: #instantaneous rupture
+        dtopo_data.dt_max_dtopo = .2
+    else:       #dynamic rupture
+        dtopo_data.dt_max_dtopo = 10.0
 
 
     # == setqinit.data values ==
@@ -461,8 +483,8 @@ def setrun(claw_pkg='geoclaw'):
     #RRdir = '/Users/rjl/git/paleo2020/topo/RuledRectangles'
     RRdir = root_dir + '/topo/regions/'
     
-    # Computational domain Variable Region - 4min, 1min to 30 sec:
-    # Level 3 below is 30 sec 
+    # Computational domain Variable Region - 4min, 2min to 24 sec:
+    # Level 3 below is 24 sec 
     # Note that this is a rectangle specified in the new way
     # (other regions below will force/allow more refinement)
     flagregion = FlagRegion(num_dim=2)
@@ -478,11 +500,9 @@ def setrun(claw_pkg='geoclaw'):
                                  clawdata.upper[1]+0.1]
     flagregions.append(flagregion)
 
-    # Continential shelf extended to cover dtopo, 15"
+    # Continential shelf extended to cover dtopo, 12"
     flagregion = FlagRegion(num_dim=2)
-    #HERE
-    #flagregion.name = 'Region_Coast_46_51b_15sec'
-    flagregion.name = 'Region_Coast_46_51b_10sec'
+    flagregion.name = 'Region_Coast_46_51b_12sec'
     flagregion.minlevel = 4
     flagregion.maxlevel = 4
     flagregion.t1 = 0.
@@ -492,11 +512,9 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_46_51b.data')
     flagregions.append(flagregion)
     
-    # Continential shelf extended to cover dtopo, 15"
+    # Continential shelf extended to cover dtopo, 12"
     flagregion = FlagRegion(num_dim=2)
-    #HERE
-    #flagregion.name = 'Region_Coast_40_46b_15sec'
-    flagregion.name = 'Region_Coast_40_46b_10sec'
+    flagregion.name = 'Region_Coast_40_46b_12sec'
     flagregion.minlevel = 4
     flagregion.maxlevel = 4
     flagregion.t1 = 0.
@@ -506,46 +524,44 @@ def setrun(claw_pkg='geoclaw'):
             '/RuledRectangle_Coast_40_46b.data')
     flagregions.append(flagregion)
 
-    # Continential shelf Variable Region, 30" to 15"
+    # Continential shelf Variable Region, 24" to 12", changed to 6" experiment
     flagregion = FlagRegion(num_dim=2)
-    #HERE
-    #flagregion.name = 'Region_Coast_46_51_30to15sec'
-    flagregion.name = 'Region_Coast_46_51_30to10sec'
-    flagregion.minlevel = 3
-    flagregion.maxlevel = 4
-    flagregion.t1 = tmax_dtopo_region
+    flagregion.name = 'Region_Coast_46_51_6sec'
+    #flagregion.minlevel = 3
+    #flagregion.maxlevel = 4
+    #flagregion.t1 = tmax_dtopo_region
+    flagregion.minlevel = 5
+    flagregion.maxlevel = 5
+    flagregion.t1 = 0.0
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_46_51.data')
     flagregions.append(flagregion)
     
-    # Continential shelf Variable Region, 30" to 15"
+    # Continential shelf Variable Region, 24" to 12", changed to 6" experiment
     flagregion = FlagRegion(num_dim=2)
-    #HERE
-    #flagregion.name = 'Region_Coast_40_46_30to15sec'
-    flagregion.name = 'Region_Coast_40_46_30to10sec'
-    flagregion.minlevel = 3
-    flagregion.maxlevel = 4
-    flagregion.t1 = tmax_dtopo_region
+    flagregion.name = 'Region_Coast_40_46_6sec'
+    #flagregion.minlevel = 3
+    #flagregion.maxlevel = 4
+    #flagregion.t1 = tmax_dtopo_region
+    flagregion.minlevel = 5
+    flagregion.maxlevel = 5
+    flagregion.t1 = 0.0
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_40_46.data')
     flagregions.append(flagregion)
 
-    #HERE
-    #if 0: #For 15" run around region of interest
-    if 0: #For 10" run around region of interest
+    if 0: #For 12" run around region of interest (This was my slider window).
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
-        # or gauges 98-143, offshore Westport.
-        # Make this region 15" for all time thinking gauge plots will be better
+        # (or gauges 98-143, offshore Westport).
+        # Make this region 12" for all time thinking gauge plots will be better
         # and tsunami propagating in our sliver of interest.
         # This rectangle goes out to the Ruled Rectangle (without the b) above.
         flagregion = FlagRegion(num_dim=2)
-        #HERE
-        #flagregion.name = 'Region_15sec'
-        flagregion.name = 'Region_10sec'
+        flagregion.name = 'Region_12sec'
         flagregion.minlevel = 4
         flagregion.maxlevel = 4
         #flagregion.t1 = tmax_dtopo_region
@@ -565,11 +581,12 @@ def setrun(claw_pkg='geoclaw'):
         flagregions.append(flagregion)
 
 
-    if 0: #For the 5" runs (Trying to keep this at 15" from the coastal region b)
+    if 0: ### Probably NEVER use  
+        #For the 6" runs (Trying to keep this at 12" from the coastal region b)
         # Rectangular region out to the b coastal region from the destination
-        # area for the time the source is moving to get the peak at 5".
+        # area for the time the source is moving to get the peak at 6".
         flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_5sec_initially'
+        flagregion.name = 'Region_6sec_initially'
         flagregion.minlevel = 5
         flagregion.maxlevel = 5
         flagregion.t1 = 0.
@@ -586,16 +603,14 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
 
-    #HERE
-    if 1:
-    #if 0:
+    if 0: ### Will use this for the inundation runs. (6" slider window)
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport.
-        # Make this region 5" for all time to check if gauge values change
-        # from when these gauges were in the 3,4 region above and had at most 15"
+        # Make this region 6" for all time to check if gauge values change
+        # from when these gauges were in the 3,4 region above and had at most 12"
         # This rectangle goes out to the Ruled Rectangle (without the b) above.
         flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_5sec'
+        flagregion.name = 'Region_6sec'
         flagregion.minlevel = 5
         flagregion.maxlevel = 5
         flagregion.t1 = 0.0
@@ -614,11 +629,11 @@ def setrun(claw_pkg='geoclaw'):
         flagregions.append(flagregion)
 
     if 0: #will need to fix the regions below for each collaboratory
-          # dx = dy = 4', 1', 30", 15", 5", 1", 1/3", 1/9"
+          # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
     
-        # Westport Variable Region - 30sec to 15sec to 5sec:
+        # Westport Variable Region - 24sec to 12sec to 6sec:
         flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_Westport_30-15-5sec'
+        flagregion.name = 'Region_Westport_24-12-6sec'
         flagregion.minlevel = 3
         flagregion.maxlevel = 5
         flagregion.t1 = 0.
@@ -627,9 +642,9 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = [-124.29, -123.655, 46.325, 47.159]
         flagregions.append(flagregion)
 
-        # Grays Harbor Region - allow  1" grids, require 15sec at least:
+        # Grays Harbor Region - allow  3" grids, require 12sec at least:
         flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_Grays_15-5-1sec'
+        flagregion.name = 'Region_Grays_12-6-3sec'
         flagregion.minlevel = 4
         flagregion.maxlevel = 6
         flagregion.t1 = tstart_finestgrid
@@ -638,9 +653,9 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = [-124.199, -123.809, 46.8, 47.145]
         flagregions.append(flagregion)
 
-        # fixedgrid Region - require  5" grids, allow 1 and  1/3":
+        # fixedgrid Region - require  6" grids, allow 3" and  1":
         flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'fixedgrid_5-1-13sec'
+        flagregion.name = 'fixedgrid_6-3-1sec'
         flagregion.minlevel = 5
         flagregion.maxlevel = 7
         flagregion.t1 = tstart_finestgrid
@@ -650,12 +665,12 @@ def setrun(claw_pkg='geoclaw'):
         flagregions.append(flagregion)
 
         if 0:
-            #Will need a 7x7 perhaps
+            #Will need a 8x8 perhaps
             # fixedgrid Region - require  1/3":
             flagregion = FlagRegion(num_dim=2)
             flagregion.name = 'fixedgrid_13sec'
-            flagregion.minlevel = 7
-            flagregion.maxlevel = 7
+            flagregion.minlevel = 8
+            flagregion.maxlevel = 8
             flagregion.t1 = tstart_finestgrid
             flagregion.t2 = 1e9
             flagregion.spatial_region_type = 1  # Rectangle
@@ -663,12 +678,12 @@ def setrun(claw_pkg='geoclaw'):
             flagregions.append(flagregion)
 
         if 0:
-            #Will need an 8x8 perhaps
+            #Will need an 9x9 perhaps
             # fixedgrid Region - require  1/9":
             flagregion = FlagRegion(num_dim=2)
             flagregion.name = 'fixedgrid_19sec'
-            flagregion.minlevel = 8
-            flagregion.maxlevel = 8
+            flagregion.minlevel = 9
+            flagregion.maxlevel = 9
             flagregion.t1 = tstart_finestgrid
             flagregion.t2 = 1e9
             flagregion.spatial_region_type = 1  # Rectangle
@@ -685,7 +700,9 @@ def setrun(claw_pkg='geoclaw'):
 
     asce_gagues_file = root_dir + '/info/asce_values.txt'
     asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
-    for k in range(0,len(asce_gauges),10):
+
+    #Use all the ASCE gauges for this job run
+    for k in range(0,len(asce_gauges)):
         gaugeno = int(asce_gauges[k,0])
         gx = float(asce_gauges[k,1])
         gy = float(asce_gauges[k,2])
@@ -700,73 +717,77 @@ def setrun(claw_pkg='geoclaw'):
         rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
 
 
-    # == fgmax_grids.data values ==
-    # NEW STYLE STARTING IN v5.7.0
+    if 0:  #don't use fgmax grid
+        # == fgmax_grids.data values ==
+        # NEW STYLE STARTING IN v5.7.0
 
-    # set num_fgmax_val = 1 to save only max depth,
-    #                     2 to also save max speed,
-    #                     5 to also save max hs,hss,hmin
-    rundata.fgmax_data.num_fgmax_val = 2  # Save depth and speed
+        # set num_fgmax_val = 1 to save only max depth,
+        #                     2 to also save max speed,
+        #                     5 to also save max hs,hss,hmin
+        rundata.fgmax_data.num_fgmax_val = 2  # Save depth and speed
 
-    fgmax_grids = rundata.fgmax_data.fgmax_grids  # empty list to start
+        fgmax_grids = rundata.fgmax_data.fgmax_grids  # empty list to start
 
-    # Now append to this list objects of class fgmax_tools.FGmaxGrid
-    # specifying any fgmax grids.
+        # Now append to this list objects of class fgmax_tools.FGmaxGrid
+        # specifying any fgmax grids.
 
-    # Points on a uniform 2d grid:
-    dx_fine = 30./3600.  # grid resolution at finest level for the big fgmax region
-                         # use finest of 30"
-
-
-    #keep the domain shifted to align with the etopo22 data
-    #This means that whole numbers like -130 and -123 below
-    #will be at the center of 1/3" cells. They will also be
-    #at centers of 30" cells (domain originally -135 to -122.
-    #Likewise, 39.0 and 52.0 will be at centers of both 1/3"
-    #and 30" cells (domain originally was 38.5 to 53.5)
-
-    fg = fgmax_tools.FGmaxGrid()
-    fg.point_style = 2  # uniform rectangular x-y grid
-    fg.x1 = -130.      # specify pts to align with FV cell centers
-    fg.x2 = -123. 
-    fg.y1 = 39.0 
-    fg.y2 = 52.0 
-    fg.dx = dx_fine
-    fg.dy = dx_fine
-    fg.tstart_max =  0.       # when to start monitoring max values 
-    fg.tend_max = 1.e10       # when to stop monitoring max values
-    fg.dt_check = 10.         # target time (sec) increment between updating
-    #fg.min_level_check = 5   # monitor on finest level
-    fg.min_level_check = 3    # Coastal regions are 3,4 after tmax sec 
-    fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
-    fg.interp_method = 0      # 0 ==> pw const in cells, recommended
-    fgmax_grids.append(fg)    # written to fgmax_grids.data
-
-    #Add the fg max grid here at the finest level
-
-    # == fgout_grids.data values ==
-    # NEW IN v5.9.0
-    # Set rundata.fgout_data.fgout_grids to be a list of
-    # objects of class clawpack.geoclaw.fgout_tools.FGoutGrid:
-    fgout_grids = rundata.fgout_data.fgout_grids  # empty list initially
-
-    fgout = fgout_tools.FGoutGrid()
-    fgout.fgno = 1
-    fgout.point_style = 2       # will specify a 2d grid of points
-    fgout.output_format = 'binary32'
-    fgout.nx = 8*60
-    fgout.ny = 12*60
-    fgout.x1 = -130. - one_sixth  # specify edges (fgout pts will be cell centers)
-    fgout.x2 = -122. - one_sixth  # edge of a cell
-    fgout.y1 = 38.5  - one_sixth  # edge of a cell
-    fgout.y2 = 50.5  - one_sixth  # edge of a cell
-    fgout.tstart = 0.
-    fgout.tend = 2*3600
-    fgout.nout = int(np.floor(fgout.tend)/30) + 1
-    fgout_grids.append(fgout)    # written to fgout_grids.data
+        # Points on a uniform 2d grid:
+        dx_fine = 30./3600.  # grid resolution at finest level for the big fgmax region
+                             # use finest of 30"
 
 
-    if 0:
+        #keep the domain shifted to align with the etopo22 data
+        #This means that whole numbers like -130 and -123 below
+        #will be at the center of 1/3" cells. They will also be
+        #at centers of 30" cells (domain originally -135 to -122.
+        #Likewise, 39.0 and 52.0 will be at centers of both 1/3"
+        #and 30" cells (domain originally was 38.5 to 53.5)
+
+        fg = fgmax_tools.FGmaxGrid()
+        fg.point_style = 2  # uniform rectangular x-y grid
+        fg.x1 = -130. + dx_fine/2.0       # specified pts to align with FV cell centers
+        fg.x2 = -123. - dx_fine/2.0       # since whole numbers are domain edges here
+        fg.y1 = 39.0  + dx_fine/2.0
+        fg.y2 = 52.0  - dx_fine/2.0
+        fg.dx = dx_fine
+        fg.dy = dx_fine
+        fg.tstart_max =  0.       # when to start monitoring max values 
+        fg.tend_max = 1.e10       # when to stop monitoring max values
+        fg.dt_check = 10.         # target time (sec) increment between updating
+        #fg.min_level_check = 5   # monitor on finest level for a 5 level run
+        fg.min_level_check = 3    # Coastal regions are 3,4 after tmax sec 
+        fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
+        fg.interp_method = 0      # 0 ==> pw const in cells, recommended
+        fgmax_grids.append(fg)    # written to fgmax_grids.data
+
+        #Add the fg max grid here at the finest level
+
+    if 1:
+        ###  HERE IS THE FGOUT STUFF TO EDIT (if plot_eta is set to True in 
+        ###  compare_gauge_max_withasce.py postprocessing, it uses fgout)
+        # == fgout_grids.data values ==
+        # NEW IN v5.9.0
+        # Set rundata.fgout_data.fgout_grids to be a list of
+        # objects of class clawpack.geoclaw.fgout_tools.FGoutGrid:
+        fgout_grids = rundata.fgout_data.fgout_grids  # empty list initially
+
+        fgout = fgout_tools.FGoutGrid()
+        fgout.fgno = 1
+        fgout.point_style = 2       # will specify a 2d grid of points
+        fgout.output_format = 'binary32'
+        fgout.nx = 8*60
+        fgout.ny = 12*60
+        fgout.x1 = -130.   # specify edges (fgout pts will be cell centers)
+        fgout.x2 = -122.   # edge of a cell, edges are whole numbers in this domain
+        fgout.y1 = 38.5    # edge of a cell
+        fgout.y2 = 50.5    # edge of a cell
+        fgout.tstart = 0.
+        fgout.tend = 1*3600
+        fgout.nout = int(np.floor(fgout.tend)/30) + 1
+        fgout_grids.append(fgout)    # written to fgout_grids.data
+
+
+    if 0: #extra one for editing, numbers below are NOT yet edges of a cell in current domain
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 2
         fgout.point_style = 2       # will specify a 2d grid of points

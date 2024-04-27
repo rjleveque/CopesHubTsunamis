@@ -25,36 +25,20 @@ asce_region = 2; y1region = 46.335; y2region = 47.3
 #asce_region = 8; y1region = 40.1; y2region = 41.4
 
 zoom =  True
-plot_gauge_timeseries = False 
+plot_gauge_timeseries = False
 
-#outdir1 = '_output60DEM_15Grid'
-outdir1 = None
+outdir1 = '_output_12sec'
+outdir2 = '_output_6sec'
 
-#outdir2 = '_output15DEM_15Grid_again'
-#outdir2 = '_output15DEM_15Grid_large15DEM'
-#outdir2 = '_output_15sec'
-#outdir2 = None
-#the inner outer one had 5sec grid from 0 to infinity; 15sec outer grid for 15min.
-outdir2 = '_output15DEM_5innerGrid'
-
-#outdir3 = '_output15GEBDEM_15Grid'
-#outdir3 = '_output15DEM_15tmax15Grid'
-outdir3 = '_output_5sec'
-
-#outdir4 = '_output60DEM_30Grid'
+outdir3 = None
 outdir4 = None
 
-#outdir5 = '_output15DEM_30Grid'
-outdir5 = None
-
-#outdir6 = '_output15DEM_5Grid_large15DEM'
-#outdir6 = '_output_with5sec'
-#outdir6 = None
-outdir6 = '_output_10sec'
+outdir5 = '../../CSZ_groundmotions/buried-locking-str10-deep/_output_10sec'
+outdir6 = '../../CSZ_groundmotions/buried-locking-str10-deep/_output_5sec'
 
 
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
-color_list = ['r','b','g','r','m','r']
+color_list = ['r','b','g','r','g','m']
 linestyle_list = ['-','-','-','--','--','--']
 
 fname = root_dir + '/info/asce_values.txt'
@@ -62,14 +46,7 @@ d = loadtxt(fname,skiprows=1)
 y_asce = d[:,2]
 eta_asce = d[:,4]  #*0.3048  # convert from feet to meters
 
-#plotdir = '_plots_with5sec'
-#plotdir = '_plots_15Grid_vs_5Grid_large15DEM'
-#plotdir = '_plots_15Grid_vs_5Grid_large15DEM'
-#plotdir = '_plots_5vs15'
-#plotdir = '_plots_5vs15vs15tmax15'
-#plotdir = '_plots_5inner_vs_5'
-#plotdir = '_plots_5inner_vs_10'
-plotdir = '_plots_5_vs_5inner_vs_10'
+plotdir = '_plots_12_vs_6_vs_10_vs_5'
 os.system('mkdir -p %s' % plotdir)
 
 fname = root_dir + '/topo/topofiles/etopo22_15s_-137_-121_37_55.asc'
