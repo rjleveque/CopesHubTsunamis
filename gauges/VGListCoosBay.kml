@@ -1,0 +1,2175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+            <kml xmlns="http://www.opengis.net/kml/2.2"
+            xmlns:gx="http://www.google.com/kml/ext/2.2">
+            <Document><name>VGListCoosBay</name>
+
+            <Style id="Red">
+            <IconStyle><color>FF0000FF</color></IconStyle>
+            </Style>
+
+            <Style id="Yellow">
+            <IconStyle><color>FF00FFFF</color></IconStyle>
+            </Style>
+            
+                <Placemark><name>1001</name>
+                <description>-124.30529, 43.47869</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.305291667, 43.478686111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.30532, 43.47866</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.305324074, 43.478657407, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1002</name>
+                <description>-124.31269, 43.44081</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.312691667, 43.440805556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31273, 43.44079</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.312731481, 43.440787037, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1003</name>
+                <description>-124.32241, 43.40530</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.322408333, 43.405302778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32245, 43.40532</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.322453704, 43.405324074, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1004</name>
+                <description>-124.34235, 43.37621</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.342352778, 43.376211111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.34236, 43.37625</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.342361111, 43.376250000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1005</name>
+                <description>-124.35221, 43.36425</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.352205556, 43.364252778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.35218, 43.36421</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.352175926, 43.364212963, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1006</name>
+                <description>-124.35592, 43.35770</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.355916667, 43.357697222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.35588, 43.35773</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.355879630, 43.357731481, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1007</name>
+                <description>-124.35543, 43.34767</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.355430556, 43.347672222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.35542, 43.34764</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.355416667, 43.347638889, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1008</name>
+                <description>-124.37006, 43.34404</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.370058333, 43.344044444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.37005, 43.34403</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.370046296, 43.344027778, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1009</name>
+                <description>-124.34644, 43.35560</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.346444444, 43.355602778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.34644, 43.35560</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.346435185, 43.355601852, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1010</name>
+                <description>-124.33780, 43.35318</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.337802778, 43.353183333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.33782, 43.35319</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.337824074, 43.353194444, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1011</name>
+                <description>-124.32701, 43.34795</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.327013889, 43.347950000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32699, 43.34792</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.326990741, 43.347916667, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1012</name>
+                <description>-124.33007, 43.35798</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.330066667, 43.357983333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.33005, 43.35801</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.330046296, 43.358009259, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1013</name>
+                <description>-124.31860, 43.35516</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.318600000, 43.355155556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31856, 43.35514</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.318564815, 43.355138889, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1014</name>
+                <description>-124.31866, 43.34815</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.318661111, 43.348152778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31866, 43.34819</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.318657407, 43.348194444, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1015</name>
+                <description>-124.32252, 43.34564</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.322516667, 43.345644444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32255, 43.34560</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.322546296, 43.345601852, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1016</name>
+                <description>-124.32715, 43.34581</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.327147222, 43.345813889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32718, 43.34579</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.327175926, 43.345787037, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1017</name>
+                <description>-124.32668, 43.34315</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.326680556, 43.343147222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32671, 43.34310</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.326712963, 43.343101852, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1018</name>
+                <description>-124.32398, 43.34277</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.323977778, 43.342772222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32394, 43.34273</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.323935185, 43.342731481, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1019</name>
+                <description>-124.32196, 43.34072</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.321955556, 43.340725000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32199, 43.34069</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.321990741, 43.340694444, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1020</name>
+                <description>-124.32182, 43.33944</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.321819444, 43.339438889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32181, 43.33940</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.321805556, 43.339398148, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1021</name>
+                <description>-124.32059, 43.33903</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.320588889, 43.339030556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32060, 43.33903</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.320601852, 43.339027778, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1022</name>
+                <description>-124.32315, 43.33891</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.323147222, 43.338911111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32310, 43.33894</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.323101852, 43.338935185, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1023</name>
+                <description>-124.32183, 43.33876</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.321830556, 43.338758333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32181, 43.33875</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.321805556, 43.338750000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1024</name>
+                <description>-124.32057, 43.33850</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.320572222, 43.338502778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32060, 43.33847</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.320601852, 43.338472222, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1025</name>
+                <description>-124.31959, 43.33833</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.319588889, 43.338327778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31958, 43.33829</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.319583333, 43.338287037, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1026</name>
+                <description>-124.32200, 43.33642</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.322000000, 43.336419444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.32199, 43.33644</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.321990741, 43.336435185, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1027</name>
+                <description>-124.31903, 43.33379</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.319030556, 43.333791667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31903, 43.33375</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.319027778, 43.333750000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1028</name>
+                <description>-124.31949, 43.36034</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.319494444, 43.360344444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31949, 43.36032</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.319490741, 43.360324074, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1029</name>
+                <description>-124.30791, 43.36026</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.307905556, 43.360255556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.30792, 43.36023</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.307916667, 43.360231481, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1030</name>
+                <description>-124.31719, 43.36785</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.317191667, 43.367847222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31718, 43.36782</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.317175926, 43.367824074, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1031</name>
+                <description>-124.31314, 43.37322</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.313138889, 43.373216667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31310, 43.37319</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.313101852, 43.373194444, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1032</name>
+                <description>-124.30661, 43.37760</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.306605556, 43.377602778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.30662, 43.37764</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.306620370, 43.377638889, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1033</name>
+                <description>-124.29991, 43.38238</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.299913889, 43.382380556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.29995, 43.38236</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.299953704, 43.382361111, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1034</name>
+                <description>-124.29279, 43.38918</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.292786111, 43.389183333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.29282, 43.38921</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.292824074, 43.389212963, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1035</name>
+                <description>-124.28242, 43.39658</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.282422222, 43.396583333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.28245, 43.39662</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.282453704, 43.396620370, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1036</name>
+                <description>-124.27470, 43.41494</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.274697222, 43.414936111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.27468, 43.41495</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.274675926, 43.414953704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1037</name>
+                <description>-124.24608, 43.42498</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.246077778, 43.424977778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.24606, 43.42495</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.246064815, 43.424953704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1038</name>
+                <description>-124.23722, 43.42344</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.237225000, 43.423441667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23727, 43.42347</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.237268519, 43.423472222, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1039</name>
+                <description>-124.26185, 43.41028</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.261850000, 43.410283333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.26181, 43.41032</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.261805556, 43.410324074, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1040</name>
+                <description>-124.23785, 43.43129</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.237850000, 43.431286111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23782, 43.43125</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.237824074, 43.431250000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1041</name>
+                <description>-124.23756, 43.42630</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.237561111, 43.426302778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23755, 43.42634</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.237546296, 43.426342593, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1042</name>
+                <description>-124.23727, 43.42829</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.237275000, 43.428291667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23727, 43.42829</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.237268519, 43.428287037, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1043</name>
+                <description>-124.23624, 43.42498</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.236236111, 43.424977778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23625, 43.42495</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.236250000, 43.424953704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1044</name>
+                <description>-124.23535, 43.43290</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.235352778, 43.432902778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23532, 43.43292</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.235324074, 43.432916667, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1045</name>
+                <description>-124.23466, 43.42721</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.234663889, 43.427213889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23468, 43.42718</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.234675926, 43.427175926, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1046</name>
+                <description>-124.23375, 43.42449</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.233750000, 43.424494444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23375, 43.42449</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.233750000, 43.424490741, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1047</name>
+                <description>-124.23467, 43.43719</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.234675000, 43.437191667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23468, 43.43718</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.234675926, 43.437175926, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1048</name>
+                <description>-124.23056, 43.43840</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.230555556, 43.438400000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23051, 43.43838</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.230509259, 43.438379630, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1049</name>
+                <description>-124.22641, 43.44008</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.226408333, 43.440083333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22644, 43.44005</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.226435185, 43.440046296, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1050</name>
+                <description>-124.22260, 43.44227</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.222602778, 43.442275000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22264, 43.44227</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.222638889, 43.442268519, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1051</name>
+                <description>-124.22133, 43.44051</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.221325000, 43.440508333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22134, 43.44051</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.221342593, 43.440509259, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1052</name>
+                <description>-124.22062, 43.43910</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.220619444, 43.439102778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22060, 43.43912</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.220601852, 43.439120370, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1053</name>
+                <description>-124.21926, 43.44066</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.219258333, 43.440663889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21921, 43.44069</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.219212963, 43.440694444, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1054</name>
+                <description>-124.22038, 43.44289</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.220380556, 43.442891667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22042, 43.44292</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.220416667, 43.442916667, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1055</name>
+                <description>-124.22162, 43.44484</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.221622222, 43.444844444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22162, 43.44486</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.221620370, 43.444861111, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1056</name>
+                <description>-124.22234, 43.44700</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.222341667, 43.447000000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22236, 43.44699</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.222361111, 43.446990741, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1057</name>
+                <description>-124.22281, 43.44957</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.222813889, 43.449566667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22282, 43.44958</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.222824074, 43.449583333, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1058</name>
+                <description>-124.22311, 43.44383</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.223111111, 43.443830556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22310, 43.44384</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.223101852, 43.443842593, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1059</name>
+                <description>-124.22470, 43.44679</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.224702778, 43.446794444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22468, 43.44681</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.224675926, 43.446805556, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1060</name>
+                <description>-124.22556, 43.44954</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.225563889, 43.449541667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22560, 43.44958</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.225601852, 43.449583333, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1061</name>
+                <description>-124.22641, 43.44162</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.226408333, 43.441619444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22644, 43.44162</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.226435185, 43.441620370, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1062</name>
+                <description>-124.22970, 43.44034</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.229700000, 43.440344444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22968, 43.44032</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.229675926, 43.440324074, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1063</name>
+                <description>-124.23499, 43.43860</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.234988889, 43.438597222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23495, 43.43856</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.234953704, 43.438564815, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1064</name>
+                <description>-124.22166, 43.43671</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.221663889, 43.436705556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22162, 43.43671</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.221620370, 43.436712963, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1065</name>
+                <description>-124.22200, 43.43258</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.222000000, 43.432583333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22199, 43.43255</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.221990741, 43.432546296, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1066</name>
+                <description>-124.22237, 43.42950</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.222369444, 43.429497222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22236, 43.42949</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.222361111, 43.429490741, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1067</name>
+                <description>-124.22308, 43.42624</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.223083333, 43.426236111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22310, 43.42625</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.223101852, 43.426250000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1068</name>
+                <description>-124.22349, 43.42426</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.223488889, 43.424255556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22347, 43.42421</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.223472222, 43.424212963, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1069</name>
+                <description>-124.21988, 43.43127</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.219877778, 43.431269444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21986, 43.43125</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.219861111, 43.431250000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1070</name>
+                <description>-124.21988, 43.42742</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.219880556, 43.427422222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21986, 43.42745</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.219861111, 43.427453704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1071</name>
+                <description>-124.22053, 43.42404</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.220533333, 43.424044444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22051, 43.42403</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.220509259, 43.424027778, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1072</name>
+                <description>-124.19426, 43.46223</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.194255556, 43.462233333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.19421, 43.46227</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.194212963, 43.462268519, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1073</name>
+                <description>-124.19360, 43.46180</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.193600000, 43.461800000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.19356, 43.46181</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.193564815, 43.461805556, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1074</name>
+                <description>-124.19001, 43.46582</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.190011111, 43.465819444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.19005, 43.46579</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.190046296, 43.465787037, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1075</name>
+                <description>-124.18924, 43.46552</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.189244444, 43.465516667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.18921, 43.46551</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.189212963, 43.465509259, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1076</name>
+                <description>-124.22619, 43.50507</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.226191667, 43.505066667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22616, 43.50505</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.226157407, 43.505046296, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1077</name>
+                <description>-124.22702, 43.50500</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.227022222, 43.505002778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22699, 43.50505</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.226990741, 43.505046296, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1078</name>
+                <description>-124.19429, 43.35711</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.194291667, 43.357111111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.19431, 43.35708</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.194305556, 43.357083333, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1079</name>
+                <description>-124.19378, 43.35490</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.193777778, 43.354897222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.19375, 43.35486</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.193750000, 43.354861111, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1080</name>
+                <description>-124.20538, 43.32468</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.205375000, 43.324680556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.20542, 43.32468</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.205416667, 43.324675926, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1081</name>
+                <description>-124.20705, 43.32578</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.207047222, 43.325783333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.20708, 43.32579</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.207083333, 43.325787037, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1082</name>
+                <description>-124.20871, 43.30129</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.208713889, 43.301286111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.20875, 43.30125</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.208750000, 43.301250000, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1083</name>
+                <description>-124.20918, 43.29967</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.209177778, 43.299666667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.20921, 43.29968</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.209212963, 43.299675926, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1084</name>
+                <description>-124.20771, 43.29991</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.207711111, 43.299908333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.20773, 43.29995</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.207731481, 43.299953704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1085</name>
+                <description>-124.17602, 43.36368</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.176019444, 43.363675000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.17606, 43.36366</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.176064815, 43.363657407, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1086</name>
+                <description>-124.17671, 43.36244</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.176713889, 43.362444444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.17671, 43.36245</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.176712963, 43.362453704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1087</name>
+                <description>-124.15388, 43.36544</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.153883333, 43.365436111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.15384, 43.36542</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.153842593, 43.365416667, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1088</name>
+                <description>-124.15259, 43.36660</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.152594444, 43.366600000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.15264, 43.36662</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.152638889, 43.366620370, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1089</name>
+                <description>-124.22588, 43.28762</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.225875000, 43.287625000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22588, 43.28764</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.225879630, 43.287638889, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1090</name>
+                <description>-124.22697, 43.28880</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.226975000, 43.288802778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22699, 43.28884</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.226990741, 43.288842593, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1091</name>
+                <description>-124.22693, 43.29009</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.226933333, 43.290094444, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.22690, 43.29014</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.226898148, 43.290138889, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1092</name>
+                <description>-124.08213, 43.36592</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.082127778, 43.365922222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.08208, 43.36588</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.082083333, 43.365879630, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1093</name>
+                <description>-124.08270, 43.36546</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.082700000, 43.365461111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.08273, 43.36542</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.082731481, 43.365416667, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1094</name>
+                <description>-124.21563, 43.25619</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.215627778, 43.256188889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21560, 43.25616</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.215601852, 43.256157407, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1095</name>
+                <description>-124.21543, 43.25593</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.215430556, 43.255930556, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21542, 43.25597</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.215416667, 43.255972222, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1096</name>
+                <description>-124.21383, 43.25249</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.213833333, 43.252488889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21384, 43.25245</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.213842593, 43.252453704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1097</name>
+                <description>-124.21373, 43.25238</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.213727778, 43.252375000, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.21375, 43.25236</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.213750000, 43.252361111, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1098</name>
+                <description>-124.23236, 43.40679</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.232355556, 43.406788889, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23236, 43.40681</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.232361111, 43.406805556, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1099</name>
+                <description>-124.23231, 43.40641</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.232308333, 43.406411111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23227, 43.40644</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.232268519, 43.406435185, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1100</name>
+                <description>-124.23204, 43.40384</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.232041667, 43.403836111, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23208, 43.40384</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.232083333, 43.403842593, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1101</name>
+                <description>-124.23204, 43.40357</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.232036111, 43.403572222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.23199, 43.40356</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.231990741, 43.403564815, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1102</name>
+                <description>-124.25069, 43.36993</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.250694444, 43.369933333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.25069, 43.36995</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.250694444, 43.369953704, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1103</name>
+                <description>-124.26867, 43.36120</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.268672222, 43.361197222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.26866, 43.36116</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.268657407, 43.361157407, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1104</name>
+                <description>-124.26139, 43.35258</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.261394444, 43.352577778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.26144, 43.35255</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.261435185, 43.352546296, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1105</name>
+                <description>-124.26214, 43.35265</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.262138889, 43.352652778, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.26218, 43.35264</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.262175926, 43.352638889, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1106</name>
+                <description>-124.26183, 43.35198</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.261833333, 43.351983333, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.26181, 43.35199</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.261805556, 43.351990741, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1107</name>
+                <description>-124.31032, 43.33954</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.310316667, 43.339541667, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.31032, 43.33958</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.310324074, 43.339583333, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+                <Placemark><name>1108</name>
+                <description>-124.30923, 43.33977</description>
+                <styleUrl>#Red</styleUrl>
+                <Point>
+                <coordinates>
+                -124.309227778, 43.339772222, 0.0
+                </coordinates>
+                </Point>
+                </Placemark>
+                
+                    <Placemark><name></name>
+                    <description>-124.30921, 43.33977</description>
+                    <styleUrl>#Yellow</styleUrl>
+                    <Point>
+                    <coordinates>
+                    -124.309212963, 43.339768519, 0.0
+                    </coordinates>
+                    </Point>
+                    </Placemark>
+                    
+</Document>
+</kml>
