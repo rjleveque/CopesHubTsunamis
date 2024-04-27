@@ -25,7 +25,7 @@ print('setting input_files_dir = ',input_files_dir)
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
 
-if 0:
+if 1:
     # for new ground motions:
     event = os.path.split(os.getcwd())[-1]
     instant = ('instant' in rundir)  # is this instantaneous uplift?
@@ -124,15 +124,10 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.num_dim = num_dim
 
     # Lower and upper edge of computational domain:
-    one_sixth = 1.0/(3600.*6)
-    one_third = 1.0/(3600.*3)
-
-    #Shift the domain so the center of cells align with the gauges, fgmax pts
-    shift = one_sixth # if finest level is 1/3"
-    clawdata.lower[0] = -135. - shift      # west longitude
-    clawdata.upper[0] = -122. - shift      # east longitude
-    clawdata.lower[1] = 38.5  - shift      # south latitude
-    clawdata.upper[1] = 53.5  - shift      # north latitude
+    clawdata.lower[0] = -135.      # west longitude
+    clawdata.upper[0] = -122.      # east longitude
+    clawdata.lower[1] = 38.5       # south latitude
+    clawdata.upper[1] = 53.5       # north latitude
 
     clawdata.num_cells[0] = 13*15
     clawdata.num_cells[1] = 15*15
@@ -182,10 +177,9 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
-        ## ADJUST:
-        clawdata.num_output_times = 4    #output every 15 minutes
-        clawdata.tfinal = 1*3600.        #run for 2 hours
-        clawdata.output_t0 = True        # output at initial (or restart) time?
+        clawdata.num_output_times = 0    # no frame output
+        clawdata.tfinal = 2*3600.
+        clawdata.output_t0 = False       # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -471,8 +465,7 @@ def setrun(claw_pkg='geoclaw'):
     # for moving topography, append lines of the form :   (<= 1 allowed for now!)
     #   [topotype, fname]
 
-    #dtopofile = dtopodir + '/' + event + '.dtt3'
-    dtopofile = '/Users/rjl/git/copes_hub_tsunamis/dtopo/dtopofiles/CSZ_SM1.tt3'
+    dtopofile = dtopodir + '/' + event + '.dtt3'
     dtopo_data.dtopofiles = [[3, dtopofile]]
 
     if instant: #instantaneous rupture
@@ -792,8 +785,7 @@ def setrun(claw_pkg='geoclaw'):
         # load list of virtual gauges to use, with columns 
         #      gaugeno, x, y
         # x,y should be in decimal form, preferably cell centered on finest grid
-        #gauges_file = root_dir + '/info/VGListSeaside.csv' 
-        gauges_file = './VGListSeaside.csv' 
+        gauges_file = root_dir + '/gauges/VGListSeaside.csv' 
         gauges = np.loadtxt(gauges_file, delimiter=',')
 
         for k in range(gauges.shape[0]):
