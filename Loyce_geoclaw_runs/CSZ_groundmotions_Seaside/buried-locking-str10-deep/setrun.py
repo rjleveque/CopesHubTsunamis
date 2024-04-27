@@ -518,7 +518,8 @@ def setrun(claw_pkg='geoclaw'):
     flagregion.minlevel = 4
     flagregion.maxlevel = 4
     flagregion.t1 = 0.
-    flagregion.t2 = tmax_dtopo_region
+    #flagregion.t2 = tmax_dtopo_region
+    flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_46_51b.data')
@@ -530,41 +531,42 @@ def setrun(claw_pkg='geoclaw'):
     flagregion.minlevel = 4
     flagregion.maxlevel = 4
     flagregion.t1 = 0.
-    flagregion.t2 = tmax_dtopo_region
+    flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_40_46b.data')
     flagregions.append(flagregion)
 
-    # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
-    flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_46_51_12sec'
-    #flagregion.minlevel = 3
-    #flagregion.maxlevel = 4
-    #flagregion.t1 = tmax_dtopo_region
-    flagregion.minlevel = 4
-    flagregion.maxlevel = 4
-    flagregion.t1 = 0.0
-    flagregion.t2 = 1e9
-    flagregion.spatial_region_type = 2  # Ruled Rectangle
-    flagregion.spatial_region_file = os.path.abspath(RRdir + \
+    if 0:
+        # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_Coast_46_51_12sec'
+        #flagregion.minlevel = 3
+        #flagregion.maxlevel = 4
+        #flagregion.t1 = tmax_dtopo_region
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 4
+        flagregion.t1 = 0.0
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 2  # Ruled Rectangle
+        flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_46_51.data')
-    flagregions.append(flagregion)
+        flagregions.append(flagregion)
     
-    # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
-    flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_Coast_40_46_12sec'
-    #flagregion.minlevel = 3
-    #flagregion.maxlevel = 4
-    #flagregion.t1 = tmax_dtopo_region
-    flagregion.minlevel = 4
-    flagregion.maxlevel = 4
-    flagregion.t1 = 0.0
-    flagregion.t2 = 1e9
-    flagregion.spatial_region_type = 2  # Ruled Rectangle
-    flagregion.spatial_region_file = os.path.abspath(RRdir + \
+        # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_Coast_40_46_12sec'
+        #flagregion.minlevel = 3
+        #flagregion.maxlevel = 4
+        #flagregion.t1 = tmax_dtopo_region
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 4
+        flagregion.t1 = 0.0
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 2  # Ruled Rectangle
+        flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_40_46.data')
-    flagregions.append(flagregion)
+        flagregions.append(flagregion)
 
     if 0: #Probably never use.
         #For 12" run around region of interest (This was my slider window).
@@ -616,13 +618,11 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = source_region
         flagregions.append(flagregion)
 
-    if 1: ### Not needed now since we have the Coastal Region at fixed 6sec.
+    if 1:
         ### Will use this for the inundation runs. (6" slider window)
-        ##### Probably not needed if Coastal Region for whole margin is 6" fixed
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
-        # or gauges 98-143, offshore Westport.
+        # or gauges 98-143, offshore Westport, or gauges 166-208 offshore Seaside.
         # Make this region 6" for all time to check if gauge values change
-        # from when these gauges were in the 3,4 region above and had at most 12"
         # This rectangle goes out to the Ruled Rectangle (without the b) above.
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_6sec'
