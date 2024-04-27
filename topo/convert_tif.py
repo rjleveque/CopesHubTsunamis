@@ -65,7 +65,8 @@ def convert_tif_to_asc(fname_tif, fname_asc=None, extent=None, coarsen=1):
         fname_asc = fname_asc + '.asc'
         
     # write .asc file with millimeter precision:
-    topo.write(fname_asc, topo_type=3, header_style='asc', Z_format='%.3f')
+    topo.write(fname_asc, topo_type=3, header_style='asc', Z_format='%.3f',
+               grid_registration='llcenter')
     print('Created ',fname_asc)
     
 if __name__ == '__main__':

@@ -8,7 +8,9 @@ from clawpack.geoclaw import topotools, kmltools, dtopotools
 from clawpack.visclaw import colormaps, geoplot, gridtools
 import os, sys, glob, zipfile
 
-def make_kml(dtopofile, dtopo_type=3, dZ_interval=1, dZmax=20):
+def make_kml(dtopofile, dtopo_type=3, dZ_interval=1, dZmax=20,
+             text_label=True):
+
     event = os.path.splitext(dtopofile)[0]
     print('Making contours for event = ',event)
     print('  contour interval = %gm' % dZ_interval)
@@ -22,9 +24,18 @@ def make_kml(dtopofile, dtopo_type=3, dZ_interval=1, dZmax=20):
     lw = 1.
     ax.contour(dtopo.X, dtopo.Y, dtopo.dZ[-1,:,:], clines, colors='r', 
                linestyles='-', linewidths=lw)
-    clines = arange(-dZ_interval,dZmax,-dZ_interval)
+    clines = arange(-dZmax,0,dZ_interval)
     ax.contour(dtopo.X, dtopo.Y, dtopo.dZ[-1,:,:], clines, colors='c', 
                linestyles='-', linewidths=lw)
+
+    if text_label:
+        yt = dtopo.y.mean()
+        xt = dtopo.x.min()
+        dz_min = dtopo.dZ[-1,:,:].min()
+        dz_max = dtopo.dZ[-1,:,:].max()
+        text(xt,yt,'%s\ndz_min = %.1fm, dz_max = %.1fm' \
+                % (event,dz_min,dz_max),
+             fontsize=15,color='yellow')
     
     kml_dir = '%s_kml' % event
     os.system('mkdir -p %s' % kml_dir)
