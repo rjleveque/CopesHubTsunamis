@@ -1,5 +1,5 @@
-""" This compares the instantaneous results of this directory to
-    the dynamic results of its counterpart which lives one directory up.
+""" This compares the dynamic results of this directory to
+    the asce values at the asce gauges.
 """
 
 import sys, os
@@ -38,10 +38,8 @@ plot_gauge_timeseries = True
 ### name of its dynamic counterpart up one level.
 ###
 
-print(' COMPARING THE INSTANT (and COMPANION DYNAMIC) OUTPUTS ')
+print(' COMPARING THE 6-sec DYNAMIC to ASCE values at ASCE gauges ')
 print(' ')
-
-compare_more = False
 
 outdir1 =  '_output'
 eventname1 = eventname + ' (6sec)'
@@ -49,24 +47,21 @@ print('eventname             : ',eventname1)
 print('event output directory: ',outdir1)
 print(' ')
 #
-outdir2 = '../' + eventname[0:-8] + '/_output'
-eventname2 = eventname[0:-8] + ' (6sec)'
-print('companion eventname             : ',eventname2)
-print('companion event output directory: ',outdir2)
-print(' ')
-
+compare_more = False
 if (compare_more):
     #Examples
-    outdir3 = '../../CSZ_groundmotions_12sec_compares/' + eventname + '/_output'                     
-    eventname3 = eventname + ' (12sec)'
-    outdir4 = '../../CSZ_groundmotions_12sec_compares/' + eventname[0:-8] + '/_output'                     
-    eventname4 = eventname[0:-8] + ' (12sec)'
+    outdir2 = '../../CSZ_groundmotions_12sec_compares/' + eventname + '/_output'                     
+    eventname2 = eventname + ' (12sec)'
+    outdir3 = '../../CSZ_groundmotions_12sec_compares/' + eventname[0:-8] + '/_output'                     
+    eventname3 = eventname[0:-8] + ' (12sec)'
 else:
+    outdir2 = None
+    eventname2 = None
     outdir3 = None
     eventname3 = None
-    outdir4 = None
-    eventname4 = None
 
+outdir4 = None
+eventname4 = None
 outdir5 = None
 eventname5 = None
 outdir6 = None
@@ -76,10 +71,10 @@ eventname6 = None
 #instant directory to compare with its dynamic counterpart
 
 if (compare_more):
-    plotdir = '_plots_instant_vs_dynamic_6sec_and_more'
+    plotdir = '_plots_dynamic_6sec_and_more'
     os.system('mkdir -p %s' % plotdir)
 else:
-    plotdir = '_plots_instant_vs_dynamic_6sec'
+    plotdir = '_plots_dynamic_6sec'
     os.system('mkdir -p %s' % plotdir)
 
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
