@@ -28,8 +28,8 @@ asce_region = 2; y1region = 46.335; y2region = 47.3
 #asce_region = 7; y1region = 41.4; y2region = 42.1
 #asce_region = 8; y1region = 40.1; y2region = 41.4
 
-zoom =  True
-plot_gauge_timeseries = False
+zoom =  False
+plot_gauge_timeseries = True
 
 ### Examples, assuming you are running this code from one of
 ### the instant event directories to compare the instant with
@@ -41,7 +41,7 @@ plot_gauge_timeseries = False
 print(' COMPARING THE INSTANT (and COMPANION DYNAMIC) OUTPUTS ')
 print(' ')
 
-compare_6sec_to_12sec_also = True
+compare_more = False
 
 outdir1 =  '_output'
 eventname1 = eventname + ' (6sec)'
@@ -55,8 +55,8 @@ print('companion eventname             : ',eventname2)
 print('companion event output directory: ',outdir2)
 print(' ')
 
-if (compare_6sec_to_12sec_also):
-    #12sec instant in outdir3, 12sec dynamic in outdir4
+if (compare_more):
+    #Examples
     outdir3 = '../../CSZ_groundmotions_12sec_compares/' + eventname + '/_output'                     
     eventname3 = eventname + ' (12sec)'
     outdir4 = '../../CSZ_groundmotions_12sec_compares/' + eventname[0:-8] + '/_output'                     
@@ -75,8 +75,8 @@ eventname6 = None
 #Make this directory for the comparison plot here in this 
 #instant directory to compare with its dynamic counterpart
 
-if (compare_6sec_to_12sec_also):
-    plotdir = '_plots_instant_vs_dynamic_and_6sec_vs_12sec'
+if (compare_more):
+    plotdir = '_plots_instant_vs_dynamic_6sec_and_more'
     os.system('mkdir -p %s' % plotdir)
 else:
     plotdir = '_plots_instant_vs_dynamic_6sec'
@@ -85,7 +85,6 @@ else:
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
 eventname_list = [eventname1,eventname2,eventname3,eventname4,eventname5,eventname6]
 
-#6sec instant; 6sec dynamic; 12sec instant; 12sec dynamic
 color_list = ['r','b','g','m','r','b']
 linestyle_list = ['-','-','--','--','--','--']
 
