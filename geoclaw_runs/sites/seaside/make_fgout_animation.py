@@ -196,10 +196,10 @@ axtrans.set_title('Transect 1 at y = %.5f %s' % (y1trans,Ttitle1))
 
 axtrans.set_ylim(ylimtr)
 
-Btrans1, etatrans1 = extract_transect(fgout1,xtrans,ytrans)
+Btrans, etatrans = extract_transect(fgout1,xtrans,ytrans)
 #import pdb; pdb.set_trace()
 
-Btrans, etatrans = Btrans1, etatrans1
+#Btrans, etatrans = Btrans1, etatrans1
 
 # filled regions:
 Bfill_plot = axtrans.fill_between(xtrans, Btrans-1e4, Btrans, 

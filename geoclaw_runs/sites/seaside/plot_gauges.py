@@ -3,16 +3,13 @@ from pylab import *
 import clawpack.pyclaw.gauges as gauges
 import os,sys
 
-sys.path.insert(0,'.')
-from params import event, location
-
-outdir = os.path.abspath('./_output')
-plotdir = os.path.abspath('./_plots')
-os.system('mkdir -p %s' % plotdir)
-print('Will take output from \n    %sand send plots to \n    %s' \
-        % (outdir,plotdir))
         
 def make_plot(gaugeno, location, event, outdir, plotdir):
+    
+    os.system('mkdir -p %s' % plotdir)
+    print('Will take output from \n    %sand send plots to \n    %s' \
+            % (outdir,plotdir))
+            
     gauge = gauges.GaugeSolution(gaugeno, outdir)
     x,y = gauge.location
     t = gauge.t / 60.   # convert to minutes
@@ -62,6 +59,12 @@ def make_plot(gaugeno, location, event, outdir, plotdir):
 
 if __name__ == '__main__':
 
+    sys.path.insert(0,'.')
+    from params import event, location
+
+    outdir = os.path.abspath('./_output')
+    plotdir = os.path.abspath('./_plots')
+    
     gaugenos = range(1001,1051,1)
     
     for gaugeno in gaugenos:
