@@ -22,7 +22,7 @@ from pylab import *
 
 import os,sys,glob,zipfile,shutil
 from clawpack.geoclaw import topotools, dtopotools
-from clawpack.visclaw import colormaps
+from clawpack.visclaw import colormaps, gridtools
 import matplotlib as mpl
 from matplotlib import colors
 from clawpack.amrclaw import region_tools
@@ -60,7 +60,8 @@ if use_force_dry:
 def savefigp(fname):
     global save_figs
     if save_figs:
-        fullname = '%s/%s' % (fgmax_plotdir, fname)
+        run_name = '%s_%s_' % (location,event)
+        fullname = '%s/%s%s' % (fgmax_plotdir, run_name, fname)
         savefig(fullname)
         print('Created ', fullname)
     else:
@@ -267,6 +268,118 @@ if 0:
     savefigp('eta_offshore.png')
 
 
+# plots on transects:
+
+yt1 = 46.0015; Ttitle1 = '(12th Ave)'
+yt2 = 45.9931; Ttitle2 = '(Broadway)'
+yt3 = 45.9894; Ttitle3 = '(Avenue G)'
+
+x1trans, x2trans = -123.94,  -123.9025
+
+#import pdb; pdb.set_trace()
+
+def extract_transect(fgmax_soln,xtrans,ytrans):
+
+    h1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
+                                   fgmax_soln.h.T, xtrans, ytrans)
+    B1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
+                                 fgmax_soln.B.T, xtrans, ytrans)
+    eta1d = h1d + B1d
+    return B1d, eta1d
+
+fig = figure(1, figsize=(7,8))
+clf()
+
+def annotate_transect(axtrans):
+    dxkm = 1
+    dxlong = dxkm/(111.* cos(pi*46/180))
+    axtrans.plot([-123.936,-123.936+dxlong], [-12,-12],'k')
+    axtrans.text(-123.936+dxlong/2, -13, '%i km' % dxkm, \
+                 ha='center',va='top')
+
+    axtrans.grid(True)
+    axtrans.ticklabel_format(useOffset=False)
+    axtrans.set_xlabel('longitude')
+    axtrans.set_ylabel('meters')
+    axtrans.set_xlim(x1trans,x2trans)
+    xt = axtrans.get_xticks()
+    #axtrans.set_xticks(xt,rotation=20)
+    axtrans.set_xticks(arange(x1trans,x2trans+1e-6,.01))
+    
+ylimtr = (-20,20)  # ylimits for transect plots
+xtrans = linspace(x1trans, x2trans, 1000)  # x points on transects
+
+
+# Transect 1 (top)
+
+y1trans, y2trans = 2*[yt1]; Ttitle = Ttitle1
+ytrans = linspace(y1trans, y2trans, 1000)
+Btrans, etatrans = extract_transect(fg,xtrans,ytrans)
+
+axtrans = axes([.1,.7,.8,.2])
+axtrans.set_title('Transect 1 at y = %.5f %s' % (y1trans,Ttitle1))
+axtrans.set_ylim(ylimtr)
+
+# filled regions:
+Bfill_plot = axtrans.fill_between(xtrans, Btrans-1e4, Btrans, 
+                                  color=[.5,1,.5,1])
+#etafill_plot = axtrans.fill_between(xtrans, Btrans, etatrans, 
+#                                  color=[.5,.5,1,1])
+
+# surface and topo plots:
+etatrans_plot, = axtrans.plot(xtrans, etatrans, 'b')
+Btrans_plot, = axtrans.plot(xtrans, Btrans, 'g')
+annotate_transect(axtrans)
+
+
+# Transect 2 (middle)
+
+y1trans, y2trans = 2*[yt2]; Ttitle = Ttitle2
+ytrans = linspace(y1trans, y2trans, 1000)
+axtrans2 = axes([.1,.4,.8,.2],sharex=axtrans)
+axtrans2.set_title('Transect 2 at y = %.5f %s' % (y1trans,Ttitle2))
+
+axtrans2.set_ylim(ylimtr)
+
+Btrans2, etatrans2 = extract_transect(fg,xtrans,ytrans)
+
+# filled regions:
+Bfill_plot2 = axtrans2.fill_between(xtrans, Btrans2-1e4, Btrans2, 
+                                  color=[.5,1,.5,1])
+
+# surface and topo plots:
+etatrans_plot2, = axtrans2.plot(xtrans, etatrans2, 'b')
+Btrans_plot2, = axtrans2.plot(xtrans, Btrans2, 'g')
+
+annotate_transect(axtrans2)
+
+# Transect 3 (bottom)
+
+y1trans, y2trans = 2*[yt3]; Ttitle = Ttitle3
+
+ytrans = linspace(y1trans, y2trans, 1000)
+
+axtrans3 = axes([.1,.1,.8,.2],sharex=axtrans)
+axtrans3.set_title('Transect 3 at y = %.5f %s' % (y1trans,Ttitle3))
+
+#axtrans.set_xlim(x1trans,x2trans)
+#axtrans.sharex(ax)
+
+axtrans3.set_ylim(ylimtr)
+
+Btrans3, etatrans3 = extract_transect(fg,xtrans,ytrans)
+
+# filled regions:
+Bfill_plot3 = axtrans3.fill_between(xtrans, Btrans3-1e4, Btrans3, 
+                                  color=[.5,1,.5,1])
+
+# surface and topo plots:
+etatrans_plot3, = axtrans3.plot(xtrans, etatrans3, 'b')
+Btrans_plot3, = axtrans3.plot(xtrans, Btrans3, 'g')
+
+annotate_transect(axtrans3)
+
+savefigp('transects.png')
 
 # ## Plots for Google Earth overlays
 # 
