@@ -28,7 +28,12 @@ import os, time, shutil, sys
 from multiprocessing import Process, current_process
 
 # set nohup==True to run geoclaw in background and redirect output to nohup.txt
-nohup = True  
+
+this_dir = os.getcwd()
+if '/mmfs1/home' in this_dir:
+    nohup = False  # on hyak, slurm output is redirected to a job*.out file
+else:
+    nohup = True  
 
 setplot_file = os.path.abspath('setplot.py')
 

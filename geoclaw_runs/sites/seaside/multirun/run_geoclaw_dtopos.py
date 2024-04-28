@@ -41,12 +41,18 @@ from multip_tools import run_many_cases_pool
 
 # location for big files:
 this_dir = os.getcwd()
+# Randy's laptop:
 scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
                                'scratch/CHT_runs')
 #scratch_dir = '/Users/rjl/tests/CHT_runs'
 
+# for hyak:
+scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+
 # where to find all the dtopo files:
 dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
+# for hyak:
+dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 print('dtopo_dir = ',dtopo_dir)
 
 # where to put output for all the runs:
@@ -62,7 +68,7 @@ os.system('mkdir -p %s' % runs_dir)
 xgeoclaw_path = os.path.join(root_dir, 'geoclaw_runs/xgeoclaw')
 
 # number of GeoClaw jobs to run simultaneously:
-nprocs = 2
+nprocs = 5
 
 # Specify the list of dtopo files to loop over for geoclaw runs:
 
@@ -74,8 +80,8 @@ if 1:
     dtopo_files.sort()
 
 if 1:
-    # test on only the last few files from list above:
-    dtopo_files = dtopo_files[-2:]
+    # test on only a few files from list above:
+    dtopo_files = dtopo_files[:5]
     
 # or set a list of dtopo_names by other means, e.g.
 #dtopo_files = ['buried-locking-str10-middle.dtt3']

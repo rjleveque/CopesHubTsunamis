@@ -44,16 +44,22 @@ import plot_gauges, process_fgmax
 
 # location for big files:
 this_dir = os.getcwd()
+# Randy's laptop:
 scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
                                'scratch/CHT_runs')
-#scratch_dir = '/Users/rjl/tests/CHT_runs'
+# for hyak:
+scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 # where to find output for all the runs:
 # (in a subdirectory of runs_dir named geoclaw_outputs)
 runs_dir = os.path.abspath(scratch_dir)
 #runs_dir = os.path.abspath('.')
 
-events = ['buried-random-str10-middle','buried-random-str10-shallow']
+#events = ['buried-random-str10-middle','buried-random-str10-shallow']
+
+events = ['buried-locking-mur13-deep', 'buried-locking-skl16-deep', 
+          'buried-locking-mur13-middle', 'buried-locking-skl16-middle',
+          'buried-locking-mur13-shallow']
 
 output_dirs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (output_dirs, event) for event in events]

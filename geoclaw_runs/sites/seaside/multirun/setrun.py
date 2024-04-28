@@ -18,9 +18,7 @@ except:
     raise Exception("*** Must first set CLAW enviornment variable")
 
 root_dir = os.environ['CHT']
-Seaside_root_dir = os.environ['Seaside']
-input_files_dir = root_dir + '/input_files/'
-print('setting input_files_dir = ',input_files_dir)
+#Seaside_root_dir = os.environ['Seaside']
 
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
@@ -56,15 +54,15 @@ else:
     print (' ')
 
 
-if '/projects' in rundir:
-    topodir = '/projects/rale6846/topo/topofiles'      # on CU
-    dtopodir = '/projects/rale6846/dtopo/dtopofiles'   # on CU
-else:
     #topodir = '/Users/rjl/topo/topofiles'                 # on Randys laptop
     #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'            # on Randys laptop
     topodir = root_dir + '/topo/topofiles'                 # on Loyces laptop
-    Seaside_topodir = Seaside_root_dir + '/topo/topofiles' # on Loyces laptop
+    #Seaside_topodir = Seaside_root_dir + '/topo/topofiles' # on Loyces laptop
     dtopodir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'       # moved
+
+    # for hyak cluster:
+    topodir = topodir.replace('/mmfs1/home', '/gscratch/tsunami')
+    dtopodir = dtopodir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 
 #------------------------------
@@ -437,15 +435,15 @@ def setrun(claw_pkg='geoclaw'):
     topofiles.append([3, topodir + '/etopo22_15s_-137_-121_37_55.asc'])
 
     #2-second topo:
-    topofiles.append([3, Seaside_topodir + '/astoria_2s_mhw.asc'])
+    topofiles.append([3, topodir + '/astoria_2s_mhw.asc'])
 
     # 1/3-second topo:
-    topofiles.append([3, Seaside_topodir + '/SeasideN_13s_mhw.asc'])
-    topofiles.append([3, Seaside_topodir + '/SeasideS_13s_mhw.asc'])
+    topofiles.append([3, topodir + '/SeasideN_13s_mhw.asc'])
+    topofiles.append([3, topodir + '/SeasideS_13s_mhw.asc'])
 
     # 1/9-second topo:
-    topofiles.append([3, Seaside_topodir + '/SeasideN_19s_mhw.asc'])
-    topofiles.append([3, Seaside_topodir + '/SeasideS_19s_mhw.asc'])
+    topofiles.append([3, topodir + '/SeasideN_19s_mhw.asc'])
+    topofiles.append([3, topodir + '/SeasideS_19s_mhw.asc'])
 
     if 0:
         # 2-second topo:
@@ -955,4 +953,4 @@ if __name__ == '__main__':
     rundata = setrun(*sys.argv[1:])
     rundata.write()
     
-    kmltools.make_input_data_kmls(rundata)
+    #kmltools.make_input_data_kmls(rundata)
