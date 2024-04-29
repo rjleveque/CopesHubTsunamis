@@ -48,18 +48,21 @@ this_dir = os.getcwd()
 scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
                                'scratch/CHT_runs')
 # for hyak:
-scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 # where to find output for all the runs:
 # (in a subdirectory of runs_dir named geoclaw_outputs)
 runs_dir = os.path.abspath(scratch_dir)
 #runs_dir = os.path.abspath('.')
 
-#events = ['buried-random-str10-middle','buried-random-str10-shallow']
+print('runs_dir = ',runs_dir)
 
-events = ['buried-locking-mur13-deep', 'buried-locking-skl16-deep', 
-          'buried-locking-mur13-middle', 'buried-locking-skl16-middle',
-          'buried-locking-mur13-shallow']
+events = ['buried-random-str10-middle','buried-random-str10-shallow']
+
+if 0:
+    events = ['buried-locking-mur13-deep', 'buried-locking-skl16-deep', 
+              'buried-locking-mur13-middle', 'buried-locking-skl16-middle',
+              'buried-locking-mur13-shallow']
 
 output_dirs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (output_dirs, event) for event in events]
@@ -75,6 +78,15 @@ print('Will make %i gauge plots for each event' % len(gaugenos))
 
 if dry_run:
     print('DRY RUN - location = %s,  events to process:\n' % location ,events)
+
+def make_html_index(plotdir,event):
+    html_fname = os.path.join(plotdir,'index.html')
+    with open(html_fname, 'w') as f:
+        f.write('<html>\n<h1>%s</h1>\n' % event)
+        f.write('\n<ul>\n<li><a href="fgmax">fgmax plots</a>\n')
+        f.write('<li><a href="gauges">gauge plots</a>\n</ul>\n')
+    print('Created ',html_fname)
+
 
 if not dry_run:
     for k in range(len(outdirs)):
@@ -92,3 +104,5 @@ if not dry_run:
         fg, t_hours = process_fgmax.load_fgmax(outdir)
         process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
         process_fgmax.make_kmz_plots(fg, fgmax_plotdir, run_name)
+
+        make_html_index(plotdir,event)

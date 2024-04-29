@@ -21,6 +21,7 @@ if 'matplotlib' not in sys.modules:
 from pylab import *
 
 import os,sys,glob,zipfile,shutil
+from clawpack.clawutil.data import ClawData
 from clawpack.geoclaw import topotools, dtopotools
 from clawpack.visclaw import colormaps, gridtools
 import matplotlib as mpl
@@ -44,29 +45,19 @@ if use_force_dry:
 def load_fgmax(outdir):
 
 
-    print('outdir = ',outdir)
-    t_files = glob.glob(outdir + '/fort.t0*')
-    times = []
-    for f in t_files:
-        lines = open(f,'r').readlines()
-        for line in lines:
-            if 'time' in line: 
-                t = float(line.split()[0])
-        times.append(t)
-    times.sort()
-    print('Output times found: ',times)
-    if len(times) > 0:
-        t_hours = times[-1] / 3600.
-        print('\nfgmax results are presumably from final time: %.1f seconds = %.2f hours'          % (times[-1], t_hours))
-    else:
-        t_hours = nan
-
-
     # Read fgmax data:
     fg = fgmax_tools.FGmaxGrid()
     fgmax_input_file_name = outdir + '/fgmax_grids.data'
     print('fgmax input file: \n  %s' % fgmax_input_file_name)
     fg.read_fgmax_grids_data(fgno=1, data_file=fgmax_input_file_name)
+
+    # determine time interval used for fgmax:
+    clawdata = ClawData()
+    clawdata.read(os.path.join(outdir, 'claw.data'), force=True)
+    try:
+        t_hours = min(clawdata.tfinal, fg.tend_max) / 3600.
+    except:
+        t_hours = nan
 
     fg.read_output(outdir=outdir, indexing='xy')  # so array layout same as topofile
 
@@ -487,8 +478,8 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
             for file in files:
                 zip.write(file) 
             
-        shutil.move(fname_kmz, fgmax_plotdir)
         path_kmz = os.path.join(fgmax_plotdir, fname_kmz)
+        shutil.move(fname_kmz, path_kmz)
         print('Created %s' % os.path.abspath(path_kmz))
         shutil.rmtree(kml_dir)
         os.chdir(savedir)

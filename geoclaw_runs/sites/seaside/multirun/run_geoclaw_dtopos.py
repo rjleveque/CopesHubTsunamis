@@ -47,7 +47,7 @@ scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
 #scratch_dir = '/Users/rjl/tests/CHT_runs'
 
 # for hyak:
-scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 # where to find all the dtopo files:
 dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
