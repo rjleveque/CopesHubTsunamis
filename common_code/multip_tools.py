@@ -26,6 +26,7 @@ that is assumed to exist.
 from numpy import *
 import os, time, shutil, sys
 from multiprocessing import Process, current_process
+import subprocess
 
 # set nohup==True to run geoclaw in background and redirect output to nohup.txt
 
@@ -317,9 +318,15 @@ def run_one_case_dtopo(case):
 
     # Run the xgeoclaw code
     # Use data from rundir=outdir, which was just written above...
+    
+    # redirect output and error messages:
+    outfile = os.path.join(outdir, 'geoclaw_output.txt')
+    print('GeoClaw output will be redirected to\n    ', outfile)
+    
     if 1:
         runclaw(xclawcmd = xgeoclaw_path, outdir=outdir, 
-            rundir=outdir, nohup=nohup)
+            rundir=outdir, nohup=nohup, xclawout=outfile,
+            xclawerr=subprocess.STDOUT)
     else:
         print('DRY RUN -- runclaw is NOT called from run_one_case_dtopos')
 
