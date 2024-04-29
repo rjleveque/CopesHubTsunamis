@@ -176,8 +176,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         clawdata.num_output_times = 0    # no frame output
-        #clawdata.tfinal = 30.            # SHORT TEST
-        clawdata.tfinal = 1.5*3600.
+        clawdata.tfinal = 30.            # SHORT TEST
+        #clawdata.tfinal = 1.5*3600.
         clawdata.output_t0 = False       # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
@@ -851,8 +851,8 @@ def setrun(claw_pkg='geoclaw'):
         fg.y2 = fgmax_extent[3] #- dx_fine/2.
         fg.dx = dx_fine
         fg.dy = dx_fine
-        #fg.tstart_max = 0.  # SHORT TEST
-        fg.tstart_max =  20.*60.  # when to start monitoring max values, at 20minutes 
+        fg.tstart_max = 0.  # SHORT TEST
+        #fg.tstart_max =  20.*60.  # when to start monitoring max values, at 20minutes 
         fg.tend_max = 1.e10       # when to stop monitoring max values
         fg.dt_check = 10.         # target time (sec) increment between updating
         # monitor on finest level:
@@ -922,8 +922,8 @@ def setrun(claw_pkg='geoclaw'):
         fgout.y2 = fgout_extent[3]
         fgout.nx = int(round((fgout.x2 - fgout.x1)/dx_fgout))
         fgout.ny = int(round((fgout.y2 - fgout.y1)/dy_fgout))
-        fgout.tstart = 20*60.
-        #fgout.tstart = 0.  # SHORT TEST
+        #fgout.tstart = 20*60.
+        fgout.tstart = 0.  # SHORT TEST
         fgout.tend = clawdata.tfinal
         fgout.nout = int(round(((fgout.tend - fgout.tstart)/dt_fgout))) + 1
         fgout_grids.append(fgout)
