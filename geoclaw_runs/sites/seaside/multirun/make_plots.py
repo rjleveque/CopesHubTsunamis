@@ -64,12 +64,12 @@ if 0:
               'buried-locking-mur13-middle', 'buried-locking-skl16-middle',
               'buried-locking-mur13-shallow']
 
-output_dirs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
-outdirs = ['%s/_output_%s' % (output_dirs, event) for event in events]
+geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
+outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
 #print('outdirs = ', outdirs)
 
-plot_dirs = os.path.abspath('%s/geoclaw_plots' % runs_dir)
-plotdirs = ['%s/_plots_%s' % (plot_dirs, event) for event in events]
+geoclaw_plots = os.path.abspath('%s/geoclaw_plots' % runs_dir)
+plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 #plotdirs = [outdir.replace('output','plot') for outdir in outdirs]
 #print('plotdirs = ', plotdirs)
 
