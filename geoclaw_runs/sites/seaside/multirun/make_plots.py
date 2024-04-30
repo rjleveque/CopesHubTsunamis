@@ -73,7 +73,6 @@ if 1:
            + ['%s-shallow' % model for model in models]
 
 #events = ['buried-random-str10-middle','buried-random-str10-shallow']
-events = ['buried-random-str10-shallow']
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
@@ -106,7 +105,7 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 0:
+        if 1:
             gauges_plotdir = plotdir + '/gauges'
             for gaugeno in gaugenos:
                 plot_gauges.make_plot(gaugeno, location, event, outdir,
@@ -116,10 +115,9 @@ if not dry_run:
             fgmax_plotdir = plotdir + '/fgmax'
             fg, t_hours = process_fgmax.load_fgmax(outdir)
             process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
-            process_fgmax.make_kmz_plots(fg, fgmax_plotdir, run_name)
 
         if 1:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)
 
-        if 0:
+        if 1:
             make_html_index(plotdir,event)

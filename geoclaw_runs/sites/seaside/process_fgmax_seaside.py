@@ -35,6 +35,16 @@ import sys
 save_figs = True             # make png files for figures?
 close_figs = True            # close big figures after saving?
 
+location = 'Seaside'
+
+try:
+    CHT = os.environ['CHT']
+except:
+    raise Exception("*** Set CHT enviornment variable to repository top")
+    
+graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/seaside')
+GE_image = imread(graphics_dir + '/seaside_fgout0003GE.png')
+GE_extent = [-123.96,-123.9025,45.972,46.0275]
 
 use_force_dry = False
 if use_force_dry:
@@ -92,7 +102,9 @@ cmap_depth = colors.ListedColormap([[.7,.7,1],[.5,.5,1],[0,0,1],
 cmap_depth.set_over(color=[1,0,1])
 
 # Set color for land points without inundation to light green:
-cmap_depth.set_under(color=[.7,1,.7])
+#cmap_depth.set_under(color=[.7,1,.7])
+# Set color for land points without inundation to transparent if on image:
+cmap_depth.set_under(color=[.7,1,.7,0])
 
 norm_depth = colors.BoundaryNorm(bounds_depth, cmap_depth.N)
 
@@ -201,12 +213,13 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     # use B0 for continuity at shore:                                    
     fg.eta_offshore = ma.masked_where(onshore, fg.B0 + fg.h)
 
-    # Plot maximum flow depth
 
+    # Plot maximum flow depth
 
     maxh_onshore = nanmax(fg.zeta_onshore)
     maxh_onshore_ft = maxh_onshore/0.3048
     figure(figsize=(8,8))
+    imshow(GE_image, extent=GE_extent)
     pc = plottools.pcolorcells(fg.X, fg.Y, fg.zeta_onshore, cmap=cmap_depth, norm=norm_depth)
     cb = colorbar(pc, extend='max', shrink=0.7)
     cb.set_label('meters')
@@ -218,6 +231,25 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     xticks(rotation=20)
     title('Maximum onshore flow depth h over %.2f hours\n' % t_hours \
             +'(h+B0 in harbor/rivers), max = %.2f meters ' % maxh_onshore)
+    
+    # Add transects to planview plot:
+    yt1 = 46.0015; Ttitle1 = '(12th Ave)'
+    yt2 = 45.9931; Ttitle2 = '(Broadway)'
+    yt3 = 45.9894; Ttitle3 = '(Avenue G)'
+    
+    x1trans, x2trans = -123.95,  -123.91
+    
+    plot([x1trans,x2trans], [yt1,yt1],'-', color='yellow', linewidth=1.2)
+    text(-123.935,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=12,
+         ha='left', color='yellow')
+    plot([x1trans,x2trans], [yt2,yt2],'-', color='yellow', linewidth=1.2)
+    text(-123.935,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=12,
+         ha='left', color='yellow')
+    plot([x1trans,x2trans], [yt3,yt3],'-', color='yellow', linewidth=1.2)
+    text(-123.935,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=12,
+         ha='left', color='yellow')
+    
+    # plot max speed
         
     savefigp('h_onshore.png')
 
@@ -497,6 +529,7 @@ if __name__== '__main__':
                         
 
     outdir = os.path.abspath('./_output')
+    outdir = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun_tests/geoclaw_outputs/_output_buried-random-str10-shallow'
     plotdir = os.path.abspath('./_plots')
     os.system('mkdir -p %s' % plotdir)
         
@@ -509,4 +542,4 @@ if __name__== '__main__':
     
     fg, t_hours = load_fgmax(outdir)
     make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
-    make_kmz_plots(fg, fgmax_plotdir, run_name)
+    #make_kmz_plots(fg, fgmax_plotdir, run_name)

@@ -65,7 +65,7 @@ all_models = \
      'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
 
-if 1:
+if 0:
 
     models = all_models[:3]
     events = ['%s-deep' % model for model in models] \
@@ -116,9 +116,8 @@ if not dry_run:
             fgmax_plotdir = plotdir + '/fgmax'
             fg, t_hours = process_fgmax.load_fgmax(outdir)
             process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
-            process_fgmax.make_kmz_plots(fg, fgmax_plotdir, run_name)
 
-        if 1:
+        if 0:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)
 
         if 0:
