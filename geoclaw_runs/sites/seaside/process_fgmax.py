@@ -137,6 +137,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
             print('save_figs = False')
 
     ylat = fg.y.mean()  # for aspect ratio of plots
+    fgmax_extent = [-123.94,-123.9025,45.972,46.02]
 
     ##### Plot topography
 
@@ -212,6 +213,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     contour(fg.X, fg.Y, fg.B0, [0], colors='g')
 
     gca().set_aspect(1./cos(ylat*pi/180.))
+    axis(fgmax_extent)
     ticklabel_format(useOffset=False)
     xticks(rotation=20)
     title('Maximum onshore flow depth h over %.2f hours\n' % t_hours \
@@ -226,6 +228,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     cb.set_label('m/s')
     contour(fg.X, fg.Y, fg.B0, [0], colors='g')
     gca().set_aspect(1./cos(ylat*pi/180.))
+    axis(fgmax_extent)
     ticklabel_format(useOffset=False)
     xticks(rotation=20)
     maxs = fg.s.max()
