@@ -43,6 +43,7 @@ if 1:
            + ['%s-shallow' % model for model in models]
 
 #events = ['buried-random-str10-middle','buried-random-str10-shallow']
+events = ['buried-random-str10-shallow']
 
 
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
