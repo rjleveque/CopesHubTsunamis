@@ -81,7 +81,8 @@ if 1:
 
 if 1:
     # test on only a few files from list above:
-    dtopo_files = dtopo_files[:5]
+    #dtopo_files = dtopo_files[:5]
+    dtopo_files = dtopo_files[5:9]
     
 # or set a list of dtopo_names by other means, e.g.
 #dtopo_files = ['buried-locking-str10-middle.dtt3']

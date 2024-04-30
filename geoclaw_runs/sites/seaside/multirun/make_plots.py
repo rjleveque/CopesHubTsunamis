@@ -57,12 +57,19 @@ runs_dir = os.path.abspath(scratch_dir)
 
 print('runs_dir = ',runs_dir)
 
-events = ['buried-random-str10-middle','buried-random-str10-shallow']
+all_models = \
+    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
-if 0:
-    events = ['buried-locking-mur13-deep', 'buried-locking-skl16-deep', 
-              'buried-locking-mur13-middle', 'buried-locking-skl16-middle',
-              'buried-locking-mur13-shallow']
+
+if 1:
+
+    models = all_models[:3]
+    events = ['%s-deep' % model for model in models] \
+           + ['%s-middle' % model for model in models] \
+           + ['%s-shallow' % model for model in models]
+
+#events = ['buried-random-str10-middle','buried-random-str10-shallow']
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
@@ -71,7 +78,7 @@ outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
 geoclaw_plots = os.path.abspath('%s/geoclaw_plots' % runs_dir)
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 #plotdirs = [outdir.replace('output','plot') for outdir in outdirs]
-#print('plotdirs = ', plotdirs)
+print('plotdirs = ', plotdirs)
 
 gaugenos = range(1001,1051,1)
 print('Will make %i gauge plots for each event' % len(gaugenos))

@@ -32,12 +32,17 @@ geoclaw_plots = os.path.join(runs_dir, 'geoclaw_plots')
 
 print('geoclaw_plots = ',geoclaw_plots)
 
-events = ['buried-random-str10-middle','buried-random-str10-shallow']
+all_models = \
+    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
-if 0:
-    events = ['buried-locking-mur13-deep', 'buried-locking-skl16-deep', 
-              'buried-locking-mur13-middle', 'buried-locking-skl16-middle',
-              'buried-locking-mur13-shallow']
+if 1:
+    models = all_models[:3]
+    events = ['%s-deep' % model for model in models] \
+           + ['%s-middle' % model for model in models] \
+           + ['%s-shallow' % model for model in models]
+
+#events = ['buried-random-str10-middle','buried-random-str10-shallow']
 
 
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
@@ -75,9 +80,11 @@ with open(top_index_fname, 'w') as top_index:
         top_index.write('<img src=%s/%s_speed.png width=28%%>\n<p>\n' \
                 % (fgmax_plotdir,run_name))                
 
-        top_index.write('<img src=%s/%s_Gauge01033.png width=35%%>\n' \
+        top_index.write('<img src=%s/%s_Gauge01033.png width=30%%>\n' \
                 % (gauges_plotdir,run_name))
-        top_index.write('<img src=%s/%s_Gauge01013.png width=35%%>\n<p>\n' \
+        top_index.write('<img src=%s/%s_Gauge01045.png width=30%%>\n' \
+                % (gauges_plotdir,run_name))
+        top_index.write('<img src=%s/%s_Gauge01047.png width=30%%>\n<p>\n' \
                 % (gauges_plotdir,run_name))
                 
         top_index.write('<ul>\n<li> <a href="%s/index.html">all plots</a>\n' \
@@ -94,9 +101,9 @@ with open(top_index_fname, 'w') as top_index:
                 % gauges_plotdir)
         top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01033.png">1033 (offshore)</a>\n' \
                 % (gauges_plotdir,run_name))    
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01013.png">1013 (first bridge)</a>\n' \
+        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01013.png">1013 (in Necamicum River)</a>\n' \
                 % (gauges_plotdir,run_name)) 
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01017.png">1017 (second bridge)</a>\n' \
+        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01017.png">1017 (in Neawanna River)</a>\n' \
                 % (gauges_plotdir,run_name))                
         top_index.write('</ul>\n')
         
