@@ -68,16 +68,16 @@ with open(top_index_fname, 'w') as top_index:
         make_html_index(plotdir,event)
         
         top_index.write('<h2>%s</h2>\n ' % event)
-        top_index.write('<img src=%s/%s_h_onshore.png height=500>\n' \
+        top_index.write('<img src=%s/%s_h_onshore.png width=28%%>\n' \
                 % (fgmax_plotdir,run_name))
-        top_index.write('<img src=%s/%s_transects.png height=500>\n' \
+        top_index.write('<img src=%s/%s_transects.png width=38%%>\n' \
                 % (fgmax_plotdir,run_name))
-                                
-        top_index.write('<img src=%s/%s_speed.png height=500>\n' \
+        top_index.write('<img src=%s/%s_speed.png width=28%%>\n<p>\n' \
                 % (fgmax_plotdir,run_name))                
-        top_index.write('<img src=%s/%s_Gauge01033.png height=500>\n' \
+
+        top_index.write('<img src=%s/%s_Gauge01033.png width=35%%>\n' \
                 % (gauges_plotdir,run_name))
-        top_index.write('<img src=%s/%s_Gauge01013.png height=500>\n<p>\n' \
+        top_index.write('<img src=%s/%s_Gauge01013.png width=35%%>\n<p>\n' \
                 % (gauges_plotdir,run_name))
                 
         top_index.write('<ul>\n<li> <a href="%s/index.html">all plots</a>\n' \
