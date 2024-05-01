@@ -66,12 +66,13 @@ with open(top_index_fname, 'w') as top_index:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
+        make_html_index(plotdir,event)
+        
         # relative paths:
+        plotdir = '_plots_%s' % event
         gauges_plotdir = '_plots_%s/gauges' % event
         fgmax_plotdir = '_plots_%s/fgmax' % event
 
-        make_html_index(plotdir,event)
-        
         top_index.write('<h2>%s</h2>\n ' % event)
         top_index.write('<img src=%s/%s_h_onshore.png width=28%%>\n' \
                 % (fgmax_plotdir,run_name))
