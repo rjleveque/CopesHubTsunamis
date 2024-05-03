@@ -177,9 +177,9 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         ## ADJUST:
-        clawdata.num_output_times = 8    #output every 5 minutes
-        clawdata.tfinal = 40.*60         #run for 40 minutes
-        clawdata.output_t0 = True        # output at initial (or restart) time?
+        clawdata.num_output_times = 0    # no frame output, only fgmax
+        clawdata.tfinal = 60.*60       
+        clawdata.output_t0 = False        # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -454,7 +454,8 @@ def setrun(claw_pkg='geoclaw'):
     # for moving topography, append lines of the form :   (<= 1 allowed for now!)
     #   [topotype, fname]
 
-    dtopo_data.dtopofiles = [[3, dtopodir + '/' + event + '.dtt3']]
+    # dtopofile will be set by run_geoclaw_dtopos.py 
+    #dtopo_data.dtopofiles = [[3, dtopodir + '/' + event + '.dtt3']]
 
     if instant: #instantaneous rupture
         dtopo_data.dt_max_dtopo = .2
@@ -770,20 +771,26 @@ def setrun(claw_pkg='geoclaw'):
         # Set rundata.fgout_data.fgout_grids to be a list of
         # objects of class clawpack.geoclaw.fgout_tools.FGoutGrid:
         fgout_grids = rundata.fgout_data.fgout_grids  # empty list initially
+        dx_fgout = 1/60.  # degrees
+        dy_fgout = dx_fgout
+        dt_fgout = 30  # seconds
 
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 1
         fgout.point_style = 2       # will specify a 2d grid of points
         fgout.output_format = 'binary32'
-        fgout.nx = 8*60
-        fgout.ny = 12*60
+        #fgout.nx = 8*60
+        #fgout.ny = 12*60
+
         fgout.x1 = -130.   # specify edges (fgout pts will be cell centers)
         fgout.x2 = -122.   # edge of a cell, edges are whole numbers in this domain
         fgout.y1 = 38.5    # edge of a cell
         fgout.y2 = 50.5    # edge of a cell
+        fgout.nx = int(round((fgout.x2 - fgout.x1)/dx_fgout))
+        fgout.ny = int(round((fgout.y2 - fgout.y1)/dy_fgout))
         fgout.tstart = 0.
         fgout.tend = 1*3600
-        fgout.nout = int(np.floor(fgout.tend)/30) + 1
+        fgout.nout = int(round(((fgout.tend - fgout.tstart)/dt_fgout))) + 1
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
 
