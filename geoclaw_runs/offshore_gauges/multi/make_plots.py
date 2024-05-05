@@ -105,20 +105,24 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 1:
-            gauges_plotdir = plotdir + '/gauges'
-            #gaugenos = list(range(1,642,20)) + list(range(2000,2015))
-            gaugenos = 'all'
-            plot_gauges.make_gauge_plot(gaugenos, outdir, gauges_plotdir,
-                                        location, event)
+        try:
+            if 1:
+                gauges_plotdir = plotdir + '/gauges'
+                #gaugenos = list(range(1,642,20)) + list(range(2000,2015))
+                gaugenos = 'all'
+                plot_gauges.make_gauge_plot(gaugenos, outdir, gauges_plotdir,
+                                            location, event)
 
-        if 0:
-            fgmax_plotdir = plotdir + '/fgmax'
-            fg, t_hours = process_fgmax.load_fgmax(outdir)
-            process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
+            if 0:
+                fgmax_plotdir = plotdir + '/fgmax'
+                fg, t_hours = process_fgmax.load_fgmax(outdir)
+                process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
 
-        if 1:
-            make_fgout_animation.make_anim(outdir, plotdir, location, event)
+            if 1:
+                make_fgout_animation.make_anim(outdir, plotdir, location, event)
 
-        if 0:
-            make_html_index(plotdir,event)
+            if 0:
+                make_html_index(plotdir,event)
+
+        except:
+            print('*** Plotting failed for %s'  % run_name)

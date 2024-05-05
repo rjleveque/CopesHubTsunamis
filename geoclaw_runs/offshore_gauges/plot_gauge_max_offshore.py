@@ -134,7 +134,7 @@ def make_gauge_plot(gaugenos, outdir, plotdir, location, event):
     ax2.legend(loc='upper left')
 
 
-    fname = '%s/map_gauge_amplitudes.png' % plotdir
+    fname = '%s/%s_%s_gauges_max.png' % (plotdir,location,event)
     savefig(fname)
     print('Created %s' % fname)
     
