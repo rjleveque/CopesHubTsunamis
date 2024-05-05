@@ -23,7 +23,7 @@ format = 'binary'  # format of fgout grid output
 
 #fgframes = range(1,241)  # frames of fgout solution to use in animation
 #fgframes = range(1,81)  # 40 minutes
-fgframes = range(1,81,2)
+fgframes = range(1,82,2)
 
 def make_anim(outdir, plotdir, location, event):
     figsize = (5,8)
@@ -110,8 +110,8 @@ def make_anim(outdir, plotdir, location, event):
     # Output files:
     name = '%s_%s_animation' % (location,event)
 
-    fname_mp4 = name + '.mp4'
-    fname_html = None # name + '.html'
+    fname_mp4 = os.path.join(plotdir, name + '.mp4')
+    #fname_html = os.path.join(plotdir, name + '.html')
     
     if fname_mp4:
         fps = 5

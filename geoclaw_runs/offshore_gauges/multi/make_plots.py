@@ -37,10 +37,10 @@ dry_run = False  # If True, only print out settings, do not run GeoClaw
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
 
-location = 'Offshore' # need to change module names below for other locations
+location = 'offshore' # need to change module names below for other locations
 
 sys.path.insert(0, os.path.abspath('..'))
-#import plot_gauges_offshore as plot_gauges
+import plot_gauge_max_offshore as plot_gauges
 #import process_fgmax_offshore as process_fgmax
 import make_fgout_animation_offshore as make_fgout_animation
 
@@ -72,8 +72,10 @@ if 1:
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
 
-#events = ['buried-random-str10-middle','buried-random-str10-shallow']
-events = ['buried-locking-str10-deep']
+if 1:
+    # or specify particular events:
+    #events = ['buried-random-str10-middle','buried-random-str10-shallow']
+    events = ['buried-locking-str10-deep']
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
@@ -103,13 +105,12 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 0:
-            gaugenos = range(1001,1051,1)  # fix for offshore
-            print('Will make %i gauge plots for each event' % len(gaugenos))
+        if 1:
             gauges_plotdir = plotdir + '/gauges'
-            for gaugeno in gaugenos:
-                plot_gauges.make_plot(gaugeno, location, event, outdir,
-                                      gauges_plotdir)
+            #gaugenos = list(range(1,642,20)) + list(range(2000,2015))
+            gaugenos = 'all'
+            plot_gauges.make_gauge_plot(gaugenos, outdir, gauges_plotdir,
+                                        location, event)
 
         if 0:
             fgmax_plotdir = plotdir + '/fgmax'
