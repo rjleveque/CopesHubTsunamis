@@ -13,7 +13,15 @@ from clawpack.geoclaw import fgout_tools
 
 location = 'offshore'
 
-etopo = topotools.Topography('/Users/rjl/topo/topofiles/etopo1_-163_-122_38_63.asc',3)
+try:
+    CHT = os.environ['CHT']
+except:
+    raise Exception("*** Set CHT enviornment variable to repository top")
+
+etopo_file = os.path.join(CHT,
+                          'topo/topofiles/etopo22_15s_-137_-121_37_55.asc')
+
+etopo = topotools.Topography(etopo_file)
 
 plot_eta = True
 outdir_instant = None  # not set up for comparisons with instataneous dtopo

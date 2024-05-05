@@ -111,6 +111,7 @@ def make_anim(outdir, plotdir, location, event):
     name = '%s_%s_animation' % (location,event)
 
     fname_mp4 = os.path.join(plotdir, name + '.mp4')
+    fname_html = None
     #fname_html = os.path.join(plotdir, name + '.html')
     
     if fname_mp4:
