@@ -42,7 +42,9 @@ if 1:
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
 
-#events = ['buried-random-str10-middle','buried-random-str10-shallow']
+if 0:
+    #events = ['buried-random-str10-middle','buried-random-str10-shallow']
+    events = ['buried-locking-str10-deep']
 
 
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
@@ -74,40 +76,51 @@ with open(top_index_fname, 'w') as top_index:
         fgmax_plotdir = '_plots_%s/fgmax' % event
 
         top_index.write('<h2>%s</h2>\n ' % event)
-        top_index.write('<img src=%s/%s_h_onshore.png width=28%%>\n' \
-                % (fgmax_plotdir,run_name))
-        top_index.write('<img src=%s/%s_transects.png width=38%%>\n' \
-                % (fgmax_plotdir,run_name))
-        top_index.write('<img src=%s/%s_speed.png width=28%%>\n<p>\n' \
-                % (fgmax_plotdir,run_name))                
 
-        top_index.write('<img src=%s/%s_Gauge01033.png width=30%%>\n' \
-                % (gauges_plotdir,run_name))
-        top_index.write('<img src=%s/%s_Gauge01045.png width=30%%>\n' \
-                % (gauges_plotdir,run_name))
-        top_index.write('<img src=%s/%s_Gauge01047.png width=30%%>\n<p>\n' \
-                % (gauges_plotdir,run_name))
+        # images to appear on index page:
+
+        if 1:
+            # fgmax plots
+            top_index.write('<img src=%s/%s_h_onshore.png width=28%%>\n' \
+                    % (fgmax_plotdir,run_name))
+            top_index.write('<img src=%s/%s_transects.png width=38%%>\n' \
+                    % (fgmax_plotdir,run_name))
+            top_index.write('<img src=%s/%s_speed.png width=28%%>\n<p>\n' \
+                    % (fgmax_plotdir,run_name))                
+    
+            top_index.write('<img src=%s/%s_Gauge01033.png width=30%%>\n' \
+                    % (gauges_plotdir,run_name))
+            top_index.write('<img src=%s/%s_Gauge01045.png width=30%%>\n' \
+                    % (gauges_plotdir,run_name))
+            top_index.write('<img src=%s/%s_Gauge01047.png width=30%%>\n<p>\n' \
+                    % (gauges_plotdir,run_name))
                 
+        # Other links to appear in index:
+
         top_index.write('<ul>\n<li> <a href="%s/index.html">all plots</a>\n' \
                 % plotdir)
         top_index.write('<li>  animation: <a href="%s/%s_animation.mp4">mp4</a>\n' \
                 % (plotdir,run_name))
-        top_index.write('<li>  fgmax: <a href="%s/%s_h_onshore.png">max h onshore</a>\n' \
-                % (fgmax_plotdir,run_name))
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_speed.png">max speed</a>\n' \
-                % (fgmax_plotdir,run_name))
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_transects.png">transects</a>\n' \
-                % (fgmax_plotdir,run_name))
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_fgmax.kmz">kmz file</a>\n' \
-                % (fgmax_plotdir,run_name))
-        top_index.write('<li> <a href="%s/gauges">gauges</a> On 12th Avenue:\n' \
-                % gauges_plotdir)
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01033.png">1033 (offshore)</a>\n' \
-                % (gauges_plotdir,run_name))    
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01013.png">1013 (in Necamicum River)</a>\n' \
-                % (gauges_plotdir,run_name)) 
-        top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01017.png">1017 (in Neawanna River)</a>\n' \
-                % (gauges_plotdir,run_name))                
+
+        if 1:
+
+            top_index.write('<li>  fgmax: <a href="%s/%s_h_onshore.png">max h onshore</a>\n' \
+                    % (fgmax_plotdir,run_name))
+            top_index.write('&nbsp;&nbsp; <a href="%s/%s_speed.png">max speed</a>\n' \
+                    % (fgmax_plotdir,run_name))
+            top_index.write('&nbsp;&nbsp; <a href="%s/%s_transects.png">transects</a>\n' \
+                    % (fgmax_plotdir,run_name))
+            top_index.write('&nbsp;&nbsp; <a href="%s/%s_fgmax.kmz">kmz file</a>\n' \
+                    % (fgmax_plotdir,run_name))
+            top_index.write('<li> <a href="%s/gauges">gauges</a> On 12th Avenue:\n' \
+                    % gauges_plotdir)
+            top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01033.png">1033 (offshore)</a>\n' \
+                    % (gauges_plotdir,run_name))    
+            top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01013.png">1013 (in Necamicum River)</a>\n' \
+                    % (gauges_plotdir,run_name)) 
+            top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01017.png">1017 (in Neawanna River)</a>\n' \
+                    % (gauges_plotdir,run_name))                
+
         top_index.write('</ul>\n')
         
 print('Created', top_index_fname)
