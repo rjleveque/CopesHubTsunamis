@@ -59,7 +59,15 @@ def read_gauges(outdir, gaugenos='all'):
 def make_gauge_plot(gaugenos, outdir, plotdir, location, event):
     
     os.system('mkdir -p %s' % plotdir)
-    xg,yg,gmax = read_gauges(outdir)
+    run_name = '%s_%s' % (location,event)
+    
+    xg,yg,gmax = read_gauges(outdir, gaugenos=gaugenos)
+    
+    # save gmax for plotting comparisons:
+    d = vstack((yg,gmax)).T
+    fname = '%s/%s_gauges_max.txt' % (plotdir,run_name)
+    savetxt(fname, d, fmt='%.5f',header='latitude of gauge, max eta')
+    print('Created ',fname)
 
     figure(201, figsize=(11,8))
     clf()
@@ -134,7 +142,7 @@ def make_gauge_plot(gaugenos, outdir, plotdir, location, event):
     ax2.legend(loc='upper left')
 
 
-    fname = '%s/%s_%s_gauges_max.png' % (plotdir,location,event)
+    fname = '%s/%s_gauges_max.png' % (plotdir,run_name)
     savefig(fname)
     print('Created %s' % fname)
     

@@ -32,7 +32,7 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
+dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -61,16 +61,21 @@ runs_dir = os.path.abspath(scratch_dir)
 print('runs_dir = ',runs_dir)
 
 sizes = ['SM','M','L','XL','XXL']
-all_events = ['CSZ_%s1_noext' % size for size in sizes] \
-           + ['CSZ_%s2_noext' % size for size in sizes] \
-           + ['CSZ_%s3_noext' % size for size in sizes]
 
-if 1:
+all_events = []
+for size in sizes:
+    for M in [1,2,3]:
+        all_events.append('CSZ_%s%s_noext' % (size,M))
+
+if 0:
+    events = all_events
+
+if 0:
     events = []
     for e in all_events:
         if e[4] in ['M','L']: events.append(e)
 
-if 0:
+if 1:
     # or specify particular events:
     events = ['CSZ_L1_noext']
 
