@@ -18,7 +18,7 @@ for y0 in y0_list:
     for depth in depths:
         events.append('%s-%s_instant' % (rupture,depth))
 
-    fname = rupture + '_y%s.png' % str(y0).replace('.','-')
+    fname = rupture + '_ASCESIFT_y%s.png' % str(y0).replace('.','-')
 
     figure(205,figsize=(10,7))
     clf()
@@ -41,7 +41,7 @@ for y0 in y0_list:
     grid(True)
     xlim(-127,-122)
 
-    if 1:
+    if 0:
         events = []
         depths = ['L1','L2','L3']
         rupture = 'CSZ_'
@@ -62,13 +62,14 @@ for y0 in y0_list:
             plot(dtopo.x,dtopo.dZ[-1,j,:],color=linecolors[k],
                  linestyle='--', label=labels[k])
 
-    if 0:
+    if 1:
         events = []
         labels = ['Region2','Region3']
         for label in labels:
             events.append('ASCE_SIFT_dtopo_%s' % label)
 
-        linecolors = ['m','c','g']
+        #linecolors = ['m','c','g']
+        linecolors = ['k','m','g']
 
         for k,event in enumerate(events):
             print('Rupture name: ',event)
@@ -79,7 +80,7 @@ for y0 in y0_list:
 
             j = where(dtopo.y<y0)[0].max()
             plot(dtopo.x,dtopo.dZ[-1,j,:],color=linecolors[k],
-                 linestyle=':', label=labels[k])
+                 linestyle='--', label=labels[k])
 
     legend(loc='upper right',fontsize=12,framealpha=1)
 
