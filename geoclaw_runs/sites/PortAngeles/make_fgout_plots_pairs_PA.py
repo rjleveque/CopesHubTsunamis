@@ -9,7 +9,7 @@ if 'matplotlib' not in sys.modules:
 
 
 from pylab import *
-import os,sys
+import os,sys,glob
 from matplotlib import colors
 import matplotlib.animation as animation
 from clawpack.visclaw import animation_tools, plottools, geoplot
@@ -33,37 +33,41 @@ else:
     import fgout_tools
     graphics_dir = './'
 
-#topo = topotools.Topography()
-#topo.read('../BM3topo.tt3',3)
 
-#graphics_dir = '/Users/rjl/git/CMH_2021/graphics/'
+name = 'ships'
 
+outdir = '_output'
 fgno = 3
 
+format = 'binary32'  # format of fgout grid output
+
+# for plotting 'ships':
+color = 'k'
+linewidth = 3
+
+
 # List of frames to use for making debris paths and animation:
-#fgframes = range(100,110)
-#fgframes = range(1,331)
-#fgframes = [100,200]
-fgframes = range(1,482,2)
+
+if 1:
+    # all frames found in outdir:
+    fgout_frames = glob.glob(os.path.join(outdir, \
+                                          'fgout%s.t*' % str(fgno).zfill(4)))
+    fgframes = range(1, len(fgout_frames)+1)
+    nout = len(fgout_frames)
+    print('Found %i fgout frames' % nout)
+
+# or use a subset for testing:
+#fgframes = [100,200,300,400]
+#fgframes = range(1,482,2)
+
 
 fgout_extent = [-123.47,-123.36,48.12,48.15]
 plot_extent = fgout_extent
 
-#fgout_extent = [-123.85, -123.81, 46.185, 46.196]
-#plot_extent = [-123.84, -123.81, 46.185, 46.196]
-
-#bgimage = [imread('fgout1GE.jpg'), fgout_extent]
-#bgimage = [imread(os.path.join(graphics_dir,'fgout1STfootprint.png')),
-#           plot_extent]
+# background image, if any (e.g. Google Earth image or map):
 bgimage = None
-name = 'ships'
-
-outdir = '_output'
-format = 'binary32'  # format of fgout grid output
-
-
-color = 'k'
-linewidth = 3
+#bgimage = imread(graphics_dir + '/PortAngeles_GE.png')
+#bgextent = [-123.47,-123.36,48.12,48.15]
 
 
 # Create ClawPlotData object used for reading in fgout frames:
@@ -216,6 +220,7 @@ def make_dbAB(t, debris_paths, dbnosA, dbnosB):
     return xdAB,ydAB
 
 
+# ===== plotting ======
 
 # First initialize plot with data from initial frame,
 # do this in a way that returns an object for each plot attribute that
@@ -229,38 +234,25 @@ ylat = fgout.Y.mean()  # for aspect ratio of plots
 
 fig,ax = subplots(figsize=(12,7))
 if bgimage:
-    ax.imshow(bgimage[0],extent=bgimage[1])
+    ax.imshow(bgimage,extent=bgextent)
     
 ax.set_xlim(plot_extent[:2])
 ax.set_ylim(plot_extent[2:])
 
+# colomap:
 
 s_units = 'knots'
-if s_units == 'knots':
-    s = fgout.s * 1.9438  # convert m/s to knots
-    bounds_speed = np.array([1e-3,2,4,6,8,10])  # knots
-    #bounds_speed = np.array([1e-3,1,2,3,6,9])  # knots
-elif s_units == 'm/s':
-    s = fgout.s
-    bounds_speed = np.array([1e-3,0.05,0.1,0.2,0.3,0.4])  # m/s
-elif s_units == 'vorticity':
-    dx = (fgout.x[1] - fgout.x[0]) * 111e3 * cos(ylat*pi/180)
-    dy = (fgout.y[1] - fgout.y[0]) * 111e3
-    #print('dx = %.2fm, dy = %.2fm' % (dx,dy))
-    dudy = zeros(fgout.u.shape)
-    dvdx = zeros(fgout.u.shape)
-    dudy[:,:-1] = diff(fgout.u, axis=1) / dy
-    dvdx[:-1,:] = diff(fgout.v, axis=0) / dx
-    s = dvdx - dudy
-    omega_max = abs(s).max()
-    print('+++ omega_max = %.1f' % omega_max)
-    bounds_speed = np.array([-3,-2,-1,0,1,2])
     
-#a = 0.4 # on top of image
-a = 0.5
+#a = 0.4 # transparency, on top of image
+a = 0.7
 cmap_speed = mpl.colors.ListedColormap([
                 [.3,.3,1,a],[0,0,1,a], [1,.8,.8,a],[1,.6,.6,a],
                 [1,0,0,a]])
+                
+if s_units == 'knots':
+    bounds_speed = np.array([1e-3,2,4,6,8,10])  # knots
+elif s_units == 'm/s':
+    bounds_speed = np.array([1e-3,0.05,0.1,0.2,0.3,0.4])  # m/s
 
 # Set color for value exceeding top of range to purple:
 cmap_speed.set_over(color=[1,0,1,a])
@@ -269,21 +261,23 @@ if bgimage:
     # Set color to transparent where s < 1e-3:
     cmap_speed.set_under(color=[1,1,1,0])
 else:
-    # Set color to white where s < 1e-3:
-    cmap_speed.set_under(color=[1,1,1,a])
+    # Set color to green where s < 1e-3:
+    cmap_speed.set_under(color=[0,1,0,a])
 
 norm_speed = colors.BoundaryNorm(bounds_speed, cmap_speed.N)
 
-#contourf(fgout.X, fgout.Y, fgout.B, levels=[0.04, 0.2], colors=[[1,1,.7]])
-#Bdry = where(fgout.h < 0.001, fgout.B, nan)
-#pcolormesh(fgout.X, fgout.Y, Bdry, cmap=geoplot.land1_colormap)
+
+# plot speed:
+
+if s_units == 'knots':
+    s = fgout.s * 1.9438  # convert m/s to knots
+elif s_units == 'm/s':
+    s = fgout.s
+    
 im = imshow(flipud(s.T), extent=fgout_extent,
             cmap=cmap_speed, norm=norm_speed)
 cb = colorbar(im, extend='max', shrink=0.7)
 cb.set_label(s_units)
-#contour(fgout.X, fgout.Y, Bfine, [0], colors='g', linewidths=1)
-#contour(fgout.X, fgout.Y, Bfine, [0.02,0.04,0.08], colors='g', linewidths=0.5)
-
 
 ax.set_aspect(1./cos(ylat*pi/180.))
 ticklabel_format(useOffset=False)
@@ -294,35 +288,24 @@ ax.set_ylim(plot_extent[2:])
 t = fgout.t
 t_str = timeformat(t)
 title_text = title('Water speed at %s after quake' % t_str)
-#title_text = title('Vorticity at %s after quake' % t_str)
 
 
 xdAB,ydAB = make_dbAB(t, debris_paths, dbnosA, dbnosB)
 pairs, = ax.plot(xdAB, ydAB, color=color, linestyle='-', linewidth=linewidth)
-print('+++ pairs = ',pairs)
+#print('+++ pairs = ',pairs)
 
-# The function update below should have arguments num (for the frame number)
-# plus things listed here in fargs.
-
-fargs = (im,pairs,title_text)
-
-# fargs should be initialized above and are the plot Artist objects 
-# whose data change from one frame to the next.
 
 if 0:
-    # Plot full debris paths on the previous plot:
-    #for k in range(len(dbnos)):
+    # Plot selected full debris paths on the previous plot:
     for k in [6,7]:
         debris_path = debris_paths[dbnos[k]]
         ax.plot(debris_path[:,1], debris_path[:,2], color='k', linewidth=0.5)
 
-def update(num, im, pairs, title_text):
+def update(fgframeno):
     
-    fgframe = fgframes[num]
-    # note: uses fgframes to specify fgout frames to use
+    fgframe = fgframes[fgframeno]
     
     # Read fgout data for this frame:
-    #fgout = P.read_fgout_frame(fgno, fgframe, plotdata)
     fgout = fgout_grid.read_frame(fgframe)
     
     # Reset the plot objects that need to change from previous frame:
@@ -331,25 +314,12 @@ def update(num, im, pairs, title_text):
     t = fgout.t        
     t_str = timeformat(t)
     title_text = title('Water speed at %s after quake' % t_str)
-    #title_text = title('Vorticity at %s after quake' % t_str)
-
     
     # color image:
     if s_units == 'knots':
         s = fgout.s * 1.9438  # convert m/s to knots
     elif s_units == 'm/s':
         s = fgout.s
-    elif s_units == 'vorticity':
-        dx = (fgout.x[1] - fgout.x[0]) * 111e3 * cos(ylat*pi/180)
-        dy = (fgout.y[1] - fgout.y[0]) * 111e3
-        #print('dx = %.2fm, dy = %.2fm' % (dx,dy))
-        dudy = zeros(fgout.u.shape)
-        dvdx = zeros(fgout.u.shape)
-        dudy[:,:-1] = diff(fgout.u, axis=1) / dy
-        dvdx[:-1,:] = diff(fgout.v, axis=0) / dx
-        s = dvdx - dudy
-        omega_max = abs(s).max()
-        print('+++ omega_max = %.1f' % omega_max)
     
     im.set_data(flipud(s.T))
 
@@ -357,15 +327,12 @@ def update(num, im, pairs, title_text):
     
     xdAB,ydAB = make_dbAB(t, debris_paths, dbnosA, dbnosB)
     pairs.set_data(xdAB, ydAB)        
-        
-    # must now return all the objects listed in fargs:
-    return im,pairs,title_text
+
 
 print('Making anim...')
 anim = animation.FuncAnimation(fig, update,
                                frames=len(fgframes), 
-                               fargs=fargs,
-                               interval=200, blit=True)
+                               interval=200, blit=False)
 
 fname_mp4 = '%s_pairs.mp4' % name
 fps = 5
