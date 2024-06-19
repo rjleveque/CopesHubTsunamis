@@ -18,7 +18,8 @@ for y0 in y0_list:
     for depth in depths:
         events.append('%s-%s_instant' % (rupture,depth))
 
-    fname = rupture + '_ASCESIFT_y%s.png' % str(y0).replace('.','-')
+    #fname = rupture + '_ASCESIFT_y%s.png' % str(y0).replace('.','-')
+    fname = rupture + '_Wang_y%s.png' % str(y0).replace('.','-')
 
     figure(205,figsize=(10,7))
     clf()
@@ -28,7 +29,7 @@ for y0 in y0_list:
     for k,event in enumerate(events):
         print('Rupture name: ',event)
 
-        # Save dtopo file for GeoClaw:
+        # Read dtopo file used for GeoClaw:
 
         fname_dtopo = 'dtopofiles/' + event + '.dtt3'
         print('Reading ',fname_dtopo)
@@ -62,7 +63,7 @@ for y0 in y0_list:
             plot(dtopo.x,dtopo.dZ[-1,j,:],color=linecolors[k],
                  linestyle='--', label=labels[k])
 
-    if 1:
+    if 0:
         events = []
         labels = ['Region2','Region3']
         for label in labels:
@@ -75,6 +76,27 @@ for y0 in y0_list:
             print('Rupture name: ',event)
 
             fname_dtopo = '/Users/rjl/B/dtopo/ASCE_SIFT/' + event + '.tt3'
+            print('Reading ',fname_dtopo)
+            dtopo = dtopotools.DTopography(fname_dtopo, 3)
+
+            j = where(dtopo.y<y0)[0].max()
+            plot(dtopo.x,dtopo.dZ[-1,j,:],color=linecolors[k],
+                 linestyle='--', label=labels[k])
+
+    if 1:
+        events = []
+        labels = ['S-A-Whole','B-Whole','f1p4as1']
+        for label in labels[:2]:
+            events.append('%s-result' % label)
+        events.append('f1p4as1-interpolated-new')
+
+        #linecolors = ['m','c','g']
+        linecolors = ['k','m','c']
+
+        for k,event in enumerate(events):
+            print('Rupture name: ',event)
+
+            fname_dtopo = '/Users/rjl/B/dtopo/CSZ/Wang/dtopofiles/' + event + '.tt3'
             print('Reading ',fname_dtopo)
             dtopo = dtopotools.DTopography(fname_dtopo, 3)
 
