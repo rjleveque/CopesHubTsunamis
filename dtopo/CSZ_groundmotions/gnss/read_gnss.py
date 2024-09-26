@@ -1,6 +1,6 @@
 from pylab import *
 import obspy
-
+import os
 
 distances = open('GNSS_distances_to_synthetic_stations').readlines()
 
@@ -22,7 +22,7 @@ print('Keeping %i stations' % len(distance))
 
 def load_gnss(event, station, make_plot=True):
     print('Loading GNSS data for event %s, station %s' % (event,station))
-    fname = 'GNSS_' + event + '.h5'
+    fname = 'h5files/GNSS_' + event + '.h5'
     waveforms = obspy.read(fname)
 
     wstation = waveforms.select(station=station)
@@ -35,6 +35,10 @@ def load_gnss(event, station, make_plot=True):
     t = Zstation.times()
 
     if make_plot:
+        event_dir = 'gnss_data_%s' % event
+        plotdir = '%s/plots' % event_dir
+        os.system('mkdir -p %s' % plotdir)
+
         figure(1,figsize=(10,6))
         clf()
         plot(t, Nstation, 'r', label='N')
@@ -47,13 +51,16 @@ def load_gnss(event, station, make_plot=True):
         title('Station %s (distance to grid point = %.1f km) \nScenario %s' \
                 % (station,dist/1e3,event))
                 
-        fname_png = '%s_%s.png' % (event,station)
+        fname_png = '%s/%s_%s.png' % (plotdir,event,station)
         savefig(fname_png)
         print('Created ',fname_png)
 
     return t, Nstation, Estation, Zstation
 
 def make_npy_all_stations(event):
+
+    event_dir = 'gnss_data_%s' % event
+    os.system('mkdir -p %s' % event_dir)
 
     j = 0
     for station in stations:
@@ -66,11 +73,11 @@ def make_npy_all_stations(event):
         j = j+1
             
     print('d now has shape: ',d.shape)
-    fname = 'gnss_%sstations_%s.npy' % (j, event)
+    fname = '%s/gnss_%sstations_%s.npy' % (event_dir, j, event)
     save(fname, d)
     print('Created ', fname)
     
-    fname2 = 'gnss_%sstations_list_%s.txt' % (j, event)
+    fname2 = '%s/gnss_%sstations_list_%s.txt' % (event_dir, j, event)
     with open(fname2,'w') as f:
         f.write('# list of stations in file %s\n' % fname)
         f.write('# columns are t, then N,E,Z components for each station\n')
@@ -92,8 +99,20 @@ def load_sample():
     
     load_gnss(event, station, make_plot=True)
 
-
 if __name__=='__main__':
 
-    event = 'buried-locking-str10-middle'
-    make_npy_all_stations(event)
+    all_models = \
+        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+
+    if 1:
+        models = all_models
+        events = ['%s-deep' % model for model in models] \
+               + ['%s-middle' % model for model in models] \
+               + ['%s-shallow' % model for model in models]
+
+    #events = ['buried-locking-str10-shallow']
+
+    for event in events:
+        make_npy_all_stations(event)
+
