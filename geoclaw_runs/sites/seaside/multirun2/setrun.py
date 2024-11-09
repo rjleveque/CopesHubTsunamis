@@ -446,19 +446,6 @@ def setrun(claw_pkg='geoclaw'):
         topofiles.append([3, topodir + '/SeasideN_19s_mhw.asc'])
         topofiles.append([3, topodir + '/SeasideS_19s_mhw.asc'])
 
-    if 0:
-        # 2-second topo:
-        topofiles.append([3, topodir + '/PT_2sec_center.asc'])
-        topofiles.append([3, topodir + '/PS_2sec_center.asc'])
-        topofiles.append([3, topodir + '/SJdF_2sec_center.asc'])
-
-    if 0:
-        # 1/3-second topo:
-        topofiles.append([3, topodir + '/GH_13sec.asc'])
-        topofiles.append([3, topodir + '/WB_13sec.asc'])
-
-    #topofiles.append([3, '/Users/rjl/topo/WA/astoria_13_mhw_2012/GH_13sec.asc'])
-    #topofiles.append([3, '/Users/rjl/topo/WA/astoria_13_mhw_2012/WB_13sec.asc'])
 
 
     # == setdtopo.data values ==
@@ -570,57 +557,6 @@ def setrun(claw_pkg='geoclaw'):
         flagregions.append(flagregion)
 
 
-
-    if 0: #Probably never use.
-        #For 12" run around region of interest (This was my slider window).
-        # Rectangular region that encompasses gauges 94-137, offshore OSVES
-        # (or gauges 98-143, offshore Westport).
-        # Make this region 12" for all time thinking gauge plots will be better
-        # and tsunami propagating in our sliver of interest.
-        # This rectangle goes out to the Ruled Rectangle (without the b) above.
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_12sec'
-        flagregion.minlevel = 4
-        flagregion.maxlevel = 4
-        #flagregion.t1 = tmax_dtopo_region
-        flagregion.t1 = 0.0
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 1  # Rectangle for now
-
-        ## for Ocean Shores, encompasses gauges 94 to 137
-        #latitudes below are for 93 in north to 138 in south
-        #gauges_region = [-125.9,-124.1,46.66,47.287]
-
-        ## for Westport, encompasses gauges 98 to 143
-        #latitudes below are for 97 in north to 144 in south
-        gauges_region = [-125.9,-124.1,46.587,47.227]
-
-        flagregion.spatial_region = gauges_region
-        flagregions.append(flagregion)
-
-
-    if 0: ### Probably NEVER use  
-        #For the 6" runs (Trying to keep this at 12" from the coastal region b)
-        # Rectangular region out to the b coastal region from the destination
-        # area for the time the source is moving to get the peak at 6".
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_6sec_initially'
-        flagregion.minlevel = 5
-        flagregion.maxlevel = 5
-        flagregion.t1 = 0.
-        flagregion.t2 = tmax_dtopo_region
-        flagregion.spatial_region_type = 1  # Rectangle for now
-
-        ## for Ocean Shores, encompasses gauges 94 to 137
-        #latitudes below are for 93 in north to 138 in south
-        #source_region = [-126.58,-124.1,46.66,47.287]
-
-        ## for Westport, encompasses gauges 98 to 143
-        #latitudes below are for 97 in north to 144 in south
-        source_region = [-126.58,-124.1,46.587,47.227]
-        flagregion.spatial_region = source_region
-        flagregions.append(flagregion)
-
     if 1:
         ### Will use this for the inundation runs. (6" slider window)
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
@@ -649,87 +585,8 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region = gauges_region
         flagregions.append(flagregion)
 
-    if 0: #will need to fix the regions below for each collaboratory
-          #These will be fixed for Westport.
-
-          # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
-    
-        # Westport Variable Region - 24sec to 12sec to 6sec:
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_Westport_24-12-6sec'
-        flagregion.minlevel = 3
-        flagregion.maxlevel = 5
-        flagregion.t1 = 0.
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.29, -123.655, 46.325, 47.159]
-        flagregions.append(flagregion)
-
-        # Grays Harbor Region - allow  3" grids, require 12sec at least:
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_Grays_12-6-3sec'
-        flagregion.minlevel = 4
-        flagregion.maxlevel = 6
-        flagregion.t1 = tstart_finestgrid
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.199, -123.809, 46.8, 47.145]
-        flagregions.append(flagregion)
-
-        # fixedgrid Region - require  6" grids, allow 3" and  1":
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'fixedgrid_6-3-1sec'
-        flagregion.minlevel = 5
-        flagregion.maxlevel = 7
-        flagregion.t1 = tstart_finestgrid
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.185,-123.935,46.785,46.935]
-        flagregions.append(flagregion)
-
-
-        if 0:
-            #Will need a 8x8 perhaps for Westport
-            # fixedgrid Region - require  1/3":
-            flagregion = FlagRegion(num_dim=2)
-            flagregion.name = 'fixedgrid_13sec'
-            flagregion.minlevel = 8
-            flagregion.maxlevel = 8
-            flagregion.t1 = tstart_finestgrid
-            flagregion.t2 = 1e9
-            flagregion.spatial_region_type = 1  # Rectangle
-            flagregion.spatial_region = [-124.185,-123.935,46.785,46.935]
-            flagregions.append(flagregion)
-
-        if 0:
-            #Will need an 9x9 perhaps for Westport
-            # fixedgrid Region - require  1/9":
-            flagregion = FlagRegion(num_dim=2)
-            flagregion.name = 'fixedgrid_19sec'
-            flagregion.minlevel = 9
-            flagregion.maxlevel = 9
-            flagregion.t1 = tstart_finestgrid
-            flagregion.t2 = 1e9
-            flagregion.spatial_region_type = 1  # Rectangle
-            flagregion.spatial_region = [-124.185,-123.935,46.785,46.935]
-            flagregions.append(flagregion)
 
     if 1: #For Seaside
-
-        if 0: #Not needed now
-            # OldRegion6a - fixed at 6 sec :
-            # Level 5 is 6 sec
-            # Note that this is a rectangle specified in the new way
-            # (other regions below will force/allow more refinement)
-            flagregion = FlagRegion(num_dim=2)
-            flagregion.name = 'Region_6sec'
-            flagregion.minlevel = 5
-            flagregion.maxlevel = 5
-            flagregion.t1 = 0.
-            flagregion.t2 = 1e9
-            flagregion.spatial_region_type = 1  # Rectangle
-            flagregion.spatial_region = [-124.58,-123.82,45.21,46.77]
-            flagregions.append(flagregion)
 
         # Old Region 2" - fixed at 3" sec. :
         # Level 6 is 3" sec
@@ -794,25 +651,6 @@ def setrun(claw_pkg='geoclaw'):
             xg = gauges[k,1]
             yg = gauges[k,2]
             rundata.gaugedata.gauges.append([gaugeno,xg,yg,0,1e9])
-
-    if 0: #Not needed for inundation run
-        asce_gagues_file = root_dir + '/info/asce_values.txt'
-        asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
-
-        #Use all the ASCE gauges for this job run
-        for k in range(0,len(asce_gauges)):
-            gaugeno = int(asce_gauges[k,0])
-            gx = float(asce_gauges[k,1])
-            gy = float(asce_gauges[k,2])
-            if gy >= 40:
-                rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
-        VI_gagues_file = root_dir + '/info/gaugesVI.txt'
-        VI_gauges = np.loadtxt(VI_gagues_file, skiprows=1)
-        for k in range(0,len(VI_gauges),1):
-            gaugeno = int(VI_gauges[k,0])
-            gx = float(VI_gauges[k,1])
-            gy = float(VI_gauges[k,2])
-            rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
 
     # fgmax grids:
 
