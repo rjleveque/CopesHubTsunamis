@@ -68,7 +68,7 @@ os.system('mkdir -p %s' % runs_dir)
 xgeoclaw_path = os.path.join(root_dir, 'geoclaw_runs/xgeoclaw')
 
 # number of GeoClaw jobs to run simultaneously:
-nprocs = 5
+nprocs = 9
 
 # Specify the list of dtopo files to loop over for geoclaw runs:
 
@@ -81,8 +81,8 @@ if 1:
 
 if 1:
     # test on only a few files from list above:
-    #dtopo_files = dtopo_files[:5]
-    dtopo_files = dtopo_files[5:9]
+    dtopo_files = dtopo_files[:9]
+    #dtopo_files = dtopo_files[5:9]
     
 # or set a list of dtopo_names by other means, e.g.
 #dtopo_files = ['buried-locking-str10-middle.dtt3']
@@ -103,7 +103,7 @@ if __name__ == '__main__':
         print('DRY RUN - settings in run_geoclaw_dtopos.py')
 
     print('Will run GeoClaw for %i dtopo files' % len(dtopo_files))
-    print('list of dtopo_files to process:\n', dtopo_files)
+    print('list of dtopo_files to process:\n', dtopo_names)
     print('dtopo files should be in dtopo_dir:\n    ', dtopo_dir)
     print('output will go in \n    %s/geoclaw_outputs/' % runs_dir)
     print('nprocs = %i jobs will run simultaneously' % nprocs)
