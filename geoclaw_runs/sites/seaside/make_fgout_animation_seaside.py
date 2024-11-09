@@ -44,6 +44,9 @@ def make_anim(outdir, plotdir, location, event):
         nout = len(fgout_frames)
         print('Found %i fgout frames' % nout)
     
+    if 1:
+        fgframes = range(61,nout+1,1)
+
     if 0:
         nout = 301
         fgframes = range(1,nout+1)
@@ -64,7 +67,8 @@ def make_anim(outdir, plotdir, location, event):
     
     # Instantiate object for reading fgout frames:
     fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
-    
+    fgout_grid1.read_fgout_grids_data()
+
     
     fgframes1 = array(fgframes)
     fgframes1 = [int(i) for i in fgframes1]  # convert from numpy.int64 to int
@@ -180,7 +184,7 @@ def make_anim(outdir, plotdir, location, event):
         #axtrans.set_xticks(xt,rotation=20)
         axtrans.set_xticks(arange(x1trans,x2trans+1e-6,.01))
         
-    ylimtr = (-20,20)  # ylimits for transect plots
+    ylimtr = (-20,30)  # ylimits for transect plots
     xtrans = linspace(x1trans, x2trans, 1000)  # x points on transects
     
     # Transect 1 (top)
@@ -303,18 +307,22 @@ def make_anim(outdir, plotdir, location, event):
         Btrans_plot.set_data(xtrans,Btrans)
         etatrans_plot.set_data(xtrans,etatrans)
     
-        #update the PolyCollections for fill_between plots:             
-        dummy = axdummy.fill_between(xtrans, Btrans-1e4, Btrans, 
-                                          color=[.5,1,.5,1])
-        dp = dummy.get_paths()[0]
-        dummy.remove()
-        Bfill_plot.set_paths([dp.vertices])
-    
-        dummy = axdummy.fill_between(xtrans, Btrans, etatrans, 
-                                          color=[.5,.5,1,1])
-        dp = dummy.get_paths()[0]
-        dummy.remove()
-        etafill_plot.set_paths([dp.vertices])
+        try:
+            #update the PolyCollections for fill_between plots:             
+            dummy = axdummy.fill_between(xtrans, Btrans-1e4, Btrans, 
+                                              color=[.5,1,.5,1])
+            dp = dummy.get_paths()[0]
+            Bfill_plot.set_paths([dp.vertices])
+
+            dummy.remove()
+        
+            dummy = axdummy.fill_between(xtrans, Btrans, etatrans, 
+                                              color=[.5,.5,1,1])
+            dp = dummy.get_paths()[0]
+            dummy.remove()
+            etafill_plot.set_paths([dp.vertices])
+        except:
+            print('Could not update transect 1 fill_between')
     
         # update transect 2:
         y1trans, y2trans = 2*[yt2]
@@ -327,18 +335,23 @@ def make_anim(outdir, plotdir, location, event):
     
     
         #update the PolyCollections for fill_between plots:             
-        dummy = axdummy.fill_between(xtrans, Btrans2-1e4, Btrans2, 
-                                          color=[.5,1,.5,1])
-        dp = dummy.get_paths()[0]
-        dummy.remove()
-        Bfill_plot2.set_paths([dp.vertices])
     
-        dummy = axdummy.fill_between(xtrans, Btrans2, etatrans2, 
-                                          color=[.5,.5,1,1])
-        dp = dummy.get_paths()[0]
-        dummy.remove()
-        etafill_plot2.set_paths([dp.vertices])
-                          
+        try:
+            #update the PolyCollections for fill_between plots:             
+            dummy = axdummy.fill_between(xtrans, Btrans-1e4, Btrans, 
+                                              color=[.5,1,.5,1])
+            dp = dummy.get_paths()[0]
+            Bfill_plot2.set_paths([dp.vertices])
+
+            dummy.remove()
+        
+            dummy = axdummy.fill_between(xtrans, Btrans, etatrans, 
+                                              color=[.5,.5,1,1])
+            dp = dummy.get_paths()[0]
+            dummy.remove()
+            etafill_plot2.set_paths([dp.vertices])
+        except:
+            print('Could not update transect 2 fill_between')
                               
         # update transect 3:
     
@@ -352,17 +365,23 @@ def make_anim(outdir, plotdir, location, event):
     
     
         #update the PolyCollections for fill_between plots:             
-        dummy = axdummy.fill_between(xtrans, Btrans3-1e4, Btrans3, 
-                                          color=[.5,1,.5,1])
-        dp = dummy.get_paths()[0]
-        dummy.remove()
-        Bfill_plot3.set_paths([dp.vertices])
-    
-        dummy = axdummy.fill_between(xtrans, Btrans3, etatrans3, 
-                                          color=[.5,.5,1,1])
-        dp = dummy.get_paths()[0]
-        dummy.remove()
-        etafill_plot3.set_paths([dp.vertices])
+
+        try:
+            #update the PolyCollections for fill_between plots:             
+            dummy = axdummy.fill_between(xtrans, Btrans-1e4, Btrans, 
+                                              color=[.5,1,.5,1])
+            dp = dummy.get_paths()[0]
+            Bfill_plot3.set_paths([dp.vertices])
+
+            dummy.remove()
+        
+            dummy = axdummy.fill_between(xtrans, Btrans, etatrans, 
+                                              color=[.5,.5,1,1])
+            dp = dummy.get_paths()[0]
+            dummy.remove()
+            etafill_plot3.set_paths([dp.vertices])
+        except:
+            print('Could not update transect 2 fill_between')
     
     
     def plot_fgframe(fgframeno, save_png=False):
@@ -417,6 +436,8 @@ if __name__ == '__main__':
     from params import event, location
     outdir = os.path.abspath('./_output')
     plotdir = os.path.abspath('./_plots')
+    #plotdir = os.path.abspath('.')
 
     make_anim(outdir,plotdir,location,event)
-
+    close('all')
+    
