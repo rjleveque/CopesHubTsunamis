@@ -69,3 +69,5 @@ if __name__ == '__main__':
     
     for gaugeno in gaugenos:
         make_plot(gaugeno, location, event, outdir, plotdir)
+
+    close('all')

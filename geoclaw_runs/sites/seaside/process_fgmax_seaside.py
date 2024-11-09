@@ -543,3 +543,5 @@ if __name__== '__main__':
     fg, t_hours = load_fgmax(outdir)
     make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
     #make_kmz_plots(fg, fgmax_plotdir, run_name)
+
+    close('all')

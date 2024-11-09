@@ -83,7 +83,7 @@ plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 #plotdirs = [outdir.replace('output','plot') for outdir in outdirs]
 print('plotdirs = ', plotdirs)
 
-gaugenos = range(1001,1051,1)
+gaugenos = range(1001,1068,1)
 print('Will make %i gauge plots for each event' % len(gaugenos))
 
 if dry_run:

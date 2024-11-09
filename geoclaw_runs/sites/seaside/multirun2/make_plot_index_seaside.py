@@ -37,7 +37,8 @@ all_models = \
      'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
 if 1:
-    models = all_models[:3]
+    models = all_models
+    #models = all_models[:3]
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
@@ -46,6 +47,7 @@ if 0:
     #events = ['buried-random-str10-middle','buried-random-str10-shallow']
     events = ['buried-locking-str10-deep']
 
+events.sort()
 
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 
@@ -112,7 +114,7 @@ with open(top_index_fname, 'w') as top_index:
                     % (fgmax_plotdir,run_name))
             top_index.write('&nbsp;&nbsp; <a href="%s/%s_fgmax.kmz">kmz file</a>\n' \
                     % (fgmax_plotdir,run_name))
-            top_index.write('<li> <a href="%s/gauges">gauges</a> On 12th Avenue:\n' \
+            top_index.write('<li> <a href="%s">gauges</a> On 12th Avenue:\n' \
                     % gauges_plotdir)
             top_index.write('&nbsp;&nbsp; <a href="%s/%s_Gauge01033.png">1033 (offshore)</a>\n' \
                     % (gauges_plotdir,run_name))    

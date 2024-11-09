@@ -30,7 +30,7 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
+dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -81,8 +81,8 @@ if 1:
 
 if 1:
     # test on only a few files from list above:
-    dtopo_files = dtopo_files[:9]
-    #dtopo_files = dtopo_files[5:9]
+    #dtopo_files = dtopo_files[:9]
+    dtopo_files = dtopo_files[9:18]
     
 # or set a list of dtopo_names by other means, e.g.
 #dtopo_files = ['buried-locking-str10-middle.dtt3']
