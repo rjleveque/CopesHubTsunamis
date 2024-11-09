@@ -643,7 +643,7 @@ def setrun(claw_pkg='geoclaw'):
         # load list of virtual gauges to use, with columns 
         #      gaugeno, x, y
         # x,y should be in decimal form, preferably cell centered on finest grid
-        gauges_file = root_dir + '/gauges/VGListSeaside.csv' 
+        gauges_file = root_dir + '/oregon_gauges_2024/VGListSeaside.csv' 
         gauges = np.loadtxt(gauges_file, delimiter=',')
 
         for k in range(gauges.shape[0]):
