@@ -37,7 +37,7 @@ all_models = \
      'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
 if 1:
-    models = all_models[:3]
+    models = all_models
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
@@ -46,6 +46,8 @@ if 0:
     #events = ['buried-random-str10-middle','buried-random-str10-shallow']
     events = ['buried-locking-str10-deep']
 
+
+events.sort()
 
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 

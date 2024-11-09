@@ -1,4 +1,9 @@
 
+import sys
+if 'matplotlib' not in sys.modules:
+    import matplotlib
+    matplotlib.use('Agg')  # Use an image backend
+
 from pylab import *
 import clawpack.pyclaw.gauges as gauges
 import os,sys

@@ -65,13 +65,13 @@ all_models = \
      'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
 
-if 1:
+models = all_models
+#models = all_models[:3]
+events = ['%s-deep' % model for model in models] \
+       + ['%s-middle' % model for model in models] \
+       + ['%s-shallow' % model for model in models]
 
-    models = all_models[:3]
-    events = ['%s-deep' % model for model in models] \
-           + ['%s-middle' % model for model in models] \
-           + ['%s-shallow' % model for model in models]
-
+#events = events[:1]
 #events = ['buried-random-str10-middle','buried-random-str10-shallow']
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)

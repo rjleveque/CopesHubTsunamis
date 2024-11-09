@@ -32,7 +32,7 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
-dry_run = False  # If True, only print out settings, do not run GeoClaw
+dry_run = True  # If True, only print out settings, do not run GeoClaw
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -67,7 +67,7 @@ all_models = \
 
 if 1:
 
-    models = all_models[:3]
+    models = all_models[3:]
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
@@ -105,19 +105,28 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 1:
-            gauges_plotdir = plotdir + '/gauges'
-            for gaugeno in gaugenos:
-                plot_gauges.make_plot(gaugeno, location, event, outdir,
-                                      gauges_plotdir)
+        if 0:
+            try:
+                gauges_plotdir = plotdir + '/gauges'
+                for gaugeno in gaugenos:
+                    plot_gauges.make_plot(gaugeno, location, event, outdir,
+                                          gauges_plotdir)
+            except:
+                print('***FAILURE making gauge plots in %s' % run_name)
+
+        if 0:
+            try:
+                fgmax_plotdir = plotdir + '/fgmax'
+                fg, t_hours = process_fgmax.load_fgmax(outdir)
+                process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
+            except:
+                print('***FAILURE making fgmax plots in %s' % run_name)
 
         if 1:
-            fgmax_plotdir = plotdir + '/fgmax'
-            fg, t_hours = process_fgmax.load_fgmax(outdir)
-            process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
+            try:
+                make_fgout_animation.make_anim(outdir, plotdir, location, event)
+            except:
+                print('***FAILURE making fgout anim in %s' % run_name)
 
-        if 1:
-            make_fgout_animation.make_anim(outdir, plotdir, location, event)
-
-        if 1:
+        if 0:
             make_html_index(plotdir,event)

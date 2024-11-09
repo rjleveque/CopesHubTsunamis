@@ -96,6 +96,7 @@ def make_anim(outdir, plotdir, location, event):
                                            0.0:[0,1,1,alpha],
                                            0.6:[1,0,0,alpha]})
     
+    close(1)
     fig = figure(1, figsize=(14,9))
     clf()
     
@@ -338,14 +339,14 @@ def make_anim(outdir, plotdir, location, event):
     
         try:
             #update the PolyCollections for fill_between plots:             
-            dummy = axdummy.fill_between(xtrans, Btrans-1e4, Btrans, 
+            dummy = axdummy.fill_between(xtrans, Btrans2-1e4, Btrans2, 
                                               color=[.5,1,.5,1])
             dp = dummy.get_paths()[0]
             Bfill_plot2.set_paths([dp.vertices])
 
             dummy.remove()
         
-            dummy = axdummy.fill_between(xtrans, Btrans, etatrans, 
+            dummy = axdummy.fill_between(xtrans, Btrans2, etatrans2, 
                                               color=[.5,.5,1,1])
             dp = dummy.get_paths()[0]
             dummy.remove()
@@ -368,14 +369,14 @@ def make_anim(outdir, plotdir, location, event):
 
         try:
             #update the PolyCollections for fill_between plots:             
-            dummy = axdummy.fill_between(xtrans, Btrans-1e4, Btrans, 
+            dummy = axdummy.fill_between(xtrans, Btrans3-1e4, Btrans3, 
                                               color=[.5,1,.5,1])
             dp = dummy.get_paths()[0]
             Bfill_plot3.set_paths([dp.vertices])
 
             dummy.remove()
         
-            dummy = axdummy.fill_between(xtrans, Btrans, etatrans, 
+            dummy = axdummy.fill_between(xtrans, Btrans3, etatrans3, 
                                               color=[.5,.5,1,1])
             dp = dummy.get_paths()[0]
             dummy.remove()
