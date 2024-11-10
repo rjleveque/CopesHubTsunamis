@@ -111,10 +111,12 @@ if not dry_run:
                 plot_gauges.make_plot(gaugeno, location, event, outdir,
                                       gauges_plotdir)
 
-        if 1:
+        try:
             fgmax_plotdir = plotdir + '/fgmax'
             fg, t_hours = process_fgmax.load_fgmax(outdir)
             process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
+        except:
+            print('*** fgmax file NOT FOUND for %s, skipping' % run_name)
 
         if 1:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)

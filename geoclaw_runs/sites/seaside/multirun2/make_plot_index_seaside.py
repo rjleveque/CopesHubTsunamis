@@ -51,6 +51,9 @@ events.sort()
 
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 
+cmd = 'cp ../%sGauges.* %s' % (location,geoclaw_plots)
+print(cmd)
+os.system(cmd)
 
 def make_html_index(plotdir,event):
     html_fname = os.path.join(plotdir,'index.html')
@@ -63,7 +66,22 @@ def make_html_index(plotdir,event):
 top_index_fname = os.path.join(geoclaw_plots,'index.html')
 with open(top_index_fname, 'w') as top_index:
     
-    top_index.write('<html>\n<h1>Plots for %s</h1>\n<ul>\n' % location)
+    #top_index.write('<html>\n<h1>Plots for %s</h1>\n<ul>\n' % location)
+    top_index.write('<html>\n<h1>Inundation plots for %s</h1>\n' % location)
+    top_index.write("""
+Computed from Cascadia CoPes Hub Ground Motions using the GeoClaw tsunami 
+model.
+
+<h2> Gauge locations:</h2>
+Download <a href="%sGauges.kml">%sGauges.kml</a> and open in
+Google Earth.
+<p>
+<img src=%sGauges.jpg width=50%%>
+<p>
+&nbsp;
+<p>
+<h1>Kinematic rupture events</h1>
+""" % (location,location,location))
 
     for k in range(len(plotdirs)):
         plotdir = plotdirs[k]
