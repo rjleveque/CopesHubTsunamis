@@ -16,9 +16,18 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from copy import copy
 import os,sys
+from multiprocessing import current_process
+
+
+# top level directory for this project:
+root_dir = os.environ['CHT']   # assuming environment variable set
+
+sys.path.insert(0, os.path.join(root_dir, 'common_code'))
+from multip_tools import run_many_cases_pool
+
 
 dry_run = False  # if True, just print event names
-test_subset = True
+test_subset = False
 
 # ## Read in the fault geometry:
 # 
@@ -221,28 +230,136 @@ def plot_slip_vs_seismic_instant(fault, dtopo):
     print('Created ', fname)
 
 
-all_models = \
-    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
-     
-models = all_models
-#models = all_models[:3]
-events = ['%s-deep' % model for model in models] \
-       + ['%s-middle' % model for model in models] \
-       + ['%s-shallow' % model for model in models]
-       
-       
+def run_all_cases_old():
+    all_models = \
+        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+         
+    models = all_models
+    #models = all_models[:3]
+    events = ['%s-deep' % model for model in models] \
+           + ['%s-middle' % model for model in models] \
+           + ['%s-shallow' % model for model in models]
+           
+           
 
-# Test on one event:
-events = ['locking_mur13_deep']
+    # Test on one event:
+    events = ['locking_mur13_deep']
 
 
-for event in events:
-    event1 = event.replace('buried-','')
-    event_jey = event1.replace('-','_')  # switch to Jey's notation
+    for event in events:
+        event1 = event.replace('buried-','')
+        event_jey = event1.replace('-','_')  # switch to Jey's notation
+        
+        fault = set_slip(fault0, event_jey)
+
+
+        if test_subset:
+            # Test on smaller set of subfaults:
+
+            testfault = dtopotools.Fault(coordinate_specification='triangular')
+            testfault.subfaults = []
+            for s in fault.subfaults:
+                if 45.4<s.latitude<45.6 and -126<s.longitude<-125:
+                    testfault.subfaults.append(s)
+            print('Created testfault with %i subfaults' % len(testfault.subfaults))
+            testfault.event = '%s_subset_test' % event
+            fault = testfault
+
+            
+        print('\n==============================')
+        print('+++ event = ',event)
+        print('+++ event_jey = ',event_jey)
+        print('+++ fault.event = ',fault.event)
+        print('There are %i subfaults in this model' % len(fault.subfaults))
+        
+        if not dry_run:
+            dtopo = make_dtopo(fault, times=[0.])
+            plot_slip_final_dtopo(fault, dtopo)
+            if not test_subset:
+                plot_slip_vs_seismic_instant(fault, dtopo)
+            
+
+def make_all_cases_okada():
+    """
+    Output: *caselist*, a list of cases to be run.
+    Each case should be dictionary of any parameters needed to set up an
+    individual case.  These will be used by run_one_case.
+
+    """
     
-    fault = set_slip(fault0, event_jey)
+    all_models = \
+        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+         
+    #models = all_models
+    models = all_models[:2]
+    events = ['%s-deep' % model for model in models] \
+           + ['%s-middle' % model for model in models] \
+           + ['%s-shallow' % model for model in models]
+           
+           
 
+    # Test on one event:
+    #events = ['locking_mur13_deep']
+
+    # Create a list of the cases to be run:
+    caselist = []
+    
+    for k,event in enumerate(events):
+        event1 = event.replace('buried-','')
+        event_jey = event1.replace('-','_')  # switch to Jey's notation
+        
+        fault = set_slip(fault0, event_jey)
+        case = {'num':k, 'fault':fault}
+        caselist.append(case)
+
+    return caselist
+
+
+def run_one_case_okada(case):
+    """
+    Input *case* should be a dictionary with any parameters needed to set up
+    and run a specific case.
+    """
+
+    num = case['num']
+    fault = case['fault']
+    event = fault.event
+    print('Now running case %i with event %s' % (num,event))
+    
+    # This part shows how to redirect stdout so output from any
+    # print statements go to a unique file...
+    import sys
+    import datetime
+    
+    message = ""
+    stdout_fname = 'case%s_out.txt' % case['num']
+    try:
+        stdout_file = open(stdout_fname, 'w')
+        message = message +  "Python output from this case will go to %s\n" \
+                            % stdout_fname
+    except:
+        print(message)
+        raise Exception("Cannot open file %s" % stdout_fname)
+        
+    print(message) # constructed first to avoid interleaving prints
+        
+    sys_stdout = sys.stdout
+    sys.stdout = stdout_file
+    # send any errors to the same file:
+    sys_stderr = sys.stderr
+    sys.stderr = stdout_file
+    
+    print('\n==============================')
+    timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
+    print('Working on case %s, started at %s' % (case['num'],timenow))
+
+    p = current_process()
+    print('Process running this case: ', p)
+    
+
+    fault = case['fault']
 
     if test_subset:
         # Test on smaller set of subfaults:
@@ -257,9 +374,8 @@ for event in events:
         fault = testfault
 
         
-    print('\n==============================')
-    print('+++ event = ',event)
-    print('+++ event_jey = ',event_jey)
+    #print('+++ event = ',event)
+    #print('+++ event_jey = ',event_jey)
     print('+++ fault.event = ',fault.event)
     print('There are %i subfaults in this model' % len(fault.subfaults))
     
@@ -268,4 +384,27 @@ for event in events:
         plot_slip_final_dtopo(fault, dtopo)
         if not test_subset:
             plot_slip_vs_seismic_instant(fault, dtopo)
-            
+    
+    timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
+    print('Done with case %s at %s' % (case['num'],timenow))
+    
+    # Reset stdout and stdout:
+    sys.stdout = sys_stdout
+    sys.stderr = sys_stderr
+
+if __name__ == '__main__':
+    
+    print('\n--------------------------')
+    if dry_run:
+        # just print out settings, no runs...
+        print('DRY RUN - settings in OkadaStatic.py')
+
+    caselist = make_all_cases_okada()
+    nprocs = 3
+    run_many_cases_pool(caselist, nprocs, run_one_case_okada)
+
+    if dry_run:
+        print('Set dry_run=False and re-execute to run GeoClaw')
+        print('--------------------------')
+    
+    print("Done... See files caseN_out.txt for python output from each case")
