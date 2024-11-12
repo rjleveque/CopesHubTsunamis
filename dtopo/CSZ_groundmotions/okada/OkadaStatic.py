@@ -17,6 +17,8 @@ import numpy as np
 from copy import copy
 import os,sys
 
+dry_run = False  # if True, just print event names
+test_subset = True
 
 # ## Read in the fault geometry:
 # 
@@ -231,33 +233,39 @@ events = ['%s-deep' % model for model in models] \
        
        
 
-# ## Test on one event:
-#events = ['locking_mur13_deep']
+# Test on one event:
+events = ['locking_mur13_deep']
+
+
 for event in events:
     event1 = event.replace('buried-','')
     event_jey = event1.replace('-','_')  # switch to Jey's notation
     
     fault = set_slip(fault0, event_jey)
+
+
+    if test_subset:
+        # Test on smaller set of subfaults:
+
+        testfault = dtopotools.Fault(coordinate_specification='triangular')
+        testfault.subfaults = []
+        for s in fault.subfaults:
+            if 45.4<s.latitude<45.6 and -126<s.longitude<-125:
+                testfault.subfaults.append(s)
+        print('Created testfault with %i subfaults' % len(testfault.subfaults))
+        testfault.event = '%s_subset_test' % event
+        fault = testfault
+
+        
     print('\n==============================')
     print('+++ event = ',event)
     print('+++ event_jey = ',event_jey)
     print('+++ fault.event = ',fault.event)
     print('There are %i subfaults in this model' % len(fault.subfaults))
-
-    if 0:
+    
+    if not dry_run:
         dtopo = make_dtopo(fault, times=[0.])
         plot_slip_final_dtopo(fault, dtopo)
-        plot_slip_vs_seismic_instant(fault, dtopo)
-
-if 0:
-    # Test on smaller set of subfaults:
-
-    testfault = dtopotools.Fault(coordinate_specification='triangular')
-    testfault.subfaults = []
-    for s in fault.subfaults:
-        if 45.4<s.latitude<45.8 and -126<s.longitude<-125:
-            testfault.subfaults.append(s)
-    print('Created testfault with %i subfaults' % len(testfault.subfaults))
-    testfault.event = 'testfault_okada_instant'
-    testdtopo = make_dtopo(testfault, times=[0.])
-    plot_slip_final_dtopo(testfault, testdtopo)
+        if not test_subset:
+            plot_slip_vs_seismic_instant(fault, dtopo)
+            
