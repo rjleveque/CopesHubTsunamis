@@ -14,7 +14,7 @@ from clawpack.geoclaw import dtopotools
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from copy import copy
+import copy
 import os,sys
 from multiprocessing import current_process
 
@@ -117,33 +117,52 @@ if 0:
 
 
 def set_slip(fault0, event):
-    import copy
-    fault = copy.copy(fault0)
+    
+    # start with deepcopy of fault0 to make copies of each subfault 
+    # in fault0.subfaults, so that each subfault.slip can be modified
+    # differently for each event:
+    fault = copy.deepcopy(fault0)
+    
+    if 0:
+        # alternative to deep copy:
+        fault = dtopotools.Fault(coordinate_specification='triangular')
+        fault.subfaults = []
+        for s in fault0.subfaults:
+            fault.subfaults.append(copy.copy(s))  # must be copy, not orig!
     
     event_dir = datadir + 'output_files_orig'
     
+    # switch to Jey's notation:
+    event1 = event.replace('buried-','')
+    event_jey = event1.replace('-','_')
+    print('+++ in set_slip, event = %s' % event)
+    print('+++ in set_slip, event_jey = %s' % event_jey)
+    
     if 0:
         # don't need slip in dip and strike directions separately, only magnitude read below
-        fname = 'dip_slip_resampled_source_saved_%s.out' % event
+        fname = 'dip_slip_resampled_source_saved_%s.out' % event_jey
         dip_slip = loadtxt(os.path.join(event_dir, fname))
-        fname = 'strike_slip_resampled_source_saved_%s.out' % event
+        fname = 'strike_slip_resampled_source_saved_%s.out' % event_jey
         strike_slip = loadtxt(os.path.join(event_dir, fname))
         
-    fname = 'mag_slip_resampled_source_saved_%s.out' % event
+    fname = 'mag_slip_resampled_source_saved_%s.out' % event_jey
     mag_slip = loadtxt(os.path.join(event_dir, fname))[:,2]
     
-    fname = 'rake_resampled_source_saved_%s.out' % event
+    fname = 'rake_resampled_source_saved_%s.out' % event_jey
     rake = loadtxt(os.path.join(event_dir, fname))[:,2]
     
     for j in range(nsubfaults):
         subfault = fault.subfaults[j]
         subfault.rake = rake[j]
         subfault.slip = mag_slip[j]
-        
-    print('Created fault with Mw = %.2f' % fault.Mw())
+
+    slips = array([s.slip for s in fault.subfaults])
+    print('+++ max slip = %.2fm' % slips.max())        
+    print('In set_slip, created fault with Mw = %.2f' % fault.Mw())
     
     # save new name of event in fault object
-    fault.event = 'buried-%s_okada_instant' % event.replace('_','-')
+    #fault.event = 'buried-%s_okada_instant' % event.replace('_','-')
+    fault.event = event + '_okada_instant'
     print('New event name: %s' % fault.event)
     return fault
 
@@ -168,6 +187,7 @@ def make_dtopo(fault, times=[0.]):
     print('Created %s with %s displacement at %i times' \
             % (fname, fault.rupture_type, len(times)))
     return dtopo
+
 
 def plot_slip_final_dtopo(fault, dtopo):
 
@@ -261,7 +281,7 @@ def run_all_cases_old():
             testfault.subfaults = []
             for s in fault.subfaults:
                 if 45.4<s.latitude<45.6 and -126<s.longitude<-125:
-                    testfault.subfaults.append(s)
+                    testfault.subfaults.append(copy.copy(s))
             print('Created testfault with %i subfaults' % len(testfault.subfaults))
             testfault.event = '%s_subset_test' % event
             fault = testfault
@@ -293,13 +313,11 @@ def make_all_cases_okada():
          'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
          
     #models = all_models
-    models = all_models[:2]
+    models = all_models[-1:]
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
            
-           
-
     # Test on one event:
     #events = ['locking_mur13_deep']
 
@@ -307,11 +325,15 @@ def make_all_cases_okada():
     caselist = []
     
     for k,event in enumerate(events):
-        event1 = event.replace('buried-','')
-        event_jey = event1.replace('-','_')  # switch to Jey's notation
+        #event1 = event.replace('buried-','')
+        #event_jey = event1.replace('-','_')  # switch to Jey's notation
         
-        fault = set_slip(fault0, event_jey)
+        fault = set_slip(fault0, event)
         case = {'num':k, 'fault':fault}
+
+        print("+++ in caselist, id(case['fault']) = %i, Mw = %.2f" \
+                % (id(case['fault']), case['fault'].Mw()))
+
         caselist.append(case)
 
     return caselist
@@ -327,6 +349,8 @@ def run_one_case_okada(case):
     fault = case['fault']
     event = fault.event
     print('Now running case %i with event %s' % (num,event))
+    print('+++ in run_one_case, id(fault) = %i, Mw = %.2f' \
+            %  (id(fault),fault.Mw()))
     
     # This part shows how to redirect stdout so output from any
     # print statements go to a unique file...
@@ -344,12 +368,13 @@ def run_one_case_okada(case):
         raise Exception("Cannot open file %s" % stdout_fname)
         
     print(message) # constructed first to avoid interleaving prints
-        
-    sys_stdout = sys.stdout
-    sys.stdout = stdout_file
-    # send any errors to the same file:
-    sys_stderr = sys.stderr
-    sys.stderr = stdout_file
+    
+    if 1:
+        sys_stdout = sys.stdout
+        sys.stdout = stdout_file
+        # send any errors to the same file:
+        sys_stderr = sys.stderr
+        sys.stderr = stdout_file
     
     print('\n==============================')
     timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
@@ -377,7 +402,11 @@ def run_one_case_okada(case):
     #print('+++ event = ',event)
     #print('+++ event_jey = ',event_jey)
     print('+++ fault.event = ',fault.event)
+    print('+++ fault.Mw = %.2f' % fault.Mw())
     print('There are %i subfaults in this model' % len(fault.subfaults))
+    
+    slips = array([s.slip for s in fault.subfaults])
+    print('+++ max slip = %.2fm' % slips.max())
     
     if not dry_run:
         dtopo = make_dtopo(fault, times=[0.])
@@ -388,9 +417,10 @@ def run_one_case_okada(case):
     timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
     print('Done with case %s at %s' % (case['num'],timenow))
     
-    # Reset stdout and stdout:
-    sys.stdout = sys_stdout
-    sys.stderr = sys_stderr
+    if 1:
+        # Reset stdout and stdout:
+        sys.stdout = sys_stdout
+        sys.stderr = sys_stderr
 
 if __name__ == '__main__':
     
@@ -404,7 +434,7 @@ if __name__ == '__main__':
     run_many_cases_pool(caselist, nprocs, run_one_case_okada)
 
     if dry_run:
-        print('Set dry_run=False and re-execute to run GeoClaw')
+        print('Set dry_run=False and re-execute to make dtopo files')
         print('--------------------------')
     
     print("Done... See files caseN_out.txt for python output from each case")
