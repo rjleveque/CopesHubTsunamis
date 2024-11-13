@@ -26,6 +26,8 @@ sys.path.insert(0, os.path.join(root_dir, 'common_code'))
 from multip_tools import run_many_cases_pool
 
 
+mu = 30e9  # rigidity = shear modulus (in Pascals)
+
 dry_run = False  # if True, just print event names
 test_subset = False
 
@@ -155,6 +157,7 @@ def set_slip(fault0, event):
         subfault = fault.subfaults[j]
         subfault.rake = rake[j]
         subfault.slip = mag_slip[j]
+        subfault.mu = mu
 
     slips = array([s.slip for s in fault.subfaults])
     print('+++ max slip = %.2fm' % slips.max())        
