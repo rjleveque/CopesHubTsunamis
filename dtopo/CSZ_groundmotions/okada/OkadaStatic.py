@@ -25,12 +25,22 @@ root_dir = os.environ['CHT']   # assuming environment variable set
 sys.path.insert(0, os.path.join(root_dir, 'common_code'))
 from multip_tools import run_many_cases_pool
 
-
-mu = 30e9  # rigidity = shear modulus (in Pascals)
-
 dry_run = False  # if True, just print event names
 test_subset = False
 
+mu = 30e9  # rigidity = shear modulus (in Pascals)
+# Note: the value of mu doesn't matter in Okada solution, only for computing Mw
+# Okada depends only on Poisson ratio which is set to 0.25 by default.
+
+
+rupture_type = 'static'
+    # 'static' ==> instant displacement at t=0
+    # 'kinematic' ==> apply Okada to each subfault but only include dz in
+    #                 dtopo.dZ for times after subfault.rupture_time
+    #                 times will be every 10 seconds to end of rupture
+
+
+    
 # ## Read in the fault geometry:
 # 
 # And specify a `dtopotools.Fault` object with this geometry.
@@ -42,12 +52,24 @@ vertices = loadtxt(datadir+'David_cas_fine_mesh.ned')  # list of vertices, lon-l
 
 vertices[:,1] = vertices[:,1] - 360.  # shift to longitude W
 vertices[:,3] = -1000*vertices[:,3]   # convert depth to positive depth in meters
-
+    
 
 # Create Fault with geometry, no slip yet:
 
 fault0 = dtopotools.Fault(coordinate_specification='triangular')
+fault0.rupture_type = rupture_type
 fault0.subfaults = []
+
+
+# Grid for dtopo vertical deformations:
+dx = dy = 30/3600.  # spatial resolution for dtopo file
+#x,y = fault0.create_dtopo_xy(dx=dx)  # choose automatically
+# use same x,y as in dtopo files made from ground motions:
+x = arange(-128.5, -122.4999, dx)
+y = arange(40,50.0001,dy)
+
+print('Will create dtopo on arrays of shape %i by %i ...' % (len(x),len(y)))
+
 
 nsubfaults = triangles.shape[0]
 
@@ -132,7 +154,7 @@ def set_slip(fault0, event):
         for s in fault0.subfaults:
             fault.subfaults.append(copy.copy(s))  # must be copy, not orig!
     
-    event_dir = datadir + 'output_files_orig'
+    event_dir = datadir + 'output_files_combined'  # now includes kinematics
     
     # switch to Jey's notation:
     event1 = event.replace('buried-','')
@@ -153,11 +175,29 @@ def set_slip(fault0, event):
     fname = 'rake_resampled_source_saved_%s.out' % event_jey
     rake = loadtxt(os.path.join(event_dir, fname))[:,2]
     
+    if rupture_type == 'kinematic':
+        fname = 'rupt_time_resampled_source_saved_%s.out' % event_jey
+        rupt_time = loadtxt(os.path.join(event_dir, fname))[:,2]
+        fname = 'rise_time_resampled_source_saved_%s.out' % event_jey
+        rise_time = loadtxt(os.path.join(event_dir, fname))[:,2]
+        rupt_tfinal = (rupt_time + rise_time).max()
+        fault.dtopo_times = arange(0, rupt_tfinal+10, 10)  # every 10 seconds
+    else:
+        fault.dtopo_times = [0.]  # only compute static displacement (instant)
+        
+    print('+++ fault.rupture_type = %s, fault.dtopo_times = %s' \
+                % (fault.rupture_type, fault.dtopo_times))
+        
     for j in range(nsubfaults):
         subfault = fault.subfaults[j]
         subfault.rake = rake[j]
         subfault.slip = mag_slip[j]
         subfault.mu = mu
+        if rupture_type == 'kinematic':
+            subfault.rupture_time = rupt_time[j]
+            subfault.rise_time = rise_time[j]
+            subfault.rise_shape = 'quadratic'  # correct?
+            subfault.rise_time_starting = None # correct?
 
     slips = array([s.slip for s in fault.subfaults])
     print('+++ max slip = %.2fm' % slips.max())        
@@ -167,28 +207,19 @@ def set_slip(fault0, event):
     #fault.event = 'buried-%s_okada_instant' % event.replace('_','-')
     fault.event = event + '_okada_instant'
     print('New event name: %s' % fault.event)
+    print('+++ fault.dtopo_times = ',fault.dtopo_times)
     return fault
 
 
-def make_dtopo(fault, times=[0.]):
-    if len(times) <= 2:
-        fault.rupture_type = 'static'
-    else:
-        fault.rupture_type = 'kinematic'
+def make_dtopo(fault):
 
-    dx = dy = 30/3600.  # spatial resolution for dtopo file
-    #x,y = fault.create_dtopo_xy(dx=dx)  # choose automatically
-    # use same x,y as in dtopo files made from ground motions:
-    x = arange(-128.5, -122.4999, dx)
-    y = arange(40,50.0001,dy)
-    
-    print('Will create dtopo on arrays of shape %i by %i ...' % (len(x),len(y)))
-    dtopo = fault.create_dtopography(x,y,times=times,verbose=100);
+    # Apply Okada to all subfaults to create deformation dtopo.dZ:
+    dtopo = fault.create_dtopography(x,y,times=fault.dtopo_times,verbose=100)
     
     fname = '%s.dtt3' % fault.event
     dtopo.write(fname, dtopo_type=3)
     print('Created %s with %s displacement at %i times' \
-            % (fname, fault.rupture_type, len(times)))
+            % (fname, fault.rupture_type, len(dtopo.times)))
     return dtopo
 
 
@@ -252,55 +283,6 @@ def plot_slip_vs_seismic_instant(fault, dtopo):
     savefig(fname, bbox_inches='tight')
     print('Created ', fname)
 
-
-def run_all_cases_old():
-    all_models = \
-        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
-         
-    models = all_models
-    #models = all_models[:3]
-    events = ['%s-deep' % model for model in models] \
-           + ['%s-middle' % model for model in models] \
-           + ['%s-shallow' % model for model in models]
-           
-           
-
-    # Test on one event:
-    events = ['locking_mur13_deep']
-
-
-    for event in events:
-        event1 = event.replace('buried-','')
-        event_jey = event1.replace('-','_')  # switch to Jey's notation
-        
-        fault = set_slip(fault0, event_jey)
-
-
-        if test_subset:
-            # Test on smaller set of subfaults:
-
-            testfault = dtopotools.Fault(coordinate_specification='triangular')
-            testfault.subfaults = []
-            for s in fault.subfaults:
-                if 45.4<s.latitude<45.6 and -126<s.longitude<-125:
-                    testfault.subfaults.append(copy.copy(s))
-            print('Created testfault with %i subfaults' % len(testfault.subfaults))
-            testfault.event = '%s_subset_test' % event
-            fault = testfault
-
-            
-        print('\n==============================')
-        print('+++ event = ',event)
-        print('+++ event_jey = ',event_jey)
-        print('+++ fault.event = ',fault.event)
-        print('There are %i subfaults in this model' % len(fault.subfaults))
-        
-        if not dry_run:
-            dtopo = make_dtopo(fault, times=[0.])
-            plot_slip_final_dtopo(fault, dtopo)
-            if not test_subset:
-                plot_slip_vs_seismic_instant(fault, dtopo)
             
 
 def make_all_cases_okada():
@@ -321,8 +303,8 @@ def make_all_cases_okada():
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
            
-    # Test on one event:
-    #events = ['locking_mur13_deep']
+    # Test on one event:    
+    events = ['buried-random-NOSUBmur13_deep']
 
     # Create a list of the cases to be run:
     caselist = []
@@ -354,11 +336,14 @@ def run_one_case_okada(case):
     print('Now running case %i with event %s' % (num,event))
     print('+++ in run_one_case, id(fault) = %i, Mw = %.2f' \
             %  (id(fault),fault.Mw()))
+    print('+++ fault.dtopo_times = ', fault.dtopo_times)
     
     # This part shows how to redirect stdout so output from any
     # print statements go to a unique file...
     import sys
     import datetime
+    
+    redirect_output = True
     
     message = ""
     stdout_fname = 'case%s_out.txt' % case['num']
@@ -372,7 +357,7 @@ def run_one_case_okada(case):
         
     print(message) # constructed first to avoid interleaving prints
     
-    if 1:
+    if redirect_output:
         sys_stdout = sys.stdout
         sys.stdout = stdout_file
         # send any errors to the same file:
@@ -392,7 +377,8 @@ def run_one_case_okada(case):
     if test_subset:
         # Test on smaller set of subfaults:
 
-        testfault = dtopotools.Fault(coordinate_specification='triangular')
+        #testfault = dtopotools.Fault(coordinate_specification='triangular')
+        testfault = copy.deepcopy(fault)
         testfault.subfaults = []
         for s in fault.subfaults:
             if 45.4<s.latitude<45.6 and -126<s.longitude<-125:
@@ -412,15 +398,19 @@ def run_one_case_okada(case):
     print('+++ max slip = %.2fm' % slips.max())
     
     if not dry_run:
-        dtopo = make_dtopo(fault, times=[0.])
+        dtopo = make_dtopo(fault)  # Apply Okada model
         plot_slip_final_dtopo(fault, dtopo)
-        if not test_subset:
-            plot_slip_vs_seismic_instant(fault, dtopo)
+        
+        if (not test_subset) and (rupture_type == 'static'):
+            try:
+                plot_slip_vs_seismic_instant(fault, dtopo)
+            except:
+                print('plot_slip_vs_seismic_instant failed')
     
     timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
     print('Done with case %s at %s' % (case['num'],timenow))
     
-    if 1:
+    if redirect_output:
         # Reset stdout and stdout:
         sys.stdout = sys_stdout
         sys.stderr = sys_stderr
@@ -433,7 +423,7 @@ if __name__ == '__main__':
         print('DRY RUN - settings in OkadaStatic.py')
 
     caselist = make_all_cases_okada()
-    nprocs = 3
+    nprocs = 1
     run_many_cases_pool(caselist, nprocs, run_one_case_okada)
 
     if dry_run:
