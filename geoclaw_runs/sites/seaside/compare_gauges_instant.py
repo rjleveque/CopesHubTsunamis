@@ -66,10 +66,11 @@ for event in events:
         % event
     outdir_instant = outdir_event + '_instant'
     
-    # test:
-    outdir_event = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun/geoclaw_outputs/_output_buried-random-str10-middle'
-    outdir_instant = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun/geoclaw_outputs/_output_buried-random-str10-shallow'
-    gaugenos = [1001]
+    if 0:
+        # test:
+        outdir_event = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun/geoclaw_outputs/_output_buried-random-str10-middle'
+        outdir_instant = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun/geoclaw_outputs/_output_buried-random-str10-shallow'
+        gaugenos = [1001]
 
     for gaugeno in gaugenos:
         figure(205,figsize=(12,8))
