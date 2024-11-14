@@ -33,7 +33,7 @@ mu = 30e9  # rigidity = shear modulus (in Pascals)
 # Okada depends only on Poisson ratio which is set to 0.25 by default.
 
 
-rupture_type = 'static'
+rupture_type = 'kinematic'
     # 'static' ==> instant displacement at t=0
     # 'kinematic' ==> apply Okada to each subfault but only include dz in
     #                 dtopo.dZ for times after subfault.rupture_time
@@ -204,8 +204,12 @@ def set_slip(fault0, event):
     print('In set_slip, created fault with Mw = %.2f' % fault.Mw())
     
     # save new name of event in fault object
-    #fault.event = 'buried-%s_okada_instant' % event.replace('_','-')
-    fault.event = event + '_okada_instant'
+    
+    if rupture_type == 'static':
+        fault.event = event + '_okada_instant'
+    else:
+        fault.event = event + '_okada_kinematic'
+        
     print('New event name: %s' % fault.event)
     print('+++ fault.dtopo_times = ',fault.dtopo_times)
     return fault
@@ -298,13 +302,13 @@ def make_all_cases_okada():
          'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
          
     #models = all_models
-    models = all_models[-1:]
+    models = all_models[:3]
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
            
     # Test on one event:    
-    events = ['buried-random-NOSUBmur13_deep']
+    #events = ['buried-random-NOSUBmur13_deep']
 
     # Create a list of the cases to be run:
     caselist = []
@@ -423,7 +427,7 @@ if __name__ == '__main__':
         print('DRY RUN - settings in OkadaStatic.py')
 
     caselist = make_all_cases_okada()
-    nprocs = 1
+    nprocs = 3
     run_many_cases_pool(caselist, nprocs, run_one_case_okada)
 
     if dry_run:
