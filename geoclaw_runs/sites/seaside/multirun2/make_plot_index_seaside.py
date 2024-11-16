@@ -43,9 +43,15 @@ if 1:
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
 
+instant = True
+if instant:
+    events = [e+'_instant' for e in events]
+    rupture_type = 'Instant'
+
 if 0:
     #events = ['buried-random-str10-middle','buried-random-str10-shallow']
     events = ['buried-locking-str10-deep']
+    rupture_type = 'Kinematic'
 
 events.sort()
 
@@ -63,14 +69,19 @@ def make_html_index(plotdir,event):
         f.write('<li><a href="gauges">gauge plots</a>\n</ul>\n')
     print('Created ',html_fname)
 
-top_index_fname = os.path.join(geoclaw_plots,'index.html')
+if instant:
+    top_index_fname = os.path.join(geoclaw_plots,'index_instant.html')
+else:
+    top_index_fname = os.path.join(geoclaw_plots,'index.html')
+
+
 with open(top_index_fname, 'w') as top_index:
     
     #top_index.write('<html>\n<h1>Plots for %s</h1>\n<ul>\n' % location)
     top_index.write('<html>\n<h1>Inundation plots for %s</h1>\n' % location)
     top_index.write("""
 Computed from Cascadia CoPes Hub Ground Motions using the GeoClaw tsunami 
-model.
+model. (%s rupture events)
 
 <h2> Gauge locations:</h2>
 Download <a href="%sGauges.kml">%sGauges.kml</a> and open in
@@ -80,8 +91,8 @@ Google Earth.
 <p>
 &nbsp;
 <p>
-<h1>Kinematic rupture events</h1>
-""" % (location,location,location))
+<h1>%s rupture events</h1>
+""" % (rupture_type,location,location,location,rupture_type))
 
     for k in range(len(plotdirs)):
         plotdir = plotdirs[k]

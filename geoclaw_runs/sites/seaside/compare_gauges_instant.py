@@ -10,10 +10,7 @@ from pylab import *
 import clawpack.pyclaw.gauges as gauges
 from clawpack.geoclaw import topotools
 from clawpack.visclaw import plottools, geoplot, gaugetools
-from clawpack.geoclaw import fgout_tools
 
-#event = os.path.split(os.getcwd())[-1]
-#event = 'Comparison of different events'
 location = 'Seaside'
 
 all_models = \
@@ -24,15 +21,14 @@ all_models = \
 if 0:
 
     models = all_models[0]
-    subtitle = 'buried-random models'
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
 
 if 1:
 
-    models = all_models[:1]
-    subtitle = 'buried-random models'
+    #models = all_models[:1]
+    models = ['buried-random-mur13']
     events = ['%s-deep' % model for model in models]
 
 print('Events: ', events)
@@ -55,14 +51,14 @@ def read_gauge(outdir, gaugeno):
     s = sqrt(u**2 + v**2)
     xg = gauge.location[0]
     yg = gauge.location[1]
-    return t, eta, s, xg, yg
+    return t, h, eta, s, xg, yg
     
-gaugenos = range(1,5,1)
+gaugenos = [1033,1045,1047]
 
 for event in events:
     print('Event ',event)
     event_instant = event + '_instant'
-    outdir_event = '/gscratch/tsunami/rjl/CopesHubTsunamis/geoclaw_runs/sites/seaside/multirun2/geoclaw_plots/_plots_%s' \
+    outdir_event = '/gscratch/tsunami/rjl/CopesHubTsunamis/geoclaw_runs/sites/seaside/multirun2/geoclaw_outputs/_output_%s' \
         % event
     outdir_instant = outdir_event + '_instant'
     
@@ -76,31 +72,47 @@ for event in events:
         figure(205,figsize=(12,8))
         clf()
 
-        t,eta,s,xg,yg = read_gauge(outdir_event, gaugeno)
+        t,h,eta,s,xg,yg = read_gauge(outdir_event, gaugeno)
+
+        if h.min() > 0:
+            qoi = 'eta'; q = eta
+        else:
+            qoi = 'h'; q = h
 
         subplot(211)
-        plot(t/60., eta, color='r', linestyle='-', label='kinematic')
+        plot(t/60., q, color='r', linestyle='-', label='kinematic')
         
         subplot(212)
         plot(t/60., s, color='r', linestyle='-', label='kinematic')
         
-        t_instant,eta_instant,s_instant,xg,yg = \
+        t_instant,h_instant,eta_instant,s_instant,xg,yg = \
                                 read_gauge(outdir_instant, gaugeno)
         
         eta_instant[0] = eta[0]  # preseismic
+        h_instant[0] = h[0]  # preseismic
+
+        if qoi == 'eta':
+            q = eta_instant
+        else:
+            q = h_instant
         
         subplot(211)
-        plot(t_instant/60., eta_instant, color='r', linestyle='--', label='instant')
+        plot(t_instant/60., q, color='b', linestyle='-', label='instant')
         grid(True)
         xlim(-1,60)
         #xlabel('time (minutes)')
-        ylabel('surface elevation (m)')
+        if qoi == 'eta':
+            ylabel('surface elevation (m)')
+        else:
+            ylabel('water depth (m)')
         legend(framealpha=1)
-        title('%s Gauge %s at (%.5f, %.5f)\n%s' \
-                % (location,gaugeno,xg,yg,event))
+
+        B0 = eta[0] - h[0]  # preseismic topo
+        title('%s Gauge %s at (%.5f, %.5f),  preseismic topo B0 = %.2fm\n%s' \
+                % (location,gaugeno,xg,yg,B0,event))
 
         subplot(212)
-        plot(t_instant/60., s_instant, color='r', linestyle='--', label='instant')
+        plot(t_instant/60., s_instant, color='b', linestyle='-', label='instant')
         grid(True)
         xlim(-1,60)
         xlabel('time (minutes)')
@@ -109,7 +121,7 @@ for event in events:
         
         tight_layout()
         
-        fname = '%s/gauge%s_comparison.png' \
-                    % (plotdir,str(gaugeno).zfill(5))
+        fname = '%s/%s_gauge%s_comparison.png' \
+                    % (plotdir,event,str(gaugeno).zfill(5))
         savefig(fname)
         print('Created ',fname)

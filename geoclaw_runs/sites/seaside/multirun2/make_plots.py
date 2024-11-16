@@ -74,6 +74,13 @@ events = ['%s-deep' % model for model in models] \
 #events = events[:1]
 #events = ['buried-random-str10-middle','buried-random-str10-shallow']
 
+instant = True
+if instant:
+    events = [e+'_instant' for e in events]
+
+events = ['buried-random-str10-middle','buried-random-str10-deep',
+            'buried-random-mur13-deep_instant']
+
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
 #print('outdirs = ', outdirs)
