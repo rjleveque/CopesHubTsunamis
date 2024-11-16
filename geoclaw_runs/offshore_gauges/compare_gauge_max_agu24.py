@@ -49,7 +49,7 @@ plot_eta = False
 # read in Yong's results:
 add_yongdata = True
 if add_yongdata:
-    yongdata = loadtxt('yongwei_asce_gauge_model_data.txt', skiprows=1)
+    yongdata = loadtxt('yongwei_asce_gauge_buried-random-mur13-deep.txt', skiprows=1)
     yong_lat = yongdata[:,1]
     yong_neowave_nondisp_15sec = yongdata[:,2]
     yong_neowave_disp_15sec = yongdata[:,3]
