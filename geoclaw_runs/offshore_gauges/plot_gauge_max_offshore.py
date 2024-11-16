@@ -23,7 +23,7 @@ etopo_file = os.path.join(CHT,
 
 etopo = topotools.Topography(etopo_file)
 
-plot_eta = True
+plot_eta = False # not working with old fgout_grids.data containing dclaw
 outdir_instant = None  # not set up for comparisons with instataneous dtopo
 
 def read_gauges(outdir, gaugenos='all'):
@@ -38,7 +38,7 @@ def read_gauges(outdir, gaugenos='all'):
     gmax = []
     for gaugeno in gaugenos:
         gauge = gauges.GaugeSolution(gaugeno, outdir)
-        eta = gauge.q[3,:]
+        eta = gauge.q[-1,:]
         gmax.append(eta.max())
         xg.append(gauge.location[0])
         yg.append(gauge.location[1])
@@ -83,6 +83,7 @@ def make_gauge_plot(gaugenos, outdir, plotdir, location, event):
         # Instantiate object for reading fgout frames:
         format = 'binary32'  # format of fgout grid output
         fgout_grid = fgout_tools.FGoutGrid(1, outdir, format)      
+        fgout_grid.read_fgout_grids_data()
         fgout1 = fgout_grid.read_frame(fgframeno)
         tfg = fgout1.t / 60.
         eta = ma.masked_where(fgout1.h<0.001, fgout1.eta)
@@ -136,7 +137,8 @@ def make_gauge_plot(gaugenos, outdir, plotdir, location, event):
         
     ax2.set_title('maximum amplitude at gauges\n%s' % event)
     ax2.grid(True)
-    ax2.set_xlim(14,0)
+    ampmax = max(ampl.max(), 14)
+    ax2.set_xlim(ampmax,0)
     ax2.set_xlabel('meters')
     ax2.set_ylim(ylimits)
     ax2.legend(loc='upper left')
