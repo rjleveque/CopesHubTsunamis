@@ -25,6 +25,12 @@ except:
     raise Exception("*** Set CHT enviornment variable to repository top")
 
 
+sys.path.insert(0,'.')
+from params import event, location
+    
+qmap = 'geoclaw'
+if 'bouss' in event:
+    qmap = 'geoclaw-bouss'
 
 #graphics_dir = os.path.abspath(CHT + '/graphics')
 graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/seaside')
@@ -44,12 +50,12 @@ def make_anim(outdir, plotdir, location, event):
         nout = len(fgout_frames)
         print('Found %i fgout frames' % nout)
     
-    if 1:
+    if 0:
         fgframes = range(61,nout+1,1)
 
     if 0:
-        nout = 301
-        fgframes = range(1,nout+1)
+        nout = 126
+        fgframes = range(1,nout+1,2)
         
     #fgframes = [1,nout]  # test on few frames
     
@@ -66,7 +72,8 @@ def make_anim(outdir, plotdir, location, event):
     GE_extent = [-123.96,-123.9025,45.972,46.0275]
     
     # Instantiate object for reading fgout frames:
-    fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
+    fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format,
+                                        qmap=qmap)
     fgout_grid1.read_fgout_grids_data()
 
     
@@ -433,8 +440,6 @@ def make_anim(outdir, plotdir, location, event):
 
 if __name__ == '__main__':
 
-    sys.path.insert(0,'.')
-    from params import event, location
     outdir = os.path.abspath('./_output')
     plotdir = os.path.abspath('./_plots')
     #plotdir = os.path.abspath('.')
