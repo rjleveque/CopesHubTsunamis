@@ -10,6 +10,9 @@ Also create a kmz file with plots to be viewed on Google Earth.
 Before running this code, make sure the file specified by fname_B0 exists.
 This file provides the pre-seismic topography at each fgmax point.
 See README for instructions on creating it by doing a GeoClaw run with no dtopo.
+
+Now includes code to rewrite some of the fgmax data as a netCDF file that is
+smaller and easier for others to use.
 """
 
 
@@ -342,8 +345,8 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     # filled regions:
     Bfill_plot = axtrans.fill_between(xtrans, Btrans-1e4, Btrans, 
                                       color=[.5,1,.5,1])
-    #etafill_plot = axtrans.fill_between(xtrans, Btrans, etatrans, 
-    #                                  color=[.5,.5,1,1])
+    etafill_plot = axtrans.fill_between(xtrans, Btrans, etatrans, 
+                                      color=[.5,.5,1,1])
 
     # surface and topo plots:
     etatrans_plot, = axtrans.plot(xtrans, etatrans, 'b')
@@ -366,7 +369,8 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     # filled regions:
     Bfill_plot2 = axtrans2.fill_between(xtrans, Btrans2-1e4, Btrans2, 
                                       color=[.5,1,.5,1])
-
+    etafill_plot2 = axtrans2.fill_between(xtrans, Btrans2, etatrans2, 
+                                      color=[.5,.5,1,1])
     # surface and topo plots:
     etatrans_plot2, = axtrans2.plot(xtrans, etatrans2, 'b')
     Btrans_plot2, = axtrans2.plot(xtrans, Btrans2, 'g')
@@ -393,7 +397,9 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     # filled regions:
     Bfill_plot3 = axtrans3.fill_between(xtrans, Btrans3-1e4, Btrans3, 
                                       color=[.5,1,.5,1])
-
+    etafill_plot3 = axtrans3.fill_between(xtrans, Btrans3, etatrans3, 
+                                      color=[.5,.5,1,1])
+                                      
     # surface and topo plots:
     etatrans_plot3, = axtrans3.plot(xtrans, etatrans3, 'b')
     Btrans_plot3, = axtrans3.plot(xtrans, Btrans3, 'g')
@@ -519,6 +525,318 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
         shutil.rmtree(kml_dir)
         os.chdir(savedir)
 
+def make_nc_input(fname_nc, fg, force=False, verbose=True):
+
+    import netCDF4
+    import time
+        
+    if os.path.isfile(fname_nc):
+        if force and verbose:
+            print('Overwriting ', fname_nc)
+        elif not force:
+            print('*** netCDF file already exists, \n'\
+                + '*** NOT overwriting '\
+                + '--- use force==True to overwrite' )
+            return -1
+    
+    with netCDF4.Dataset(fname_nc, 'w') as rootgrp:
+
+        rootgrp.description = "fgmax data for " + fg.id
+        rootgrp.history = "Created with input data " + time.ctime(time.time())
+        rootgrp.history += " in %s;  " % os.getcwd()
+            
+        if fg.X is not None:
+            x = fg.X[0,:]
+            lon = rootgrp.createDimension('lon', len(x))
+            longitudes = rootgrp.createVariable('lon','f8',('lon',))
+            longitudes[:] = x
+            longitudes.units = 'degrees_east'
+        else:
+            if verbose: print('fg.X is None, not adding x')
+            
+        if fg.Y is not None:
+            y = fg.Y[:,0]
+            lat = rootgrp.createDimension('lat', len(y))
+            latitudes = rootgrp.createVariable('lat','f8',('lat',))
+            latitudes[:] = y
+            latitudes.units = 'degrees_north'
+        else:
+            if verbose: print('fg.Y is None, not adding y')
+            
+        if fg.fgmax_point is not None:
+            fgmax_point_var = \
+                rootgrp.createVariable('fgmax_point','u1',('lat','lon',))
+            fgmax_point_var[:,:] = fg.fgmax_point
+        else:
+            if verbose: print('fg.fgmax_point is None, not adding')
+            
+        if fg.force_dry_init is not None:
+            force_dry_init = \
+                rootgrp.createVariable('force_dry_init','u1',('lat','lon',))
+            force_dry_init[:,:] = fg.force_dry_init
+        else:
+            if verbose: print('fg.force_dry_init is None, not adding')  
+
+        print('Created %s' % fname_nc)            
+        if verbose:
+            print('History:  ', rootgrp.history) 
+        return 0     
+        
+def write_nc_output(fname_nc, fg, new=False, force=False, 
+                    outdir='Unknown', verbose=True):
+
+    from clawpack.clawutil.data import ClawData 
+    import netCDF4
+    import time
+    
+    fv = -9999.   # fill_value for netcdf4
+    
+    if new:
+        # first create a new .nc file with X,Y,fgmax_point,force_dry_init:
+        result = make_nc_input(fname_nc, fg, force=force, verbose=verbose)
+        if result == -1:
+            print('*** make_nc_input failed, not appending output')
+            return        
+        
+    if outdir == 'Unknown':
+        # Cannot determine tfinal or run_finished time
+        tfinal = fv
+        run_finished = 'Unknown'
+    else:
+        claw = ClawData()
+        claw.read(outdir+'/claw.data', force=True)
+
+        try:
+            if claw.output_style==1:
+                tfinal = claw.tfinal
+            elif claw.output_style==2:
+                tfinal = array(claw.output_times).max()
+        except:
+            tfinal = fv
+        
+        try:
+            mtime = os.path.getmtime(outdir+'/timing.txt')
+            run_finished = time.ctime(mtime) 
+        except:
+            run_finished = 'Unknown'
+            
+    # add fgmax output results to existing file
+    print(os.getcwd())
+    with netCDF4.Dataset(fname_nc, 'a') as rootgrp:
+        if verbose:
+            print('Appending data from fg to nc file',fname_nc)
+            print('        nc file description: ', rootgrp.description)
+            print('        fg.id: ', fg.id)
+        
+        h = rootgrp.variables.get('h', None)
+        if (h is not None) and (not force):
+            print('*** netCDF file already contains output,\n'\
+                + '*** NOT overwriting '\
+                + '--- use force==True to overwrite' )
+            return
+                
+        x = array(rootgrp.variables['lon'])
+        y = array(rootgrp.variables['lat'])
+        X,Y = meshgrid(x,y)
+        try:
+            fgmax_point = array(rootgrp.variables['fgmax_point'])
+        except:
+            fgmax_point = None
+        bounding_box = [x.min(),x.max(),y.min(),y.max()]
+        
+        dx = x[1]-x[0]
+        Xclose = allclose(fg.X, X, atol=0.1*dx)
+        Yclose = allclose(fg.Y, Y, atol=0.1*dx)
+        
+        if (fg.X.shape != X.shape):
+            # for now raise an exception, might want to extent to allow
+            # filling only part of input arrays
+            print('*** Mismatch of fg with data in nc file:')
+            print('fg.X.shape = ',fg.X.shape)
+            print('nc  X.shape = ',X.shape)
+            print('fg.bounding_box = ',fg.bounding_box())
+            print('nc  bounding_box = ',bounding_box)
+            raise ValueError('*** Mismatch of fg with data in nc file')
+    
+        Xclose = allclose(fg.X, X, atol=0.1*dx)
+        Yclose = allclose(fg.Y, Y, atol=0.1*dx)
+        if (not (Xclose and Yclose)):
+            raise ValueError('*** Mismatch of fg.X or fg.Y with data in nc file')
+            
+
+        rootgrp.history += "Added output " + time.ctime(time.time())
+        rootgrp.history += " in %s;  " % os.getcwd()
+        
+        rootgrp.tfinal = tfinal
+        rootgrp.outdir = os.path.abspath(outdir)
+        rootgrp.run_finished = run_finished
+        
+        #fgmax_point = rootgrp.variables.get('fgmax_point', None)
+
+        if fg.dz is not None:
+            try:
+                dz = rootgrp.variables['dz']
+            except:
+                dz = rootgrp.createVariable('dz','f4',('lat','lon',),
+                                            fill_value=fv)
+            dz[:,:] = fg.dz
+            dz.units = 'meters'
+            if verbose: print('    Adding fg.dz to nc file')
+        else:
+            if verbose: print('fg.dz is None, not adding')
+
+        if fg.B is not None:
+            try:
+                B = rootgrp.variables['B']
+            except:
+                B = rootgrp.createVariable('B','f4',('lat','lon',),
+                                            fill_value=fv)
+            B[:,:] = fg.B
+            B.units = 'meters'
+            if verbose: print('    Adding fg.B to nc file')
+        else:
+            if verbose: print('fg.B is None, not adding')
+                        
+        if fg.h is not None:
+            try:
+                h = rootgrp.variables['h']
+            except:
+                h = rootgrp.createVariable('h','f4',('lat','lon',),
+                                            fill_value=fv)
+            h[:,:] = fg.h
+            h.units = 'meters'
+            if verbose: print('    Adding fg.h to nc file')
+        else:
+            if verbose: print('fg.h is None, not adding')
+            
+        if fg.s is not None:        
+            try:
+                s = rootgrp.variables['s']
+            except:
+                s = rootgrp.createVariable('s','f4',('lat','lon',),
+                                            fill_value=fv)
+            s[:,:] = fg.s
+            s.units = 'meters/second'
+            if verbose: print('    Adding fg.s to nc file')
+        else:
+            if verbose: print('fg.s is None, not adding')
+            
+        if fg.hss is not None:        
+            try:
+                hss = rootgrp.variables['hss']
+            except:
+                hss = rootgrp.createVariable('hss','f4',('lat','lon',),
+                                            fill_value=fv)
+            hss[:,:] = fg.hss
+            hss.units = 'meters^3/sec^2'
+            if verbose: print('    Adding fg.hss to nc file')
+        else:
+            if verbose: print('fg.hss is None, not adding')
+            
+        if fg.hmin is not None:        
+            try:
+                hmin = rootgrp.variables['hmin']
+            except:
+                hmin = rootgrp.createVariable('hmin','f4',('lat','lon',),
+                                            fill_value=fv)
+            # negate hmin so that it is minimum flow depth min(h):
+            hmin[:,:] = -fg.hmin
+            hmin.units = 'meters'
+            if verbose: print('    Adding fg.hmin to nc file')
+        else:
+            if verbose: print('fg.hmin is None, not adding')
+            
+        if fg.arrival_time is not None:        
+            try:
+                arrival_time = rootgrp.variables['arrival_time']
+            except:
+                arrival_time = rootgrp.createVariable('arrival_time','f4',('lat','lon',),
+                                            fill_value=fv)
+            arrival_time[:,:] = fg.arrival_time
+            arrival_time.units = 'seconds'
+            if verbose: print('    Adding fg.arrival_time to nc file')
+        else:
+            if verbose: print('fg.arrival_time is None, not adding')
+            
+        print('Created %s' % fname_nc)
+        if verbose:
+            print('History:  ', rootgrp.history)
+            print('\nMetadata:')
+            print('  outdir:  ', rootgrp.outdir)
+            print('  run_finished:  ', rootgrp.run_finished)
+            print('  tfinal:  ', rootgrp.tfinal)
+
+def read_nc(fname_nc, verbose=True):
+
+    import netCDF4
+    import time
+    import os
+    from numpy import ma
+    from clawpack.geoclaw import fgmax_tools
+
+    print('Reading fgmax data from %s' % fname_nc)
+    
+    def get_as_array(var, fgvar=None):
+        if fgvar is None:
+            fgvar = var
+        a = rootgrp.variables.get(var, None)
+        if a is not None:
+            if verbose: print('    Loaded %s as fg.%s' % (var,fgvar))
+            return array(a)
+        else:
+            if verbose: print('    Did not find %s for fg.%s' \
+                                % (var,fgvar))
+            return None
+                    
+    fg = fgmax_tools.FGmaxGrid()
+
+    with netCDF4.Dataset(fname_nc, 'r') as rootgrp:
+        if verbose:
+            print('Reading data to fg from nc file',fname_nc)
+            print('        nc file description: ', rootgrp.description)
+            print('History:  ', rootgrp.history)
+
+
+                
+        x = get_as_array('lon','x')
+        y = get_as_array('lat','y')
+        
+        if (x is None) or (y is None):
+            print('*** Could not create grid')
+            return None
+            
+        X,Y = meshgrid(x,y)
+        fg.X = X
+        fg.Y = Y
+        if verbose:
+            print('    Constructed fg.X and fg.Y')
+        
+        # arrays defined everywhere
+        fg.dz = get_as_array('dz')
+        fg.force_dry_init = get_as_array('force_dry_init')
+        fg.fgmax_point = get_as_array('fgmax_point') 
+        
+        if fg.fgmax_point is not None:
+            # arrays defined only at fgmax points: return as masked arrays:
+            fgmask = 1 - fg.fgmax_point  # mask points that are not fgmax pts
+            fg.B = ma.masked_array(get_as_array('B'), fgmask)
+            fg.h = ma.masked_array(get_as_array('h'), fgmask)
+            fg.s = ma.masked_array(get_as_array('s'), fgmask)
+            fg.hss = ma.masked_array(get_as_array('hss'), fgmask)
+            fg.hmin = ma.masked_array(get_as_array('hmin'), fgmask)
+            fg.arrival_time = ma.masked_array(get_as_array('arrival_time'), fgmask)
+        else:
+            fg.B = get_as_array('B')
+            fg.h = get_as_array('h')
+            fg.s = get_as_array('s')
+            fg.hss = get_as_array('hss')
+            fg.hmin = get_as_array('hmin')
+            fg.arrival_time = get_as_array('arrival_time')
+            
+    if verbose:
+        print('Returning FGmaxGrid object')
+    return fg
+
 if __name__== '__main__':
     
     sys.path.insert(0,'.')
@@ -529,7 +847,7 @@ if __name__== '__main__':
                         
 
     outdir = os.path.abspath('./_output')
-    outdir = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun_tests/geoclaw_outputs/_output_buried-random-str10-shallow'
+    #outdir = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun_tests/geoclaw_outputs/_output_buried-random-str10-shallow'
     plotdir = os.path.abspath('./_plots')
     os.system('mkdir -p %s' % plotdir)
         
@@ -545,3 +863,11 @@ if __name__== '__main__':
     #make_kmz_plots(fg, fgmax_plotdir, run_name)
 
     close('all')
+
+    fname_nc = '%s_fgmax.nc' % run_name
+    write_nc_output(fname_nc, fg, new=True, force=True, 
+                        outdir=outdir, verbose=True)
+                        
+    fg2 = read_nc(fname_nc, verbose=True)  # test reading it back in
+    
+        
