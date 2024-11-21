@@ -685,6 +685,18 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
         else:
             if verbose: print('fg.dz is None, not adding')
 
+        if fg.B0 is not None:
+            try:
+                B0 = rootgrp.variables['B0']
+            except:
+                B0 = rootgrp.createVariable('B0','f4',('lat','lon',),
+                                            fill_value=fv)
+            B0[:,:] = fg.B0
+            B0.units = 'meters'
+            if verbose: print('    Adding fg.B0 to nc file')
+        else:
+            if verbose: print('fg.B0 is None, not adding')
+            
         if fg.B is not None:
             try:
                 B = rootgrp.variables['B']
@@ -820,6 +832,7 @@ def read_nc(fname_nc, verbose=True):
             # arrays defined only at fgmax points: return as masked arrays:
             fgmask = 1 - fg.fgmax_point  # mask points that are not fgmax pts
             fg.B = ma.masked_array(get_as_array('B'), fgmask)
+            fg.B0 = ma.masked_array(get_as_array('B0'), fgmask)
             fg.h = ma.masked_array(get_as_array('h'), fgmask)
             fg.s = ma.masked_array(get_as_array('s'), fgmask)
             fg.hss = ma.masked_array(get_as_array('hss'), fgmask)
@@ -827,6 +840,7 @@ def read_nc(fname_nc, verbose=True):
             fg.arrival_time = ma.masked_array(get_as_array('arrival_time'), fgmask)
         else:
             fg.B = get_as_array('B')
+            fg.B0 = get_as_array('B0')
             fg.h = get_as_array('h')
             fg.s = get_as_array('s')
             fg.hss = get_as_array('hss')
@@ -869,5 +883,6 @@ if __name__== '__main__':
                         outdir=outdir, verbose=True)
                         
     fg2 = read_nc(fname_nc, verbose=True)  # test reading it back in
+    print('max abs(B-B0) = %.2f' % abs(fg2.B-fg2.B0).max())
     
         
