@@ -36,6 +36,9 @@ if '/mmfs1/home' in this_dir:
 else:
     nohup = True  
 
+nohup = False # output is redirected to geoclaw_output.txt
+
+
 setplot_file = os.path.abspath('setplot.py')
 
 def run_many_cases(caselist, nprocs, run_one_case):

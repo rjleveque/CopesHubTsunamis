@@ -26,7 +26,9 @@ output_format = 'binary32'
 
 # Instantiate object for reading fgout frames:
 fgout_grid1 = fgout_tools.FGoutGrid(1, outdir, output_format)
+fgout_grid1.read_fgout_grids_data()
 fgout_grid2 = fgout_tools.FGoutGrid(2, outdir, output_format)
+fgout_grid2.read_fgout_grids_data()
 
 
 # transect:
