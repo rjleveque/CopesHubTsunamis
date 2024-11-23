@@ -10,12 +10,13 @@ sys.path.insert(0,CHT+'/common_code')  # add to search path
 import dtopotools # local version, makes smaller files
 
 #defdir = 'vertical_displacements' # first 18 events
-defdir = 'vertical_displacements_sensitivity'  # 3 new events 6/20/24
+#defdir = 'vertical_displacements_sensitivity'  # 3 new events 6/20/24
+defdir = 'vertical_displacements_FrontalThrust'  # new events 11/7/24
 
 #fname_orig = 'vert_displacements_all_xgrid_buried-random-str10-shallow'
-#fname_orig = 'vert_displacements_all_xgrid_ft-random-mur13-deep'
+fname_orig = 'vert_displacements_all_xgrid_ft-random-mur13-deep'
 #fname_orig = 'vert_displacements_all_xgrid_buried-random-mur13-deep-nosub'
-fname_orig = 'vert_displacements_all_xgrid_buried-random-mur13-deep-nosub-homogeneous-halfspace-noQ'
+#fname_orig = 'vert_displacements_all_xgrid_buried-random-mur13-deep-nosub-homogeneous-halfspace-noQ'
 
 path_orig = os.path.join(defdir, fname_orig)
 lon,lat,z = loadtxt(path_orig, skiprows=1,usecols=[1,2,3],unpack=True)
@@ -47,6 +48,10 @@ else:
         dZ[k,:,:] = k/(ntimes-1) * Z
 
 dtopo.dZ = dZ
+
+# simplify name for sensitivity study:
+fname_orig = fname_orig.replace('vert_displacements_all_xgrid_','')
+fname_orig = fname_orig + '_instant'  # since these are static displacements
 
 fname = fname_orig + '.dtt3'
 path_new = os.path.join(defdir, fname)

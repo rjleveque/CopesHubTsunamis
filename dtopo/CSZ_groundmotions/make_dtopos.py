@@ -30,7 +30,7 @@ event = 'buried-locking-mur13-shallow'
 events = [event]
 
 if 1:
-    #files = glob.glob('vertical_displacements/*')
+    #files = glob.glob('vertical_displacements_FrontalThurst/*')
     files = glob.glob('time_dependent_zdisp/*')
     events = []
     for f in files:
