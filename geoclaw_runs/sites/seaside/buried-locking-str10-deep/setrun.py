@@ -336,6 +336,7 @@ def setrun(claw_pkg='geoclaw'):
     # ---------------
     amrdata = rundata.amrdata
     amrdata.max1d = 200
+    amrdata.memsize = 2**27 - 1
 
     # max number of refinement levels:
     #amrdata.amr_levels_max = 4
@@ -769,7 +770,7 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-123.9975,-123.9025,45.975,46.0275]
+        flagregion.spatial_region = [-123.9975,-123.9025,45.970,46.0275]
         flagregions.append(flagregion)
 
     # ---------------
