@@ -33,7 +33,7 @@ SCRATCH = $(subst /mmfs1/home/,/gscratch/tsunami/,$(CURDIR))
 # top of git repository, in order to use the same executable in all directories.
 # Otherwise, use xgeoclaw in the the current run directory:
 CHT ?= $(CURDIR)
-EXE ?= $(CHT)/xgeoclaw_bouss
+EXE ?= $(CHT)/geoclaw_runs/xgeoclaw_bouss_v511_smax
 # Note ?= since on HPC cluster EXE is set in slurm script to proper location
 # =========================
 
@@ -58,29 +58,33 @@ ifndef PETSC_DIR
   $(error PETSC_DIR not set)
 endif
 
-ifndef PETSC_ARCH
-  $(error PETSC_ARCH not set)
-endif
-
 ifndef PETSC_OPTIONS
   PETSC_OPTIONS=MISSING
   $(error PETSC_OPTIONS must be declared as environment variable)
 endif
 
+ifndef CLAW_MPIEXEC
+  CLAW_MPIEXEC=MISSING
+  $(error CLAW_MPIEXEC must be declared as environment variable)
+endif
+
+ifndef CLAW_MPIFC
+  CLAW_MPIFC=MISSING
+  $(error Fortran compiler CLAW_MPIFC must be declared as environment variable)
+endif
+
+# Environment variable FC should be set to fortran compiler, e.g. gfortran
+FC = ${CLAW_MPIFC}
+
 # How many MPI processes to use:
 BOUSS_MPI_PROCS ?= 6
 
-#EXE = $(PWD)/xgeoclaw
-RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n ${BOUSS_MPI_PROCS}"
+RUNEXE="${CLAW_MPIEXEC} -n ${BOUSS_MPI_PROCS}"
 SETRUN_FILE = setrun.py           # File containing function to make data
 OUTDIR = _output                  # Directory for output
 SETPLOT_FILE = setplot.py         # File containing function to set plots
 PLOTDIR = _plots                  # Directory for plots
 
-
-# Environment variable FC should be set to fortran compiler, e.g. gfortran
-
-FC = gfortran
 
 # Some compiler flags below are needed for PETSc
 PETSC_INCLUDE = $(PETSC_DIR)/include $(PETSC_DIR)/$(PETSC_ARCH)/include         
@@ -125,7 +129,7 @@ EXCLUDE_SOURCES = \
 MODULES = \
 
 SOURCES = \
-
+  $(CHT)/common_code/b4step2.f90 \
 
 #-------------------------------------------------------------------
 # Include Makefile containing standard definitions and make options:
@@ -135,12 +139,22 @@ include $(CLAWMAKE)
 
 check:
 	@echo ===================
+	@echo running whichclaw shows the following...
+	python $(CLAW)/clawutil/src/python/clawutil/whichclaw.py 
+	@echo ===================
 	@echo CLAW = $(CLAW)
 	@echo OMP_NUM_THREADS = $(OMP_NUM_THREADS)
 	@echo BOUSS_MPI_PROCS = $(BOUSS_MPI_PROCS)
 	@env | grep PETSC_OPTIONS
 	@echo PETSC_DIR = $(PETSC_DIR)
 	@echo PETSC_ARCH = $(PETSC_ARCH)
+	@echo CLAW_MPIEXEC = $(CLAW_MPIEXEC)
 	@echo RUNEXE = $(RUNEXE)
+	@echo EXE = $(EXE)
+	@echo CLAW_MPIFC = $(CLAW_MPIFC)
+	@echo FC = $(FC)
 	@echo FFLAGS = $(FFLAGS)
+	@echo LFLAGS = $(LFLAGS)
+	@echo OUTDIR = $(OUTDIR)
+	@echo PLOTDIR = $(PLOTDIR)
 	@echo ===================

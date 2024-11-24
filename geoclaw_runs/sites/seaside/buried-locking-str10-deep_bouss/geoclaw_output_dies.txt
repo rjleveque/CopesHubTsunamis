@@ -1,0 +1,1027 @@
+/Applications/Xcode.app/Contents/Developer/usr/bin/make output -f  Makefile /Users/rjl/git/clawpack/geoclaw/src/2d/bouss/Makefile.bouss /Users/rjl/git/clawpack/clawutil/src/Makefile.common
+/Users/rjl/git/clawpack/clawutil/src/Makefile.common:117: Warning : Proper compiler flags unknown for FC=mpif90
+/Users/rjl/git/clawpack/clawutil/src/Makefile.common:120: Warning : Using -J for MODULE_FLAG
+/Users/rjl/git/clawpack/clawutil/src/Makefile.common:124: Warning : Using -fopenmp for OMP_FLAG
+rm -f .output
+python /Users/rjl/git/clawpack/clawutil/src/python/clawutil/runclaw.py /Users/rjl/git/CopesHubTsunamis/geoclaw_runs/xgeoclaw_bouss_v511_smax _output                   \
+	True None . False False None "mpiexec -n 6"
+==> runclaw: Will take data from  /Users/rjl/git/CopesHubTsunamis/geoclaw_runs/sites/seaside/buried-locking-str10-deep_bouss
+==> runclaw: Will write output to  /Users/rjl/git/CopesHubTsunamis/geoclaw_runs/sites/seaside/buried-locking-str10-deep_bouss/_output
+==> runclaw: Removing all old fort/gauge files in  /Users/rjl/git/CopesHubTsunamis/geoclaw_runs/sites/seaside/buried-locking-str10-deep_bouss/_output
+
+==> Running with command:
+    mpiexec -n 6 /Users/rjl/git/CopesHubTsunamis/geoclaw_runs/xgeoclaw_bouss_v511_smax
+Reading data file: claw.data
+         first 5 lines are comments and will be skipped
+Reading data file: amr.data
+         first 5 lines are comments and will be skipped
+  
+ Running amrclaw ...  
+  
+Reading data file: geoclaw.data
+         first 5 lines are comments and will be skipped
+Reading data file: refinement.data
+         first 5 lines are comments and will be skipped
+Reading data file: dtopo.data
+         first 5 lines are comments and will be skipped
+Reading data file: topo.data
+         first 5 lines are comments and will be skipped
+ *** in file: /Users/rjl/git/CopesHubTsunamis/topo/topofiles/astoria_2s_mhw.asc
+     Shifting xllcorner by 0.5*dx to cell center
+ *** in file: /Users/rjl/git/CopesHubTsunamis/topo/topofiles/astoria_2s_mhw.asc
+     Shifting yllcorner by 0.5*dy to cell center
+ *** in file: /Users/rjl/git/CopesHubTsunamis/topo/topofiles/SeasideN_13s_mhw.asc
+     Shifting xllcorner by 0.5*dx to cell center
+ *** in file: /Users/rjl/git/CopesHubTsunamis/topo/topofiles/SeasideN_13s_mhw.asc
+     Shifting yllcorner by 0.5*dy to cell center
+ *** in file: /Users/rjl/git/CopesHubTsunamis/topo/topofiles/SeasideS_13s_mhw.asc
+     Shifting xllcorner by 0.5*dx to cell center
+ *** in file: /Users/rjl/git/CopesHubTsunamis/topo/topofiles/SeasideS_13s_mhw.asc
+     Shifting yllcorner by 0.5*dy to cell center
+  
+ Reading topography file  /Users/rjl/git/CopesHubTsunamis/topo/topofiles/etopo22_15s_-137_-121_37_55.asc                                                                        
+  
+ Reading topography file  /Users/rjl/git/CopesHubTsunamis/topo/topofiles/astoria_2s_mhw.asc                                                                                     
+  
+ Reading topography file  /Users/rjl/git/CopesHubTsunamis/topo/topofiles/SeasideN_13s_mhw.asc                                                                                   
+  
+ Reading topography file  /Users/rjl/git/CopesHubTsunamis/topo/topofiles/SeasideS_13s_mhw.asc                                                                                   
+Reading data file: qinit.data
+         first 5 lines are comments and will be skipped
+   qinit_type = 0, no perturbation
+Reading data file: fgout_grids.data
+         first 5 lines are comments and will be skipped
+ +++ q_out_vars: T T T F F T F
+ +++ nqout =            4
+ +++ q_out_vars: T T T F F T F
+ +++ nqout =            4
+ +++ q_out_vars: T T T F F T F
+ +++ nqout =            4
+Reading data file: friction.data
+         first 5 lines are comments and will be skipped
+Reading data file: multilayer.data
+         first 5 lines are comments and will be skipped
+Reading data file: surge.data
+         first 5 lines are comments and will be skipped
+Reading data file: regions.data
+         first 5 lines are comments and will be skipped
+Reading data file: flagregions.data
+         first 5 lines are comments and will be skipped
+ +++ rregion bounding box: 
+  -128.09999999999999       -121.90000000000001        44.399999999999999        47.600000000000001     
+ +++ i, rr%s(1), rr%ds:            1  -128.09999999999999        6.1999999999999886     
+ +++ Ruled region name: Region_Coast_46_51b_12sec                                                                                                                                                                               
+ +++ Ruled region file_name: /Users/rjl/git/CopesHubTsunamis/topo/regions/RuledRectangle_Coast_46_51b.data                                                                                                                           
+ +++ rregion bounding box: 
+  -131.03333333300000       -123.23333333300000        45.966666666999998        51.033333333000002     
+ +++ i, rr%s(1), rr%ds:            2   45.966666666999998        6.6666699999999995E-002
+ +++ Ruled region name: Region_Coast_40_46b_12sec                                                                                                                                                                               
+ +++ Ruled region file_name: /Users/rjl/git/CopesHubTsunamis/topo/regions/RuledRectangle_Coast_40_46b.data                                                                                                                           
+ +++ rregion bounding box: 
+  -126.50000000000000       -123.76666666700000        39.966666666999998        46.033333333000002     
+ +++ i, rr%s(1), rr%ds:            3   39.966666666999998        6.6666699999999995E-002
+ +++ rregion bounding box: 
+  -126.00000000000000       -123.76000000000001        45.689999999999998        46.430000000000000     
+ +++ i, rr%s(1), rr%ds:            4  -126.00000000000000        2.2399999999999949     
+ +++ rregion bounding box: 
+  -124.25000000000000       -123.90250000000000        45.902500000000003        46.320000000000000     
+ +++ i, rr%s(1), rr%ds:            5  -124.25000000000000       0.34749999999999659     
+ +++ rregion bounding box: 
+  -124.03000000000000       -123.90250000000000        45.945000000000000        46.079999999999998     
+ +++ i, rr%s(1), rr%ds:            6  -124.03000000000000       0.12749999999999773     
+ +++ rregion bounding box: 
+  -123.99750000000000       -123.90250000000000        45.969999999999999        46.027500000000003     
+ +++ i, rr%s(1), rr%ds:            7  -123.99750000000000        9.4999999999998863E-002
+Reading data file: gauges.data
+         first 5 lines are comments and will be skipped
+Reading data file: fgmax_grids.data
+         first 5 lines are comments and will be skipped
+ +++ fgbb:   -123.94000000000000       -123.90250000000000        45.972000000000001        46.019962962999998     
+ +++ fgll:   -123.94000000000000        45.972000000000001              406         519
+ +++ fg%x(npts), fg%y(1):   -123.90250000000000        45.972000000000001     
+Reading data file: adjoint.data
+         first 5 lines are comments and will be skipped
+Reading data file: bouss.data               
+         first 5 lines are comments and will be skipped
+  Using SGN equations
+==> Applying Bouss equations to selected grids between levels   1 and   7
+ ==> Use Bouss. in water deeper than    10.000000000000000     
+ Using a PETSc solver
+ ==> Wait until time    60.000000000000000       for before starting Bouss
+ ==> Using SWE until then.
+ rnode allocated...
+ node allocated...
+ listOfGrids allocated...
+ Storage allocated...
+ bndList allocated...
+Gridding level   1 at t =  0.000000E+00:     1 grids with        4050 cells
+   Setting initial dt to    10.000000000000000     
+  max threads set to            6
+  
+ Done reading data, starting computation ...  
+  
+ Total zeta at initial time:  -0.16644683063591406     
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.100000E+02
+Writing fgout grid #   1  frame    1 at time =    0.00000000E+00
+Writing fgout grid #   2  frame    1 at time =    0.00000000E+00
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.200000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.300000E+02
+Writing fgout grid #   1  frame    2 at time =    0.30000000E+02
+Writing fgout grid #   2  frame    2 at time =    0.30000000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.400000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.500000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.600000E+02
+Writing fgout grid #   1  frame    3 at time =    0.60000000E+02
+Writing fgout grid #   2  frame    3 at time =    0.60000000E+02
+ Using/Switching to Boussinesq equations
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.700000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.800000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.900000E+02
+Writing fgout grid #   1  frame    4 at time =    0.90000000E+02
+Writing fgout grid #   2  frame    4 at time =    0.90000000E+02
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.100000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.110000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.120000E+03
+Writing fgout grid #   1  frame    5 at time =    0.12000000E+03
+Writing fgout grid #   2  frame    5 at time =    0.12000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.130000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.140000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.150000E+03
+Writing fgout grid #   1  frame    6 at time =    0.15000000E+03
+Writing fgout grid #   2  frame    6 at time =    0.15000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.160000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.170000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.180000E+03
+Writing fgout grid #   1  frame    7 at time =    0.18000000E+03
+Writing fgout grid #   2  frame    7 at time =    0.18000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.190000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.200000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.210000E+03
+Writing fgout grid #   1  frame    8 at time =    0.21000000E+03
+Writing fgout grid #   2  frame    8 at time =    0.21000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.220000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.230000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.240000E+03
+Writing fgout grid #   1  frame    9 at time =    0.24000000E+03
+Writing fgout grid #   2  frame    9 at time =    0.24000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.250000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.260000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.270000E+03
+Writing fgout grid #   1  frame   10 at time =    0.27000000E+03
+Writing fgout grid #   2  frame   10 at time =    0.27000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.280000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.290000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.300000E+03
+Writing fgout grid #   1  frame   11 at time =    0.30000000E+03
+Writing fgout grid #   2  frame   11 at time =    0.30000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.310000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.320000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.330000E+03
+Writing fgout grid #   1  frame   12 at time =    0.33000000E+03
+Writing fgout grid #   2  frame   12 at time =    0.33000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.340000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.350000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.360000E+03
+Writing fgout grid #   1  frame   13 at time =    0.36000000E+03
+Writing fgout grid #   2  frame   13 at time =    0.36000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.370000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.380000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.390000E+03
+Writing fgout grid #   1  frame   14 at time =    0.39000000E+03
+Writing fgout grid #   2  frame   14 at time =    0.39000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.400000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.410000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.420000E+03
+Writing fgout grid #   1  frame   15 at time =    0.42000000E+03
+Writing fgout grid #   2  frame   15 at time =    0.42000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.430000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.440000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.450000E+03
+Writing fgout grid #   1  frame   16 at time =    0.45000000E+03
+Writing fgout grid #   2  frame   16 at time =    0.45000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.460000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.470000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.480000E+03
+Writing fgout grid #   1  frame   17 at time =    0.48000000E+03
+Writing fgout grid #   2  frame   17 at time =    0.48000000E+03
+ AMRCLAW: level  1  CFL = .329E+00  dt = 0.1000E+02  final t = 0.490000E+03
++++ sratio,h: 0.92967  96.197 at t = 481.0  x,y =  -124.317500   46.317500
++++ sratio,h: 0.92967  96.197 at t = 481.0  x,y =  -124.317500   46.317500
++++ sratio,h: 0.02799  94.157 at t = 481.5  x,y =  -124.317500   46.317500
++++ sratio,h: 0.02799  94.157 at t = 481.5  x,y =  -124.317500   46.317500
++++ sratio,h: 0.05289  92.587 at t = 482.0  x,y =  -124.317500   46.317500
++++ sratio,h: 0.05289  92.587 at t = 482.0  x,y =  -124.317500   46.317500
++++ sratio,h: 0.26221  90.978 at t = 482.5  x,y =  -124.317500   46.317500
++++ sratio,h: 0.26221  90.978 at t = 482.5  x,y =  -124.317500   46.317500
++++ sratio,h: 0.34581  11.088 at t = 484.0  x,y =  -124.135000   46.858333
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.512788E+03
+Writing fgout grid #   1  frame   18 at time =    0.51000000E+03
+Writing fgout grid #   2  frame   18 at time =    0.51000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.535575E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.558363E+03
+Writing fgout grid #   1  frame   19 at time =    0.54000000E+03
+Writing fgout grid #   2  frame   19 at time =    0.54000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.581150E+03
+Writing fgout grid #   1  frame   20 at time =    0.57000000E+03
+Writing fgout grid #   2  frame   20 at time =    0.57000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.603937E+03
+Writing fgout grid #   1  frame   21 at time =    0.60000000E+03
+Writing fgout grid #   2  frame   21 at time =    0.60000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.626725E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.649512E+03
+Writing fgout grid #   1  frame   22 at time =    0.63000000E+03
+Writing fgout grid #   2  frame   22 at time =    0.63000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.672300E+03
+Writing fgout grid #   1  frame   23 at time =    0.66000000E+03
+Writing fgout grid #   2  frame   23 at time =    0.66000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.695087E+03
+Writing fgout grid #   1  frame   24 at time =    0.69000000E+03
+Writing fgout grid #   2  frame   24 at time =    0.69000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.717874E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.740662E+03
+Writing fgout grid #   1  frame   25 at time =    0.72000000E+03
+Writing fgout grid #   2  frame   25 at time =    0.72000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.763449E+03
+Writing fgout grid #   1  frame   26 at time =    0.75000000E+03
+Writing fgout grid #   2  frame   26 at time =    0.75000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.786236E+03
+Writing fgout grid #   1  frame   27 at time =    0.78000000E+03
+Writing fgout grid #   2  frame   27 at time =    0.78000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.809024E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.831811E+03
+Writing fgout grid #   1  frame   28 at time =    0.81000000E+03
+Writing fgout grid #   2  frame   28 at time =    0.81000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.854598E+03
+Writing fgout grid #   1  frame   29 at time =    0.84000000E+03
+Writing fgout grid #   2  frame   29 at time =    0.84000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.877386E+03
+Writing fgout grid #   1  frame   30 at time =    0.87000000E+03
+Writing fgout grid #   2  frame   30 at time =    0.87000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.900173E+03
+Writing fgout grid #   1  frame   31 at time =    0.90000000E+03
+Writing fgout grid #   2  frame   31 at time =    0.90000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.922960E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.945747E+03
+Writing fgout grid #   1  frame   32 at time =    0.93000000E+03
+Writing fgout grid #   2  frame   32 at time =    0.93000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.968535E+03
+Writing fgout grid #   1  frame   33 at time =    0.96000000E+03
+Writing fgout grid #   2  frame   33 at time =    0.96000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.991322E+03
+Writing fgout grid #   1  frame   34 at time =    0.99000000E+03
+Writing fgout grid #   2  frame   34 at time =    0.99000000E+03
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.101411E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.103690E+04
+Writing fgout grid #   1  frame   35 at time =    0.10200000E+04
+Writing fgout grid #   2  frame   35 at time =    0.10200000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.105968E+04
+Writing fgout grid #   1  frame   36 at time =    0.10500000E+04
+Writing fgout grid #   2  frame   36 at time =    0.10500000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.108247E+04
+Writing fgout grid #   1  frame   37 at time =    0.10800000E+04
+Writing fgout grid #   2  frame   37 at time =    0.10800000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.110525E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.112802E+04
+Writing fgout grid #   1  frame   38 at time =    0.11100000E+04
+Writing fgout grid #   2  frame   38 at time =    0.11100000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2277E+02  final t = 0.115079E+04
+Writing fgout grid #   1  frame   39 at time =    0.11400000E+04
+Writing fgout grid #   2  frame   39 at time =    0.11400000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2277E+02  final t = 0.117356E+04
+Writing fgout grid #   1  frame   40 at time =    0.11700000E+04
+Writing fgout grid #   2  frame   40 at time =    0.11700000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2276E+02  final t = 0.119632E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2276E+02  final t = 0.121908E+04
+Writing fgout grid #   1  frame   41 at time =    0.12000000E+04
+Writing fgout grid #   2  frame   41 at time =    0.12000000E+04
+Writing fgout grid #   3  frame    1 at time =    0.12000000E+04
+Writing fgout grid #   3  frame    2 at time =    0.12150000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2276E+02  final t = 0.124184E+04
+Writing fgout grid #   1  frame   42 at time =    0.12300000E+04
+Writing fgout grid #   2  frame   42 at time =    0.12300000E+04
+Writing fgout grid #   3  frame    3 at time =    0.12300000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2277E+02  final t = 0.126461E+04
+Writing fgout grid #   3  frame    4 at time =    0.12450000E+04
+Writing fgout grid #   1  frame   43 at time =    0.12600000E+04
+Writing fgout grid #   2  frame   43 at time =    0.12600000E+04
+Writing fgout grid #   3  frame    5 at time =    0.12600000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2277E+02  final t = 0.128738E+04
+Writing fgout grid #   3  frame    6 at time =    0.12750000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.131016E+04
+Writing fgout grid #   1  frame   44 at time =    0.12900000E+04
+Writing fgout grid #   2  frame   44 at time =    0.12900000E+04
+Writing fgout grid #   3  frame    7 at time =    0.12900000E+04
+Writing fgout grid #   3  frame    8 at time =    0.13050000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.133295E+04
+Writing fgout grid #   1  frame   45 at time =    0.13200000E+04
+Writing fgout grid #   2  frame   45 at time =    0.13200000E+04
+Writing fgout grid #   3  frame    9 at time =    0.13200000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.135573E+04
+Writing fgout grid #   3  frame   10 at time =    0.13350000E+04
+Writing fgout grid #   1  frame   46 at time =    0.13500000E+04
+Writing fgout grid #   2  frame   46 at time =    0.13500000E+04
+Writing fgout grid #   3  frame   11 at time =    0.13500000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.137851E+04
+Writing fgout grid #   3  frame   12 at time =    0.13650000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.140129E+04
+Writing fgout grid #   1  frame   47 at time =    0.13800000E+04
+Writing fgout grid #   2  frame   47 at time =    0.13800000E+04
+Writing fgout grid #   3  frame   13 at time =    0.13800000E+04
+Writing fgout grid #   3  frame   14 at time =    0.13950000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.142407E+04
+Writing fgout grid #   1  frame   48 at time =    0.14100000E+04
+Writing fgout grid #   2  frame   48 at time =    0.14100000E+04
+Writing fgout grid #   3  frame   15 at time =    0.14100000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.144686E+04
+Writing fgout grid #   3  frame   16 at time =    0.14250000E+04
+Writing fgout grid #   1  frame   49 at time =    0.14400000E+04
+Writing fgout grid #   2  frame   49 at time =    0.14400000E+04
+Writing fgout grid #   3  frame   17 at time =    0.14400000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.146964E+04
+Writing fgout grid #   3  frame   18 at time =    0.14550000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.149243E+04
+Writing fgout grid #   1  frame   50 at time =    0.14700000E+04
+Writing fgout grid #   2  frame   50 at time =    0.14700000E+04
+Writing fgout grid #   3  frame   19 at time =    0.14700000E+04
+Writing fgout grid #   3  frame   20 at time =    0.14850000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.151521E+04
+Writing fgout grid #   1  frame   51 at time =    0.15000000E+04
+Writing fgout grid #   2  frame   51 at time =    0.15000000E+04
+Writing fgout grid #   3  frame   21 at time =    0.15000000E+04
+Writing fgout grid #   3  frame   22 at time =    0.15150000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.153799E+04
+Writing fgout grid #   1  frame   52 at time =    0.15300000E+04
+Writing fgout grid #   2  frame   52 at time =    0.15300000E+04
+Writing fgout grid #   3  frame   23 at time =    0.15300000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.156078E+04
+Writing fgout grid #   3  frame   24 at time =    0.15450000E+04
+Writing fgout grid #   1  frame   53 at time =    0.15600000E+04
+Writing fgout grid #   2  frame   53 at time =    0.15600000E+04
+Writing fgout grid #   3  frame   25 at time =    0.15600000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.158357E+04
+Writing fgout grid #   3  frame   26 at time =    0.15750000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.160635E+04
+Writing fgout grid #   1  frame   54 at time =    0.15900000E+04
+Writing fgout grid #   2  frame   54 at time =    0.15900000E+04
+Writing fgout grid #   3  frame   27 at time =    0.15900000E+04
+Writing fgout grid #   3  frame   28 at time =    0.16050000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.162914E+04
+Writing fgout grid #   1  frame   55 at time =    0.16200000E+04
+Writing fgout grid #   2  frame   55 at time =    0.16200000E+04
+Writing fgout grid #   3  frame   29 at time =    0.16200000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.165192E+04
+Writing fgout grid #   3  frame   30 at time =    0.16350000E+04
+Writing fgout grid #   1  frame   56 at time =    0.16500000E+04
+Writing fgout grid #   2  frame   56 at time =    0.16500000E+04
+Writing fgout grid #   3  frame   31 at time =    0.16500000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.167471E+04
+Writing fgout grid #   3  frame   32 at time =    0.16650000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.169749E+04
+Writing fgout grid #   1  frame   57 at time =    0.16800000E+04
+Writing fgout grid #   2  frame   57 at time =    0.16800000E+04
+Writing fgout grid #   3  frame   33 at time =    0.16800000E+04
+Writing fgout grid #   3  frame   34 at time =    0.16950000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.172028E+04
+Writing fgout grid #   1  frame   58 at time =    0.17100000E+04
+Writing fgout grid #   2  frame   58 at time =    0.17100000E+04
+Writing fgout grid #   3  frame   35 at time =    0.17100000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.174307E+04
+Writing fgout grid #   3  frame   36 at time =    0.17250000E+04
+Writing fgout grid #   1  frame   59 at time =    0.17400000E+04
+Writing fgout grid #   2  frame   59 at time =    0.17400000E+04
+Writing fgout grid #   3  frame   37 at time =    0.17400000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.176586E+04
+Writing fgout grid #   3  frame   38 at time =    0.17550000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.178864E+04
+Writing fgout grid #   1  frame   60 at time =    0.17700000E+04
+Writing fgout grid #   2  frame   60 at time =    0.17700000E+04
+Writing fgout grid #   3  frame   39 at time =    0.17700000E+04
+Writing fgout grid #   3  frame   40 at time =    0.17850000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.181143E+04
+Writing fgout grid #   1  frame   61 at time =    0.18000000E+04
+Writing fgout grid #   2  frame   61 at time =    0.18000000E+04
+Writing fgout grid #   3  frame   41 at time =    0.18000000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.183421E+04
+Writing fgout grid #   3  frame   42 at time =    0.18150000E+04
+Writing fgout grid #   1  frame   62 at time =    0.18300000E+04
+Writing fgout grid #   2  frame   62 at time =    0.18300000E+04
+Writing fgout grid #   3  frame   43 at time =    0.18300000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.185700E+04
+Writing fgout grid #   3  frame   44 at time =    0.18450000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.187978E+04
+Writing fgout grid #   1  frame   63 at time =    0.18600000E+04
+Writing fgout grid #   2  frame   63 at time =    0.18600000E+04
+Writing fgout grid #   3  frame   45 at time =    0.18600000E+04
+Writing fgout grid #   3  frame   46 at time =    0.18750000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.190256E+04
+Writing fgout grid #   1  frame   64 at time =    0.18900000E+04
+Writing fgout grid #   2  frame   64 at time =    0.18900000E+04
+Writing fgout grid #   3  frame   47 at time =    0.18900000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.192535E+04
+Writing fgout grid #   3  frame   48 at time =    0.19050000E+04
+Writing fgout grid #   1  frame   65 at time =    0.19200000E+04
+Writing fgout grid #   2  frame   65 at time =    0.19200000E+04
+Writing fgout grid #   3  frame   49 at time =    0.19200000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.194813E+04
+Writing fgout grid #   3  frame   50 at time =    0.19350000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.197092E+04
+Writing fgout grid #   1  frame   66 at time =    0.19500000E+04
+Writing fgout grid #   2  frame   66 at time =    0.19500000E+04
+Writing fgout grid #   3  frame   51 at time =    0.19500000E+04
+Writing fgout grid #   3  frame   52 at time =    0.19650000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.199370E+04
+Writing fgout grid #   1  frame   67 at time =    0.19800000E+04
+Writing fgout grid #   2  frame   67 at time =    0.19800000E+04
+Writing fgout grid #   3  frame   53 at time =    0.19800000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.201649E+04
+Writing fgout grid #   3  frame   54 at time =    0.19950000E+04
+Writing fgout grid #   1  frame   68 at time =    0.20100000E+04
+Writing fgout grid #   2  frame   68 at time =    0.20100000E+04
+Writing fgout grid #   3  frame   55 at time =    0.20100000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.203927E+04
+Writing fgout grid #   3  frame   56 at time =    0.20250000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.206206E+04
+Writing fgout grid #   1  frame   69 at time =    0.20400000E+04
+Writing fgout grid #   2  frame   69 at time =    0.20400000E+04
+Writing fgout grid #   3  frame   57 at time =    0.20400000E+04
++++ sratio,h: 0.46154   0.002 at t =2052.6  x,y =  -123.969028   45.969306
++++ sratio,h: 0.78696   0.005 at t =2053.0  x,y =  -123.969028   45.969306
+Writing fgout grid #   3  frame   58 at time =    0.20550000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.208484E+04
+Writing fgout grid #   1  frame   70 at time =    0.20700000E+04
+Writing fgout grid #   2  frame   70 at time =    0.20700000E+04
+Writing fgout grid #   3  frame   59 at time =    0.20700000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.210763E+04
+Writing fgout grid #   3  frame   60 at time =    0.20850000E+04
+Writing fgout grid #   1  frame   71 at time =    0.21000000E+04
+Writing fgout grid #   2  frame   71 at time =    0.21000000E+04
+Writing fgout grid #   3  frame   61 at time =    0.21000000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.213041E+04
+Writing fgout grid #   3  frame   62 at time =    0.21150000E+04
+Writing fgout grid #   1  frame   72 at time =    0.21300000E+04
+Writing fgout grid #   2  frame   72 at time =    0.21300000E+04
+Writing fgout grid #   3  frame   63 at time =    0.21300000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2278E+02  final t = 0.215320E+04
+Writing fgout grid #   3  frame   64 at time =    0.21450000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.217598E+04
++++ sratio,h: 0.66399   0.007 at t =2154.1  x,y =  -123.968472   45.969306
++++ sratio,h: 0.22097   0.004 at t =2154.6  x,y =  -123.968472   45.969306
++++ sratio,h: 0.25221   0.004 at t =2154.9  x,y =  -123.968472   45.969306
++++ sratio,h: 0.49104   0.008 at t =2155.1  x,y =  -123.968472   45.969306
++++ sratio,h: 0.66848   0.008 at t =2155.3  x,y =  -123.968472   45.969306
+Writing fgout grid #   1  frame   73 at time =    0.21600000E+04
+Writing fgout grid #   2  frame   73 at time =    0.21600000E+04
+Writing fgout grid #   3  frame   65 at time =    0.21600000E+04
++++ sratio,h: 0.95805   0.002 at t =2169.3  x,y =  -123.960833   45.897500
++++ sratio,h: 0.73794   0.001 at t =2171.7  x,y =  -123.960833   45.897500
+Writing fgout grid #   3  frame   66 at time =    0.21750000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.219877E+04
++++ sratio,h: 0.44201   0.001 at t =2179.3  x,y =  -123.959167   45.897500
++++ sratio,h: 0.88486   0.002 at t =2180.3  x,y =  -123.959167   45.897500
+Writing fgout grid #   1  frame   74 at time =    0.21900000E+04
+Writing fgout grid #   2  frame   74 at time =    0.21900000E+04
+Writing fgout grid #   3  frame   67 at time =    0.21900000E+04
++++ sratio,h: 0.72937   0.001 at t =2190.7  x,y =  -123.957500   45.897500
++++ sratio,h: 0.92911   0.001 at t =2191.2  x,y =  -123.957500   45.897500
++++ sratio,h: 0.84897   0.001 at t =2191.6  x,y =  -123.957500   45.897500
++++ sratio,h: 0.83646   0.001 at t =2192.1  x,y =  -123.957500   45.897500
++++ sratio,h: 0.82532   0.001 at t =2192.6  x,y =  -123.957500   45.897500
++++ sratio,h: 0.92573   0.001 at t =2193.1  x,y =  -123.957500   45.897500
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.222156E+04
+Writing fgout grid #   3  frame   68 at time =    0.22050000E+04
+Writing fgout grid #   1  frame   75 at time =    0.22200000E+04
+Writing fgout grid #   2  frame   75 at time =    0.22200000E+04
+Writing fgout grid #   3  frame   69 at time =    0.22200000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.224434E+04
+Writing fgout grid #   3  frame   70 at time =    0.22350000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.226713E+04
+Writing fgout grid #   1  frame   76 at time =    0.22500000E+04
+Writing fgout grid #   2  frame   76 at time =    0.22500000E+04
+Writing fgout grid #   3  frame   71 at time =    0.22500000E+04
+Writing fgout grid #   3  frame   72 at time =    0.22650000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.228992E+04
++++ sratio,h: 0.81415   0.005 at t =2279.9  x,y =  -123.968472   45.969306
+Writing fgout grid #   1  frame   77 at time =    0.22800000E+04
+Writing fgout grid #   2  frame   77 at time =    0.22800000E+04
+Writing fgout grid #   3  frame   73 at time =    0.22800000E+04
++++ sratio,h: 0.55082   0.005 at t =2280.4  x,y =  -123.968472   45.969306
++++ sratio,h: 0.45349   0.005 at t =2280.9  x,y =  -123.968472   45.969306
++++ sratio,h: 0.31036   0.004 at t =2281.4  x,y =  -123.968472   45.969306
++++ sratio,h: 0.43675   0.004 at t =2281.6  x,y =  -123.968472   45.969306
++++ sratio,h: 0.68554   0.004 at t =2281.8  x,y =  -123.968472   45.969306
++++ sratio,h: 0.98242   0.004 at t =2282.1  x,y =  -123.968472   45.969306
++++ sratio,h: 0.60674   0.004 at t =2283.7  x,y =  -123.968472   45.969306
++++ sratio,h: 0.46910   0.004 at t =2284.2  x,y =  -123.968472   45.969306
++++ sratio,h: 0.24505   0.003 at t =2284.7  x,y =  -123.968472   45.969306
++++ sratio,h: 0.21999   0.004 at t =2285.2  x,y =  -123.968472   45.969306
++++ sratio,h: 0.06907   0.002 at t =2285.6  x,y =  -123.968472   45.969306
++++ sratio,h: 0.09005   0.002 at t =2285.7  x,y =  -123.968472   45.969306
++++ sratio,h: 0.15600   0.002 at t =2285.8  x,y =  -123.968472   45.969306
++++ sratio,h: 0.44592   0.002 at t =2285.9  x,y =  -123.968472   45.969306
++++ sratio,h: 0.76127   0.006 at t =2289.0  x,y =  -123.968472   45.969306
++++ sratio,h: 0.57068   0.005 at t =2289.4  x,y =  -123.968472   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.231270E+04
++++ sratio,h: 0.46275   0.005 at t =2289.9  x,y =  -123.968472   45.969306
++++ sratio,h: 0.40777   0.005 at t =2290.4  x,y =  -123.968472   45.969306
++++ sratio,h: 0.35421   0.005 at t =2290.9  x,y =  -123.968472   45.969306
++++ sratio,h: 0.31248   0.005 at t =2291.3  x,y =  -123.968472   45.969306
++++ sratio,h: 0.45995   0.005 at t =2291.6  x,y =  -123.968472   45.969306
++++ sratio,h: 0.88310   0.005 at t =2291.8  x,y =  -123.968472   45.969306
+Writing fgout grid #   3  frame   74 at time =    0.22950000E+04
++++ sratio,h: 0.30366   0.001 at t =2300.4  x,y =  -123.968472   45.969306
++++ sratio,h: 0.17036   0.001 at t =2300.8  x,y =  -123.968472   45.969306
++++ sratio,h: 0.13760   0.002 at t =2301.3  x,y =  -123.968472   45.969306
++++ sratio,h: 0.86919   0.004 at t =2304.2  x,y =  -123.968472   45.969306
++++ sratio,h: 0.95632   0.007 at t =2306.5  x,y =  -123.968472   45.969306
+Writing fgout grid #   1  frame   78 at time =    0.23100000E+04
+Writing fgout grid #   2  frame   78 at time =    0.23100000E+04
+Writing fgout grid #   3  frame   75 at time =    0.23100000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.233549E+04
+Writing fgout grid #   3  frame   76 at time =    0.23250000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.235827E+04
+Writing fgout grid #   1  frame   79 at time =    0.23400000E+04
+Writing fgout grid #   2  frame   79 at time =    0.23400000E+04
+Writing fgout grid #   3  frame   77 at time =    0.23400000E+04
+Writing fgout grid #   3  frame   78 at time =    0.23550000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.238106E+04
+Writing fgout grid #   1  frame   80 at time =    0.23700000E+04
+Writing fgout grid #   2  frame   80 at time =    0.23700000E+04
+Writing fgout grid #   3  frame   79 at time =    0.23700000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.240385E+04
+Writing fgout grid #   3  frame   80 at time =    0.23850000E+04
+Writing fgout grid #   1  frame   81 at time =    0.24000000E+04
+Writing fgout grid #   2  frame   81 at time =    0.24000000E+04
+Writing fgout grid #   3  frame   81 at time =    0.24000000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.242664E+04
+Writing fgout grid #   3  frame   82 at time =    0.24150000E+04
++++ sratio,h: 0.97447   0.143 at t =2416.2  x,y =  -123.968194   45.969306
++++ sratio,h: 0.12250   0.012 at t =2416.7  x,y =  -123.968194   45.969306
++++ sratio,h: 0.41761   0.006 at t =2417.1  x,y =  -123.968194   45.969306
++++ sratio,h: 0.09345   0.001 at t =2417.6  x,y =  -123.968194   45.969306
++++ sratio,h: 0.79857   0.026 at t =2418.6  x,y =  -123.968194   45.969306
++++ sratio,h: 0.42012   0.014 at t =2419.5  x,y =  -123.968194   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.244942E+04
++++ sratio,h: 0.91363   0.024 at t =2429.5  x,y =  -123.968194   45.969306
+Writing fgout grid #   1  frame   82 at time =    0.24300000E+04
+Writing fgout grid #   2  frame   82 at time =    0.24300000E+04
+Writing fgout grid #   3  frame   83 at time =    0.24300000E+04
++++ sratio,h: 0.33954   0.015 at t =2430.9  x,y =  -123.968194   45.969306
++++ sratio,h: 0.88553   0.031 at t =2431.9  x,y =  -123.968194   45.969306
++++ sratio,h: 0.40630   0.013 at t =2432.1  x,y =  -123.968194   45.969306
++++ sratio,h: 0.03644   0.001 at t =2432.3  x,y =  -123.968194   45.969306
++++ sratio,h: 0.05150   0.001 at t =2432.4  x,y =  -123.968194   45.969306
++++ sratio,h: 0.09533   0.001 at t =2432.4  x,y =  -123.968194   45.969306
++++ sratio,h: 0.22550   0.002 at t =2432.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.43479   0.002 at t =2432.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.53322   0.002 at t =2432.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.58104   0.002 at t =2432.6  x,y =  -123.968194   45.969306
++++ sratio,h: 0.62635   0.002 at t =2432.6  x,y =  -123.968194   45.969306
++++ sratio,h: 0.67346   0.003 at t =2432.7  x,y =  -123.968194   45.969306
++++ sratio,h: 0.72150   0.003 at t =2432.7  x,y =  -123.968194   45.969306
++++ sratio,h: 0.76951   0.003 at t =2432.7  x,y =  -123.968194   45.969306
++++ sratio,h: 0.81672   0.003 at t =2432.8  x,y =  -123.968194   45.969306
++++ sratio,h: 0.86252   0.004 at t =2432.8  x,y =  -123.968194   45.969306
++++ sratio,h: 0.90652   0.004 at t =2432.8  x,y =  -123.968194   45.969306
++++ sratio,h: 0.94894   0.005 at t =2432.9  x,y =  -123.968194   45.969306
++++ sratio,h: 0.98792   0.005 at t =2432.9  x,y =  -123.968194   45.969306
++++ sratio,h: 0.82856   0.043 at t =2434.2  x,y =  -123.968194   45.969306
+Writing fgout grid #   3  frame   84 at time =    0.24450000E+04
++++ sratio,h: 0.86183   0.239 at t =2446.1  x,y =  -123.968194   45.969306
++++ sratio,h: 0.79302   0.201 at t =2446.6  x,y =  -123.968194   45.969306
++++ sratio,h: 0.73225   0.172 at t =2447.1  x,y =  -123.968194   45.969306
++++ sratio,h: 0.68027   0.151 at t =2447.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.63550   0.135 at t =2448.0  x,y =  -123.968194   45.969306
++++ sratio,h: 0.41663   0.086 at t =2448.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.23903   0.053 at t =2448.9  x,y =  -123.968194   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.247221E+04
++++ sratio,h: 0.08286   0.028 at t =2449.4  x,y =  -123.968194   45.969306
++++ sratio,h: 0.08642   0.023 at t =2449.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.07821   0.016 at t =2449.6  x,y =  -123.968194   45.969306
++++ sratio,h: 0.03706   0.006 at t =2449.7  x,y =  -123.968194   45.969306
++++ sratio,h: 0.51231   0.010 at t =2450.1  x,y =  -123.968194   45.969306
++++ sratio,h: 0.36656   0.009 at t =2450.5  x,y =  -123.968194   45.969306
++++ sratio,h: 0.34954   0.008 at t =2450.8  x,y =  -123.968194   45.969306
++++ sratio,h: 0.12587   0.005 at t =2451.6  x,y =  -123.968194   45.969306
+Writing fgout grid #   1  frame   83 at time =    0.24600000E+04
+Writing fgout grid #   2  frame   83 at time =    0.24600000E+04
+Writing fgout grid #   3  frame   85 at time =    0.24600000E+04
++++ sratio,h: 0.87418   0.002 at t =2462.2  x,y =  -123.932917   45.969306
++++ sratio,h: 0.87418   0.002 at t =2462.2  x,y =  -123.932917   45.969306
++++ sratio,h: 0.84946   0.003 at t =2464.1  x,y =  -123.932639   45.969306
++++ sratio,h: 0.84946   0.003 at t =2464.1  x,y =  -123.932639   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.249500E+04
+Writing fgout grid #   3  frame   86 at time =    0.24750000E+04
++++ sratio,h: 0.05099   0.005 at t =2484.1  x,y =  -123.968194   45.969306
+Writing fgout grid #   1  frame   84 at time =    0.24900000E+04
+Writing fgout grid #   2  frame   84 at time =    0.24900000E+04
+Writing fgout grid #   3  frame   87 at time =    0.24900000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.251779E+04
+Writing fgout grid #   3  frame   88 at time =    0.25050000E+04
+ ***adjusting timestep for level   8 at t =     0.249500D+04
+     old ntogo dt           1  0.23736233895547232     
+     NEW ntogo dt            2  0.11868116947789531     
+ ***adjusting timestep for level   8 at t =     0.249500D+04
+     old ntogo dt           1  0.23736233895547232     
+     NEW ntogo dt            2  0.11868116947789531     
+ ***adjusting timestep for level   8 at t =     0.249500D+04
+     old ntogo dt           1  0.23736233895547232     
+     NEW ntogo dt            2  0.11868116947789531     
+ ***adjusting timestep for level   8 at t =     0.249500D+04
+     old ntogo dt           1  0.23736233895547232     
+     NEW ntogo dt            2  0.11868116947789531     
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.254057E+04
+Writing fgout grid #   1  frame   85 at time =    0.25200000E+04
+Writing fgout grid #   2  frame   85 at time =    0.25200000E+04
+Writing fgout grid #   3  frame   89 at time =    0.25200000E+04
+Writing fgout grid #   3  frame   90 at time =    0.25350000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.256336E+04
+Writing fgout grid #   1  frame   86 at time =    0.25500000E+04
+Writing fgout grid #   2  frame   86 at time =    0.25500000E+04
+Writing fgout grid #   3  frame   91 at time =    0.25500000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.258615E+04
+Writing fgout grid #   3  frame   92 at time =    0.25650000E+04
++++ sratio,h: 0.99863   2.911 at t =2578.6  x,y =  -123.924491   46.015139
++++ sratio,h: 0.98865   3.059 at t =2578.7  x,y =  -123.924491   46.015139
++++ sratio,h: 0.99172   3.184 at t =2578.9  x,y =  -123.924491   46.015139
++++ sratio,h: 0.99738   3.303 at t =2579.0  x,y =  -123.924491   46.015139
++++ sratio,h: 0.99983   3.427 at t =2579.2  x,y =  -123.924398   46.015139
++++ sratio,h: 0.99764   3.456 at t =2579.3  x,y =  -123.924398   46.015139
++++ sratio,h: 0.98023   2.668 at t =2579.3  x,y =  -123.924398   46.015231
++++ sratio,h: 0.98666   2.670 at t =2579.5  x,y =  -123.924398   46.015231
++++ sratio,h: 0.99119   2.716 at t =2579.7  x,y =  -123.924398   46.015231
++++ sratio,h: 0.99512   2.774 at t =2579.8  x,y =  -123.924398   46.015231
++++ sratio,h: 0.99969   2.835 at t =2580.0  x,y =  -123.924398   46.015231
+Writing fgout grid #   1  frame   87 at time =    0.25800000E+04
+Writing fgout grid #   2  frame   87 at time =    0.25800000E+04
+Writing fgout grid #   3  frame   93 at time =    0.25800000E+04
++++ sratio,h: 0.99453   3.050 at t =2580.1  x,y =  -123.924306   46.015231
++++ sratio,h: 0.99710   2.994 at t =2580.3  x,y =  -123.924306   46.015231
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.260894E+04
+Writing fgout grid #   3  frame   94 at time =    0.25950000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.263172E+04
++++ sratio,h: 0.83707   0.007 at t =2608.9  x,y =  -123.968750   45.969306
+Writing fgout grid #   1  frame   88 at time =    0.26100000E+04
+Writing fgout grid #   2  frame   88 at time =    0.26100000E+04
+Writing fgout grid #   3  frame   95 at time =    0.26100000E+04
++++ sratio,h: 0.40895   0.004 at t =2614.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.82005   0.003 at t =2617.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.85316   0.002 at t =2618.4  x,y =  -123.991250   45.942917
++++ sratio,h: 0.67337   0.002 at t =2618.9  x,y =  -123.991250   45.942917
++++ sratio,h: 0.71852   0.002 at t =2619.4  x,y =  -123.991250   45.942917
++++ sratio,h: 0.83224   0.002 at t =2619.9  x,y =  -123.991250   45.942917
++++ sratio,h: 0.97161   0.002 at t =2620.3  x,y =  -123.991250   45.942917
++++ sratio,h: 0.65812   0.002 at t =2620.3  x,y =  -123.968750   45.969306
++++ sratio,h: 0.48883   0.001 at t =2622.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.64305   0.001 at t =2623.7  x,y =  -123.991250   45.942917
++++ sratio,h: 0.65633   0.001 at t =2624.1  x,y =  -123.991250   45.942917
++++ sratio,h: 0.46156   0.001 at t =2624.6  x,y =  -123.991250   45.942917
++++ sratio,h: 0.60672   0.005 at t =2624.6  x,y =  -123.968750   45.969306
+Writing fgout grid #   3  frame   96 at time =    0.26250000E+04
++++ sratio,h: 0.89476   0.007 at t =2626.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.73499   0.005 at t =2628.4  x,y =  -123.968750   45.969306
++++ sratio,h: 0.25803   0.002 at t =2630.3  x,y =  -123.968750   45.969306
++++ sratio,h: 0.41005   0.002 at t =2631.5  x,y =  -123.968750   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.265451E+04
++++ sratio,h: 0.76817   0.007 at t =2632.7  x,y =  -123.968750   45.969306
++++ sratio,h: 0.35742   0.003 at t =2634.1  x,y =  -123.968750   45.969306
+Writing fgout grid #   1  frame   89 at time =    0.26400000E+04
+Writing fgout grid #   2  frame   89 at time =    0.26400000E+04
+Writing fgout grid #   3  frame   97 at time =    0.26400000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.267730E+04
+Writing fgout grid #   3  frame   98 at time =    0.26550000E+04
+Writing fgout grid #   1  frame   90 at time =    0.26700000E+04
+Writing fgout grid #   2  frame   90 at time =    0.26700000E+04
+Writing fgout grid #   3  frame   99 at time =    0.26700000E+04
++++ sratio,h: 0.44210   0.002 at t =2671.1  x,y =  -123.923472   45.969306
++++ sratio,h: 0.69917   0.004 at t =2671.6  x,y =  -123.923472   45.969306
++++ sratio,h: 0.42494   0.002 at t =2673.0  x,y =  -123.923194   45.969306
+ AMRCLAW: level  1  CFL = .747E+00  dt = 0.2270E+02  final t = 0.270000E+04
+Writing fgout grid #   3  frame  100 at time =    0.26850000E+04
++++ sratio,h: 0.07775   0.001 at t =2691.0  x,y =  -123.901806   46.012917
++++ sratio,h: 0.07775   0.001 at t =2691.0  x,y =  -123.901806   46.012917
++++ sratio,h: 0.29742   0.004 at t =2691.5  x,y =  -123.901806   46.012361
++++ sratio,h: 0.29742   0.004 at t =2691.5  x,y =  -123.901806   46.012361
++++ sratio,h: 0.80761   0.007 at t =2691.5  x,y =  -123.901806   46.014306
++++ sratio,h: 0.21876   0.001 at t =2691.7  x,y =  -123.901806   46.012083
++++ sratio,h: 0.21876   0.001 at t =2691.7  x,y =  -123.901806   46.012083
++++ sratio,h: 0.26190   0.003 at t =2692.0  x,y =  -123.901806   46.012083
++++ sratio,h: 0.26190   0.003 at t =2692.0  x,y =  -123.901806   46.012083
++++ sratio,h: 0.21285   0.001 at t =2692.2  x,y =  -123.901806   46.015694
++++ sratio,h: 0.48890   0.003 at t =2692.4  x,y =  -123.901806   46.011806
++++ sratio,h: 0.53440   0.007 at t =2692.4  x,y =  -123.901806   46.015694
++++ sratio,h: 0.78954   0.010 at t =2694.3  x,y =  -123.922361   45.969306
++++ sratio,h: 0.16837   0.003 at t =2694.8  x,y =  -123.922361   45.969306
++++ sratio,h: 0.74103   0.001 at t =2695.7  x,y =  -123.901806   46.010417
++++ sratio,h: 0.79191   0.012 at t =2696.2  x,y =  -123.922361   45.969306
++++ sratio,h: 0.36151   0.005 at t =2697.6  x,y =  -123.922361   45.969306
++++ sratio,h: 0.15236   0.001 at t =2699.1  x,y =  -123.922361   45.969306
+Writing fgout grid #   1  frame   91 at time =    0.27000000E+04
+Writing fgout grid #   2  frame   91 at time =    0.27000000E+04
+Writing fgout grid #   3  frame  101 at time =    0.27000000E+04
+Creating checkpoint file at t =  0.270000000E+04  nsteps =   146
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.272279E+04
++++ sratio,h: 0.41918   0.002 at t =2700.5  x,y =  -123.901806   46.008472
++++ sratio,h: 0.99537   0.007 at t =2700.5  x,y =  -123.901806   46.017639
++++ sratio,h: 0.68528   0.009 at t =2702.4  x,y =  -123.969028   45.969306
++++ sratio,h: 0.46690   0.006 at t =2707.6  x,y =  -123.922361   45.969306
++++ sratio,h: 0.47614   0.002 at t =2708.1  x,y =  -123.901806   46.019028
++++ sratio,h: 0.53117   0.004 at t =2710.4  x,y =  -123.922361   45.969306
++++ sratio,h: 0.49630   0.003 at t =2712.8  x,y =  -123.901806   46.019583
++++ sratio,h: 0.84185   0.009 at t =2713.3  x,y =  -123.901806   46.019583
++++ sratio,h: 0.46396   0.002 at t =2714.7  x,y =  -123.901806   46.019861
+Writing fgout grid #   3  frame  102 at time =    0.27150000E+04
++++ sratio,h: 0.23514   0.001 at t =2716.6  x,y =  -123.898750   46.014583
++++ sratio,h: 0.88343   0.005 at t =2717.6  x,y =  -123.898750   46.014583
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.274557E+04
++++ sratio,h: 0.59989   0.005 at t =2724.2  x,y =  -123.898750   46.017083
++++ sratio,h: 0.31709   0.001 at t =2725.2  x,y =  -123.898750   46.010417
++++ sratio,h: 0.40804   0.013 at t =2725.2  x,y =  -123.901806   46.006250
++++ sratio,h: 0.89433   0.003 at t =2726.6  x,y =  -123.898750   46.010417
++++ sratio,h: 0.99527   0.001 at t =2728.5  x,y =  -123.915694   46.028194
++++ sratio,h: 0.95503   0.004 at t =2729.4  x,y =  -123.922361   45.969306
+Writing fgout grid #   1  frame   92 at time =    0.27300000E+04
+Writing fgout grid #   2  frame   92 at time =    0.27300000E+04
+Writing fgout grid #   3  frame  103 at time =    0.27300000E+04
++++ sratio,h: 0.46799   0.002 at t =2732.8  x,y =  -123.922361   45.969306
++++ sratio,h: 0.79596   0.050 at t =2734.2  x,y =  -123.901806   46.006528
++++ sratio,h: 0.46591   0.027 at t =2734.7  x,y =  -123.901806   46.006528
++++ sratio,h: 0.24007   0.018 at t =2735.1  x,y =  -123.901806   46.006528
++++ sratio,h: 0.03083   0.005 at t =2735.6  x,y =  -123.901806   46.006528
++++ sratio,h: 0.03090   0.003 at t =2735.6  x,y =  -123.901806   46.006528
++++ sratio,h: 0.02825   0.002 at t =2735.7  x,y =  -123.901806   46.006528
++++ sratio,h: 0.01867   0.001 at t =2735.7  x,y =  -123.901806   46.006528
++++ sratio,h: 0.73104   0.002 at t =2736.1  x,y =  -123.901806   46.006528
++++ sratio,h: 0.72216   0.002 at t =2736.4  x,y =  -123.901806   46.006528
++++ sratio,h: 0.67481   0.002 at t =2736.7  x,y =  -123.901806   46.006528
++++ sratio,h: 0.75367   0.003 at t =2737.0  x,y =  -123.901806   46.006528
++++ sratio,h: 0.61554   0.038 at t =2738.5  x,y =  -123.901806   46.006528
++++ sratio,h: 0.66781   0.039 at t =2739.9  x,y =  -123.901806   46.006528
++++ sratio,h: 0.84974   0.046 at t =2741.3  x,y =  -123.901806   46.006528
++++ sratio,h: 0.87414   0.019 at t =2744.2  x,y =  -123.901806   46.006250
++++ sratio,h: 0.09839   0.002 at t =2744.6  x,y =  -123.901806   46.006250
+Writing fgout grid #   3  frame  104 at time =    0.27450000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.276836E+04
++++ sratio,h: 0.53675   0.004 at t =2749.8  x,y =  -123.901806   46.006250
++++ sratio,h: 0.20581   0.001 at t =2750.1  x,y =  -123.901806   46.006250
++++ sratio,h: 0.66292   0.001 at t =2755.5  x,y =  -123.898750   46.008750
++++ sratio,h: 0.38016   0.003 at t =2756.0  x,y =  -123.922361   45.969306
++++ sratio,h: 0.94574   0.008 at t =2758.4  x,y =  -123.922361   45.969306
++++ sratio,h: 0.30167   0.001 at t =2758.9  x,y =  -123.922361   45.969306
+Writing fgout grid #   1  frame   93 at time =    0.27600000E+04
+Writing fgout grid #   2  frame   93 at time =    0.27600000E+04
+Writing fgout grid #   3  frame  105 at time =    0.27600000E+04
++++ sratio,h: 0.63893   0.005 at t =2761.7  x,y =  -123.922361   45.969306
++++ sratio,h: 0.33665   0.003 at t =2764.6  x,y =  -123.922361   45.969306
++++ sratio,h: 0.21161   0.003 at t =2766.9  x,y =  -123.901806   46.005417
++++ sratio,h: 0.95812   0.003 at t =2766.9  x,y =  -123.922361   45.969306
++++ sratio,h: 0.42812   0.001 at t =2767.9  x,y =  -123.898750   46.012917
++++ sratio,h: 0.83813   0.002 at t =2767.9  x,y =  -123.901806   46.002361
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.279115E+04
++++ sratio,h: 0.19891   0.002 at t =2769.3  x,y =  -123.901806   46.005417
++++ sratio,h: 0.69493   0.005 at t =2771.2  x,y =  -123.898750   46.012917
++++ sratio,h: 0.29724   0.003 at t =2774.1  x,y =  -123.922361   45.969306
+Writing fgout grid #   3  frame  106 at time =    0.27750000E+04
++++ sratio,h: 0.75681   0.007 at t =2776.4  x,y =  -123.901806   46.006250
++++ sratio,h: 0.66267   0.005 at t =2776.9  x,y =  -123.898750   46.012917
++++ sratio,h: 0.30563   0.002 at t =2778.8  x,y =  -123.898750   46.012917
++++ sratio,h: 0.86127   0.027 at t =2781.7  x,y =  -123.901806   46.006528
++++ sratio,h: 0.65328   0.003 at t =2783.6  x,y =  -123.901806   46.002639
++++ sratio,h: 0.88732   0.008 at t =2784.5  x,y =  -123.898750   46.012917
++++ sratio,h: 0.50042   0.004 at t =2785.9  x,y =  -123.898750   46.012917
++++ sratio,h: 0.91274   0.003 at t =2786.4  x,y =  -123.910694   46.028194
++++ sratio,h: 0.98634   0.004 at t =2786.9  x,y =  -123.910694   46.028194
++++ sratio,h: 0.91924   0.014 at t =2787.8  x,y =  -123.901806   46.006528
+Writing fgout grid #   1  frame   94 at time =    0.27900000E+04
+Writing fgout grid #   2  frame   94 at time =    0.27900000E+04
+Writing fgout grid #   3  frame  107 at time =    0.27900000E+04
++++ sratio,h: 0.09494   0.004 at t =2790.2  x,y =  -123.901806   46.006528
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.281394E+04
++++ sratio,h: 0.39549   0.021 at t =2792.1  x,y =  -123.901806   46.006528
++++ sratio,h: 0.28885   0.003 at t =2795.4  x,y =  -123.901806   46.006528
++++ sratio,h: 0.54659   0.008 at t =2795.4  x,y =  -123.901806   46.006343
++++ sratio,h: 0.33848   0.004 at t =2797.3  x,y =  -123.901806   46.004583
++++ sratio,h: 0.04249   0.001 at t =2797.8  x,y =  -123.901806   46.006250
+Writing fgout grid #   3  frame  108 at time =    0.28050000E+04
++++ sratio,h: 0.73779   0.001 at t =2806.3  x,y =  -123.910139   46.028194
++++ sratio,h: 0.93177   0.003 at t =2807.8  x,y =  -123.910139   46.028194
++++ sratio,h: 0.48704   0.007 at t =2809.2  x,y =  -123.901806   46.004306
++++ sratio,h: 0.98258   0.002 at t =2809.7  x,y =  -123.910139   46.028194
++++ sratio,h: 0.49615   0.001 at t =2810.6  x,y =  -123.910139   46.028194
++++ sratio,h: 0.56766   0.005 at t =2811.6  x,y =  -123.901806   46.006250
++++ sratio,h: 0.47906   0.002 at t =2812.5  x,y =  -123.922361   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.283672E+04
++++ sratio,h: 0.98523   0.005 at t =2815.8  x,y =  -123.901806   46.006528
+Writing fgout grid #   1  frame   95 at time =    0.28200000E+04
+Writing fgout grid #   2  frame   95 at time =    0.28200000E+04
+Writing fgout grid #   3  frame  109 at time =    0.28200000E+04
++++ sratio,h: 0.61014   0.001 at t =2822.0  x,y =  -123.910139   46.028194
++++ sratio,h: 0.70761   0.001 at t =2823.0  x,y =  -123.910139   46.028194
++++ sratio,h: 0.80756   0.002 at t =2823.9  x,y =  -123.910139   46.028194
++++ sratio,h: 0.87580   0.002 at t =2824.9  x,y =  -123.910139   46.028194
++++ sratio,h: 0.57491   0.002 at t =2825.8  x,y =  -123.898750   46.017083
++++ sratio,h: 0.87043   0.002 at t =2825.8  x,y =  -123.910139   46.028194
++++ sratio,h: 0.76603   0.002 at t =2826.8  x,y =  -123.910139   46.028194
++++ sratio,h: 0.57805   0.001 at t =2827.7  x,y =  -123.910139   46.028194
++++ sratio,h: 0.73911   0.004 at t =2832.0  x,y =  -123.922361   45.969306
+Writing fgout grid #   3  frame  110 at time =    0.28350000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.285951E+04
++++ sratio,h: 0.57304   0.011 at t =2840.5  x,y =  -123.901806   46.006250
++++ sratio,h: 0.42625   0.002 at t =2841.0  x,y =  -123.922361   45.969306
++++ sratio,h: 0.88185   0.006 at t =2842.4  x,y =  -123.922361   45.969306
++++ sratio,h: 0.06135   0.002 at t =2842.9  x,y =  -123.901806   46.006250
++++ sratio,h: 0.74532   0.005 at t =2843.8  x,y =  -123.922361   45.969306
++++ sratio,h: 0.69744   0.018 at t =2844.3  x,y =  -123.901806   46.006528
++++ sratio,h: 0.59630   0.004 at t =2845.3  x,y =  -123.922361   45.969306
++++ sratio,h: 0.31797   0.002 at t =2846.7  x,y =  -123.922361   45.969306
+Writing fgout grid #   1  frame   96 at time =    0.28500000E+04
+Writing fgout grid #   2  frame   96 at time =    0.28500000E+04
+Writing fgout grid #   3  frame  111 at time =    0.28500000E+04
++++ sratio,h: 0.39347   0.002 at t =2850.5  x,y =  -123.922361   45.969306
++++ sratio,h: 0.73818   0.001 at t =2852.4  x,y =  -123.906528   46.028194
++++ sratio,h: 0.57287   0.001 at t =2853.8  x,y =  -123.910139   46.028194
++++ sratio,h: 0.95023   0.002 at t =2857.1  x,y =  -123.906250   46.028194
++++ sratio,h: 0.78442   0.005 at t =2857.6  x,y =  -123.922361   45.969306
++++ sratio,h: 0.51711   0.001 at t =2857.6  x,y =  -123.906250   46.028194
++++ sratio,h: 0.71889   0.002 at t =2858.1  x,y =  -123.906250   46.028194
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.288230E+04
++++ sratio,h: 0.50623   0.016 at t =2860.0  x,y =  -123.901806   46.006528
+Writing fgout grid #   3  frame  112 at time =    0.28650000E+04
++++ sratio,h: 0.75082   0.009 at t =2867.1  x,y =  -123.901806   46.006528
+Writing fgout grid #   1  frame   97 at time =    0.28800000E+04
+Writing fgout grid #   2  frame   97 at time =    0.28800000E+04
+Writing fgout grid #   3  frame  113 at time =    0.28800000E+04
++++ sratio,h: 0.25877   0.001 at t =2880.4  x,y =  -123.904028   46.028194
++++ sratio,h: 0.36125   0.002 at t =2880.9  x,y =  -123.903750   46.028194
++++ sratio,h: 0.26060   0.002 at t =2881.3  x,y =  -123.903750   46.028194
++++ sratio,h: 0.16251   0.002 at t =2881.8  x,y =  -123.901806   46.006250
++++ sratio,h: 0.48389   0.002 at t =2881.8  x,y =  -123.903472   46.028194
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.290508E+04
++++ sratio,h: 0.44387   0.001 at t =2883.7  x,y =  -123.903194   46.028194
++++ sratio,h: 0.82776   0.002 at t =2884.2  x,y =  -123.904861   46.028194
++++ sratio,h: 0.24852   0.004 at t =2885.1  x,y =  -123.901806   46.006528
++++ sratio,h: 0.85136   0.017 at t =2892.3  x,y =  -123.901806   46.006250
+Writing fgout grid #   3  frame  114 at time =    0.28950000E+04
++++ sratio,h: 0.73199   0.003 at t =2895.6  x,y =  -123.910139   46.028194
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.292787E+04
+Writing fgout grid #   1  frame   98 at time =    0.29100000E+04
+Writing fgout grid #   2  frame   98 at time =    0.29100000E+04
+Writing fgout grid #   3  frame  115 at time =    0.29100000E+04
++++ sratio,h: 0.55684   0.013 at t =2920.7  x,y =  -123.901806   46.006250
++++ sratio,h: 0.78559   0.021 at t =2923.1  x,y =  -123.901806   46.006528
+Writing fgout grid #   3  frame  116 at time =    0.29250000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.295066E+04
+Writing fgout grid #   1  frame   99 at time =    0.29400000E+04
+Writing fgout grid #   2  frame   99 at time =    0.29400000E+04
+Writing fgout grid #   3  frame  117 at time =    0.29400000E+04
++++ sratio,h: 0.89129   0.017 at t =2940.2  x,y =  -123.901806   46.006250
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.297345E+04
++++ sratio,h: 0.49230   0.016 at t =2950.7  x,y =  -123.901806   46.006250
++++ sratio,h: 0.83388   0.037 at t =2953.5  x,y =  -123.901806   46.006528
+Writing fgout grid #   3  frame  118 at time =    0.29550000E+04
++++ sratio,h: 0.95380   0.036 at t =2965.8  x,y =  -123.921528   45.969306
++++ sratio,h: 0.78906   0.006 at t =2966.3  x,y =  -123.901806   46.005694
++++ sratio,h: 0.88809   0.032 at t =2966.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.82049   0.029 at t =2966.8  x,y =  -123.921528   45.969306
++++ sratio,h: 0.74842   0.026 at t =2967.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.66725   0.023 at t =2967.7  x,y =  -123.921528   45.969306
++++ sratio,h: 0.57921   0.021 at t =2968.2  x,y =  -123.921528   45.969306
++++ sratio,h: 0.64486   0.027 at t =2968.7  x,y =  -123.901806   46.006528
++++ sratio,h: 0.48547   0.018 at t =2968.7  x,y =  -123.921528   45.969306
++++ sratio,h: 0.38614   0.016 at t =2969.2  x,y =  -123.921528   45.969306
++++ sratio,h: 0.51970   0.014 at t =2969.4  x,y =  -123.921528   45.969306
++++ sratio,h: 0.61709   0.012 at t =2969.6  x,y =  -123.921528   45.969306
++++ sratio,h: 0.61133   0.010 at t =2969.9  x,y =  -123.921528   45.969306
+Writing fgout grid #   1  frame  100 at time =    0.29700000E+04
+Writing fgout grid #   2  frame  100 at time =    0.29700000E+04
+Writing fgout grid #   3  frame  119 at time =    0.29700000E+04
++++ sratio,h: 0.53425   0.008 at t =2970.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.43985   0.006 at t =2970.4  x,y =  -123.921528   45.969306
++++ sratio,h: 0.35295   0.005 at t =2970.6  x,y =  -123.921528   45.969306
++++ sratio,h: 0.27855   0.004 at t =2970.8  x,y =  -123.921528   45.969306
++++ sratio,h: 0.21443   0.004 at t =2971.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.15738   0.003 at t =2971.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.10578   0.003 at t =2971.5  x,y =  -123.921528   45.969306
++++ sratio,h: 0.06115   0.003 at t =2971.8  x,y =  -123.921528   45.969306
++++ sratio,h: 0.02814   0.003 at t =2972.0  x,y =  -123.921528   45.969306
++++ sratio,h: 0.04160   0.004 at t =2972.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.08461   0.004 at t =2972.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.28502   0.004 at t =2972.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.94792   0.001 at t =2972.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.80547   0.001 at t =2972.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.96760   0.002 at t =2972.7  x,y =  -123.921528   45.969306
++++ sratio,h: 0.80583   0.001 at t =2972.7  x,y =  -123.921528   45.969306
++++ sratio,h: 0.84498   0.001 at t =2973.2  x,y =  -123.921528   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.299623E+04
++++ sratio,h: 0.67023   0.021 at t =2975.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.11522   0.004 at t =2975.8  x,y =  -123.921528   45.969306
++++ sratio,h: 0.22569   0.007 at t =2977.7  x,y =  -123.921528   45.969306
++++ sratio,h: 0.74982   0.012 at t =2978.9  x,y =  -123.921528   45.969306
++++ sratio,h: 0.67496   0.001 at t =2980.1  x,y =  -123.971528   45.969306
++++ sratio,h: 0.52153   0.013 at t =2980.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.25408   0.006 at t =2981.5  x,y =  -123.921528   45.969306
+Writing fgout grid #   3  frame  120 at time =    0.29850000E+04
++++ sratio,h: 0.53155   0.053 at t =2992.0  x,y =  -123.971528   45.969306
++++ sratio,h: 0.90720   0.010 at t =2993.4  x,y =  -123.921528   45.969306
++++ sratio,h: 0.80751   0.032 at t =2994.8  x,y =  -123.901806   46.006528
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.301902E+04
+Writing fgout grid #   1  frame  101 at time =    0.30000000E+04
+Writing fgout grid #   2  frame  101 at time =    0.30000000E+04
+Writing fgout grid #   3  frame  121 at time =    0.30000000E+04
++++ sratio,h: 0.97477   0.067 at t =3003.1  x,y =  -123.969583   45.969306
++++ sratio,h: 0.07840   0.001 at t =3003.1  x,y =  -123.921528   45.969306
++++ sratio,h: 0.74848   0.003 at t =3003.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.79089   0.003 at t =3003.6  x,y =  -123.921528   45.969306
++++ sratio,h: 0.90031   0.003 at t =3003.8  x,y =  -123.921528   45.969306
++++ sratio,h: 0.89646   0.003 at t =3004.0  x,y =  -123.921528   45.969306
++++ sratio,h: 0.89160   0.003 at t =3004.3  x,y =  -123.921528   45.969306
++++ sratio,h: 0.26455   0.013 at t =3005.3  x,y =  -123.969306   45.969306
++++ sratio,h: 0.65649   0.001 at t =3013.9  x,y =  -123.929306   46.028194
+Writing fgout grid #   3  frame  122 at time =    0.30150000E+04
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.304181E+04
++++ sratio,h: 0.96791   0.003 at t =3019.6  x,y =  -123.901806   46.005694
++++ sratio,h: 0.91571   0.001 at t =3021.9  x,y =  -123.929306   46.028194
++++ sratio,h: 0.04854   0.003 at t =3024.1  x,y =  -123.969028   45.969306
++++ sratio,h: 0.05824   0.023 at t =3024.7  x,y =  -123.969028   45.969306
++++ sratio,h: 0.03054   0.065 at t =3025.3  x,y =  -123.969028   45.969306
++++ sratio,h: 0.41016   0.345 at t =3025.3  x,y =  -123.969120   45.969306
++++ sratio,h: 0.41016   0.074 at t =3025.3  x,y =  -123.969028   45.969306
++++ sratio,h: 0.41016   2.717 at t =3025.3  x,y =  -123.969120   45.969398
++++ sratio,h: 0.41016   1.516 at t =3025.3  x,y =  -123.969028   45.969398
++++ sratio,h: 0.41016   0.577 at t =3025.3  x,y =  -123.968935   45.969398
++++ sratio,h: 0.01827   0.026 at t =3025.3  x,y =  -123.969028   45.969306
++++ sratio,h: 0.59217   0.293 at t =3025.3  x,y =  -123.969120   45.969306
++++ sratio,h: 0.59217   0.035 at t =3025.3  x,y =  -123.969028   45.969306
++++ sratio,h: 0.59217   2.651 at t =3025.3  x,y =  -123.969120   45.969398
++++ sratio,h: 0.59217   1.463 at t =3025.3  x,y =  -123.969028   45.969398
++++ sratio,h: 0.59217   0.538 at t =3025.3  x,y =  -123.968935   45.969398
++++ sratio,h: 0.28854   0.001 at t =3026.1  x,y =  -123.969028   45.969306
++++ sratio,h: 0.49926   0.002 at t =3026.1  x,y =  -123.969028   45.969306
++++ sratio,h: 0.72847   0.003 at t =3026.2  x,y =  -123.969028   45.969306
++++ sratio,h: 0.88139   0.004 at t =3026.2  x,y =  -123.969028   45.969306
++++ sratio,h: 0.99486   0.005 at t =3026.3  x,y =  -123.969028   45.969306
+Writing fgout grid #   1  frame  102 at time =    0.30300000E+04
+Writing fgout grid #   2  frame  102 at time =    0.30300000E+04
+Writing fgout grid #   3  frame  123 at time =    0.30300000E+04
++++ sratio,h: 0.31573   0.017 at t =3031.0  x,y =  -123.901806   46.006528
++++ sratio,h: 0.13937   0.004 at t =3033.3  x,y =  -123.968750   45.969306
++++ sratio,h: 0.46667   0.017 at t =3034.4  x,y =  -123.968750   45.969306
++++ sratio,h: 0.11761   0.009 at t =3035.0  x,y =  -123.968750   45.969306
++++ sratio,h: 0.00852   0.002 at t =3035.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.01146   0.002 at t =3035.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.01984   0.002 at t =3035.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.05220   0.002 at t =3035.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.24085   0.001 at t =3035.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.04615   0.002 at t =3037.8  x,y =  -123.968750   45.969306
++++ sratio,h: 0.93767   0.041 at t =3039.0  x,y =  -123.968750   45.969306
++++ sratio,h: 0.60445   0.050 at t =3039.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.56290   0.062 at t =3040.1  x,y =  -123.968750   45.969306
++++ sratio,h: 0.56981   0.075 at t =3040.7  x,y =  -123.968750   45.969306
++++ sratio,h: 0.56042   0.080 at t =3041.2  x,y =  -123.968750   45.969306
+ AMRCLAW: level  1  CFL = .750E+00  dt = 0.2279E+02  final t = 0.306459E+04
++++ sratio,h: 0.54814   0.083 at t =3041.8  x,y =  -123.968750   45.969306
++++ sratio,h: 0.53313   0.083 at t =3042.4  x,y =  -123.968750   45.969306
++++ sratio,h: 0.50619   0.080 at t =3042.9  x,y =  -123.968750   45.969306
++++ sratio,h: 0.46845   0.076 at t =3043.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.43394   0.074 at t =3044.1  x,y =  -123.968750   45.969306
++++ sratio,h: 0.58061   0.002 at t =3044.7  x,y =  -123.898750   46.017083
++++ sratio,h: 0.41489   0.077 at t =3044.7  x,y =  -123.968750   45.969306
+Writing fgout grid #   3  frame  124 at time =    0.30450000E+04
++++ sratio,h: 0.40259   0.081 at t =3045.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.42257   0.014 at t =3045.8  x,y =  -123.901806   46.006250
++++ sratio,h: 0.38824   0.084 at t =3045.8  x,y =  -123.968750   45.969306
++++ sratio,h: 0.56394   0.083 at t =3046.1  x,y =  -123.968750   45.969306
++++ sratio,h: 0.73848   0.079 at t =3046.4  x,y =  -123.968750   45.969306
++++ sratio,h: 0.82685   0.073 at t =3046.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.84866   0.069 at t =3046.9  x,y =  -123.968750   45.969306
++++ sratio,h: 0.76163   0.024 at t =3047.2  x,y =  -123.901806   46.006528
++++ sratio,h: 0.84626   0.062 at t =3047.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.81169   0.054 at t =3047.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.50718   0.045 at t =3048.1  x,y =  -123.968750   45.969306
++++ sratio,h: 0.37006   0.042 at t =3048.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.28071   0.043 at t =3049.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.33510   0.042 at t =3049.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.38190   0.037 at t =3049.8  x,y =  -123.968750   45.969306
++++ sratio,h: 0.39402   0.030 at t =3050.1  x,y =  -123.968750   45.969306
++++ sratio,h: 0.34973   0.022 at t =3050.4  x,y =  -123.968750   45.969306
++++ sratio,h: 0.24971   0.014 at t =3050.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.12038   0.007 at t =3050.9  x,y =  -123.968750   45.969306
++++ sratio,h: 0.06271   0.003 at t =3051.1  x,y =  -123.968750   45.969306
++++ sratio,h: 0.53151   0.010 at t =3051.6  x,y =  -123.968750   45.969306
++++ sratio,h: 0.11511   0.002 at t =3051.8  x,y =  -123.968750   45.969306
++++ sratio,h: 0.96887   0.016 at t =3052.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.37314   0.006 at t =3052.3  x,y =  -123.968750   45.969306
++++ sratio,h: 0.09588   0.005 at t =3053.2  x,y =  -123.968750   45.969306
++++ sratio,h: 0.48420   0.019 at t =3054.3  x,y =  -123.968750   45.969306
++++ sratio,h: 0.09980   0.007 at t =3054.9  x,y =  -123.968750   45.969306
++++ sratio,h: 0.00991   0.003 at t =3055.5  x,y =  -123.968750   45.969306
++++ sratio,h: 0.00324   0.030 at t =3056.0  x,y =  -123.968750   45.969306
++++ sratio,h: 0.13366   1.398 at t =3056.0  x,y =  -123.968843   45.969306
++++ sratio,h: 0.13366   0.056 at t =3056.0  x,y =  -123.968750   45.969306
++++ sratio,h: 0.13366   2.966 at t =3056.0  x,y =  -123.968843   45.969398
++++ sratio,h: 0.13366   2.013 at t =3056.0  x,y =  -123.968750   45.969398
++++ sratio,h: 0.13366   0.899 at t =3056.0  x,y =  -123.968657   45.969398
+ **** Too many dt reductions ****
+ **** Stopping calculation   ****
+ **** ntogo =          134
+   Refinement ratios...  in x:  3  in y:  3  in t:135 for level    7
+**** Writing extra output frames for debugging at level-1 =  6 and level =  7
