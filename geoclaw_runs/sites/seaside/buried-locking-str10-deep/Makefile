@@ -26,10 +26,8 @@ CLAW_PKG = geoclaw                  # Clawpack package to use
 # top of git repository (perhaps in shared locaation on HPC cluster)
 
 # for laptop:
-EXE ?= $(CHT)/geoclaw_runs/xgeoclaw
+EXE ?= $(CHT)/geoclaw_runs/xgeoclaw_v511_smax
 
-# on CU HPC cluster set EXE as environment variable, so we don't need this:
-#EXE = /projects/$(USER)/WA_EMD_Snoho2/cu_cluster/xgeoclaw
 
 SETRUN_FILE = setrun.py             # File containing function to make data
 OUTDIR = $(SCRATCH)/_output         # Directory for output
@@ -68,6 +66,7 @@ EXCLUDE_SOURCES = \
 MODULES = \
 
 SOURCES = \
+  $(CHT)/common_code/b4step2.f90 \
   $(CLAW)/riemann/src/rpn2_geoclaw.f \
   $(CLAW)/riemann/src/rpt2_geoclaw.f \
   $(CLAW)/riemann/src/geoclaw_riemann_utils.f \
@@ -77,7 +76,7 @@ SOURCES = \
 include $(CLAWMAKE)
 
 # Construct the topography data
-.PHONY: run all scrdir only_plots
+.PHONY: run all scrdir only_plots check
 
 scrdir: 
 	mkdir -p $(SCRATCH)
@@ -103,3 +102,18 @@ all:
 only_plots:
 	$(MAKE) plots
 
+check:
+	@echo ===================
+	@echo running whichclaw shows the following...
+	python $(CLAW)/clawutil/src/python/clawutil/whichclaw.py 
+	@echo ===================
+	@echo CLAW = $(CLAW)
+	@echo OMP_NUM_THREADS = $(OMP_NUM_THREADS)
+	@echo RUNEXE = $(RUNEXE)
+	@echo EXE = $(EXE)
+	@echo FC = $(FC)
+	@echo FFLAGS = $(FFLAGS)
+	@echo LFLAGS = $(LFLAGS)
+	@echo OUTDIR = $(OUTDIR)
+	@echo PLOTDIR = $(PLOTDIR)
+	@echo ===================
