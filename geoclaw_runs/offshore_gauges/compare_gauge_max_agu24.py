@@ -25,11 +25,12 @@ outdir4 = None
 outdir5 = None
 outdir6 = None
 
-#outdir1 = 'buried-random-mur13-deep_shallow/_output_30sec'
+outdir1 = 'buried-random-mur13-deep_shallow/_output_30sec'
 outdir2 = 'buried-random-mur13-deep_shallow/_output_15sec'
-#outdir3 = 'buried-random-mur13-deep_bouss/_output_30sec'
+outdir3 = 'buried-random-mur13-deep_bouss/_output_30sec'
 outdir4 = 'buried-random-mur13-deep_bouss/_output_15sec'
 
+add_yongdata = False
 
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
 color_list = ['r','b','g','m','r','b']
@@ -47,7 +48,7 @@ etopo = topotools.Topography('/Users/rjl/topo/topofiles/etopo1_-163_-122_38_63.a
 plot_eta = False
 
 # read in Yong's results:
-add_yongdata = True
+
 if add_yongdata:
     yongdata = loadtxt('yongwei_asce_gauge_buried-random-mur13-deep.txt', skiprows=1)
     yong_lat = yongdata[:,1]
@@ -331,7 +332,7 @@ if plot_gauge_timeseries:
         legend(framealpha=1)
         title('Gauge %s at (%.4f, %.4f)' % (gaugeno,xg,yg))
 
-        fname = '%s/gauge%s_comparison.png' \
+        fname = '%s/gauge%s_comparison_resolution.png' \
                     % (plotdir,str(gaugeno).zfill(5))
         savefig(fname)
         print('Created ',fname)
