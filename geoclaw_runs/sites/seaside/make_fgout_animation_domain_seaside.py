@@ -8,7 +8,7 @@ if 'matplotlib' not in sys.modules:
     matplotlib.use('Agg')  # Use an image backend
 
 from pylab import *
-import os
+import os, glob
 from clawpack.visclaw import plottools, geoplot, gridtools
 from clawpack.visclaw import animation_tools, colormaps
 from matplotlib import animation, colors
@@ -56,14 +56,23 @@ ytrans = linspace(y1trans, y2trans, 1000)
 
 # fgout frames to include in animation:
 
-nframes = fgout_grid1.nout
-err_msg = '*** expected the same fgout.nout for grids 1 and 2'
-if (fgout_grid2.nout < nframes):
-    raise ValueError(err_msg)
-elif (fgout_grid2.nout > nframes):
-    print(err_msg)
+if 0:
+    nframes = fgout_grid1.nout
+    err_msg = '*** expected the same fgout.nout for grids 1 and 2'
+    if (fgout_grid2.nout < nframes):
+        raise ValueError(err_msg)
+    elif (fgout_grid2.nout > nframes):
+        print(err_msg)
     
-fgframes1 = fgframes2 = range(1,nframes)
+if 1:
+    # all frames found in outdir:
+    fgno = 1
+    fgout_frames = glob.glob(os.path.join(outdir, \
+                                          'fgout%s.t*' % str(fgno).zfill(4)))
+    nframes = len(fgout_frames)
+    print('Found %i fgout frames for fgno=%i' % (nframes,fgno))
+        
+fgframes1 = fgframes2 = range(1,nframes+1)
 #fgframes1 = fgframes2 = range(1,104,1) # test
 
 fgframe1 = fgframes1[0] # start with first frame
@@ -340,8 +349,9 @@ if __name__ == '__main__':
         outdir = os.path.join(scrdir, '_output')
     plotdir = outdir.replace('_output','_plots')
 
-    if 0:
-        fgout_plotdir = plotdir + '/animations'
+    if 1:
+        #fgout_plotdir = plotdir + '/animations'
+        fgout_plotdir = plotdir
         os.system('mkdir -p %s' % fgout_plotdir)
     else:
         fgout_plotdir = '.'
