@@ -12,7 +12,8 @@ from clawpack.visclaw import plottools, geoplot, gaugetools
 from clawpack.geoclaw import fgout_tools
 
 #event = os.path.split(os.getcwd())[-1]
-event = 'event=buried-random-mur13-deep, Varying Grid Resolution / Model'
+#event = 'event=buried-random-mur13-deep, Varying Grid Resolution / Model'
+event = 'buried-random-mur13-deep'
 
 zoom = False
 plot_gauge_timeseries = False
@@ -25,22 +26,29 @@ outdir4 = None
 outdir5 = None
 outdir6 = None
 
-outdir1 = 'buried-random-mur13-deep_shallow/_output_30sec'
-outdir2 = 'buried-random-mur13-deep_shallow/_output_15sec'
-outdir3 = 'buried-random-mur13-deep_bouss/_output_30sec'
-outdir4 = 'buried-random-mur13-deep_bouss/_output_15sec'
+if 0:
+    outdir1 = 'buried-random-mur13-deep_shallow/_output_30sec'
+    outdir2 = 'buried-random-mur13-deep_shallow/_output_15sec'
+    outdir3 = 'buried-random-mur13-deep_bouss/_output_30sec'
+    outdir4 = 'buried-random-mur13-deep_bouss/_output_15sec'
+if 1:
+    outdir1 = 'buried-random-mur13-deep_shallow/_output_15sec'
+    outdir2 = 'buried-random-mur13-deep_instant/_output'
+    #outdir3 = 'buried-random-mur13-deep_okada_kinematic/_output'
+    #outdir4 = 'buried-random-mur13-deep_okada_instant/_output'
 
+    
 add_yongdata = False
 
 outdir_list = [outdir1,outdir2,outdir3,outdir4,outdir5,outdir6]
-color_list = ['r','b','g','m','r','b']
+color_list = ['r','k','m','b','r','b']
 linestyle_list = ['-','-','-','-','-','-']
 
 d = loadtxt('/Users/rjl/git/CopesHubTsunamis/info/asce_values.txt',skiprows=1)
 y_asce = d[:,2]
 eta_asce = d[:,4]  #*0.3048  # convert from feet to meters
 
-plotdir = '_plots_agu24'
+plotdir = '_plots_agu24a'
 os.system('mkdir -p %s' % plotdir)
 
 etopo = topotools.Topography('/Users/rjl/topo/topofiles/etopo1_-163_-122_38_63.asc',3)
@@ -70,8 +78,10 @@ def read_gauges(outdir, gaugenos=None):
     gmax = []
     for gaugeno in gaugenos:
         gauge = gauges.GaugeSolution(gaugeno, outdir)
-        eta = gauge.q[-1,:]
-        gmax.append(eta.max())
+        h = gauge.q[0,:]
+        eta = where(h>0, gauge.q[-1,:], nan) # filter out from coarse level
+        gmax.append(nanmax(eta))
+        #gmax.append(eta.max())
         xg.append(gauge.location[0])
         yg.append(gauge.location[1])
 
@@ -248,6 +258,8 @@ ax2 = axes()
 ylimits = [40,49]
 
 lw = 0.8
+
+
 for k,outdir in enumerate(outdir_list):
     if outdir is not None:
         print('Reading gauges from ',outdir)
@@ -260,7 +272,7 @@ for k,outdir in enumerate(outdir_list):
             label = outdir.replace('_','')
         ax2.plot(yg,ampl,color=color_list[k], linestyle=linestyle_list[k],
                   linewidth=lw, label=label)
-
+        
     
 ax2.set_title('Maximum Amplitude at Gauges\n%s' % event)
 ax2.grid(True)
@@ -284,16 +296,18 @@ if add_yongdata:
                 label='MOST (non-dispersive) 15 arcsec')
     #ax2.plot(yong_lat, yong_neowave_nondisp_15sec, color='k', lw=lw,
     #            label='NEOWAVE (non-dispersive) 15 arcsec') 
-    ax2.plot(yong_lat, yong_neowave_disp_15sec, color='r', lw=lw,
-                label='NEOWAVE (dispersive) 15 arcsec')                
+    #ax2.plot(yong_lat, yong_neowave_disp_15sec, color='r', lw=lw,
+    #            label='NEOWAVE (dispersive) 15 arcsec')                
                                 
 ax2.legend(loc='upper left', framealpha=1)
 
-fname = '%s/rotated_map_gauge_comparisons.png' % plotdir
+#fname = '%s/rotated_map_gauge_comparisons.png' % plotdir
+fname = '%s/offshore_gauge_comparisons.png' % plotdir
 if zoom:
     fname = '%s/rotated_map_gauge_comparisons_zoom.png' % plotdir
 savefig(fname)
 print('Created %s' % fname)
+
 
 
 if plot_gauge_timeseries:
@@ -332,7 +346,7 @@ if plot_gauge_timeseries:
         legend(framealpha=1)
         title('Gauge %s at (%.4f, %.4f)' % (gaugeno,xg,yg))
 
-        fname = '%s/gauge%s_comparison_resolution.png' \
+        fname = '%s/gauge%s_comparison_okada.png' \
                     % (plotdir,str(gaugeno).zfill(5))
         savefig(fname)
         print('Created ',fname)
