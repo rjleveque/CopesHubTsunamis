@@ -7484,6 +7484,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="make_Newport_topo">make_Newport_topo<a class="anchor-link" href="#make_Newport_topo">¶</a></h1><p>Using tiles downloaded from 
 <a href="https://www.ngdc.noaa.gov/thredds/catalog/tiles/nthmp/tiled_19as/catalog.html">https://www.ngdc.noaa.gov/thredds/catalog/tiles/nthmp/tiled_19as/catalog.html</a></p>
+<p>R.J. LeVeque, 1/30/25</p>
 </div>
 </div>
 </div>
@@ -7536,7 +7537,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">adjust_dz_plot_save</span><span class="p">(</span><span class="n">topo</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">dz</span><span class="o">=-</span><span class="mf">2.05</span><span class="p">):</span>
@@ -7562,7 +7563,7 @@ a.anchor-link {
     <span class="nb">print</span><span class="p">(</span><span class="s1">'Created '</span><span class="p">,</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="n">fname</span> <span class="o">=</span> <span class="s1">'</span><span class="si">%s</span><span class="s1">.asc'</span> <span class="o">%</span> <span class="n">name</span>
-    <span class="n">topo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">topo_type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">header_style</span><span class="o">=</span><span class="s1">'asc'</span><span class="p">,</span><span class="n">Z_format</span><span class="o">=</span><span class="s1">'</span><span class="si">%12.5e</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">topo_mhw</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="n">topo_type</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">header_style</span><span class="o">=</span><span class="s1">'asc'</span><span class="p">,</span><span class="n">Z_format</span><span class="o">=</span><span class="s1">'</span><span class="si">%12.5e</span><span class="s1">'</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">'Created '</span><span class="p">,</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">topo_mhw</span>
@@ -7717,7 +7718,7 @@ These should be integers if aligned so DEM point is at integer lat-long
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">topo1a_mhw</span> <span class="o">=</span> <span class="n">adjust_dz_plot_save</span><span class="p">(</span><span class="n">topo1a</span><span class="p">,</span> <span class="s1">'YaquinaBay_19s_mhw'</span><span class="p">,</span> <span class="n">dz</span><span class="o">=-</span><span class="mf">2.05</span><span class="p">)</span>
@@ -7852,7 +7853,7 @@ These should be integers if aligned so DEM point is at integer lat-long
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">topo1c_mhw</span> <span class="o">=</span> <span class="n">adjust_dz_plot_save</span><span class="p">(</span><span class="n">topo1c</span><span class="p">,</span> <span class="s1">'Newport_13s_mhw'</span><span class="p">,</span> <span class="n">dz</span><span class="o">=-</span><span class="mf">2.05</span><span class="p">)</span>
@@ -8050,7 +8051,7 @@ These should be integers if aligned so DEM point is at integer lat-long
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">topo2c_mhw</span> <span class="o">=</span> <span class="n">adjust_dz_plot_save</span><span class="p">(</span><span class="n">topo2c</span><span class="p">,</span> <span class="s1">'NewportE_13s_mhw'</span><span class="p">,</span> <span class="n">dz</span><span class="o">=-</span><span class="mf">2.05</span><span class="p">)</span>
