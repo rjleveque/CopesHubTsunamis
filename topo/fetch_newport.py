@@ -1,4 +1,8 @@
 """
+BETTER VERSION WITH NEW EXTENTS AND FILE NAMES: make_Newport_topo.ipynb
+
+This version does not properly align 1/3" cropped DEMs
+
 Using tiles downloaded from 
 https://www.ngdc.noaa.gov/thredds/catalog/tiles/nthmp/tiled_19as/catalog.html
 
@@ -6,7 +10,9 @@ https://www.ngdc.noaa.gov/thredds/catalog/tiles/nthmp/tiled_19as/catalog.html
 
 """
 
+from pylab import *
 from clawpack.geoclaw import topotools
+import os
 
 topodir = '/Users/rjl/topo/CUDEM'
 
@@ -94,10 +100,15 @@ for (topo,name) in topos:
     Z_mhw = topo.Z - 2.05
     topo_mhw = topo.crop()
     topo_mhw.set_xyZ(topo.x, topo.y, Z_mhw)
+
     fig,ax = subplots()
     topo_mhw.plot(limits=[-50,50],axes=ax,
             cb_kwargs={'extend':'both', 'shrink':0.7})
     title(name)
+    fname = '%s.png' % name
+    savefig(fname, bbox_inches='tight')
+    print('Created ',fname)
+
     fname = '%s.asc' % name
     topo.write(fname,topo_type=3,header_style='asc',Z_format='%12.5e')
     print('Created ',fname)
