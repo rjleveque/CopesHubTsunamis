@@ -17,10 +17,12 @@ from center_points import adjust
 # mesh spacing and a cell edge on a 1/3" grid, for centering gauges:
 # (based on the domain and grid resolutions specified in setrun.py)
 dx = dy = 1./(3*3600.)
-#xshift = 0.5*dx
-#yshift = 0.5*dy
-xshift = 0.
-yshift = 0.
+xshift = 0.5*dx
+yshift = 0.5*dy
+
+#xshift = 0.
+#yshift = 0.
+
 x_edge = -137.0 - xshift
 y_edge = 47. - yshift
 center_gauges = True
@@ -96,5 +98,5 @@ if __name__ == '__main__':
     
     if 1:
         for fname in ['VGListCoosBay','VGListAstoria',
-                      'VGListNewport','VGListSeaside']:
+                     'VGListNewport','VGListSeaside']:
             convert(fname)
