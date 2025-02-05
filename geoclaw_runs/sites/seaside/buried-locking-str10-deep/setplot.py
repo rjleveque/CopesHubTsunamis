@@ -53,7 +53,7 @@ def setplot(plotdata):
     plotdata.outdir = outdir
     plotdata.plotdir = plotdir
 
-    if 0:
+    if 1:
         from clawpack.visclaw import gaugetools
         setgauges = gaugetools.read_setgauges(plotdata.outdir)
         gaugenos = setgauges.gauge_numbers
@@ -72,7 +72,7 @@ def setplot(plotdata):
     #-----------------------------------------
 
     plotfigure = plotdata.new_plotfigure(name='Ocean Surface', figno=1)
-    plotfigure.show = False
+    plotfigure.show = True
     # new options in v5.10.0:
     plotfigure.figsize = (7,7)
     plotfigure.facecolor = 'w'
@@ -84,7 +84,7 @@ def setplot(plotdata):
     plotaxes.title = 'Surface at time h:m:s after quake'
 
     # new options:
-    plotaxes.aspect_latitude = -20.  # set aspect ratio based on this latitude
+    plotaxes.aspect_latitude = 44.  # set aspect ratio based on this latitude
     plotaxes.title_fontsize = 15
     plotaxes.xticks_kwargs = {'rotation':20, 'fontsize':12}
     plotaxes.yticks_fontsize = 12
@@ -124,7 +124,7 @@ def setplot(plotdata):
     # Figure for surface
     #-----------------------------------------
 
-    plotfigure = plotdata.new_plotfigure(name='Seaside', figno=1)
+    plotfigure = plotdata.new_plotfigure(name='Seaside', figno=2)
     # new options in v5.10.0:
     plotfigure.figsize = (8,6)
     plotfigure.facecolor = 'w'
@@ -136,7 +136,7 @@ def setplot(plotdata):
     plotaxes.title = 'Surface at time h:m:s after quake'
 
     # new options:
-    plotaxes.aspect_latitude = -20.  # set aspect ratio based on this latitude
+    plotaxes.aspect_latitude = 44.  # set aspect ratio based on this latitude
     plotaxes.title_fontsize = 15
     plotaxes.xticks_kwargs = {'rotation':20, 'fontsize':10}
     plotaxes.yticks_fontsize = 12

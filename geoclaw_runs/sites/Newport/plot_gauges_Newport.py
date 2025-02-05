@@ -145,7 +145,7 @@ if __name__ == '__main__':
     print('Will take output from \n    %sand send plots to \n    %s' \
             % (outdir,plotdir))
     
-    gaugenos = range(1001,1051,1)
+    gaugenos = range(1001,1079,1)
     gaugeno_dict = {}
     
     for gaugeno in gaugenos:

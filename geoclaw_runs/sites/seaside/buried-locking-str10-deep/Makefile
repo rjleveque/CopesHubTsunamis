@@ -26,7 +26,8 @@ CLAW_PKG = geoclaw                  # Clawpack package to use
 # top of git repository (perhaps in shared locaation on HPC cluster)
 
 # for laptop:
-EXE ?= $(CHT)/geoclaw_runs/xgeoclaw_v511_smax
+#EXE ?= $(CHT)/geoclaw_runs/xgeoclaw_v511_smax
+EXE = xgeoclaw
 
 
 SETRUN_FILE = setrun.py             # File containing function to make data
