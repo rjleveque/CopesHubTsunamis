@@ -146,8 +146,9 @@ def setplot(plotdata):
     plotaxes.ylabel_fontsize = 12
     plotaxes.useOffset = False
 
-    plotaxes.xlimits = [-124,-123.9]
-    plotaxes.ylimits = [45.94,46.02]
+    #This is the 1/3" region
+    plotaxes.xlimits = [-123.9975,-123.9025]
+    plotaxes.ylimits = [45.97,46.0375]
 
     plotaxes.afteraxes = addgauges
 

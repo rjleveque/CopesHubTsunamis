@@ -5,7 +5,7 @@ Process fgmax grid results and make plots of:
     maximum surface elevation offshore
     maximum flow depth onshore (based on where B0 > 0)
     maximum flow speed
-Also create a kmz file with plots to be viewed on Google Earth.
+#Also create a kmz file with plots to be viewed on Google Earth.
 
 Before running this code, make sure the file specified by fname_B0 exists.
 This file provides the pre-seismic topography at each fgmax point.
@@ -38,31 +38,26 @@ import sys
 save_figs = True             # make png files for figures?
 close_figs = True            # close big figures after saving?
 
-location = 'Seaside'
+## Also see name==main where it is read in from params.py
+#location = 'Seaside'
 
 try:
     CHT = os.environ['CHT']
 except:
     raise Exception("*** Set CHT enviornment variable to repository top")
     
-graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/seaside')
-GE_image = imread(graphics_dir + '/seaside_fgout0003GE.png')
-GE_extent = [-123.96,-123.9025,45.972,46.0275]
-
 use_force_dry = False
 if use_force_dry:
     fname_force_dry = os.path.join(input_dir, 'force_dry_init.data')
     print('Using force_dry_init from ', fname_force_dry)
 
 
-def load_fgmax(outdir):
-
-
+def load_fgmax(outdir,fgno,fname_B0):
     # Read fgmax data:
     fg = fgmax_tools.FGmaxGrid()
     fgmax_input_file_name = outdir + '/fgmax_grids.data'
     print('fgmax input file: \n  %s' % fgmax_input_file_name)
-    fg.read_fgmax_grids_data(fgno=1, data_file=fgmax_input_file_name)
+    fg.read_fgmax_grids_data(fgno=fgno, data_file=fgmax_input_file_name)
 
     # determine time interval used for fgmax:
     clawdata = ClawData()
@@ -74,15 +69,14 @@ def load_fgmax(outdir):
 
     fg.read_output(outdir=outdir, indexing='xy')  # so array layout same as topofile
 
-    # ### Read pre-seismic B0 from special run with no dtopo specified
+    #### Read pre-seismic B0 from special run with no dtopo specified
 
     if 1:
-        fname_B0 = '../fgmax0001_13s_B0.asc'
         topoB0 = topotools.Topography()
         topoB0.read(fname_B0, topo_type=3)
         B0 = topoB0.Z
         B0_masked = ma.masked_array(B0, fg.B.mask)
-        fg.B0 = B0
+        fg.B0 = B0_masked
     else:
         fg.B0 = fg.B
         print('No subsidence or uplift in fgmax region')
@@ -132,15 +126,18 @@ cmap_speed = mpl.colors.ListedColormap([[.9,.9,1],[.6,.6,1],
 cmap_speed.set_over(color=[1,0,1])
 
 # Set color for land points without inundation to light green:
-cmap_speed.set_under(color=[.7,1,.7])
+#cmap_speed.set_under(color=[.7,1,.7])
+# Set color for land points without inundation to transparent if on image:
+cmap_speed.set_under(color=[.7,1,.7,0])
 
 norm_speed = colors.BoundaryNorm(bounds_speed, cmap_speed.N)
     
 
 
-def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
-    
-    os.system('mkdir -p %s' % fgmax_plotdir)
+def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
+
+    #Here, GE_extent is the fgmax_extent
+    fgmax_extent = GE_extent
     
     def savefigp(fname):
         global save_figs
@@ -152,7 +149,6 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
             print('save_figs = False')
 
     ylat = fg.y.mean()  # for aspect ratio of plots
-    fgmax_extent = [-123.94,-123.9025,45.972,46.02]
 
     ##### Plot topography
 
@@ -193,11 +189,12 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     tight_layout()
     savefigp('geoclaw_topo.png')
 
+    if 0: #For Newport
+        othercondition = None    #onshore determined only by fg.B0 > 0
 
-    #othercondition = None    # if onshore determined only by fg.B0 > 0
-
-    # For Seaside, consider harbor/rivers to be onshore when plotting zeta:
-    othercondition = fg.X > -123.93
+    if 1: #For Seaside
+          # For Seaside, consider harbor/rivers to be onshore when plotting zeta:
+        othercondition = fg.X > -123.93
 
     onshore = logical_or(fg.B0 >  0., othercondition)
 
@@ -209,7 +206,8 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
 
     # zeta = h where B0>0 or h+B0 where B0<0 shows depth or apparent change in
     # water level in river or harbor when viewed from shore:
-    fg.zeta_onshore = where(logical_and(fg.B0 < 0., othercondition),
+
+    fg.zeta_onshore = where(logical_and(fg.B0 <= 0., othercondition),
                             fg.B0+fg.h, fg.h_onshore)
     fg.zeta_onshore = ma.masked_where(offshore, fg.zeta_onshore)
 
@@ -221,12 +219,13 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
 
     maxh_onshore = nanmax(fg.zeta_onshore)
     maxh_onshore_ft = maxh_onshore/0.3048
+
     figure(figsize=(8,8))
     imshow(GE_image, extent=GE_extent)
     pc = plottools.pcolorcells(fg.X, fg.Y, fg.zeta_onshore, cmap=cmap_depth, norm=norm_depth)
     cb = colorbar(pc, extend='max', shrink=0.7)
     cb.set_label('meters')
-    contour(fg.X, fg.Y, fg.B0, [0], colors='g')
+    #contour(fg.X, fg.Y, fg.B0, [0], colors='g')
 
     gca().set_aspect(1./cos(ylat*pi/180.))
     axis(fgmax_extent)
@@ -235,33 +234,34 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
     title('Maximum onshore flow depth h over %.2f hours\n' % t_hours \
             +'(h+B0 in harbor/rivers), max = %.2f meters ' % maxh_onshore)
     
+    #For Seaside 
     # Add transects to planview plot:
+    one_third = 1.0/(3.0*3600.)
     yt1 = 46.0015; Ttitle1 = '(12th Ave)'
     yt2 = 45.9931; Ttitle2 = '(Broadway)'
     yt3 = 45.9894; Ttitle3 = '(Avenue G)'
-    
-    x1trans, x2trans = -123.95,  -123.91
-    
+    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third 
+
     plot([x1trans,x2trans], [yt1,yt1],'-', color='yellow', linewidth=1.2)
-    text(-123.935,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=12,
+    text(x1trans,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=12,
          ha='left', color='yellow')
     plot([x1trans,x2trans], [yt2,yt2],'-', color='yellow', linewidth=1.2)
-    text(-123.935,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=12,
+    text(x1trans,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=12,
          ha='left', color='yellow')
     plot([x1trans,x2trans], [yt3,yt3],'-', color='yellow', linewidth=1.2)
-    text(-123.935,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=12,
+    text(x1trans,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=12,
          ha='left', color='yellow')
-    
-    # plot max speed
-        
     savefigp('h_onshore.png')
+    #savefigp('zeta_onshore.png')
 
 
+    # plot max speed
     figure(figsize=(8,8))
+    imshow(GE_image, extent=GE_extent)
     pc = plottools.pcolorcells(fg.X, fg.Y, fg.s, cmap=cmap_speed, norm=norm_speed)
     cb = colorbar(pc, extend='max', shrink=0.7)
     cb.set_label('m/s')
-    contour(fg.X, fg.Y, fg.B0, [0], colors='g')
+    #contour(fg.X, fg.Y, fg.B0, [0], colors='g')
     gca().set_aspect(1./cos(ylat*pi/180.))
     axis(fgmax_extent)
     ticklabel_format(useOffset=False)
@@ -274,33 +274,25 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
 
     # Plot eta offshore if desired:
 
-
-    if 0:
-
+    if 1:
         figure(figsize=(8,8))
+        imshow(GE_image, extent=GE_extent)
         pc = plottools.pcolorcells(fg.X, fg.Y, fg.eta_offshore, cmap=cmap_eta, norm=norm_eta)
         cb = colorbar(pc, extend='max', shrink=0.7)
         cb.set_label('meters')
-        contour(fg.X, fg.Y, fg.B0, [0], colors='g')
+        #contour(fg.X, fg.Y, fg.B0, [0], colors='g')
         gca().set_aspect(1./cos(ylat*pi/180.))
         ticklabel_format(useOffset=False)
         xticks(rotation=20)
         title('Maximum offshore surface eta over %.2f hours' % t_hours)
         savefigp('eta_offshore.png')
 
-
-    # plots on transects:
-
-    yt1 = 46.0015; Ttitle1 = '(12th Ave)'
-    yt2 = 45.9931; Ttitle2 = '(Broadway)'
-    yt3 = 45.9894; Ttitle3 = '(Avenue G)'
-
-    x1trans, x2trans = -123.94,  -123.9025
-
     #import pdb; pdb.set_trace()
 
-    def extract_transect(fgmax_soln,xtrans,ytrans):
+    #Use same ones from before to see how plots look
+    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third 
 
+    def extract_transect(fgmax_soln,xtrans,ytrans):
         h1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
                                        fgmax_soln.h.T, xtrans, ytrans)
         B1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
@@ -313,9 +305,9 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
 
     def annotate_transect(axtrans):
         dxkm = 1
-        dxlong = dxkm/(111.* cos(pi*46/180))
-        axtrans.plot([-123.936,-123.936+dxlong], [-12,-12],'k')
-        axtrans.text(-123.936+dxlong/2, -13, '%i km' % dxkm, \
+        dxlong = dxkm/(111.* cos(pi*ylat/180))
+        axtrans.plot([x1trans,x1trans+dxlong], [-12,-12],'k')
+        axtrans.text(x1trans+dxlong/2, -13, '%i km' % dxkm, \
                      ha='center',va='top')
 
         axtrans.grid(True)
@@ -327,7 +319,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
         #axtrans.set_xticks(xt,rotation=20)
         axtrans.set_xticks(arange(x1trans,x2trans+1e-6,.01))
         
-    ylimtr = (-20,20)  # ylimits for transect plots
+    ylimtr = (-20,25)  # ylimits for transect plots
     xtrans = linspace(x1trans, x2trans, 1000)  # x points on transects
 
 
@@ -411,7 +403,11 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours):
 def make_kmz_plots(fg, fgmax_plotdir, run_name):
     # ## Plots for Google Earth overlays
     # 
-    # Tne new version of `kmltools` includes some tools to make png files that display properly on Google Earth.  The png files have no axes and have the dimension and dpi set properly so that there is an integer number of pixels in each grid cell so cell edges are sharp when zooming in.
+    # The new version of `kmltools` includes some tools to make png files
+    # that display properly on Google Earth.  The png files have no axes
+    # and have the dimension and dpi set properly so that there is an integer
+    # number of pixels in each grid cell so cell edges are sharp when zooming in.
+    # 
     # 
     # We make three png files and then make a kml file that can be used to open all three.
 
@@ -479,7 +475,7 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
 
 
 
-        if 0:
+        if 1:
             # include eta offshore:
             png_files=['h_onshore_max_for_kml.png', 'speed_max_for_kml.png','stays_dry_for_kml.png',
                        'eta_offshore_max_for_kml.png']
@@ -860,29 +856,47 @@ if __name__== '__main__':
                         # should appear in v5.10.0
                         
 
+    #### Note: Are running from say buried-deep directory, where the _output is and where we want _plots
     outdir = os.path.abspath('./_output')
     #outdir = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun_tests/geoclaw_outputs/_output_buried-random-str10-shallow'
     plotdir = os.path.abspath('./_plots')
     os.system('mkdir -p %s' % plotdir)
+    graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/seaside')
+    B0_dir = os.path.join(CHT, 'geoclaw_runs/sites/seaside')
+
+    ###########
+    #Choose the fgnos to use
+    fgnos = [1]
+    image_names = [graphics_dir + '/seaside_fgmax0001GE.jpg']
+    GE_extents = [[-123.94,-123.9025,45.9725,46.02]]
+    fnames_B0 = [B0_dir + '/fgmax0001_13s_B0.asc']
+    ##########
         
-    print('Will read fgmax results from outdir = \n  ', outdir)
-    fgmax_plotdir = plotdir + '/fgmax'
-    print('Will send plots to fgmax_plotdir = \n  ', fgmax_plotdir)
-    os.system('mkdir -p %s' % fgmax_plotdir);
+    for fgno in fgnos:
+        GE_image = imread(image_names[fgno-1])
+        GE_extent = GE_extents[fgno-1]
+        fname_B0 = fnames_B0[fgno-1]
 
-    run_name = '%s_%s' % (location,event)
+        print('Will read fgmax results from outdir = \n  ', outdir)
+        fgmax_plotdir = plotdir + '/fgmax' + str(fgno)
+        print('Will send plots to fgmax_plotdir = \n  ', fgmax_plotdir)
+        os.system('mkdir -p %s' % fgmax_plotdir);
+
+        run_name = '%s_%s' % (location,event)
     
-    fg, t_hours = load_fgmax(outdir)
-    make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
-    #make_kmz_plots(fg, fgmax_plotdir, run_name)
+        fg, t_hours = load_fgmax(outdir,fgno,fname_B0)
+        make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent)
 
-    close('all')
+        if 1:
+            make_kmz_plots(fg, fgmax_plotdir, run_name)
 
-    fname_nc = '%s_fgmax.nc' % run_name
-    write_nc_output(fname_nc, fg, new=True, force=True, 
+        close('all')
+
+        if 0:
+            fname_nc = '%s_fgmax' + 'str(fgno)' +'.nc' % run_name
+            write_nc_output(fname_nc, fg, new=True, force=True, 
                         outdir=outdir, verbose=True)
                         
-    fg2 = read_nc(fname_nc, verbose=True)  # test reading it back in
-    print('max abs(B-B0) = %.2f' % abs(fg2.B-fg2.B0).max())
-    
+            fg2 = read_nc(fname_nc, verbose=True)  # test reading it back in
+            print('max abs(B-B0) = %.2f' % abs(fg2.B-fg2.B0).max())
         

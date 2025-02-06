@@ -123,17 +123,20 @@ def setrun(claw_pkg='geoclaw'):
     # Number of space dimensions:
     clawdata.num_dim = num_dim
 
+    one_sixth = 1.0/(6.0*3600.)
     # Lower and upper edge of computational domain:
-    #clawdata.lower[0] = -135.      # west longitude
-    clawdata.lower[0] = -128.      # west longitude
-    clawdata.upper[0] = -122.      # east longitude
-    #clawdata.lower[1] = 38.5       # south latitude
+    #clawdata.lower[0] = -128.                 # west longitude
     #clawdata.upper[1] = 53.5       # north latitude
-    clawdata.lower[1] = 44.5       # south latitude
-    clawdata.upper[1] = 47.5       # north latitude
+    #clawdata.lower[1] = 44.5       # south latitude
+    #clawdata.upper[1] = 47.5       # north latitude
 
-    clawdata.num_cells[0] = 6*15
-    clawdata.num_cells[1] = 3*15
+    clawdata.lower[0] = -135. - one_sixth      # west longitude
+    clawdata.upper[0] = -122. - one_sixth      # east longitude
+    clawdata.lower[1] = 38.5 - one_sixth       # south latitude
+    clawdata.upper[1] = 51.5 - one_sixth      # north latitude
+
+    clawdata.num_cells[0] = 13*15
+    clawdata.num_cells[1] = 13*15
 
 
     # ---------------
@@ -442,6 +445,9 @@ def setrun(claw_pkg='geoclaw'):
     #inundation runs.
     topofiles.append([3, topodir + '/etopo22_15s_-137_-121_37_55.asc'])
 
+    #3-second topo:
+    topofiles.append([3, topodir + '/crm_vol8_3sec_cropped_44-47.asc'])
+
     #2-second topo:
     topofiles.append([3, topodir + '/astoria_2s_mhw.asc'])
 
@@ -639,7 +645,11 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-123.9975,-123.9025,45.970,46.0275]
+        one_sixth = 1.0/(6.0*3600.)
+        #The east13, etc below are all edges on the 1/3" computational grid
+        east13 = -123.9975 - one_sixth; west13 = -123.9025 + one_sixth;
+        north13 = 46.0375 + one_sixth; south13 = 45.97 - one_sixth;
+        flagregion.spatial_region = [east13,west13,south13,north13]
         flagregions.append(flagregion)
 
     # ---------------
@@ -684,16 +694,12 @@ def setrun(claw_pkg='geoclaw'):
         # grid resolution at 1/3" level
         dx_fine = 1./(3.0*3600.) 
 
-        #We specified the domain edges to be whole numbers.  So a whole number
-        #will also be the edge of some 1/3" cell.  So move dx_fine/2.0 away to be
-        #at a cell center.
+        #We specified the domain edges to be whole numbers - 1/6".
+        #So whole numbers are at a cell centers. The fgmax_extent numbers
+        #below are at 1/3" cell centers also.
         
-        #fgmax_extent=[-123.940,-123.9025,45.985,45.995] Seaside project
-        #In the project, these were at 1/3" cell centers.  Let's make them at 1/3" cell edges
-        #here.
-
         fg = fgmax_tools.FGmaxGrid()
-        fgmax_extent = [-123.94,-123.9025,45.972,46.02]
+        fgmax_extent = [-123.94,-123.9025,45.9725,46.02]
         fg.point_style = 2                    # uniform rectangular x-y grid
         fg.x1 = fgmax_extent[0] #+ dx_fine/2.
         fg.x2 = fgmax_extent[1] #- dx_fine/2.
@@ -725,9 +731,9 @@ def setrun(claw_pkg='geoclaw'):
 
     if 1:
         # full domain (smaller for inundation run than for offshore_gauges)
-        dx_fgout = 60./3600.  # degrees
-        dy_fgout = 60./3600.  # degrees
-        dt_fgout = 30  # seconds
+        dx_fgout = 120./3600.  # degrees (two minute)
+        dy_fgout = 120./3600.  # degrees
+        dt_fgout = 30.         # seconds
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 1
         fgout.point_style = 2       # will specify a 2d grid of points
@@ -747,17 +753,19 @@ def setrun(claw_pkg='geoclaw'):
 
     if 1:
         # small region for inset plot
-        dx_fgout = 5/3600.
-        dy_fgout = 15/3600.  # degrees
-        dt_fgout = 30  # seconds
+        dx_fgout = 6/3600.
+        dy_fgout = 12/3600.  # degrees
+        dt_fgout = 30.       # seconds
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 2
         fgout.point_style = 2       # will specify a 2d grid of points
         fgout.output_format = 'binary32'
-        fgout.x1 = -126.  # specify edges (fgout pts will be cell centers)
-        fgout.x2 = -123.9
-        fgout.y1 = 45.7
-        fgout.y2 = 46.4
+
+        ##Need to specify edges of cells, whole numbers are centers
+        fgout.x1 = -126.0 -one_sixth   # specify edges (fgout pts will be cell centers)
+        fgout.x2 = -123.9 -one_sixth
+        fgout.y1 = 45.7 -one_sixth 
+        fgout.y2 = 46.4 -one_sixth
         fgout.nx = int(round((fgout.x2 - fgout.x1)/dx_fgout))
         fgout.ny = int(round((fgout.y2 - fgout.y1)/dy_fgout))
         fgout.tstart = 0.
@@ -768,11 +776,11 @@ def setrun(claw_pkg='geoclaw'):
 
     if 1:
         # 1/3" grid around Seaside from old topo run
-        fgout_extent = [-123.96,-123.9025,45.972,46.0275]
+        #Make this fgout be the 1/3 computation region edges
+        fgout_extent = [east13,west13,south13,north13]
         dx_fgout = 1/3 * 1/3600.  # degrees
         dy_fgout = dx_fgout
         dt_fgout = 15  # seconds
-        
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 3
         fgout.point_style = 2  # uniform rectangular x-y grid
