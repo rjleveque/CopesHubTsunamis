@@ -67,13 +67,17 @@ def make_anim(outdir, plotdir, location, event):
     
     output_format = 'binary32'
     
-    
-    GE_image = imread(graphics_dir + '/seaside_fgout0003GE.png')
-    GE_extent = [-123.96,-123.9025,45.972,46.0275]
+    one_sixth = 1.0/(6.0*3600.)
+    #The east13, etc below are all edges on the 1/3" computational grid
+    east13 = -123.9975 - one_sixth; west13 = -123.9025 + one_sixth;
+    north13 = 46.0375 + one_sixth; south13 = 45.97 - one_sixth;
+    #GE_image = imread(graphics_dir + '/seaside_fgout0003GE.png')
+    GE_image = imread(graphics_dir + '/seaside_fgout0003GE_new.jpg')
+    GE_extent = [east13,west13,south13,north13]
     
     # Instantiate object for reading fgout frames:
-    fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format,
-                                        qmap=qmap)
+    fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
+                                        #qmap=qmap)
     fgout_grid1.read_fgout_grids_data()
 
     
@@ -154,14 +158,16 @@ def make_anim(outdir, plotdir, location, event):
     yt2 = 45.9931; Ttitle2 = '(Broadway)'
     yt3 = 45.9894; Ttitle3 = '(Avenue G)'
     
-    x1trans, x2trans = -123.95,  -123.91
+    #x1trans, x2trans = -123.95,  -123.91
+    one_third = 1./(3*3600.)
+    x1trans, x2trans = GE_extent[0] + one_third,  GE_extent[1]-one_third
     
     plot([x1trans,x2trans], [yt1,yt1],'k-',linewidth=0.8)
-    text(x1trans-0.005,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=8)
+    text(x1trans+0.005,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=8)
     plot([x1trans,x2trans], [yt2,yt2],'k-',linewidth=0.8)
-    text(x1trans-0.005,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=8)
+    text(x1trans+0.005,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=8)
     plot([x1trans,x2trans], [yt3,yt3],'k-',linewidth=0.8)
-    text(x1trans-0.005,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=8)
+    text(x1trans+0.005,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=8)
     
     # =========
     # transects:
@@ -176,7 +182,7 @@ def make_anim(outdir, plotdir, location, event):
                                      fgout_soln.B, xtrans, ytrans)
         return B1d, eta1d
     
-    def annotate_transect(axtrans):
+    def annotate_transect(axtrans,xlab):
         dxkm = 1
         dxlong = dxkm/(111.* cos(pi*46/180))
         axtrans.plot([-123.936,-123.936+dxlong], [-12,-12],'k')
@@ -185,12 +191,14 @@ def make_anim(outdir, plotdir, location, event):
     
         axtrans.grid(True)
         axtrans.ticklabel_format(useOffset=False)
-        axtrans.set_xlabel('longitude')
+        #axtrans.set_xlabel('longitude')
+        axtrans.set_xlabel(xlab)
         axtrans.set_ylabel('meters')
         axtrans.set_xlim(x1trans,x2trans)
         xt = axtrans.get_xticks()
         #axtrans.set_xticks(xt,rotation=20)
         axtrans.set_xticks(arange(x1trans,x2trans+1e-6,.01))
+        axtrans.tick_params(axis='x',rotation=20)
         
     ylimtr = (-20,30)  # ylimits for transect plots
     xtrans = linspace(x1trans, x2trans, 1000)  # x points on transects
@@ -220,7 +228,8 @@ def make_anim(outdir, plotdir, location, event):
     etatrans_plot, = axtrans.plot(xtrans, etatrans, 'b')
     Btrans_plot, = axtrans.plot(xtrans, Btrans, 'g')
     
-    annotate_transect(axtrans)
+    xlab=' ' 
+    annotate_transect(axtrans,xlab)
     
     # Transect 2 (middle)
     
@@ -248,7 +257,8 @@ def make_anim(outdir, plotdir, location, event):
     etatrans_plot2, = axtrans2.plot(xtrans, etatrans2, 'b')
     Btrans_plot2, = axtrans2.plot(xtrans, Btrans2, 'g')
     
-    annotate_transect(axtrans2)
+    xlab=' ' 
+    annotate_transect(axtrans2,xlab)
     
     
     # Transect 3 (bottom)
@@ -276,8 +286,9 @@ def make_anim(outdir, plotdir, location, event):
     # surface and topo plots:
     etatrans_plot3, = axtrans3.plot(xtrans, etatrans3, 'b')
     Btrans_plot3, = axtrans3.plot(xtrans, Btrans3, 'g')
-    
-    annotate_transect(axtrans3)
+   
+    xlab='longitude' 
+    annotate_transect(axtrans3,xlab)
     
                         
     figdummy,axdummy = subplots()
