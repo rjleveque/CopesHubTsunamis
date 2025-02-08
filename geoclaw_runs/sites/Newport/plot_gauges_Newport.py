@@ -152,7 +152,7 @@ if __name__ == '__main__':
     gaugeno_dict = {}
 
     # read dictionary of B0 values indexed by gaugeno:
-    gauge_B0 = read_gauge_B0('../gauge_B0.csv')
+    gauge_B0 = read_gauge_B0('../gauges_B0.csv')
     
     for gaugeno in gaugenos:
         #OLD
