@@ -6,6 +6,8 @@ if 'matplotlib' not in sys.modules:
 
 from pylab import *
 import clawpack.pyclaw.gauges as gauges
+from gauge_B0_tools import read_gauge_B0
+from clawpack.clawutil.data import ClawData
 
 def fprint(*args):
     # build a string out of all the arguments passed to fprint:
@@ -14,7 +16,7 @@ def fprint(*args):
         line = line + str(arg)
     fprint_file.write('%s\n' % line)
 
-def make_plot(gaugeno, location, event, outdir, plotdir):
+def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     gauge = gauges.GaugeSolution(gaugeno, outdir)
     x,y = gauge.location
     t = gauge.t / 60.   # convert to minutes
@@ -56,24 +58,20 @@ def make_plot(gaugeno, location, event, outdir, plotdir):
     B_post = B[ind_B]
     etamax_pquake = hmax + B_post
 
-    #Say B0 is the first B that is not a nan, all gauges turned on at time 0
-    #     , this is the first B on the maximum level for this particular gauge
-    ind_B0=where(isnan(B) == False)[0].min()
-    B0=B[ind_B0]
-
-    #Find h0, the first h that is not a nan, all gauges turned on at time 0.
-    #       , this is the first h on the maximum level for this particular gauge
-    #       , and this will be h0 if the gauge is turned on this level pre-quake.
-    #       This will be wrong if the gauge was turned on at this level after action happens!
-    h0=h[ind_B0]
-
+    ### Find h0 from B0 and sea_level of this particular job run
+    ### Assuming no etainit
+    if (B0 >= sea_level):
+        h0=0.0
+    else:
+        h0=sea_level - B0
+        
     #### Sanity Check ####
     print ('    GAUGE NO: ',gaugeno)
     print (' Before nanning: Bmin and Bmax were: ',Bmin,Bmax)
     print (' Indexes: ind_B0, ind_hmax, ind_B were: ',ind_B0,ind_hmax,ind_B)
-    print (' h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0 were: ')
-    print (h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0)
-    print ('etamax and etamax_pquake were: ',etamax,etamax_pquake)
+    print (' t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0 were: ')
+    print (t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0)
+    print ('hmax, etamax and etamax_pquake were: ',hmax,etamax,etamax_pquake)
     print (' ')
 
     ######### Find the time of the maximum hmax, and the first time h0 INCREASES.
@@ -131,7 +129,7 @@ def make_plot(gaugeno, location, event, outdir, plotdir):
     savefig(fname2, bbox_inches='tight')
     print('Created %s' % fname2)
 
-    return B0,B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
+    return B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
 
 
 if __name__ == '__main__':
@@ -139,18 +137,32 @@ if __name__ == '__main__':
     sys.path.insert(0,'.')
     from params import event, location
 
+    geodata = ClawData()
+    geodata.read('geoclaw.data',force=True)
+    sea_level = geodata.sea_level
+    print('+++ sea_level = %.3f' % sea_level)
+
     outdir = os.path.abspath('./_output')
     plotdir = os.path.abspath('./_plots')
     os.system('mkdir -p %s' % plotdir)
     print('Will take output from \n    %sand send plots to \n    %s' \
             % (outdir,plotdir))
     
-    gaugenos = range(1001,1079,1)
+    gaugenos = range(1001,1068,1)
     gaugeno_dict = {}
+
+    # read dictionary of B0 values indexed by gaugeno:
+    gauge_B0 = read_gauge_B0('../gauge_B0.csv')
     
     for gaugeno in gaugenos:
-        B0,B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst =\
-              make_plot(gaugeno, location, event, outdir, plotdir)
+        # OLD:
+        #B0,B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst =\
+        #      make_plot(gaugeno, location, event, outdir, plotdir)
+
+        # NEW: Passing B0 and sea_level in
+        B0 = gauge_B0[gaugeno]
+        B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst =\
+              make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level)
 
         ## Save the info for this gauge in the dictionary below for later printing
         value_dict={'B0': B0, 'B': B_post, 'max_h': hmax, 'max_eta': etamax,\
