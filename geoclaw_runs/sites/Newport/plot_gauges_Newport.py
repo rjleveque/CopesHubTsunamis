@@ -68,7 +68,7 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     #### Sanity Check ####
     print ('    GAUGE NO: ',gaugeno)
     print (' Before nanning: Bmin and Bmax were: ',Bmin,Bmax)
-    print (' Indexes: ind_B0, ind_hmax, ind_B were: ',ind_B0,ind_hmax,ind_B)
+    print (' Indexes: ind_hmax, ind_B were: ',ind_hmax,ind_B)
     print (' t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0 were: ')
     print (t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0)
     print ('hmax, etamax and etamax_pquake were: ',hmax,etamax,etamax_pquake)
