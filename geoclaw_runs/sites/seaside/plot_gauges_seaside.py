@@ -139,17 +139,18 @@ if __name__ == '__main__':
     sys.path.insert(0,'.')
     from params import event, location
 
-    geodata = ClawData()
-    geodata.read('geoclaw.data',force=True)
-    sea_level = geodata.sea_level
-    print('+++ sea_level = %.3f' % sea_level)
-
     outdir = os.path.abspath('./_output')
     plotdir = os.path.abspath('./_plots')
     os.system('mkdir -p %s' % plotdir)
     print('Will take output from \n    %sand send plots to \n    %s' \
             % (outdir,plotdir))
     
+    geodata = ClawData()
+    fname = outdir + '/geoclaw.data'
+    geodata.read(fname,force=True)
+    sea_level = geodata.sea_level
+    print('+++ sea_level = %.3f' % sea_level)
+
     gaugenos = range(1001,1068,1)
     gaugeno_dict = {}
 
