@@ -59,11 +59,21 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     etamax_pquake = hmax + B_post
 
     ### Find h0 from B0 and sea_level of this particular job run
-    ### Assuming no etainit
-    if (B0 >= sea_level):
-        h0=0.0
+    ### Assuming no etainit applies to this particular gauge.
+    ### If etainit does apply, got to know the value of etainit used,
+    ### then h0 = etainit - B0
+
+    special_gauge = False    #say we have determined this gauge doesn't get etainit
+    no_force_dry = True      #didn't force any gauges to be dry 
+    if (special_gauge):
+        etainit_level = 2.0  #example, never used
     else:
-        h0=sea_level - B0
+        etainit_level = sea_level
+    fill_up_condition = (B0 < etainit_level) & no_force_dry
+    if (fill_up_condition):         #fill up to etainit_level initially which is sealevel here.
+        h0 = etainit_level - B0     
+    else:
+        h0 = 0.0                    #location stays dry
 
     #### Sanity Check ####
     print ('    GAUGE NO: ',gaugeno)
