@@ -39,7 +39,7 @@ subroutine b4step2(mbc,mx,my,meqn,q,xlower,ylower,dx,dy,t,dt,maux,aux,actualstep
 
     ! Local storage
     integer :: index,i,j,k,dummy
-    real(kind=8) :: h,u,v, smax, sratio, xs,ys
+    real(kind=8) :: h,u,v, smax, sratio, xs,ys, s
 
     ! Check for NaNs in the solution
     call check4nans(meqn,mbc,mx,my,q,t,1)
@@ -51,25 +51,33 @@ subroutine b4step2(mbc,mx,my,meqn,q,xlower,ylower,dx,dy,t,dt,maux,aux,actualstep
         q(1,i,j) = max(q(1,i,j),0.d0)
         q(2:3,i,j) = 0.d0
     end forall
-    
+
     smax = 20.d0  ! limit speed to this value (m/s)
-    
+
     do j=1-mbc,my+mbc
         do i=1-mbc,mx+mbc
-            if (q(2,i,j)**2 + q(3,i,j)**2 > (q(1,i,j) * smax)**2) then
-                sratio = sqrt((q(1,i,j)*smax)**2 / (q(2,i,j)**2 + q(3,i,j)**2))
-                q(2,i,j) = q(2,i,j) * sratio
-                q(3,i,j) = q(3,i,j) * sratio
-                xs = xlower + (i-0.5d0)*dx
-                ys = ylower + (j-0.5d0)*dy
-                write(6,601) sratio,q(1,i,j),t,xs,ys
-                write(outunit,601) sratio,q(1,i,j),t,xs,ys
- 601            format('+++ sratio,h:',f8.5,f8.3, ' at t =',f6.1, &
-                       '  x,y = ', 2f12.6)
+            if (q(1,i,j) > 0.d0) then
+                s = sqrt((q(2,i,j)**2 + q(3,i,j)**2)) / q(1,i,j)
+                if (s > smax) then
+                    !sratio = sqrt((q(1,i,j)*smax)**2 / (q(2,i,j)**2 + q(3,i,j)**2))
+                    sratio = smax / s
+                    q(2,i,j) = q(2,i,j) * sratio
+                    q(3,i,j) = q(3,i,j) * sratio
+                    xs = xlower + (i-0.5d0)*dx
+                    ys = ylower + (j-0.5d0)*dy
+                    write(6,604) t, i,j, mx,my, dx
+                    write(outunit,604) t, i,j, mx,my, dx
+                    write(6,603) s,q(1,i,j),aux(1,i,j),xs,ys
+                    write(outunit,603) s,q(1,i,j),aux(1,i,j),xs,ys
+ 604                format('b4step2 at t =',f10.2, '  i,j,mx,my:',4i4, &
+                           '  dx = ',f10.7)
+ 603                format('     reset s =',f8.2,'  h=',f9.4,  ' B=',f8.3,&
+                           '  x,y = ', f12.6,',',f12.6)
+               endif
             endif
         enddo
     enddo
-                
+
 
 
     if (aux_finalized < 2 .and. actualstep) then

@@ -68,9 +68,11 @@ MODULES = \
 
 SOURCES = \
   $(CHT)/common_code/b4step2.f90 \
+  $(CHT)/common_code/stepgrid.f \
   $(CLAW)/riemann/src/rpn2_geoclaw.f \
   $(CLAW)/riemann/src/rpt2_geoclaw.f \
   $(CLAW)/riemann/src/geoclaw_riemann_utils.f \
+
 
 #-------------------------------------------------------------------
 # Include Makefile containing standard definitions and make options:
