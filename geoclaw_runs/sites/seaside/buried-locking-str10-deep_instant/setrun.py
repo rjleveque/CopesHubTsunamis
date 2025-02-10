@@ -654,9 +654,9 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.spatial_region_type = 1  # Rectangle
         one_sixth = 1.0/(6.0*3600.)
         #The east13, etc below are all edges on the 1/3" computational grid
-        east13 = -123.9975 - one_sixth; west13 = -123.9025 + one_sixth;
+        west13 = -123.9975 - one_sixth; east13 = -123.9025 + one_sixth;
         north13 = 46.0375 + one_sixth; south13 = 45.97 - one_sixth;
-        flagregion.spatial_region = [east13,west13,south13,north13]
+        flagregion.spatial_region = [west13,east13,south13,north13]
         flagregions.append(flagregion)
 
     # ---------------
@@ -784,7 +784,7 @@ def setrun(claw_pkg='geoclaw'):
     if 1:
         # 1/3" grid around Seaside from old topo run
         #Make this fgout be the 1/3 computation region edges
-        fgout_extent = [east13,west13,south13,north13]
+        fgout_extent = [west13,east13,south13,north13]
         dx_fgout = 1/3 * 1/3600.  # degrees
         dy_fgout = dx_fgout
         dt_fgout = 15  # seconds
