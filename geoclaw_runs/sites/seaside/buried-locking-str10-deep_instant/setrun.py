@@ -20,7 +20,7 @@ except:
     raise Exception("*** Must first set CLAW enviornment variable")
 
 root_dir = os.environ['CHT']
-#Seaside_root_dir = os.environ['Seaside']  ### Not using. Everything relative, may use CHT
+#Seaside_root_dir = os.environ['Seaside']
 
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
@@ -48,6 +48,13 @@ if instant:
                                 # to propogate immediately
     print ('assuming this is an instantaneous rupture')
     print (' ')
+    topodir = root_dir + '/topo/topofiles'                 # on Loyces laptop
+    dtopodir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'       # moved
+
+    # for hyak cluster:
+    topodir = topodir.replace('/mmfs1/home', '/gscratch/tsunami')
+    dtopodir = dtopodir.replace('/mmfs1/home', '/gscratch/tsunami')
+
 else:
     tmax_dtopo_region = 20*60.  # force fine grids up to this time
                                 # 20 minutes for wave to propagate
@@ -56,10 +63,11 @@ else:
     print (' ')
 
 
-    #topodir = '/Users/rjl/topo/topofiles'                        # on Randys laptop
-    #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'                   # on Randys laptop
-    topodir = root_dir + '/topo/topofiles'                        #  on Loyces laptop
-    dtopodir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'   # Not used it seems
+    #topodir = '/Users/rjl/topo/topofiles'                 # on Randys laptop
+    #dtopodir = '/Users/rjl/B/dtopo/dtopofiles'            # on Randys laptop
+    topodir = root_dir + '/topo/topofiles'                 # on Loyces laptop
+    #Seaside_topodir = Seaside_root_dir + '/topo/topofiles' # on Loyces laptop
+    dtopodir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'       # moved
 
     # for hyak cluster:
     topodir = topodir.replace('/mmfs1/home', '/gscratch/tsunami')
@@ -122,20 +130,17 @@ def setrun(claw_pkg='geoclaw'):
     # Number of space dimensions:
     clawdata.num_dim = num_dim
 
+    one_sixth = 1.0/(6.0*3600.)
     # Lower and upper edge of computational domain:
-    #clawdata.lower[0] = -128.      # west longitude
-    #clawdata.lower[1] = 38.5       # south latitude
+    #clawdata.lower[0] = -128.                 # west longitude
     #clawdata.upper[1] = 53.5       # north latitude
     #clawdata.lower[1] = 44.5       # south latitude
     #clawdata.upper[1] = 47.5       # north latitude
-    #clawdata.num_cells[0] = 6*15
-    #clawdata.num_cells[1] = 3*15
 
-    one_sixth = 1.0/(6.0*3600.)
     clawdata.lower[0] = -135. - one_sixth      # west longitude
     clawdata.upper[0] = -122. - one_sixth      # east longitude
-    clawdata.lower[1] = 38.5  - one_sixth      # south latitude
-    clawdata.upper[1] = 51.5  - one_sixth      # north latitude
+    clawdata.lower[1] = 38.5 - one_sixth       # south latitude
+    clawdata.upper[1] = 51.5 - one_sixth      # north latitude
 
     clawdata.num_cells[0] = 13*15
     clawdata.num_cells[1] = 13*15
@@ -188,15 +193,10 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
-        #clawdata.num_output_times = 0     # no frame output
-        #clawdata.tfinal = 30.              # SHORT TEST
-        #clawdata.output_t0 = True          # output at initial (or restart) time?
-
-        clawdata.num_output_times = 0      # every 30 minutes
+        clawdata.num_output_times = 0    # no frame output
+        #clawdata.tfinal = 30.            # SHORT TEST
         clawdata.tfinal = 2.0*3600.
-        #clawdata.tfinal = 30.
-        clawdata.output_t0 = False        # output at initial (or restart) time?
-        #clawdata.output_t0 = True          # output at initial (or restart) time?
+        clawdata.output_t0 = False       # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -249,7 +249,7 @@ def setrun(claw_pkg='geoclaw'):
 
     # Desired Courant number if variable dt used, and max to allow without
     # retaking step with a smaller dt:
-    clawdata.cfl_desired = 0.75
+    clawdata.cfl_desired = 0.76
     clawdata.cfl_max = 1.0
 
     # Maximum number of time steps to allow between output times:
@@ -455,16 +455,19 @@ def setrun(claw_pkg='geoclaw'):
     #3-second topo:
     topofiles.append([3, topodir + '/crm_vol8_3sec_cropped_44-47.asc'])
 
-    #HERE, might not need
     #2-second topo:
-    #topofiles.append([3, topodir + '/HERE'])
+    topofiles.append([3, topodir + '/astoria_2s_mhw.asc'])
 
-    # 1/3-second topo: 
-    topofiles.append([3, topodir + '/NewportE_13s_mhw.asc'])
-    topofiles.append([3, topodir + '/Newport_13s_mhw.asc'])
+    # 1/3-second topo:
+    topofiles.append([3, topodir + '/SeasideN_13s_mhw.asc'])
+    topofiles.append([3, topodir + '/SeasideS_13s_mhw.asc'])
 
-    # 1/9-second topo:
-    topofiles.append([3, topodir + '/YaquinaBay_19s_mhw.asc'])
+    if 0:
+        # 1/9-second topo:
+        topofiles.append([3, topodir + '/SeasideN_19s_mhw.asc'])
+        topofiles.append([3, topodir + '/SeasideS_19s_mhw.asc'])
+
+
 
     # == setdtopo.data values ==
     dtopo_data = rundata.dtopo_data
@@ -474,7 +477,7 @@ def setrun(claw_pkg='geoclaw'):
     #dtopofile = dtopodir + '/' + event + '.dtt3'
     #dtopo_data.dtopofiles = [[3, dtopofile]]
     dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
-    dtopo_data.dtopofiles = [[3, dtopo_dir + '/buried-locking-str10-deep.dtt3']]
+    dtopo_data.dtopofiles = [[3, dtopo_dir + '/buried-locking-str10-deep_instant.dtt3']]
 
 
     if instant: #instantaneous rupture
@@ -582,7 +585,6 @@ def setrun(claw_pkg='geoclaw'):
         ### Will use this for the inundation runs. (6" slider window)
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport, or gauges 166-208 offshore Seaside.
-        # Or centered about Newport, plus or minus 32km, say
         # Make this region 6" for all time to check if gauge values change
         # This rectangle goes out to the Ruled Rectangle (without the b) above.
         flagregion = FlagRegion(num_dim=2)
@@ -603,16 +605,13 @@ def setrun(claw_pkg='geoclaw'):
 
         ## for Seaside, encompasses gauges 166 to 208 
         #gauges_region = [-125.65,-123.76,45.69,46.43]
-        #gauges_region = [-126.00,-123.76,45.69,46.43]
-
-        ## for Newport, encompasses  +-32.2km of the gauges on land
-        gauges_region = [-125.75,-123.9125,44.29,44.96]
+        gauges_region = [-126.00,-123.76,45.69,46.43]
 
         flagregion.spatial_region = gauges_region
         flagregions.append(flagregion)
 
 
-    if 1: #For Newport
+    if 1: #For Seaside
 
         # Old Region 2" - fixed at 3" sec. :
         # Level 6 is 3" sec
@@ -625,7 +624,7 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.25,-123.9150,44.535,44.715]
+        flagregion.spatial_region = [-124.25,-123.9025,45.9025,46.32]
         flagregions.append(flagregion)
 
         # Region 1" - fixed at 1" sec 
@@ -639,7 +638,7 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.1495,-123.916,44.55,44.6795] 
+        flagregion.spatial_region = [-124.03,-123.9025,45.945,46.08]
         flagregions.append(flagregion)
 
         # Region 1/3" - fixed at 1/3" 
@@ -653,22 +652,11 @@ def setrun(claw_pkg='geoclaw'):
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.102,-123.9175,44.564,44.675]
-        flagregions.append(flagregion)
-
-    if 0:  #set up, but not using this calculation region at the moment
-        # Region 1/9" - fixed at 1/9" 
-        # Level 9 is 1/9" sec
-        # Note that this is a rectangle specified in the new way
-        # (other regions below will force/allow more refinement)
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_oneninth'
-        flagregion.minlevel = 9
-        flagregion.maxlevel = 9
-        flagregion.t1 = 0.
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.0895,-124.002,44.601,44.634]
+        one_sixth = 1.0/(6.0*3600.)
+        #The east13, etc below are all edges on the 1/3" computational grid
+        west13 = -123.9975 - one_sixth; east13 = -123.9025 + one_sixth;
+        north13 = 46.0375 + one_sixth; south13 = 45.97 - one_sixth;
+        flagregion.spatial_region = [west13,east13,south13,north13]
         flagregions.append(flagregion)
 
     # ---------------
@@ -684,7 +672,7 @@ def setrun(claw_pkg='geoclaw'):
         # load list of virtual gauges to use, with columns 
         #      gaugeno, x, y
         # x,y should be in decimal form, preferably cell centered on finest grid
-        gauges_file = root_dir + '/oregon_gauges_2024/VGListNewport.csv' 
+        gauges_file = root_dir + '/oregon_gauges_2024/VGListSeaside.csv' 
         gauges = np.loadtxt(gauges_file, delimiter=',')
 
         for k in range(gauges.shape[0]):
@@ -695,47 +683,46 @@ def setrun(claw_pkg='geoclaw'):
 
     # fgmax grids:
 
-    # == fgmax_grids.data values ==
-    # NEW STYLE STARTING IN v5.7.0
+    if 1:  # Use a 1/3" fgmax grid like our Seaside project
+        # == fgmax_grids.data values ==
+        # NEW STYLE STARTING IN v5.7.0
 
-    # set num_fgmax_val = 1 to save only max depth,
-    #                     2 to also save max speed,
-    #                     5 to also save max hs,hss,hmin
-    rundata.fgmax_data.num_fgmax_val = 2  # Save depth and speed
+        # set num_fgmax_val = 1 to save only max depth,
+        #                     2 to also save max speed,
+        #                     5 to also save max hs,hss,hmin
+        rundata.fgmax_data.num_fgmax_val = 2  # Save depth and speed
 
-    fgmax_grids = rundata.fgmax_data.fgmax_grids  # empty list to start
+        fgmax_grids = rundata.fgmax_data.fgmax_grids  # empty list to start
 
-    # Now append to this list objects of class fgmax_tools.FGmaxGrid
-    # specifying any fgmax grids.
+        # Now append to this list objects of class fgmax_tools.FGmaxGrid
+        # specifying any fgmax grids.
 
-    if 1:
-        # fgmax region covering Yaquina Bay and Newport, west of -124.
+        # Points on a uniform 2d grid:
+        # grid resolution at 1/3" level
+        dx_fine = 1./(3.0*3600.) 
+
+        #We specified the domain edges to be whole numbers - 1/6".
+        #So whole numbers are at a cell centers. The fgmax_extent numbers
+        #below are at 1/3" cell centers also.
+        
         fg = fgmax_tools.FGmaxGrid()
-        fg.xy_fname = root_dir + '/topo/fgmax_grids/fgmax_pts_Newport.data'
-        fg.point_style = 4
-        fg.tstart_max =  30.*60.  # when to start monitoring max values, at 20minutes 
+        fgmax_extent = [-123.94,-123.9025,45.9725,46.02]
+        fg.point_style = 2                    # uniform rectangular x-y grid
+        fg.x1 = fgmax_extent[0] #+ dx_fine/2.
+        fg.x2 = fgmax_extent[1] #- dx_fine/2.
+        fg.y1 = fgmax_extent[2] #+ dx_fine/2.
+        fg.y2 = fgmax_extent[3] #- dx_fine/2.
+        fg.dx = dx_fine
+        fg.dy = dx_fine
+        #fg.tstart_max = 0.  # SHORT TEST
+        fg.tstart_max =  20.*60.  # when to start monitoring max values, at 20minutes 
         fg.tend_max = 1.e10       # when to stop monitoring max values
-        fg.dt_check = 5.          # target time (sec) increment between updating. 
+        fg.dt_check = 10.         # target time (sec) increment between updating
         # monitor on finest level:
         fg.min_level_check = amrdata.amr_levels_max
         fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
         fg.interp_method = 0      # 0 ==> pw const in cells, recommended
         fgmax_grids.append(fg)    # written to fgmax_grids.data
-    
-    if 1:
-        # fgmax region covering Yaquina River, east of -124.
-        fg = fgmax_tools.FGmaxGrid()
-        fg.xy_fname = root_dir + '/topo/fgmax_grids/fgmax_pts_NewportE.data'
-        fg.point_style = 4
-        fg.tstart_max =  30.*60.  # when to start monitoring max values, at 20minutes 
-        fg.tend_max = 1.e10       # when to stop monitoring max values
-        fg.dt_check = 5.          # target time (sec) increment between updating. 
-        # monitor on finest level:
-        fg.min_level_check = amrdata.amr_levels_max
-        fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
-        fg.interp_method = 0      # 0 ==> pw const in cells, recommended
-        fgmax_grids.append(fg)    # written to fgmax_grids.data
-    
 
 
     # == fgout_grids.data values ==
@@ -753,7 +740,7 @@ def setrun(claw_pkg='geoclaw'):
         # full domain (smaller for inundation run than for offshore_gauges)
         dx_fgout = 120./3600.  # degrees (two minute)
         dy_fgout = 120./3600.  # degrees
-        dt_fgout = 30  # seconds
+        dt_fgout = 30.         # seconds
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 1
         fgout.point_style = 2       # will specify a 2d grid of points
@@ -775,15 +762,17 @@ def setrun(claw_pkg='geoclaw'):
         # small region for inset plot
         dx_fgout = 6/3600.
         dy_fgout = 12/3600.  # degrees
-        dt_fgout = 30  # seconds
+        dt_fgout = 30.       # seconds
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 2
         fgout.point_style = 2       # will specify a 2d grid of points
         fgout.output_format = 'binary32'
-        fgout.x1 = -124.145 - one_sixth  # specify edges (fgout pts will be cell centers)
-        fgout.x2 = -124.055 - one_sixth
-        fgout.y1 = 44.56 - one_sixth
-        fgout.y2 = 44.67 - one_sixth
+
+        ##Need to specify edges of cells, whole numbers are centers
+        fgout.x1 = -126.0 -one_sixth   # specify edges (fgout pts will be cell centers)
+        fgout.x2 = -123.9 -one_sixth
+        fgout.y1 = 45.7 -one_sixth 
+        fgout.y2 = 46.4 -one_sixth
         fgout.nx = int(round((fgout.x2 - fgout.x1)/dx_fgout))
         fgout.ny = int(round((fgout.y2 - fgout.y1)/dy_fgout))
         fgout.tstart = 0.
@@ -793,16 +782,12 @@ def setrun(claw_pkg='geoclaw'):
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
     if 1:
-        #Keep this inside the 1/3 computational grid which was
-        #[-124.102,-123.9175,44.564,44.675]
-
-        west13 = -124.1 - one_sixth; east13 = -123.9175 - one_sixth;
-        south13 = 44.565 - one_sixth; north13 = 44.675 - one_sixth;
+        # 1/3" grid around Seaside from old topo run
+        #Make this fgout be the 1/3 computation region edges
         fgout_extent = [west13,east13,south13,north13]
         dx_fgout = 1/3 * 1/3600.  # degrees
         dy_fgout = dx_fgout
         dt_fgout = 15  # seconds
-        
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 3
         fgout.point_style = 2  # uniform rectangular x-y grid
@@ -857,9 +842,7 @@ def setrun(claw_pkg='geoclaw'):
 if __name__ == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
-    sys.path.insert(0,root_dir+'/common_code')
-    import kmltools
-    #from clawpack.geoclaw import kmltools
+    from clawpack.geoclaw import kmltools
     rundata = setrun(*sys.argv[1:])
     rundata.write()
     

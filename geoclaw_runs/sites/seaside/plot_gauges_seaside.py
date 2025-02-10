@@ -59,7 +59,9 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     etamax_pquake = hmax + B_post
 
     ### Find h0 from B0 and sea_level of this particular job run
-    ### Assuming no etainit
+    ### Assuming no etainit applies to this particular gauge.
+    ### If etainit does apply, got to know the value of etainit used,
+    ### then h0 = etainit - B0
     if (B0 >= sea_level):
         h0=0.0
     else:
@@ -68,7 +70,7 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     #### Sanity Check ####
     print ('    GAUGE NO: ',gaugeno)
     print (' Before nanning: Bmin and Bmax were: ',Bmin,Bmax)
-    print (' Indexes: ind_hmax, ind_B were: 'ind_hmax,ind_B)
+    print (' Indexes: ind_hmax, ind_B were: ',ind_hmax,ind_B)
     print (' t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0 were: ')
     print (t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0)
     print ('hmax, etamax and etamax_pquake were: ',hmax,etamax,etamax_pquake)
@@ -137,17 +139,18 @@ if __name__ == '__main__':
     sys.path.insert(0,'.')
     from params import event, location
 
-    geodata = ClawData()
-    geodata.read('geoclaw.data',force=True)
-    sea_level = geodata.sea_level
-    print('+++ sea_level = %.3f' % sea_level)
-
     outdir = os.path.abspath('./_output')
     plotdir = os.path.abspath('./_plots')
     os.system('mkdir -p %s' % plotdir)
     print('Will take output from \n    %sand send plots to \n    %s' \
             % (outdir,plotdir))
     
+    geodata = ClawData()
+    fname = outdir + '/geoclaw.data'
+    geodata.read(fname,force=True)
+    sea_level = geodata.sea_level
+    print('+++ sea_level = %.3f' % sea_level)
+
     gaugenos = range(1001,1068,1)
     gaugeno_dict = {}
 
