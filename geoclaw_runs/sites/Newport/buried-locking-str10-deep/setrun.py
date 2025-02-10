@@ -48,6 +48,13 @@ if instant:
                                 # to propogate immediately
     print ('assuming this is an instantaneous rupture')
     print (' ')
+    topodir = root_dir + '/topo/topofiles'                        #  on Loyces laptop
+    dtopodir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'   # Not used it seems
+
+    # for hyak cluster:
+    topodir = topodir.replace('/mmfs1/home', '/gscratch/tsunami')
+    dtopodir = dtopodir.replace('/mmfs1/home', '/gscratch/tsunami')
+
 else:
     tmax_dtopo_region = 20*60.  # force fine grids up to this time
                                 # 20 minutes for wave to propagate
