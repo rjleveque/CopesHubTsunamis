@@ -69,11 +69,11 @@ def make_anim(outdir, plotdir, location, event):
     
     one_sixth = 1.0/(6.0*3600.)
     #The east13, etc below are all edges on the 1/3" computational grid
-    east13 = -123.9975 - one_sixth; west13 = -123.9025 + one_sixth;
+    west13 = -123.9975 - one_sixth; east13 = -123.9025 + one_sixth;
     north13 = 46.0375 + one_sixth; south13 = 45.97 - one_sixth;
     #GE_image = imread(graphics_dir + '/seaside_fgout0003GE.png')
     GE_image = imread(graphics_dir + '/seaside_fgout0003GE_new.jpg')
-    GE_extent = [east13,west13,south13,north13]
+    GE_extent = [west3,east3,south13,north13]
     
     # Instantiate object for reading fgout frames:
     fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
