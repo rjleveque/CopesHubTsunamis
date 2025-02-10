@@ -192,9 +192,11 @@ def setrun(claw_pkg='geoclaw'):
         #clawdata.tfinal = 30.              # SHORT TEST
         #clawdata.output_t0 = True          # output at initial (or restart) time?
 
-        clawdata.num_output_times = 4      # every 30 minutes
+        clawdata.num_output_times = 0      # every 30 minutes
         clawdata.tfinal = 2.0*3600.
+        #clawdata.tfinal = 30.
         clawdata.output_t0 = False        # output at initial (or restart) time?
+        #clawdata.output_t0 = True          # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -736,7 +738,6 @@ def setrun(claw_pkg='geoclaw'):
     
 
 
-    #####  HERE -- not setup yet for fgout
     # == fgout_grids.data values ==
     # NEW IN v5.9.0
     # Set rundata.fgout_data.fgout_grids to be a list of
@@ -748,10 +749,10 @@ def setrun(claw_pkg='geoclaw'):
     else:
         q_out_vars = [1,2,3,4] # h,hu,hv,eta for shallow code
 
-    if 0:
+    if 1:
         # full domain (smaller for inundation run than for offshore_gauges)
-        dx_fgout = 60./3600.  # degrees
-        dy_fgout = 60./3600.  # degrees
+        dx_fgout = 120./3600.  # degrees (two minute)
+        dy_fgout = 120./3600.  # degrees
         dt_fgout = 30  # seconds
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 1
@@ -770,19 +771,19 @@ def setrun(claw_pkg='geoclaw'):
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
 
-    if 0:
+    if 1:
         # small region for inset plot
-        dx_fgout = 5/3600.
-        dy_fgout = 15/3600.  # degrees
+        dx_fgout = 6/3600.
+        dy_fgout = 12/3600.  # degrees
         dt_fgout = 30  # seconds
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 2
         fgout.point_style = 2       # will specify a 2d grid of points
         fgout.output_format = 'binary32'
-        fgout.x1 = -126.  # specify edges (fgout pts will be cell centers)
-        fgout.x2 = -123.9
-        fgout.y1 = 45.7
-        fgout.y2 = 46.4
+        fgout.x1 = -124.145 - one_sixth  # specify edges (fgout pts will be cell centers)
+        fgout.x2 = -124.055 - one_sixth
+        fgout.y1 = 44.56 - one_sixth
+        fgout.y2 = 44.67 - one_sixth
         fgout.nx = int(round((fgout.x2 - fgout.x1)/dx_fgout))
         fgout.ny = int(round((fgout.y2 - fgout.y1)/dy_fgout))
         fgout.tstart = 0.
@@ -791,9 +792,13 @@ def setrun(claw_pkg='geoclaw'):
         fgout.q_out_vars = q_out_vars
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
-    if 0:
-        # 1/3" grid around Seaside from old topo run
-        fgout_extent = [-123.96,-123.9025,45.972,46.0275]
+    if 1:
+        #Keep this inside the 1/3 computational grid which was
+        #[-124.102,-123.9175,44.564,44.675]
+
+        west13 = -124.1 - one_sixth; east13 = -123.9175 - one_sixth;
+        south13 = 44.565 - one_sixth; north13 = 44.675 - one_sixth;
+        fgout_extent = [west13,east13,south13,north13]
         dx_fgout = 1/3 * 1/3600.  # degrees
         dy_fgout = dx_fgout
         dt_fgout = 15  # seconds
