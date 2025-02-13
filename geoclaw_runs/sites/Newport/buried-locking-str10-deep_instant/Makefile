@@ -58,7 +58,6 @@ include $(GEOLIB)/Makefile.geoclaw
 EXCLUDE_MODULES = \
 
 EXCLUDE_SOURCES = \
-  $(GEOLIB)/getmaxspeed.f90 \
 
 # ----------------------------------------
 # List of custom sources for this program:
@@ -69,14 +68,11 @@ MODULES = \
 
 SOURCES = \
   $(CHT)/common_code/b4step2.f90 \
-  $(CHT)/common_code/getmaxspeed_reset.f90 \
+  $(CHT)/common_code/getmaxspeed.f90 \
   $(CLAW)/riemann/src/rpn2_geoclaw.f \
   $(CLAW)/riemann/src/rpt2_geoclaw.f \
   $(CLAW)/riemann/src/geoclaw_riemann_utils.f \
 
-# $(CHT)/common_code/tick.f \
-# $(CHT)/common_code/stepgrid.f \
-# $(CHT)/common_code/gfixup.f \
 
 #-------------------------------------------------------------------
 # Include Makefile containing standard definitions and make options:
