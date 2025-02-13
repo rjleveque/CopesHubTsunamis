@@ -71,8 +71,8 @@ subroutine b4step2(mbc,mx,my,meqn,q,xlower,ylower,dx,dy,t,dt,maux,aux,actualstep
                     write(outunit,603) s,q(1,i,j),aux(1,i,j),xs,ys
  604                format('b4step2 at t =',f10.2, '  i,j,mx,my:',4i4, &
                            '  dx = ',f10.7)
- 603                format('     reset s =',f8.2,'  h=',f9.4,  ' B=',f8.3,&
-                           '  x,y = ', f12.6,',',f12.6)
+ 603                format('     reset s =',f9.2,'  h=',e11.3, ' B=',f8.2,&
+                           '  x,y = ', f11.6,',',f10.6)
                endif
             endif
         enddo

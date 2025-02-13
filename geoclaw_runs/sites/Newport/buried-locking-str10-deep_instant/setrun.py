@@ -178,8 +178,8 @@ def setrun(claw_pkg='geoclaw'):
     # restart_file 'fort.chkNNNNN' specified below should be in 
     # the OUTDIR indicated in Makefile.
 
-    clawdata.restart = False
-    clawdata.restart_file = 'fort.chk00260'
+    clawdata.restart = True
+    clawdata.restart_file = 'fort.chkbbbbb'
 
     tstart_finestgrid = 0. #14*60.
 
@@ -335,7 +335,7 @@ def setrun(claw_pkg='geoclaw'):
     # so that at most 2 checkpoint files exist at any time, useful when
     # doing frequent checkpoints of large problems.
 
-    clawdata.checkpt_style = 0
+    clawdata.checkpt_style = -3
 
     if clawdata.checkpt_style == 0:
         # Do not checkpoint at all
@@ -352,7 +352,7 @@ def setrun(claw_pkg='geoclaw'):
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)
         # and at the final time.
-        clawdata.checkpt_interval = 5
+        clawdata.checkpt_interval = 10
 
 
     # ---------------
@@ -715,7 +715,7 @@ def setrun(claw_pkg='geoclaw'):
     # Now append to this list objects of class fgmax_tools.FGmaxGrid
     # specifying any fgmax grids.
 
-    if 1:
+    if 0:
         # fgmax region covering Yaquina Bay and Newport, west of -124.
         fg = fgmax_tools.FGmaxGrid()
         fg.xy_fname = root_dir + '/topo/fgmax_grids/fgmax_pts_Newport.data'
@@ -729,7 +729,7 @@ def setrun(claw_pkg='geoclaw'):
         fg.interp_method = 0      # 0 ==> pw const in cells, recommended
         fgmax_grids.append(fg)    # written to fgmax_grids.data
     
-    if 1:
+    if 0:
         # fgmax region covering Yaquina River, east of -124.
         fg = fgmax_tools.FGmaxGrid()
         fg.xy_fname = root_dir + '/topo/fgmax_grids/fgmax_pts_NewportE.data'
@@ -756,7 +756,7 @@ def setrun(claw_pkg='geoclaw'):
     else:
         q_out_vars = [1,2,3,4] # h,hu,hv,eta for shallow code
 
-    if 1:
+    if 0:
         # full domain (smaller for inundation run than for offshore_gauges)
         dx_fgout = 120./3600.  # degrees (two minute)
         dy_fgout = 120./3600.  # degrees
@@ -778,7 +778,7 @@ def setrun(claw_pkg='geoclaw'):
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
 
-    if 1:
+    if 0:
         # small region for inset plot
         dx_fgout = 6/3600.
         dy_fgout = 12/3600.  # degrees
@@ -799,7 +799,7 @@ def setrun(claw_pkg='geoclaw'):
         fgout.q_out_vars = q_out_vars
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
-    if 1:
+    if 0:
         #Keep this inside the 1/3 computational grid which was
         #[-124.102,-123.9175,44.564,44.675]
 
