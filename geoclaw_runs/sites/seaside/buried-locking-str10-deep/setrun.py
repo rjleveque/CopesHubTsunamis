@@ -169,7 +169,7 @@ def setrun(claw_pkg='geoclaw'):
     # restart_file 'fort.chkNNNNN' specified below should be in 
     # the OUTDIR indicated in Makefile.
 
-    clawdata.restart = True 
+    clawdata.restart = False
     clawdata.restart_file = 'fort.chk00180'
 
     tstart_finestgrid = 0. #14*60.
@@ -338,7 +338,7 @@ def setrun(claw_pkg='geoclaw'):
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)
         # and at the final time.
-        clawdata.checkpt_interval = 30
+        clawdata.checkpt_interval = 50
 
 
     # ---------------
@@ -676,7 +676,7 @@ def setrun(claw_pkg='geoclaw'):
 
     # fgmax grids:
 
-    if 0:  # Use a 1/3" fgmax grid like our Seaside project
+    if 1:  # Use a 1/3" fgmax grid like our Seaside project
         # == fgmax_grids.data values ==
         # NEW STYLE STARTING IN v5.7.0
 
@@ -729,7 +729,7 @@ def setrun(claw_pkg='geoclaw'):
     else:
         q_out_vars = [1,2,3,4] # h,hu,hv,eta for shallow code
 
-    if 0:
+    if 1:
         # full domain (smaller for inundation run than for offshore_gauges)
         dx_fgout = 120./3600.  # degrees (two minute)
         dy_fgout = 120./3600.  # degrees
@@ -751,7 +751,7 @@ def setrun(claw_pkg='geoclaw'):
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
 
-    if 0:
+    if 1:
         # small region for inset plot
         dx_fgout = 6/3600.
         dy_fgout = 12/3600.  # degrees
@@ -774,7 +774,7 @@ def setrun(claw_pkg='geoclaw'):
         fgout.q_out_vars = q_out_vars
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
-    if 0:
+    if 1:
         # 1/3" grid around Seaside from old topo run
         #Make this fgout be the 1/3 computation region edges
         fgout_extent = [east13,west13,south13,north13]
