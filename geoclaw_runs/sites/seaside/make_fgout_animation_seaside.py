@@ -73,7 +73,7 @@ def make_anim(outdir, plotdir, location, event):
     north13 = 46.0375 + one_sixth; south13 = 45.97 - one_sixth;
     #GE_image = imread(graphics_dir + '/seaside_fgout0003GE.png')
     GE_image = imread(graphics_dir + '/seaside_fgout0003GE_new.jpg')
-    GE_extent = [west3,east3,south13,north13]
+    GE_extent = [west13,east13,south13,north13]
     
     # Instantiate object for reading fgout frames:
     fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
