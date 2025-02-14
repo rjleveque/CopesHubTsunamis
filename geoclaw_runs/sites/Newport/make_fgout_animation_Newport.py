@@ -25,12 +25,6 @@ except:
     raise Exception("*** Set CHT enviornment variable to repository top")
 
 
-sys.path.insert(0,'.')
-from params import event, location
-    
-qmap = 'geoclaw'
-if 'bouss' in event:
-    qmap = 'geoclaw-bouss'
 
 #graphics_dir = os.path.abspath(CHT + '/graphics')
 graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/Newport')
@@ -76,8 +70,18 @@ def make_anim(outdir, plotdir, location, event):
     GE_extent = [west13,east13,south13,north13]
     
     # Instantiate object for reading fgout frames:
-    fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
-                                        #qmap=qmap)
+
+    qmap = 'geoclaw'
+    if 'bouss' in event:
+        qmap = 'geoclaw-bouss'
+
+    try:
+        fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format,
+                                            qmap=qmap)
+    except:
+        print('*** fgout_tools does not support qmap')
+        fgout_grid1 = fgout_tools.FGoutGrid(fgno, outdir, output_format)
+    
     fgout_grid1.read_fgout_grids_data()
 
     
@@ -450,6 +454,12 @@ def make_anim(outdir, plotdir, location, event):
 
 if __name__ == '__main__':
 
+    # running from within a single event directory, 
+    # which should include a params.py file:
+
+    sys.path.insert(0,'.')
+    from params import event, location
+    
     outdir = os.path.abspath('./_output')
     plotdir = os.path.abspath('./_plots')
     #plotdir = os.path.abspath('.')
