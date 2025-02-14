@@ -62,20 +62,19 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     ### Assuming no etainit applies to this particular gauge.
     ### If etainit does apply, got to know the value of etainit used,
     ### then h0 = etainit - B0
-    if (B0 >= sea_level):
-        h0=0.0
-    else:
-        h0=sea_level - B0
-        
-    #### Sanity Check ####
-    print ('    GAUGE NO: ',gaugeno)
-    print (' Before nanning: Bmin and Bmax were: ',Bmin,Bmax)
-    print (' Indexes: ind_hmax, ind_B were: ',ind_hmax,ind_B)
-    print (' t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0 were: ')
-    print (t[0],h[0],B[0],B[-1],B[ind_hmax],B_post,eta[0],h0,B0)
-    print ('hmax, etamax and etamax_pquake were: ',hmax,etamax,etamax_pquake)
-    print (' ')
 
+    special_gauge = False    #say we have determined this gauge doesn't get etainit
+    no_force_dry = True      #didn't force any gauges to be dry
+    if (special_gauge):
+        etainit_level = 2.0  #example, never used
+    else:
+        etainit_level = sea_level
+    fill_up_condition = (B0 < etainit_level) & no_force_dry
+    if (fill_up_condition):         #fill up to etainit_level initially which is sealevel here.
+        h0 = etainit_level - B0
+    else:
+        h0 = 0.0                    #location stays dry
+        
     ######### Find the time of the maximum hmax, and the first time h0 INCREASES.
     tmax = t[ind_hmax]
     hdeep_index = where((h-h0) > 0.05)[0]
@@ -95,8 +94,8 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     ylabel('Flow depth (m)')
     grid(linewidth=0.5)
     title('Gauge %i at x = %.5f, y = %.5f In %s for Event %s \n \
-      hmax = %.2f, smax = %.2f, mfluxmax = %.2f' 
-      % (gaugeno,x,y,location,event,hmax,smax,mfluxmax))
+      h0 = %.2f, hmax = %.2f, smax = %.2f, mfluxmax = %.2f' 
+      % (gaugeno,x,y,location,event,h0,hmax,smax,mfluxmax))
 
     subplot(312)
     plot(t, s, 'b')
@@ -131,7 +130,7 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     savefig(fname2, bbox_inches='tight')
     print('Created %s' % fname2)
 
-    return B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
+    return B_post,h0,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
 
 
 if __name__ == '__main__':
@@ -164,16 +163,16 @@ if __name__ == '__main__':
 
         # NEW: Passing B0 and sea_level in
         B0 = gauge_B0[gaugeno]
-        B_post,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst =\
+        B_post,h0,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst =\
               make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level)
 
         ## Save the info for this gauge in the dictionary below for later printing
-        value_dict={'B0': B0, 'B': B_post, 'max_h': hmax, 'max_eta': etamax,\
+        value_dict={'B0': B0, 'B': B_post, 'h0':h0, 'max_h': hmax, 'max_eta': etamax,\
             'max_eta_pquake': etamax_pquake, 'max_speed': smax, 'max_momentum':momentummax, \
             'max_mflux': mfluxmax, 'tmax': tmax, 'tfirst': tfirst}
         gaugeno_dict[gaugeno]=value_dict
     
-    ## print gauge report 
+    ## print gauge report as a .txt file
     fprint_path = 'gauges_report_timesarrival.txt'
     print('Will send output to \n   ',fprint_path)
     fprint_file = open(fprint_path,'w')
@@ -184,17 +183,37 @@ if __name__ == '__main__':
 
     fprint(' ')
     fprint('               SUMMARY FOR EACH OF THESE GAUGES                ' )
-    fprint('                           max     max   max IE    max    max       max                      ' )
-    fprint(' Gauge     B0        B      h      eta   post-eta   s     hs        hss        tmax    tfirst' )
-    fprint('   No     (m)       (m)    (m)     (m)     (m)    (m/s)  (m*m/s)  (m^3/s^2)    (min)   (min) ')
+    fprint('                                   max     max    max     max    max       max                      ' )
+    fprint(' Gauge     B0        B      h0      h      IE   post-IE    s     hs        hss        tmax    tfirst' )
+    fprint('   No     (m)       (m)    (m)     (m)     (m)     (m)    (m/s)  (m*m/s)  (m^3/s^2)    (min)   (min) ')
     for key in gaugeno_dict:
         value_dict = gaugeno_dict[key]
-        fprint('%5i %8.3f %8.3f %6.2f  %6.2f  %6.2f  %6.2f  %8.2f  %8.2f %8.1f %8.1f' %(key,value_dict['B0'],\
-               value_dict['B'],value_dict['max_h'],\
+        fprint('%5i %8.3f %8.3f %6.2f  %6.2f  %6.2f  %6.2f  %6.2f  %8.2f  %8.2f %8.1f %8.1f' %(key,value_dict['B0'],\
+               value_dict['B'],value_dict['h0'],value_dict['max_h'],\
                value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
                value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
 
     fprint(' ')
     fprint(' ')
 
+    ## print gauge report as a .csv file
+    fname = 'gauges_report_timesarrival.csv'
+    with open(fname,'w') as f:
+        f.write('# \n')
+        f.write('# GAUGE REPORT\n')
+        f.write('# EVENT: %s\n' %event)
+        f.write('# LOCATION: %s\n' %location)
+        f.write('# \n ')
+        f.write('      ,  , ,  ,max,max,max,max,max,max,,\n')
+        f.write('Gauge ,B0,B,h0,h,IE,post-IE,s,hs,hss,tmax,tfirst\n')
+        f.write('Number,(m),(m),(m),(m),(m),(m),(m/s),(m*m/s),(m^3/s^2),(min),(min)\n')
+
+        for key in gaugeno_dict:
+            value_dict = gaugeno_dict[key]
+            f.write('%5i, %8.3f, %8.3f, %6.2f, %6.2f,  %6.2f,  %6.2f,  %6.2f,  %8.2f,  %8.2f, %8.1f, %8.1f\n'\
+                   %(key,value_dict['B0'],value_dict['B'],value_dict['h0'],value_dict['max_h'],\
+                   value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
+                   value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
+
+    fprint(' Created ',fname)
     close('all')
