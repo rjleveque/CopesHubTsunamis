@@ -9,12 +9,13 @@ import clawpack.pyclaw.gauges as gauges
 from gauge_B0_tools import read_gauge_B0
 from clawpack.clawutil.data import ClawData
 
-def fprint(*args):
-    # build a string out of all the arguments passed to fprint:
-    line = ''
-    for arg in args:
-        line = line + str(arg)
-    fprint_file.write('%s\n' % line)
+# read dictionary of B0 values indexed by gaugeno:
+gauge_B0 = read_gauge_B0('../gauges_B0.csv')
+gaugenos_Newport = gauge_B0.keys()
+#gaugenos_Newport = range(1001,1079,1)
+print('gaugenos_Newport = ',gaugenos_Newport)
+
+
 
 def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
     gauge = gauges.GaugeSolution(gaugeno, outdir)
@@ -133,29 +134,8 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
 
     return B_post,h0,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
 
-
-if __name__ == '__main__':
-
-    sys.path.insert(0,'.')
-    from params import event, location
-
-    outdir = os.path.abspath('./_output')
-    plotdir = os.path.abspath('./_plots')
-    os.system('mkdir -p %s' % plotdir)
-    print('Will take output from \n    %sand send plots to \n    %s' \
-            % (outdir,plotdir))
-
-    geodata = ClawData()
-    fname = outdir + '/geoclaw.data'
-    geodata.read(fname,force=True)
-    sea_level = geodata.sea_level
-    print('+++ sea_level = %.3f' % sea_level)
-    
-    gaugenos = range(1001,1079,1)
+def plot_all_gauges_make_csv(gaugenos=gaugenos_Newport):
     gaugeno_dict = {}
-
-    # read dictionary of B0 values indexed by gaugeno:
-    gauge_B0 = read_gauge_B0('../gauges_B0.csv')
     
     for gaugeno in gaugenos:
         #OLD
@@ -176,26 +156,36 @@ if __name__ == '__main__':
     ## print gauge report as a .txt file 
     fprint_path = 'gauges_report_timesarrival.txt'
     print('Will send output to \n   ',fprint_path)
-    fprint_file = open(fprint_path,'w')
-    fprint(' ')
-    fprint('\nGAUGE REPORT\n')
-    fprint('EVENT: %s\n' %event)
-    fprint('LOCATION: %s\n' %location)
 
-    fprint(' ')
-    fprint('               SUMMARY FOR EACH OF THESE GAUGES                ' )
-    fprint('                                  max     max    max       max    max       max                      ' )
-    fprint(' Gauge     B0        B     h0      h      IE    post-IE     s     hs        hss        tmax    tfirst' )
-    fprint('   No     (m)       (m)    (m)    (m)     (m)     (m)     (m/s)  (m*m/s)  (m^3/s^2)    (min)   (min) ')
-    for key in gaugeno_dict:
-        value_dict = gaugeno_dict[key]
-        fprint('%5i %8.3f %8.3f %6.2f  %6.2f  %6.2f  %6.2f  %6.2f  %8.2f  %8.2f %8.1f %8.1f' %(key,value_dict['B0'],\
-               value_dict['B'],value_dict['h0'],value_dict['max_h'],\
-               value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
-               value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
+    with open(fprint_path,'w') as fprint_file:
 
-    fprint(' ')
-    fprint(' ')
+        def fprint(*args):
+            # build a string out of all the arguments passed to fprint:
+            line = ''
+            for arg in args:
+                line = line + str(arg)
+            fprint_file.write('%s\n' % line)
+
+
+        fprint(' ')
+        fprint('\nGAUGE REPORT\n')
+        fprint('EVENT: %s\n' %event)
+        fprint('LOCATION: %s\n' %location)
+
+        fprint(' ')
+        fprint('               SUMMARY FOR EACH OF THESE GAUGES                ' )
+        fprint('                                  max     max    max       max    max       max                      ' )
+        fprint(' Gauge     B0        B     h0      h      IE    post-IE     s     hs        hss        tmax    tfirst' )
+        fprint('   No     (m)       (m)    (m)    (m)     (m)     (m)     (m/s)  (m*m/s)  (m^3/s^2)    (min)   (min) ')
+        for key in gaugeno_dict:
+            value_dict = gaugeno_dict[key]
+            fprint('%5i %8.3f %8.3f %6.2f  %6.2f  %6.2f  %6.2f  %6.2f  %8.2f  %8.2f %8.1f %8.1f' %(key,value_dict['B0'],\
+                   value_dict['B'],value_dict['h0'],value_dict['max_h'],\
+                   value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
+                   value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
+
+        fprint(' ')
+        fprint(' ')
 
     ## print gauge report as a .csv file 
     fname = 'gauges_report_timesarrival.csv'
@@ -216,5 +206,28 @@ if __name__ == '__main__':
                    value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
                    value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
 
-    fprint(' Created ',fname)
+    print(' Created ',fname)
     close('all')
+
+if __name__ == '__main__':
+
+    sys.path.insert(0,'.')
+    from params import event, location
+
+    outdir = os.path.abspath('./_output')
+    plotdir = os.path.abspath('./_plots')
+    os.system('mkdir -p %s' % plotdir)
+    print('Will take output from \n    %sand send plots to \n    %s' \
+            % (outdir,plotdir))
+
+    geodata = ClawData()
+    fname = outdir + '/geoclaw.data'
+    geodata.read(fname,force=True)
+    sea_level = geodata.sea_level
+    print('+++ sea_level = %.3f' % sea_level)
+
+    #plot_all_gauges_make_csv(gaugenos=gaugenos_Newport)
+    
+    gaugenos_test = range(1001,1003)
+    plot_all_gauges_make_csv(gaugenos=gaugenos_test)
+    
