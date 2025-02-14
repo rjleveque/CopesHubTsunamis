@@ -1,4 +1,3 @@
-from pylab import *
 from clawpack.clawutil import runclaw
 
 import multip_tools
@@ -69,7 +68,6 @@ def run_one_case_clawpack(case):
 
     from plotclaw import plotclaw  # local version with plotdata argument
 
-    from clawpack.visclaw.plotpages import plotclaw2html
     import importlib
     import os,sys,shutil,pickle
     from multiprocessing import current_process
@@ -96,6 +94,7 @@ def run_one_case_clawpack(case):
     # clawpack.clawutil.runclaw parameters that might be specified:
     overwrite = case.get('overwrite', True) # if False, abort if outdir exists
     runexe = case.get('runexe', None)  # string that must preceed xclawcmd
+    nohup = case.get('nohup', False)  # run with nohup
 
     redirect_python = case.get('redirect_python', True) # sent stdout to file
 
@@ -117,23 +116,20 @@ def run_one_case_clawpack(case):
                 + ' UTC'
     message = "Process %i started   case %s at %s\n" \
                 % (p.pid, case_name, timenow)
-
-
-    stdout_fname = outdir + '/python_output.txt'
-    try:
-        stdout_file = open(stdout_fname, 'w')
-        message = message +  "Python output from this run will go to\n   %s\n" \
-                            % stdout_fname
-    except:
-        print(message)
-        raise Exception("Cannot open file %s" % stdout_fname)
-
-    message = message +  "Fortran output from this run will go to\n   %s\n" \
-                        % (outdir+'/nohup.out')
-
     print(message)
 
+
     if redirect_python:
+        stdout_fname = outdir + '/python_output.txt'
+        try:
+            stdout_file = open(stdout_fname, 'w')
+            message = "Python output from this run will go to\n   %s\n" \
+                                % stdout_fname
+        except:
+            print(message)
+            raise Exception("Cannot open file %s" % stdout_fname)
+
+
         # Redirect stdout,stderr so any print statements go to a unique file...
         import sys
         sys_stdout = sys.stdout
@@ -192,10 +188,14 @@ def run_one_case_clawpack(case):
         if not os.path.isfile(xclawcmd):
             raise Exception('Executable %s not found' % xclawcmd)
 
+        # redirect output and error messages:
+        outfile = os.path.join(outdir, 'geoclaw_output.txt')
+        print('GeoClaw output will be redirected to\n    ', outfile)
+    
         # Use data from rundir=outdir, which was just written above...
         runclaw(xclawcmd=xclawcmd, outdir=outdir, overwrite=overwrite,
-                rundir=outdir, nohup=True, runexe=runexe,
-                xclawout=None, xclawerr=None)
+                rundir=outdir, nohup=nohup, runexe=runexe,
+                xclawout=outfile, xclawerr=outfile)
 
     if make_plots:
 
@@ -216,8 +216,6 @@ def run_one_case_clawpack(case):
 
         # change things in plotdata as specified by case['setplot_params']:
         plotdata = set_plotdata_params(plotdata, case['setplot_params'])
-
-        #plotclaw2html(plotdata)  # does not work
 
         # note that modified plotclaw is needed in order to pass plotdata here:
         plotclaw(outdir, plotdir, plotdata=plotdata)
