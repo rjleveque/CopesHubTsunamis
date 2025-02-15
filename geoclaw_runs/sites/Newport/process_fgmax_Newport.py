@@ -45,7 +45,7 @@ try:
     CHT = os.environ['CHT']
 except:
     raise Exception("*** Set CHT enviornment variable to repository top")
-    
+
 use_force_dry = False
 if use_force_dry:
     fname_force_dry = os.path.join(input_dir, 'force_dry_init.data')
@@ -84,7 +84,7 @@ def load_fgmax(outdir,fgno,fname_B0):
     dB = fg.B - fg.B0
     print('Minimum/maximum dB in fgmax region: %.2f m, %.2f m' \
             % (dB.min(), dB.max()))
-            
+
     return fg, t_hours
 
 # colormaps used below:
@@ -118,7 +118,7 @@ norm_eta = colors.BoundaryNorm(bounds_eta, cmap_eta.N)
 
 # colormap for speed:
 bounds_speed = np.array([1e-6,1,2,4,6,8,10,12])
-cmap_speed = mpl.colors.ListedColormap([[.9,.9,1],[.6,.6,1],                
+cmap_speed = mpl.colors.ListedColormap([[.9,.9,1],[.6,.6,1],
                 [.3,.3,1],[0,0,1], [1,.8,.8],
                 [1,.6,.6], [1,0,0]])
 
@@ -131,14 +131,14 @@ cmap_speed.set_over(color=[1,0,1])
 cmap_speed.set_under(color=[.7,1,.7,0])
 
 norm_speed = colors.BoundaryNorm(bounds_speed, cmap_speed.N)
-    
+
 
 
 def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
 
     #Here, GE_extent is the fgmax_extent
     fgmax_extent = GE_extent
-    
+
     def savefigp(fname):
         global save_figs
         if save_figs:
@@ -163,18 +163,18 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
 
     cmap, norm = colormaps.add_colormaps((land_cmap, sea_cmap),
                                          data_limits=(zmin,zmax),
-                                         data_break=0.)                                   
+                                         data_break=0.)
 
     def plotZ(Z, show_cb=True):
-        pc = plottools.pcolorcells(fg.X, fg.Y, Z, cmap=cmap, norm=norm)  
+        pc = plottools.pcolorcells(fg.X, fg.Y, Z, cmap=cmap, norm=norm)
         if show_cb:
             cb = colorbar(pc,shrink=0.5,extend='both')
             cb.set_label('meters')
         gca().set_aspect(1./cos(ylat*pi/180.))
         ticklabel_format(useOffset=False)
         xticks(rotation=20);
-        
-        
+
+
     figure(figsize=(12,8))
     subplot(121)
     plotZ(fg.B0, show_cb=True)
@@ -211,7 +211,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
                             fg.B0+fg.h, fg.h_onshore)
     fg.zeta_onshore = ma.masked_where(offshore, fg.zeta_onshore)
 
-    # use B0 for continuity at shore:                                    
+    # use B0 for continuity at shore:
     fg.eta_offshore = ma.masked_where(onshore, fg.B0 + fg.h)
 
 
@@ -233,14 +233,14 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     xticks(rotation=20)
     title('Maximum onshore flow depth h over %.2f hours\n' % t_hours \
             +'(h+B0 in harbor/rivers), max = %.2f meters ' % maxh_onshore)
-    
+
     #For Newport
     # Add transects to planview plot:
     one_third = 1.0/(3.0*3600.)
     yt1 = 44.635; Ttitle1 = ' '
     yt2 = 44.615; Ttitle2 = '(Yaq. Bay)'
     yt3 = 44.6025; Ttitle3 = ' '
-    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third 
+    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third
     plot([x1trans,x2trans], [yt1,yt1],'-', color='yellow', linewidth=1.2)
     text(x1trans,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=12,
          ha='left', color='yellow')
@@ -289,7 +289,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     #import pdb; pdb.set_trace()
 
     #Use same ones from before to see how plots look
-    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third 
+    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third
 
     def extract_transect(fgmax_soln,xtrans,ytrans):
         h1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
@@ -317,7 +317,7 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
         xt = axtrans.get_xticks()
         #axtrans.set_xticks(xt,rotation=20)
         axtrans.set_xticks(arange(x1trans,x2trans+1e-6,.01))
-        
+
     ylimtr = (-20,25)  # ylimits for transect plots
     xtrans = linspace(x1trans, x2trans, 1000)  # x points on transects
 
@@ -334,9 +334,9 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     axtrans.set_ylim(ylimtr)
 
     # filled regions:
-    Bfill_plot = axtrans.fill_between(xtrans, Btrans-1e4, Btrans, 
+    Bfill_plot = axtrans.fill_between(xtrans, Btrans-1e4, Btrans,
                                       color=[.5,1,.5,1])
-    etafill_plot = axtrans.fill_between(xtrans, Btrans, etatrans, 
+    etafill_plot = axtrans.fill_between(xtrans, Btrans, etatrans,
                                       color=[.5,.5,1,1])
 
     # surface and topo plots:
@@ -358,9 +358,9 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     Btrans2, etatrans2 = extract_transect(fg,xtrans,ytrans)
 
     # filled regions:
-    Bfill_plot2 = axtrans2.fill_between(xtrans, Btrans2-1e4, Btrans2, 
+    Bfill_plot2 = axtrans2.fill_between(xtrans, Btrans2-1e4, Btrans2,
                                       color=[.5,1,.5,1])
-    etafill_plot2 = axtrans2.fill_between(xtrans, Btrans2, etatrans2, 
+    etafill_plot2 = axtrans2.fill_between(xtrans, Btrans2, etatrans2,
                                       color=[.5,.5,1,1])
     # surface and topo plots:
     etatrans_plot2, = axtrans2.plot(xtrans, etatrans2, 'b')
@@ -386,11 +386,11 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     Btrans3, etatrans3 = extract_transect(fg,xtrans,ytrans)
 
     # filled regions:
-    Bfill_plot3 = axtrans3.fill_between(xtrans, Btrans3-1e4, Btrans3, 
+    Bfill_plot3 = axtrans3.fill_between(xtrans, Btrans3-1e4, Btrans3,
                                       color=[.5,1,.5,1])
-    etafill_plot3 = axtrans3.fill_between(xtrans, Btrans3, etatrans3, 
+    etafill_plot3 = axtrans3.fill_between(xtrans, Btrans3, etatrans3,
                                       color=[.5,.5,1,1])
-                                      
+
     # surface and topo plots:
     etatrans_plot3, = axtrans3.plot(xtrans, etatrans3, 'b')
     Btrans_plot3, = axtrans3.plot(xtrans, Btrans3, 'g')
@@ -401,13 +401,13 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
 
 def make_kmz_plots(fg, fgmax_plotdir, run_name):
     # ## Plots for Google Earth overlays
-    # 
+    #
     # The new version of `kmltools` includes some tools to make png files
     # that display properly on Google Earth.  The png files have no axes
     # and have the dimension and dpi set properly so that there is an integer
     # number of pixels in each grid cell so cell edges are sharp when zooming in.
-    # 
-    # 
+    #
+    #
     # We make three png files and then make a kml file that can be used to open all three.
 
     if 1:
@@ -441,7 +441,7 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
 
         speed = ma.masked_where(fg.h==0., fg.s)
         png_filename = '%s/speed_max_for_kml.png' % kml_dir
-        fig,ax,png_extent,kml_dpi = kmltools.pcolorcells_for_kml(fg.x, fg.y, speed, 
+        fig,ax,png_extent,kml_dpi = kmltools.pcolorcells_for_kml(fg.x, fg.y, speed,
                                                          png_filename=png_filename,
                                                          dpc=2, cmap=cmap_speed, norm=norm_speed)
         if close_figs: close('all')
@@ -450,7 +450,7 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
         stays_dry = ma.masked_where(fg.h>0., fg.h)
         png_filename = '%s/stays_dry_for_kml.png' % kml_dir
         fig,ax,png_extent,kml_dpi = kmltools.pcolorcells_for_kml(fg.x, fg.y,
-                                                         stays_dry, 
+                                                         stays_dry,
                                                          png_filename=png_filename,
                                                          dpc=2, cmap=cmap_speed, norm=norm_speed)
         if close_figs: close('all')
@@ -459,17 +459,17 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
         # ### Make colorbars for kml files
 
 
-        kmltools.kml_build_colorbar('%s/colorbar_depth.png' % kml_dir, cmap_depth, 
+        kmltools.kml_build_colorbar('%s/colorbar_depth.png' % kml_dir, cmap_depth,
                                    norm=norm_depth, label='meters', title='depth', extend='max')
-        kmltools.kml_build_colorbar('%s/colorbar_speed.png' % kml_dir, cmap_speed, 
+        kmltools.kml_build_colorbar('%s/colorbar_speed.png' % kml_dir, cmap_speed,
                                    norm=norm_speed, label='meters / second', title='speed', extend='max')
-        kmltools.kml_build_colorbar('%s/colorbar_eta.png' % kml_dir, cmap_eta, 
+        kmltools.kml_build_colorbar('%s/colorbar_eta.png' % kml_dir, cmap_eta,
                                    norm=norm_eta, label='meters', title='eta', extend='max')
         if close_figs: close('all')
 
 
         # ### Make the kml file to display these three png files
-        # 
+        #
         # Then you can open `fgmax_results_kmlfiles/fgmax_results.kml` in Google Earth to view them.
 
 
@@ -491,10 +491,10 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
             png_names=['max depth (zeta) onshore','max speed','stays dry']
             cb_files = ['colorbar_depth.png', 'colorbar_speed.png']
             cb_names = ['colorbar_depth', 'colorbar_speed']
-                    
+
         name = 'fgmax_%s' % run_name
         fname = os.path.join(kml_dir, name+'.kml')
-        kmltools.png2kml(png_extent, png_files=png_files, png_names=png_names, 
+        kmltools.png2kml(png_extent, png_files=png_files, png_names=png_names,
                          name=name, fname=fname,
                          radio_style=False,
                          cb_files=cb_files, cb_names=cb_names)
@@ -512,8 +512,8 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
         fname_kmz = '%s_fgmax.kmz' % run_name
         with zipfile.ZipFile(fname_kmz, 'w') as zip:
             for file in files:
-                zip.write(file) 
-            
+                zip.write(file)
+
         path_kmz = os.path.join(fgmax_plotdir, fname_kmz)
         shutil.move(fname_kmz, path_kmz)
         print('Created %s' % os.path.abspath(path_kmz))
@@ -524,7 +524,7 @@ def make_nc_input(fname_nc, fg, force=False, verbose=True):
 
     import netCDF4
     import time
-        
+
     if os.path.isfile(fname_nc):
         if force and verbose:
             print('Overwriting ', fname_nc)
@@ -533,13 +533,13 @@ def make_nc_input(fname_nc, fg, force=False, verbose=True):
                 + '*** NOT overwriting '\
                 + '--- use force==True to overwrite' )
             return -1
-    
+
     with netCDF4.Dataset(fname_nc, 'w') as rootgrp:
 
         rootgrp.description = "fgmax data for " + fg.id
         rootgrp.history = "Created with input data " + time.ctime(time.time())
         rootgrp.history += " in %s;  " % os.getcwd()
-            
+
         if fg.X is not None:
             x = fg.X[0,:]
             lon = rootgrp.createDimension('lon', len(x))
@@ -548,7 +548,7 @@ def make_nc_input(fname_nc, fg, force=False, verbose=True):
             longitudes.units = 'degrees_east'
         else:
             if verbose: print('fg.X is None, not adding x')
-            
+
         if fg.Y is not None:
             y = fg.Y[:,0]
             lat = rootgrp.createDimension('lat', len(y))
@@ -557,42 +557,42 @@ def make_nc_input(fname_nc, fg, force=False, verbose=True):
             latitudes.units = 'degrees_north'
         else:
             if verbose: print('fg.Y is None, not adding y')
-            
+
         if fg.fgmax_point is not None:
             fgmax_point_var = \
                 rootgrp.createVariable('fgmax_point','u1',('lat','lon',))
             fgmax_point_var[:,:] = fg.fgmax_point
         else:
             if verbose: print('fg.fgmax_point is None, not adding')
-            
+
         if fg.force_dry_init is not None:
             force_dry_init = \
                 rootgrp.createVariable('force_dry_init','u1',('lat','lon',))
             force_dry_init[:,:] = fg.force_dry_init
         else:
-            if verbose: print('fg.force_dry_init is None, not adding')  
+            if verbose: print('fg.force_dry_init is None, not adding')
 
-        print('Created %s' % fname_nc)            
+        print('Created %s' % fname_nc)
         if verbose:
-            print('History:  ', rootgrp.history) 
-        return 0     
-        
-def write_nc_output(fname_nc, fg, new=False, force=False, 
+            print('History:  ', rootgrp.history)
+        return 0
+
+def write_nc_output(fname_nc, fg, new=False, force=False,
                     outdir='Unknown', verbose=True):
 
-    from clawpack.clawutil.data import ClawData 
+    from clawpack.clawutil.data import ClawData
     import netCDF4
     import time
-    
+
     fv = -9999.   # fill_value for netcdf4
-    
+
     if new:
         # first create a new .nc file with X,Y,fgmax_point,force_dry_init:
         result = make_nc_input(fname_nc, fg, force=force, verbose=verbose)
         if result == -1:
             print('*** make_nc_input failed, not appending output')
-            return        
-        
+            return
+
     if outdir == 'Unknown':
         # Cannot determine tfinal or run_finished time
         tfinal = fv
@@ -608,13 +608,13 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
                 tfinal = array(claw.output_times).max()
         except:
             tfinal = fv
-        
+
         try:
             mtime = os.path.getmtime(outdir+'/timing.txt')
-            run_finished = time.ctime(mtime) 
+            run_finished = time.ctime(mtime)
         except:
             run_finished = 'Unknown'
-            
+
     # add fgmax output results to existing file
     print(os.getcwd())
     with netCDF4.Dataset(fname_nc, 'a') as rootgrp:
@@ -622,14 +622,14 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             print('Appending data from fg to nc file',fname_nc)
             print('        nc file description: ', rootgrp.description)
             print('        fg.id: ', fg.id)
-        
+
         h = rootgrp.variables.get('h', None)
         if (h is not None) and (not force):
             print('*** netCDF file already contains output,\n'\
                 + '*** NOT overwriting '\
                 + '--- use force==True to overwrite' )
             return
-                
+
         x = array(rootgrp.variables['lon'])
         y = array(rootgrp.variables['lat'])
         X,Y = meshgrid(x,y)
@@ -638,11 +638,11 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
         except:
             fgmax_point = None
         bounding_box = [x.min(),x.max(),y.min(),y.max()]
-        
+
         dx = x[1]-x[0]
         Xclose = allclose(fg.X, X, atol=0.1*dx)
         Yclose = allclose(fg.Y, Y, atol=0.1*dx)
-        
+
         if (fg.X.shape != X.shape):
             # for now raise an exception, might want to extent to allow
             # filling only part of input arrays
@@ -652,20 +652,20 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             print('fg.bounding_box = ',fg.bounding_box())
             print('nc  bounding_box = ',bounding_box)
             raise ValueError('*** Mismatch of fg with data in nc file')
-    
+
         Xclose = allclose(fg.X, X, atol=0.1*dx)
         Yclose = allclose(fg.Y, Y, atol=0.1*dx)
         if (not (Xclose and Yclose)):
             raise ValueError('*** Mismatch of fg.X or fg.Y with data in nc file')
-            
+
 
         rootgrp.history += "Added output " + time.ctime(time.time())
         rootgrp.history += " in %s;  " % os.getcwd()
-        
+
         rootgrp.tfinal = tfinal
         rootgrp.outdir = os.path.abspath(outdir)
         rootgrp.run_finished = run_finished
-        
+
         #fgmax_point = rootgrp.variables.get('fgmax_point', None)
 
         if fg.dz is not None:
@@ -691,7 +691,7 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.B0 to nc file')
         else:
             if verbose: print('fg.B0 is None, not adding')
-            
+
         if fg.B is not None:
             try:
                 B = rootgrp.variables['B']
@@ -703,7 +703,7 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.B to nc file')
         else:
             if verbose: print('fg.B is None, not adding')
-                        
+
         if fg.h is not None:
             try:
                 h = rootgrp.variables['h']
@@ -715,8 +715,8 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.h to nc file')
         else:
             if verbose: print('fg.h is None, not adding')
-            
-        if fg.s is not None:        
+
+        if fg.s is not None:
             try:
                 s = rootgrp.variables['s']
             except:
@@ -727,8 +727,8 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.s to nc file')
         else:
             if verbose: print('fg.s is None, not adding')
-            
-        if fg.hss is not None:        
+
+        if fg.hss is not None:
             try:
                 hss = rootgrp.variables['hss']
             except:
@@ -739,8 +739,8 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.hss to nc file')
         else:
             if verbose: print('fg.hss is None, not adding')
-            
-        if fg.hmin is not None:        
+
+        if fg.hmin is not None:
             try:
                 hmin = rootgrp.variables['hmin']
             except:
@@ -752,8 +752,8 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.hmin to nc file')
         else:
             if verbose: print('fg.hmin is None, not adding')
-            
-        if fg.arrival_time is not None:        
+
+        if fg.arrival_time is not None:
             try:
                 arrival_time = rootgrp.variables['arrival_time']
             except:
@@ -764,7 +764,7 @@ def write_nc_output(fname_nc, fg, new=False, force=False,
             if verbose: print('    Adding fg.arrival_time to nc file')
         else:
             if verbose: print('fg.arrival_time is None, not adding')
-            
+
         print('Created %s' % fname_nc)
         if verbose:
             print('History:  ', rootgrp.history)
@@ -782,7 +782,7 @@ def read_nc(fname_nc, verbose=True):
     from clawpack.geoclaw import fgmax_tools
 
     print('Reading fgmax data from %s' % fname_nc)
-    
+
     def get_as_array(var, fgvar=None):
         if fgvar is None:
             fgvar = var
@@ -794,7 +794,7 @@ def read_nc(fname_nc, verbose=True):
             if verbose: print('    Did not find %s for fg.%s' \
                                 % (var,fgvar))
             return None
-                    
+
     fg = fgmax_tools.FGmaxGrid()
 
     with netCDF4.Dataset(fname_nc, 'r') as rootgrp:
@@ -804,25 +804,25 @@ def read_nc(fname_nc, verbose=True):
             print('History:  ', rootgrp.history)
 
 
-                
+
         x = get_as_array('lon','x')
         y = get_as_array('lat','y')
-        
+
         if (x is None) or (y is None):
             print('*** Could not create grid')
             return None
-            
+
         X,Y = meshgrid(x,y)
         fg.X = X
         fg.Y = Y
         if verbose:
             print('    Constructed fg.X and fg.Y')
-        
+
         # arrays defined everywhere
         fg.dz = get_as_array('dz')
         fg.force_dry_init = get_as_array('force_dry_init')
-        fg.fgmax_point = get_as_array('fgmax_point') 
-        
+        fg.fgmax_point = get_as_array('fgmax_point')
+
         if fg.fgmax_point is not None:
             # arrays defined only at fgmax points: return as masked arrays:
             fgmask = 1 - fg.fgmax_point  # mask points that are not fgmax pts
@@ -841,19 +841,19 @@ def read_nc(fname_nc, verbose=True):
             fg.hss = get_as_array('hss')
             fg.hmin = get_as_array('hmin')
             fg.arrival_time = get_as_array('arrival_time')
-            
+
     if verbose:
         print('Returning FGmaxGrid object')
     return fg
 
 if __name__== '__main__':
-    
+
     sys.path.insert(0,'.')
     from params import event, location
 
     #import fgmax_tools  # uses local version with transposed arrays
                         # should appear in v5.10.0
-                        
+
 
     #### Note: Are running from say buried-deep directory, where the _output is and where we want _plots
     outdir = os.path.abspath('./_output')
@@ -870,7 +870,7 @@ if __name__== '__main__':
     GE_extents = [[-124.1,-124.000092593,44.565,44.641944445], [-123.999907407,-123.92,44.565,44.641944445]]
     fnames_B0 = [B0_dir + '/fgmax0001_13s_B0.asc',B0_dir + '/fgmax0002_13s_B0.asc']
     ##########
-        
+
     for fgno in fgnos:
         GE_image = imread(image_names[fgno-1])
         GE_extent = GE_extents[fgno-1]
@@ -882,7 +882,7 @@ if __name__== '__main__':
         os.system('mkdir -p %s' % fgmax_plotdir);
 
         run_name = '%s_%s' % (location,event)
-    
+
         fg, t_hours = load_fgmax(outdir,fgno,fname_B0)
         make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent)
 
@@ -893,9 +893,8 @@ if __name__== '__main__':
 
         if 0:
             fname_nc = '%s_fgmax' + 'str(fgno)' +'.nc' % run_name
-            write_nc_output(fname_nc, fg, new=True, force=True, 
+            write_nc_output(fname_nc, fg, new=True, force=True,
                         outdir=outdir, verbose=True)
-                        
+
             fg2 = read_nc(fname_nc, verbose=True)  # test reading it back in
             print('max abs(B-B0) = %.2f' % abs(fg2.B-fg2.B0).max())
-        
