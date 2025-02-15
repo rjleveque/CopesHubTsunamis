@@ -11,10 +11,12 @@ from clawpack.clawutil.data import ClawData
 
 # read dictionary of B0 values indexed by gaugeno:
 gauge_B0 = read_gauge_B0('../gauges_B0.csv')
-gaugenos_Newport = gauge_B0.keys()
-#gaugenos_Newport = range(1001,1079,1)
-print('gaugenos_Newport = ',gaugenos_Newport)
+gaugenos = gauge_B0.keys()
+print('gaugenos = ',gaugenos)
 
+# now works for any location with definition above
+#gaugenos_Newport = range(1001,1079,1)
+#print('gaugenos_Newport = ',gaugenos_Newport)
 
 
 def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
@@ -118,23 +120,26 @@ def make_plot(gaugeno, location, event, outdir, plotdir, B0, sea_level):
         savefig(fname, bbox_inches='tight')
         print('Created %s' % fname)
 
-        figure(500, figsize=(8,8))
-        clf()
-        plot(t, B, 'g')
-        xlabel('')
-        ylabel('Bathymetry B (m)')
-        grid(linewidth=0.5)
-        title('Gauge %i at x = %.5f, y = %.5f In %s for Event %s \n \
-          B_post = %.2f, B0 = %.2f' 
-          % (gaugeno,x,y,location,event,B_post,B0))
-        fname2 = plotdir + '/%s_%s_B_at_Gauge%s.png' \
-                % (location,event,str(gaugeno).zfill(5))
-        savefig(fname2, bbox_inches='tight')
-        print('Created %s' % fname2)
+        if 0:
+            # plot Bathymetry as sanity check:
+            figure(500, figsize=(8,8))
+            clf()
+            plot(t, B, 'g')
+            xlabel('')
+            ylabel('Bathymetry B (m)')
+            grid(linewidth=0.5)
+            title('Gauge %i at x = %.5f, y = %.5f In %s for Event %s \n \
+              B_post = %.2f, B0 = %.2f' 
+              % (gaugeno,x,y,location,event,B_post,B0))
+            fname2 = plotdir + '/%s_%s_B_at_Gauge%s.png' \
+                    % (location,event,str(gaugeno).zfill(5))
+            savefig(fname2, bbox_inches='tight')
+            print('Created %s' % fname2)
 
-    return B_post,h0,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
+        return B_post,h0,hmax,smax,momentummax,mfluxmax,etamax,etamax_pquake,tmax,tfirst
 
-def plot_all_gauges_make_csv(gaugenos=gaugenos_Newport):
+def plot_all_gauges_make_csv(outdir, plotdir, location, event, 
+                             gaugenos=gaugenos, sea_level=0.):
     gaugeno_dict = {}
     
     for gaugeno in gaugenos:
@@ -226,8 +231,12 @@ if __name__ == '__main__':
     sea_level = geodata.sea_level
     print('+++ sea_level = %.3f' % sea_level)
 
-    #plot_all_gauges_make_csv(gaugenos=gaugenos_Newport)
     
-    gaugenos_test = range(1001,1003)
-    plot_all_gauges_make_csv(gaugenos=gaugenos_test)
+    if 0:
+        # test on small set:
+        gaugenos = range(1001,1003)
+
+    plot_all_gauges_make_csv(outdir, plotdir, location=location, event=event,
+                             gaugenos=gaugenos, sea_level=sea_level) 
+
     
