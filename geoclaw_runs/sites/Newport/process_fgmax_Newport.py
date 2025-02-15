@@ -132,6 +132,13 @@ cmap_speed.set_under(color=[.7,1,.7,0])
 
 norm_speed = colors.BoundaryNorm(bounds_speed, cmap_speed.N)
 
+# colormap for stays_dry points in kmz:
+# (h is plotted only where h<=0, want all points plotted to be light green)
+bounds_dry = np.array([0,1e-6])
+cmap_dry = mpl.colors.ListedColormap([[.7,1,.7]])
+# Set color for land points without inundation to light green:
+cmap_dry.set_under(color=[.7,1,.7])
+norm_dry = colors.BoundaryNorm(bounds_dry, cmap_dry.N)
 
 
 def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
@@ -452,7 +459,7 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
         fig,ax,png_extent,kml_dpi = kmltools.pcolorcells_for_kml(fg.x, fg.y,
                                                          stays_dry,
                                                          png_filename=png_filename,
-                                                         dpc=2, cmap=cmap_speed, norm=norm_speed)
+                                                         dpc=2, cmap=cmap_dry, norm=norm_dry)
         if close_figs: close('all')
 
 
