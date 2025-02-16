@@ -38,15 +38,11 @@ root_dir = os.environ['CHT']   # assuming environment variable set
 
 if 1:
     sys.path.insert(0, os.path.join(root_dir, 'common_code'))
-    #from multip_tools import make_all_cases_dtopos, run_one_case_dtopo
-    from multip_tools import run_many_cases_pool
-    from clawmultip_tools import run_one_case_clawpack \
-         as run_one_case_dtopo
 else:
     sys.path.insert(0, '/Users/rjl/git/clawpack/clawmultip/src/python/clawmultip')
-    from clawmultip_tools import run_one_case_clawpack \
-         as run_one_case_dtopo
-    from multip_tools import run_many_cases_pool
+
+from clawmultip_tools import run_one_case_clawpack as run_one_case_dtopo
+from multip_tools import run_many_cases_pool
 
 from cases_dtopos import make_all_cases_dtopos
 

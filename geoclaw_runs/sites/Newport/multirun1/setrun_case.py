@@ -4,6 +4,8 @@ Module to set up run time parameters for Clawpack.
 The values set in the function setrun are then written out to data files
 that will be read in by the Fortran code.
 
+Note: this version has case as a parameter to setrun, a dictionary used to pass
+in values that vary from case to case for doing a parameter sweep.
 """
 
 import os
@@ -74,7 +76,7 @@ else:
 
 
 #------------------------------
-def setrun(claw_pkg='geoclaw'):
+def setrun(claw_pkg='geoclaw', case={}):
 #------------------------------
 
     """
@@ -91,6 +93,11 @@ def setrun(claw_pkg='geoclaw'):
     from clawpack.clawutil import data
 
     assert claw_pkg.lower() == 'geoclaw',  "Expected claw_pkg = 'geoclaw'"
+
+    # The values below are expected to be in case dictionary,
+    # and may vary from case to case:
+
+    dtopofiles = case['dtopofiles']
 
     num_dim = 2
     rundata = data.ClawRunData(claw_pkg, num_dim)
@@ -476,10 +483,8 @@ def setrun(claw_pkg='geoclaw'):
     # for moving topography, append lines of the form :   (<= 1 allowed for now!)
     #   [topotype, fname]
 
-    #dtopofile = dtopodir + '/' + event + '.dtt3'
-    #dtopo_data.dtopofiles = [[3, dtopofile]]
     dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
-    dtopo_data.dtopofiles = [[3, dtopo_dir + '/buried-locking-str10-deep_instant.dtt3']]
+    dtopo_data.dtopofiles = dtopofiles # from case dictionary
 
 
     if instant: #instantaneous rupture
