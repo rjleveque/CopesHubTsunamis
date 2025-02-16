@@ -32,15 +32,17 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
+dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
 
 location = 'Newport' # need to change module names below for other locations
 
+sys.path.insert(0, root_dir + '/common_code')
+import plot_gauges_site  # now works for all sites
+
 sys.path.insert(0, os.path.abspath('..'))
-import plot_gauges_Newport as plot_gauges
 import process_fgmax_Newport as process_fgmax
 import make_fgout_animation_Newport as make_fgout_animation
 
@@ -71,16 +73,18 @@ events = ['%s-deep' % model for model in models] \
        + ['%s-middle' % model for model in models] \
        + ['%s-shallow' % model for model in models]
 
-events = events[:1]
+events = events[:6]
 #events = ['buried-random-str10-middle','buried-random-str10-shallow']
+if 1:
+    events = [ 'buried-locking-mur13-middle',
+                 'buried-locking-mur13-shallow',
+                 'buried-locking-skl16-middle',
+                 'buried-locking-skl16-shallow']
 
-instant = True
+instant = False
 if instant:
     events = [e+'_instant' for e in events]
 
-if 0:
-    events = ['buried-random-str10-middle','buried-random-str10-deep',
-                'buried-random-mur13-deep_instant']
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
@@ -91,8 +95,8 @@ plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 #plotdirs = [outdir.replace('output','plot') for outdir in outdirs]
 print('plotdirs = ', plotdirs)
 
-gaugenos = range(1001,1079,1)
-print('Will make %i gauge plots for each event' % len(gaugenos))
+#gaugenos = range(1001,1079,1)
+#print('Will make %i gauge plots for each event' % len(gaugenos))
 
 if dry_run:
     print('DRY RUN - location = %s,  events to process:\n' % location ,events)
@@ -115,19 +119,22 @@ if not dry_run:
 
         if 1:
             gauges_plotdir = plotdir + '/gauges'
-            for gaugeno in gaugenos:
-                plot_gauges.make_plot(gaugeno, location, event, outdir,
-                                      gauges_plotdir)
+            os.system('mkdir -p %s' % gauges_plotdir)
+            plot_gauges_site.make_all_plots_and_report(outdir, plotdir, 
+                             location=location, event=event,
+                             gaugenos='all', sea_level=0.)
 
-        try:
-            fgmax_plotdir = plotdir + '/fgmax'
-            fg, t_hours = process_fgmax.load_fgmax(outdir)
-            process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
-        except:
-            print('*** fgmax file NOT FOUND for %s, skipping' % run_name)
+        if 1:
+            try:
+                fgmax_plotdir = plotdir + '/fgmax'
+                fg, t_hours = process_fgmax.load_fgmax(outdir)
+                process_fgmax.make_fgmax_plots(fg, fgmax_plotdir,
+                                               run_name, t_hours)
+            except:
+                print('*** fgmax file NOT FOUND for %s, skipping' % run_name)
 
         if 1:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)
 
-        if 1:
+        if 0:
             make_html_index(plotdir,event)

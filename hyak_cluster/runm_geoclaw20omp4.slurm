@@ -49,14 +49,14 @@ source $HOME/.bashrc   # needed for conda setup
 export FC=ifort
 export FFLAGS='-O2 -qopenmp'
 export OMP_NUM_THREADS=4
-export CLAW=/gscratch/tsunami/clawpack-v5.10.0
+export CLAW=/gscratch/tsunami/clawpack-v5.11.0
 export PYTHONPATH=$PYTHONPATH:$CLAW
 export CHT=$HOME/CopesHubTsunamis  # for this project
 
 date
 pwd
 echo CHT=$CHT
-export EXE=$CHT/hyak_cluster/xgeoclaw
+export EXE=$CHT/hyak_cluster/xgeoclaw_v511_smax
 conda activate /gscratch/tsunami/miniconda3/envs/geo5
 python run_geoclaw_dtopos.py
 date

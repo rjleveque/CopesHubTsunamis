@@ -6,8 +6,10 @@
 # ALLOCATION DEFINITION
 # The account and partition options should be the same
 # except in a few cases (e.g. ckpt queue, genpool queue)
-#SBATCH --account=tsunami
-#SBATCH --partition=compute
+##SBATCH --account=tsunami
+##SBATCH --partition=compute
+#SBATCH --account=amath
+#SBATCH --partition=cpu-g2
 
 # RESOURCES
 #SBATCH --nodes=1  # total number of nodes allocated
@@ -19,7 +21,7 @@
 #    hours:minutes:seconds e.g. 3:00:00 for 3 hours
 #    minutes
 #    days-hours
-#SBATCH --time=6:00:00
+#SBATCH --time=2:00:00
 
 # MEMORY PER NODE
 # See above "Specifying Memory Size" for options

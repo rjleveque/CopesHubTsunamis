@@ -55,7 +55,7 @@ date
 pwd
 echo CLAW=$CLAW
 echo CHT=$CHT
-export EXE=$CHT/hyak_cluster/xgeoclaw
+export EXE=$CHT/hyak_cluster/xgeoclaw_v511_smax
 
 make new 
 date

@@ -199,10 +199,9 @@ def setrun(claw_pkg='geoclaw'):
         #clawdata.tfinal = 30.              # SHORT TEST
         #clawdata.output_t0 = True          # output at initial (or restart) time?
 
-        clawdata.num_output_times = 4      # every 30 minutes
+        clawdata.num_output_times = 0      # no frame output
         clawdata.tfinal = 2.0*3600.
-        #clawdata.output_t0 = False        # output at initial (or restart) time?
-        clawdata.output_t0 = True          # output at initial (or restart) time?
+        clawdata.output_t0 = False        # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -362,8 +361,8 @@ def setrun(claw_pkg='geoclaw'):
     amrdata.memsize = 2**27 - 1
 
     # max number of refinement levels:
-    amrdata.amr_levels_max = 4
-    #amrdata.amr_levels_max = 8
+    #amrdata.amr_levels_max = 4
+    amrdata.amr_levels_max = 8
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -755,7 +754,7 @@ def setrun(claw_pkg='geoclaw'):
     else:
         q_out_vars = [1,2,3,4] # h,hu,hv,eta for shallow code
 
-    if 1:
+    if 0:
         # full domain (smaller for inundation run than for offshore_gauges)
         dx_fgout = 120./3600.  # degrees (two minute)
         dy_fgout = 120./3600.  # degrees
@@ -777,7 +776,7 @@ def setrun(claw_pkg='geoclaw'):
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
 
-    if 1:
+    if 0:
         # small region for inset plot
         dx_fgout = 6/3600.
         dy_fgout = 12/3600.  # degrees

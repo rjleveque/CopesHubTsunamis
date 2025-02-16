@@ -19,7 +19,7 @@
 #    hours:minutes:seconds e.g. 3:00:00 for 3 hours
 #    minutes
 #    days-hours
-#SBATCH --time=6:00:00
+#SBATCH --time=12:00:00
 
 # MEMORY PER NODE
 # See above "Specifying Memory Size" for options

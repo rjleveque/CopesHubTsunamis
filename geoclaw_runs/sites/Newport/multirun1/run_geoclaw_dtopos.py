@@ -82,23 +82,23 @@ os.system('mkdir -p %s' % runs_dir)
 xgeoclaw_path = os.path.join(root_dir, 'geoclaw_runs/xgeoclaw_v511_smax')
 
 # number of GeoClaw jobs to run simultaneously:
-nprocs = 1
+nprocs = 6
 
 # Specify the list of dtopo files to loop over for geoclaw runs:
 
-if 0:
+if 1:
     # all files found
     all_dtopo_files = glob.glob('%s/*tt3' % dtopo_dir)
+    dtopo_files = all_dtopo_files
     # not the instant deformation versions:
     dtopo_files = [f for f in all_dtopo_files if 'instant' not in f]
-    dtopo_files = all_dtopo_files
     dtopo_files.sort()
 
-if 0:
-    # test on only a few files from list above:
-    dtopo_files = dtopo_files[:2]
-
 if 1:
+    # test on only a few files from list above:
+    dtopo_files = dtopo_files[:6]
+
+if 0:
     # or set a list of dtopo_names by other means, e.g.
     events = ['buried-locking-mur13-deep','buried-locking-str10-shallow']
     #events = ['ft-random-mur13-deep']
