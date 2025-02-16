@@ -9,7 +9,7 @@ The function make_all_cases_dtopos returns *caselist*, a list of
 dictionaries.  Each dictionary should define whatever parameters
 are needed for one case.
 
-The function run_one_case_dtopo(case) takes a dictionary *case* as input
+The function run_one_case_clawpack(case) takes a dictionary *case* as input
 and does what's necessary to run GeoClaw for that one case.
 
 Before running, make sure the following are properly set:
@@ -36,15 +36,16 @@ dry_run = False  # If True, only print out settings, do not run GeoClaw
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
 
-if 1:
-    sys.path.insert(0, os.path.join(root_dir, 'common_code'))
-else:
-    sys.path.insert(0, '/Users/rjl/git/clawpack/clawmultip/src/python/clawmultip')
-
-from clawmultip_tools import run_one_case_clawpack as run_one_case_dtopo
-from multip_tools import run_many_cases_pool
-
+sys.path.insert(0, os.path.join(root_dir, 'common_code'))
 from cases_dtopos import make_all_cases_dtopos
+
+if 0:
+    # if clawmultip_tools and multip_tools should import from clawpack:   
+    sys.path.insert(0, '/Users/rjl/git/clawpack/clawmultip/src/python/clawmultip')
+    # (Otherwise use the versions in common_code)
+
+from clawmultip_tools import run_one_case_clawpack
+from multip_tools import run_many_cases_pool
 
 # location for big files:
 this_dir = os.getcwd()
@@ -138,4 +139,4 @@ if __name__ == '__main__':
         				 runs_dir)
 
         # run all cases using nprocs processors:
-        run_many_cases_pool(caselist, nprocs, run_one_case_dtopo)
+        run_many_cases_pool(caselist, nprocs, run_one_case_clawpack)
