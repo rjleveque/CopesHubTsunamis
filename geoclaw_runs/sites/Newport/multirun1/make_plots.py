@@ -32,6 +32,7 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
+#dry_run = True  # If True, only print out settings, do not run GeoClaw
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # top level directory for this project:
@@ -127,11 +128,11 @@ if not dry_run:
         if 1:
             try:
                 fgmax_plotdir = plotdir + '/fgmax'
-                fg, t_hours = process_fgmax.load_fgmax(outdir)
-                process_fgmax.make_fgmax_plots(fg, fgmax_plotdir,
-                                               run_name, t_hours)
+                process_fgmax.make_all_fgmax_plots(outdir, fgmax_plotdir,
+                                               location=location, event=event)
             except:
-                print('*** fgmax file NOT FOUND for %s, skipping' % run_name)
+                print('*** problem with process_fgmax in %s, skipping' \
+                      % run_name)
 
         if 1:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)

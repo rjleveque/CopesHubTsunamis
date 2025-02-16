@@ -38,18 +38,36 @@ import sys
 save_figs = True             # make png files for figures?
 close_figs = True            # close big figures after saving?
 
-## Also see name==main where it is read in from params.py
-#location = 'Newport'
 
 try:
     CHT = os.environ['CHT']
 except:
     raise Exception("*** Set CHT enviornment variable to repository top")
 
+
+graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/Newport')
+B0_dir = os.path.join(CHT, 'geoclaw_runs/sites/Newport')
+
+###########
+# various things are specific to this location, e.g. transects, so set here:
+location = 'Newport'
+
+## Also see name==main where it is read in from params.py, should check it.
+
+# Choose the fgnos to use and GE images for these regions:
+fgnos = [1,2]
+image_names = [graphics_dir + '/Newport_fgmax0001GE.jpg',graphics_dir + '/Newport_fgmax0002GE.jpg']
+GE_extents = [[-124.1,-124.000092593,44.565,44.641944445], [-123.999907407,-123.92,44.565,44.641944445]]
+
+# Files where original topo B0 is stored for each fgmax point:
+fnames_B0 = [B0_dir + '/fgmax0001_13s_B0.asc',B0_dir + '/fgmax0002_13s_B0.asc']
+
+
 use_force_dry = False
 if use_force_dry:
     fname_force_dry = os.path.join(input_dir, 'force_dry_init.data')
     print('Using force_dry_init from ', fname_force_dry)
+
 
 
 def load_fgmax(outdir,fgno,fname_B0):
@@ -853,30 +871,7 @@ def read_nc(fname_nc, verbose=True):
         print('Returning FGmaxGrid object')
     return fg
 
-if __name__== '__main__':
-
-    sys.path.insert(0,'.')
-    from params import event, location
-
-    #import fgmax_tools  # uses local version with transposed arrays
-                        # should appear in v5.10.0
-
-
-    #### Note: Are running from say buried-deep directory, where the _output is and where we want _plots
-    outdir = os.path.abspath('./_output')
-    #outdir = '/Users/rjl/scratch/CHT_runs/sites/seaside/multirun_tests/geoclaw_outputs/_output_buried-random-str10-shallow'
-    plotdir = os.path.abspath('./_plots')
-    os.system('mkdir -p %s' % plotdir)
-    graphics_dir = os.path.join(CHT, 'geoclaw_runs/sites/Newport')
-    B0_dir = os.path.join(CHT, 'geoclaw_runs/sites/Newport')
-
-    ###########
-    #Choose the fgnos to use
-    fgnos = [1,2]
-    image_names = [graphics_dir + '/Newport_fgmax0001GE.jpg',graphics_dir + '/Newport_fgmax0002GE.jpg']
-    GE_extents = [[-124.1,-124.000092593,44.565,44.641944445], [-123.999907407,-123.92,44.565,44.641944445]]
-    fnames_B0 = [B0_dir + '/fgmax0001_13s_B0.asc',B0_dir + '/fgmax0002_13s_B0.asc']
-    ##########
+def make_all_fgmax_plots(outdir, plotdir, location, event):
 
     for fgno in fgnos:
         GE_image = imread(image_names[fgno-1])
@@ -894,14 +889,39 @@ if __name__== '__main__':
         make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent)
 
         if 1:
+            # make kml versions for viewing on Google Earth:
             make_kmz_plots(fg, fgmax_plotdir, run_name)
 
         close('all')
 
         if 0:
+            # make compact netCDF version:
             fname_nc = '%s_fgmax' + 'str(fgno)' +'.nc' % run_name
             write_nc_output(fname_nc, fg, new=True, force=True,
                         outdir=outdir, verbose=True)
 
             fg2 = read_nc(fname_nc, verbose=True)  # test reading it back in
             print('max abs(B-B0) = %.2f' % abs(fg2.B-fg2.B0).max())
+
+
+if __name__== '__main__':
+
+    sys.path.insert(0,'.')
+    from params import event
+    from params import location as params_location
+
+    errmsg = '*** wrong location? params.py has %s, expecting %s' \
+             % (params_location, location)
+    assert params_location == location, errmsg
+
+    #import fgmax_tools  # uses local version with transposed arrays
+                        # should appear in v5.10.0
+
+
+    # When running for a single event, put these directories here:
+    outdir = os.path.abspath('./_output')
+    plotdir = os.path.abspath('./_plots')
+    os.system('mkdir -p %s' % plotdir)
+
+
+    make_all_fgmax_plots(outdir, plotdir, location, event)
