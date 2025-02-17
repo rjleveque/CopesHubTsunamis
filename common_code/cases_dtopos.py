@@ -1,13 +1,25 @@
 
 
-def make_all_cases_dtopos(dtopo_dir, dtopo_files, xgeoclaw_path, runs_dir='.'):
+def make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir='.', xgeoclaw_path,
+                          make_plots):
     """
     Output: *caselist*, a list of cases to be run.
     Each case should be dictionary of any parameters needed to set up an
     individual case.  These will be used by run_one_case_dtopo.
 
     For this example, each dtopo_file in dtopo_files corresponds to a dtopo
-    file.  GeoClaw will be run for each of these earthquake sources.
+    file.  
+
+    If xgeoclaw_path is not None, GeoClaw will be run for each of 
+    these earthquake sources, based on code in setrun_case.py.
+    The setrun function in this directory should take an argument case
+    so that parameters for each case can be passed in.
+
+    If make_plots is True, plotting will also be done based on code in
+    setplot_case.py.
+    The setplot function in this directory should take an argument case
+    so that parameters for each case can be passed in.
+
     A unique directory will be created for each run, with names
     based on dtopo_file, and residing within runs_dir.
     The _output and _plots directories will be within the run directory.
@@ -38,16 +50,20 @@ def make_all_cases_dtopos(dtopo_dir, dtopo_files, xgeoclaw_path, runs_dir='.'):
         case['case_name'] = dtopo_name
         case['outdir'] = outdir
 
-        #case['xclawcmd'] = None  # if None, will not run code
         case['xclawcmd'] = xgeoclaw_path  # executable created by 'make .exe'
+                                          # or None, in which case code is
+                                          # not run (plots may be made below)
 
         # setrun parameters:
         case['setrun_file'] = 'setrun_case.py'
         case['dtopofiles'] = [[3, dtopofile]]
 
-        case['plotdir'] = None  # if None, will not make plots
-        #case['plotdir'] = plotdir
-        case['setplot_file'] = 'setplot.py'
+        if make_plots:
+            case['plotdir'] = plotdir
+        else:
+            case['plotdir'] = None  # if None, will not make plots
+
+        case['setplot_file'] = 'setplot_case.py'
 
         caselist.append(case)
 
