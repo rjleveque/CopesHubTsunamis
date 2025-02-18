@@ -63,28 +63,33 @@ runs_dir = os.path.abspath(scratch_dir)
 
 print('runs_dir = ',runs_dir)
 
-all_models = \
-    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+# where to find all the dtopo files:
+dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_Bandon_noext/')
 
+# for hyak:
+dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+print('dtopo_dir = ',dtopo_dir)
 
-models = all_models
-#models = all_models[:3]
-events = ['%s-deep' % model for model in models] \
-       + ['%s-middle' % model for model in models] \
-       + ['%s-shallow' % model for model in models]
+sizes = ['SM','M','L','XL','XXL']
 
-events = events[:6]
-#events = ['buried-random-str10-middle','buried-random-str10-shallow']
+all_events = []
+for size in sizes:
+    for M in [1,2,3]:
+        all_events.append('CSZ_%s%s_noext' % (size,M))
+
+if 0:
+    events = all_events
+
 if 1:
-    events = [ 'buried-locking-mur13-middle',
-                 'buried-locking-mur13-shallow',
-                 'buried-locking-skl16-middle',
-                 'buried-locking-skl16-shallow']
+    events = []
+    for e in all_events:
+        if e[4] in ['M','L']: events.append(e)
 
-instant = False
-if instant:
-    events = [e+'_instant' for e in events]
+if 0:
+    # or specify particular events:
+    events = ['CSZ_L1_noext','CSZ_XL1_noext']
+
+dtopo_files = ['%s/%s.tt3' % (dtopo_dir,f) for f in events]
 
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
@@ -118,10 +123,10 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 0:
+        if 1:
             gauges_plotdir = plotdir + '/gauges'
             os.system('mkdir -p %s' % gauges_plotdir)
-            plot_gauges_site.make_all_plots_and_report(outdir, plotdir, 
+            plot_gauges_site.make_all_plots_and_report(outdir, gauges_plotdir, 
                              location=location, event=event,
                              gaugenos='all', sea_level=0.)
 
