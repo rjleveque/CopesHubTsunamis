@@ -1,6 +1,6 @@
 
 
-def make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir='.', xgeoclaw_path,
+def make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir, xgeoclaw_path,
                           make_plots):
     """
     Output: *caselist*, a list of cases to be run.

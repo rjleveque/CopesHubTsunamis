@@ -161,7 +161,7 @@ def run_one_case_clawpack(case):
 
         # setplot must be modified to accept case as a kwarg in order to
         # customize for each case:
-        plotdata = setplot.setplot(case=case)
+        plotdata = setplot.setplot(plotdata=None,case=case)
 
         if plotdata is not None:
             # user wants to make time frame plots using plotclaw:
@@ -173,7 +173,7 @@ def run_one_case_clawpack(case):
         else:
             # assume setplot already made any plots desired by user,
             # e.g. fgmax, fgout, or specialized gauge plots.
-            print('plotdata is None, so not making frame plots)
+            print('plotdata is None, so not making frame plots')
 
     #timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
     timenow = datetime.datetime.utcnow().strftime('%Y-%m-%d at %H:%M:%S') \

@@ -1,3 +1,22 @@
+"""
+setplot function with case argument for looping over many events from
+run_geoclaw_make_plots_dtopos.py
+"""
+
+import os,sys
+
+# top level directory for this project:
+root_dir = os.environ['CHT']   # assuming environment variable set
+
+location = 'Newport' # need to change module names below for other locations
+
+sys.path.insert(0, root_dir + '/common_code')
+import plot_gauges_site  # now works for all sites
+
+sys.path.insert(0, os.path.abspath('..'))
+import process_fgmax_Newport as process_fgmax
+import make_fgout_animation_Newport as make_fgout_animation
+
 
 def setplot(plotdata, case={}):
 
@@ -7,8 +26,6 @@ def setplot(plotdata, case={}):
     Add code to set plotdata and return it if desired.
     """
 
-    location = 'Newport' # need to change module names below for other locations
-
     outdir = case['outdir']
     plotdir = case['plotdir']
     dtopofiles = case['dtopofiles']
@@ -17,6 +34,7 @@ def setplot(plotdata, case={}):
     event = os.path.splitext(os.path.split(dtopofile)[-1])[0]
 
     run_name = '%s_%s' % (location,event)
+    print('In setplot: run_name = ',run_name)
 
     if 1:
         gauges_plotdir = plotdir + '/gauges'

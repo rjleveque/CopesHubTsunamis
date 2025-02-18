@@ -120,14 +120,14 @@ for size in sizes:
 if 0:
     events = all_events
 
-if 1:
+if 0:
     events = []
     for e in all_events:
-        if e[4] in ['M','L','XL']: events.append(e)
+        if e[4] in ['M','L']: events.append(e)
 
-if 0:
+if 1:
     # or specify particular events:
-    events = ['CSZ_L1_noext','CSZ_XL1_noext']
+    events = ['CSZ_M3_noext']
 
 dtopo_files = ['%s/%s.tt3' % (dtopo_dir,f) for f in events]
 
