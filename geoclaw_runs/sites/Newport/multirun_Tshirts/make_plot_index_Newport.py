@@ -40,33 +40,48 @@ print('geoclaw_plots = ',geoclaw_plots)
 
 # Select set of events to show plots for:
 
-all_models = \
-    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
-
-if 1:
-    models = all_models
-    #models = all_models[:3]
-    events = ['%s-deep' % model for model in models] \
-           + ['%s-middle' % model for model in models] \
-           + ['%s-shallow' % model for model in models]
-
-instant = True
-if instant:
-    events = [e+'_instant' for e in events]
-    rupture_type = 'Instant'
-
 if 0:
-    #events = ['buried-random-str10-middle','buried-random-str10-shallow']
-    events = ['buried-locking-str10-deep']
-    rupture_type = 'Kinematic'
 
-events.sort()
+    #CoPes Hub ground motions:
+
+    all_models = \
+        ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+         'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+
+    if 1:
+        models = all_models
+        #models = all_models[:3]
+        events = ['%s-deep' % model for model in models] \
+               + ['%s-middle' % model for model in models] \
+               + ['%s-shallow' % model for model in models]
+
+    instant = True
+    if instant:
+        events = [e+'_instant' for e in events]
+        rupture_type = 'Instant'
+
+    if 0:
+        #events = ['buried-random-str10-middle','buried-random-str10-shallow']
+        events = ['buried-locking-str10-deep']
+        rupture_type = 'Kinematic'
+
+    events.sort()
 
 
 # for Tshirts:
 
-events = ['CSZ_M3_noext']
+sizes = ['SM','M','L','XL','XXL']
+
+all_events = []
+for size in sizes:
+    for M in [1,2,3]:
+        all_events.append('CSZ_%s%s_noext' % (size,M))
+
+events = []
+for e in all_events:
+    if e[4] in ['M','L']: events.append(e)
+
+#events = ['CSZ_M1_noext', 'CSZ_L1_noext']
 
 
 
@@ -77,7 +92,7 @@ print(cmd)
 os.system(cmd)
 
 
-def make_html_index(plotdir,event):
+def make_html_index(plotdir,event,gauges_plotdir,fgmax_plotdir):
     """
     Make index for a single event.
     This function is called in loop below.
@@ -117,12 +132,16 @@ Google Earth.
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        make_html_index(plotdir,event)
+        gauges_plotdir = gauges'
+        fgmax_plotdir = 'fgmax/fgmax1' # Yaquina Bay
+
+        make_html_index(plotdir,event,gauges_plotdir,fgmax_plotdir)
 
         # relative paths:
         plotdir = '_plots_%s' % event
-        gauges_plotdir = '_plots_%s/gauges' % event
-        fgmax_plotdir = '_plots_%s/fgmax/fgmax1' % event  # Yaquina Bay
+
+        gauges_plotdir = '%s/%s' % (plotdir, gauges_plotdir)
+        fgmax_plotdir = '%s/%s' % (plotdir, fgmax_plotdir)
 
         top_index.write('<h2>%s</h2>\n ' % event)
 
