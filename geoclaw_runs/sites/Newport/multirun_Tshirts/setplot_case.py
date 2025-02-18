@@ -45,7 +45,8 @@ def setplot(plotdata, case={}):
 
     if 1:
         try:
-            fgmax_plotdir = plotdir + '/fgmax'
+            #fgmax_plotdir = plotdir + '/fgmax'
+            fgmax_plotdir = plotdir  # fgmax1 or fgmax2 now added in function
             os.system('mkdir -p %s' % fgmax_plotdir)
             process_fgmax.make_all_fgmax_plots(outdir, fgmax_plotdir,
                                            location=location, event=event)

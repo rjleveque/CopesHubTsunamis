@@ -159,7 +159,8 @@ cmap_dry.set_under(color=[.7,1,.7])
 norm_dry = colors.BoundaryNorm(bounds_dry, cmap_dry.N)
 
 
-def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
+def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
+                     GE_image, GE_extent):
 
     #Here, GE_extent is the fgmax_extent
     fgmax_extent = GE_extent
@@ -167,7 +168,8 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     def savefigp(fname):
         global save_figs
         if save_figs:
-            fullname = '%s/%s_%s' % (fgmax_plotdir, run_name, fname)
+            fullname = '%s/%s_fgmax%s_%s' \
+                        % (fgmax_plotdir, run_name, fgno, fname)
             savefig(fullname, bbox_inches='tight')
             print('Created ', fullname)
         else:
@@ -262,17 +264,20 @@ def make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent):
     #For Newport
     # Add transects to planview plot:
     one_third = 1.0/(3.0*3600.)
-    yt1 = 44.635; Ttitle1 = ' '
-    yt2 = 44.615; Ttitle2 = '(Yaq. Bay)'
-    yt3 = 44.6025; Ttitle3 = ' '
+    #yt1 = 44.635; Ttitle1 = ' '
+    #yt2 = 44.615; Ttitle2 = '(Yaq. Bay)'
+    #yt3 = 44.6025; Ttitle3 = ' '
+    yt1 = 44.6215; Ttitle1 = '(OSU MSB)'
+    yt2 = 44.613; Ttitle2 = '(Yaquina Bay)'
+    yt3 = 44.58; Ttitle3 = '(Yaquina River)'
     x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third
-    plot([x1trans,x2trans], [yt1,yt1],'-', color='yellow', linewidth=1.2)
+    plot([x1trans,x2trans], [yt1,yt1],'-', color='yellow', linewidth=1.)
     text(x1trans,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=12,
          ha='left', color='yellow')
-    plot([x1trans,x2trans], [yt2,yt2],'-', color='yellow', linewidth=1.2)
+    plot([x1trans,x2trans], [yt2,yt2],'-', color='yellow', linewidth=1.)
     text(x1trans,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=12,
          ha='left', color='yellow')
-    plot([x1trans,x2trans], [yt3,yt3],'-', color='yellow', linewidth=1.2)
+    plot([x1trans,x2trans], [yt3,yt3],'-', color='yellow', linewidth=1.)
     text(x1trans,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=12,
          ha='left', color='yellow')
     savefigp('h_onshore.png')
@@ -886,7 +891,8 @@ def make_all_fgmax_plots(outdir, plotdir, location, event):
         run_name = '%s_%s' % (location,event)
 
         fg, t_hours = load_fgmax(outdir,fgno,fname_B0)
-        make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours, GE_image, GE_extent)
+        make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
+                         GE_image, GE_extent)
 
         if 1:
             # make kml versions for viewing on Google Earth:
