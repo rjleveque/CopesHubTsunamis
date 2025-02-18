@@ -140,7 +140,7 @@ def make_anim(outdir, plotdir, location, event):
            
     
     
-    climits = (-20,20)
+    climits = (-10,10)
     
     eta_plot1.set_clim(climits)
     axis(plot_extent)
@@ -158,12 +158,13 @@ def make_anim(outdir, plotdir, location, event):
         cb.set_label('meters')
         
     # Add transects to planview plot:
-    yt1 = 44.635; Ttitle1 = ' '
-    yt2 = 44.615; Ttitle2 = '(Yaq. Bay)'
-    yt3 = 44.6025; Ttitle3 = ' '
+    yt1 = 44.6215; Ttitle1 = '(OSU MSB)'
+    yt2 = 44.613; Ttitle2 = '(Yaquina Bay)'
+    yt3 = 44.58; Ttitle3 = '(Yaquina River)'
     
     one_third = 1./(3*3600.)
-    x1trans, x2trans = GE_extent[0] + one_third,  GE_extent[1]-one_third
+    #x1trans, x2trans = GE_extent[0] + one_third,  GE_extent[1]-one_third
+    x1trans, x2trans = -124.1, -124
     
     plot([x1trans,x2trans], [yt1,yt1],'k-',linewidth=0.8)
     text(x1trans+0.005,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=8)
