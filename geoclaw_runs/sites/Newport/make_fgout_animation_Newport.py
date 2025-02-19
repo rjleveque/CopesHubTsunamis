@@ -164,16 +164,16 @@ def make_anim(outdir, plotdir, location, event):
 
     one_third = 1./(3*3600.)
     #x1trans, x2trans = GE_extent[0] + one_third,  GE_extent[1]-one_third
-    x1trans, x2trans = -124.1, -123.985
+    x1trans, x2trans = -124.1, -123.99
 
     plot([x1trans,x2trans], [yt1,yt1],'-',color='yellow',linewidth=0.8)
-    text(x1trans+0.005,yt1+0.0005,'Transect 1 %s' % Ttitle1, color='yellow',
+    text(x1trans+0.005,yt1+0.0005,'Transect 1', color='yellow',
          fontsize=12)
     plot([x1trans,x2trans], [yt2,yt2],'-',color='yellow',linewidth=0.8)
-    text(x1trans+0.005,yt2+0.0005,'Transect 2 %s' % Ttitle2, color='yellow',
+    text(x1trans+0.005,yt2+0.0005,'Transect 2', color='yellow',
          fontsize=12)
     plot([x1trans,x2trans], [yt3,yt3],'-',color='yellow',linewidth=0.8)
-    text(x1trans+0.005,yt3+0.0005,'Transect 3 %s' % Ttitle3, color='yellow',
+    text(x1trans+0.005,yt3+0.0005,'Transect 3', color='yellow',
          fontsize=12)
 
     # =========

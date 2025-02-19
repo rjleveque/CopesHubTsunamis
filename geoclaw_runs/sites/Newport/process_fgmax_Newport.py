@@ -270,15 +270,16 @@ def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
     yt1 = 44.6215; Ttitle1 = '(OSU MSB)'
     yt2 = 44.613; Ttitle2 = '(Yaquina Bay)'
     yt3 = 44.58; Ttitle3 = '(Yaquina River)'
-    x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third
+    #x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third
+    x1trans, x2trans = -124.1, -123.99
     plot([x1trans,x2trans], [yt1,yt1],'-', color='yellow', linewidth=1.)
-    text(x1trans,yt1+0.0005,'Transect 1 %s' % Ttitle1, fontsize=12,
+    text(x1trans,yt1+0.0005,'Transect 1', fontsize=12,
          ha='left', color='yellow')
     plot([x1trans,x2trans], [yt2,yt2],'-', color='yellow', linewidth=1.)
-    text(x1trans,yt2+0.0005,'Transect 2 %s' % Ttitle2, fontsize=12,
+    text(x1trans,yt2+0.0005,'Transect 2', fontsize=12,
          ha='left', color='yellow')
     plot([x1trans,x2trans], [yt3,yt3],'-', color='yellow', linewidth=1.)
-    text(x1trans,yt3+0.0005,'Transect 3 %s' % Ttitle3, fontsize=12,
+    text(x1trans,yt3+0.0005,'Transect 3', fontsize=12,
          ha='left', color='yellow')
     savefigp('h_onshore.png')
     #savefigp('zeta_onshore.png')
@@ -429,7 +430,7 @@ def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
 
     savefigp('transects.png')
 
-def make_kmz_plots(fg, fgmax_plotdir, run_name):
+def make_kmz_plots(fgno, fg, fgmax_plotdir, run_name):
     # ## Plots for Google Earth overlays
     #
     # The new version of `kmltools` includes some tools to make png files
@@ -539,7 +540,7 @@ def make_kmz_plots(fg, fgmax_plotdir, run_name):
         for file in files:
             print('    %s' % os.path.split(file)[-1])
 
-        fname_kmz = '%s_fgmax.kmz' % run_name
+        fname_kmz = '%s_fgmax%s.kmz' % (run_name, fgno)
         with zipfile.ZipFile(fname_kmz, 'w') as zip:
             for file in files:
                 zip.write(file)
@@ -896,7 +897,7 @@ def make_all_fgmax_plots(outdir, plotdir, location, event):
 
         if 1:
             # make kml versions for viewing on Google Earth:
-            make_kmz_plots(fg, fgmax_plotdir, run_name)
+            make_kmz_plots(fgno, fg, fgmax_plotdir, run_name)
 
         close('all')
 
