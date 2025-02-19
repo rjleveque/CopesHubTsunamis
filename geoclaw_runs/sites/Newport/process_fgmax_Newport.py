@@ -523,7 +523,7 @@ def make_kmz_plots(fgno, fg, fgmax_plotdir, run_name):
             cb_files = ['colorbar_depth.png', 'colorbar_speed.png']
             cb_names = ['colorbar_depth', 'colorbar_speed']
 
-        name = 'fgmax_%s' % run_name
+        name = '%s_fgmax%s' % (run_name, fgno)
         fname = os.path.join(kml_dir, name+'.kml')
         kmltools.png2kml(png_extent, png_files=png_files, png_names=png_names,
                          name=name, fname=fname,
