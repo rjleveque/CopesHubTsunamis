@@ -187,6 +187,9 @@ def make_anim(outdir, plotdir, location, event):
                                        fgout_soln.eta, xtrans, ytrans)
         B1d = gridtools.grid_eval_2d(fgout_soln.X, fgout_soln.Y,
                                      fgout_soln.B, xtrans, ytrans)
+        Bmax = 20  # replace masked values (non-fgmax points) with this value
+        B1d = where(B1d.mask, Bmax, B1d)
+        print('+++ fgout: extract_transect, Bmax = %.1f' % Bmax)
         return B1d, eta1d
 
     def annotate_transect(axtrans,xlab):

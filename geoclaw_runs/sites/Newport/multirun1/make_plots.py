@@ -118,7 +118,7 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 1:
+        if 0:
             gauges_plotdir = plotdir + '/gauges'
             os.system('mkdir -p %s' % gauges_plotdir)
             plot_gauges_site.make_all_plots_and_report(outdir, plotdir, 

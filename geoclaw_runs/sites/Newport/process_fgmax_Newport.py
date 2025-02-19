@@ -330,6 +330,7 @@ def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
         Bmax = 40  # replace masked values (non-fgmax points) with this value
         B1d = where(B1d.mask, Bmax, B1d)
         eta1d = h1d + B1d
+        print('+++ fgmax: extract_transect, Bmax = %.1f' % Bmax)
         return B1d, eta1d
 
     fig = figure(1, figsize=(7,8))
