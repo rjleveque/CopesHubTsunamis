@@ -327,6 +327,8 @@ def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
                                        fgmax_soln.h.T, xtrans, ytrans)
         B1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
                                      fgmax_soln.B0.T, xtrans, ytrans)
+        Bmax = 40  # replace masked values (non-fgmax points) with this value
+        B1d = where(B1d.mask, Bmax, B1d)
         eta1d = h1d + B1d
         return B1d, eta1d
 
