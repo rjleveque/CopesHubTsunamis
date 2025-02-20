@@ -65,6 +65,8 @@ def make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir, xgeoclaw_path,
 
         case['setplot_file'] = 'setplot_case.py'
 
+        #case['redirect_python'] = False  # for debugging send to stdout
+
         caselist.append(case)
 
     return caselist

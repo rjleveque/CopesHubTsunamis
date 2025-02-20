@@ -323,12 +323,17 @@ def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
     x1trans, x2trans = GE_extent[0]+one_third, GE_extent[1]-one_third
 
     def extract_transect(fgmax_soln,xtrans,ytrans):
+        # replace masked values of h with 0 (non-fgmax points should be dry):
+        h2d = where(fgmax_soln.h.mask, 0, fgmax_soln.h)
         h1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
-                                       fgmax_soln.h.T, xtrans, ytrans)
+                                     h2d.T, xtrans, ytrans)
+
+        # replace masked values of B0 with this high value for plotting:
+        Bmax = 40
+        B2d = where(fgmax_soln.B0.mask, Bmax, fgmax_soln.B0)
         B1d = gridtools.grid_eval_2d(fgmax_soln.X.T, fgmax_soln.Y.T,
-                                     fgmax_soln.B0.T, xtrans, ytrans)
-        Bmax = 40  # replace masked values (non-fgmax points) with this value
-        B1d = where(B1d.mask, Bmax, B1d)
+                                     B2d.T, xtrans, ytrans)
+
         eta1d = h1d + B1d
         print('+++ fgmax: extract_transect, Bmax = %.1f' % Bmax)
         return B1d, eta1d
@@ -432,6 +437,7 @@ def make_fgmax_plots(fgno, fg, fgmax_plotdir, run_name, t_hours,
     annotate_transect(axtrans3)
 
     savefigp('transects.png')
+
 
 def make_kmz_plots(fgno, fg, fgmax_plotdir, run_name):
     # ## Plots for Google Earth overlays
