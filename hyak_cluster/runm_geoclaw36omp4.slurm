@@ -56,8 +56,9 @@ export CHT=$HOME/CopesHubTsunamis  # for this project
 date
 pwd
 echo CHT=$CHT
-export EXE=$CHT/hyak_cluster/xgeoclaw
+#export EXE=$CHT/hyak_cluster/xgeoclaw
 conda activate /gscratch/tsunami/miniconda3/envs/geo5
-python run_geoclaw_dtopos.py
+#python run_geoclaw_dtopos.py
+python runclaw_makeplots_dtopos.py
 date
 
