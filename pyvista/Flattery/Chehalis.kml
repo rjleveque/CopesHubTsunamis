@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document><name>Chehalis.kml</name>
+
+<Style id="Path">
+<LineStyle><color>FFFF0000</color><width>1</width></LineStyle>
+<PolyStyle><color>00000000</color></PolyStyle>
+</Style>
+<Placemark><name>Chehalis</name>
+<description>  x1 = -124.1, x2 = -123.7
+  y1 = 46.9, y2 = 47.</description>
+<styleUrl>#Path</styleUrl>
+<Polygon>
+<tessellate>1</tessellate>
+<altitudeMode>clampToGround</altitudeMode>
+<outerBoundaryIs><LinearRing><coordinates>
+
+-124.100000000,46.900000000,0.000000000
+-123.700000000,46.900000000,0.000000000
+-123.700000000,47.000000000,0.000000000
+-124.100000000,47.000000000,0.000000000
+-124.100000000,46.900000000,0.000000000
+
+</coordinates></LinearRing></outerBoundaryIs>
+</Polygon>
+</Placemark>
+
+</Document>
+</kml>
