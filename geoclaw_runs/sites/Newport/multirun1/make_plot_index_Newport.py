@@ -38,8 +38,8 @@ runs_dir = os.path.abspath(scratch_dir)
 #geoclaw_plots = os.path.join(runs_dir, 'geoclaw_plots')
 
 
-#geoclaw_plots = './geoclaw_plots_4hr'  # for local version
-geoclaw_plots = './NewportPlots4hr'  # for local version
+geoclaw_plots = './geoclaw_plots'  # for local version
+#geoclaw_plots = './NewportPlots4hr'  # for local version
 
 print('geoclaw_plots = ',geoclaw_plots)
 
@@ -107,7 +107,7 @@ def make_html_index_gauges(plotdir,event,gauges_plotdir):
                                             '*_Gauge*.png'))
         gauge_pngs.sort()
         f.write('\n<p><h2>Gauge plots:</h2>\n')
-        
+
         for k,gauge_png in enumerate(gauge_pngs):
             gauge_png = os.path.split(gauge_png)[-1]
             gaugename = os.path.splitext(gauge_png)[0]
