@@ -18,27 +18,33 @@ CHT = '/Users/rjl/git/CopesHubTsunamis' # or hard-wired
 sys.path.insert(0,CHT+'/common_code')  # add to search path
 import dtopotools # local version, makes smaller files
 
+zdisp_dir = 'time_dependent_zdisp_FrontalThrust'
+dtopo_dir = 'dtopofiles_FrontalThrust'
+os.system('mkdir -p %s' % dtopo_dir)
+print('Output will go in %s' % dtopo_dir)
 
 # Select an event:
 
-
-event = 'buried-locking-mur13-shallow'
-#event = 'buried-locking-mur13-deep'
-#event = 'buried-locking-skl16-shallow'
-#event = 'buried-random-str10-shallow'
-#event = 'buried-locking-str10-deep'
-events = [event]
+if 0:
+    #event = 'buried-locking-str10-deep'
+    event = 'ft-locking-mur13-deep'
+    events = [event]
 
 if 1:
+    # all events in zdisp_dir:
     #files = glob.glob('vertical_displacements_FrontalThurst/*')
-    files = glob.glob('time_dependent_zdisp/*')
+    #files = glob.glob('time_dependent_zdisp/*')
+    files = glob.glob('%s/*' % zdisp_dir)
+    #files = ['time_dependent_zdisp_FrontalThrust/XGRID_ft-locking-mur13-deep_Z.h5'])
     events = []
     for f in files:
         f = os.path.split(f)[-1]
         #events.append(f.replace('vert_displacements_all_xgrid_', ''))
         f = f.replace('XGRID_', '')
         f = f.replace('_Z.h5', '')
-        events.append(f)
+        #if 'locking-mur13' in f:
+        if 1:
+            events.append(f)
     print(events)
 
 
@@ -47,7 +53,7 @@ for event in events:
 
     if 0:
         # Read static displacement  (not needed)
-        datadir = 'vertical_displacements'
+        datadir = 'vertical_displacements' # might be wrong
         fname_orig = 'vert_displacements_all_xgrid_' + event
         path_orig = os.path.join(datadir, fname_orig)
         lon,lat,zdisp = loadtxt(path_orig, skiprows=1,usecols=[1,2,3],unpack=True)
@@ -61,7 +67,7 @@ for event in events:
 
     # Read waveforms
 
-    waveforms = obspy.read('time_dependent_zdisp/XGRID_%s_Z.h5' % event)
+    waveforms = obspy.read('%s/XGRID_%s_Z.h5' % (zdisp_dir,event))
 
     waveforms = waveforms.sort(['station'])
 
@@ -113,7 +119,7 @@ for event in events:
 
     # Save dtopo file for GeoClaw:
 
-    fname_dtopo = event + '.dtt3'
+    fname_dtopo = '%s/%s.dtt3' % (dtopo_dir,event)
     dtopo.write(fname_dtopo, 3)
     print('Created ',fname_dtopo)
 
@@ -127,7 +133,7 @@ for event in events:
     dtopo_instant.dZ = empty(dZshape)
     dtopo_instant.dZ[0,:,:] = dtopo.dZ[-1,:,:]
 
-    fname_dtopo = event + '_instant.dtt3'
+    fname_dtopo = '%s/%s_instant.dtt3' % (dtopo_dir,event)
     dtopo_instant.write(fname_dtopo, 3)
     print('Created ',fname_dtopo)
 
@@ -154,7 +160,7 @@ for event in events:
         dtopo.plot_dZ_colors(t,axes=ax,cmax_dZ=cmax_dZ,dZ_interval=100)
         title('Final vertical displacement\n%s' % event)
         grid(True);
-        fname = '%s_final.png' % event
+        fname = '%s/%s_final.png' % (dtopo_dir,event)
         savefig(fname)
         print('Created ',fname)
 
@@ -176,22 +182,26 @@ for event in events:
         anim = animation_tools.animate_figs(figs, figsize=(7,8))
 
         # make mp4 file:
-        fname = event + '.mp4'
+        fname = '%s/%s.mp4' % (dtopo_dir,event)
         animation_tools.make_mp4(anim, file_name=fname)
         print('Created ',fname)
 
 
     if 1:
-        # plot transect of dz at a sequence of times:
+        for y0 in [44,45,46,47,48]:
+            # plot transect of dz at a sequence of times:
 
-        figure(figsize=(10,7))
-        y0 = 47.5
-        j = where(y<y0)[0].max()
-        for k in range(6,15):
-            plot(x,dtopo.dZ[k,j,:],label='%.0fs' % dtopo.times[k])
-        legend(loc='upper left')
-        title('Transect at y = %.1f\n%s' % (y0,event))
-        grid(True)
-        fname = event + '_y%s.png' % str(y0).replace('.','-')
-        savefig(fname)
-        print('Created ',fname)
+            time_interval = 4
+            time_indices = range(time_interval, len(dtopo.times), time_interval)
+            #times = dtopo.times[interval::interval]
+            figure(figsize=(10,7))
+            #y0 = 47.5
+            j = where(y<y0)[0].max()
+            for k in time_indices:
+                plot(x,dtopo.dZ[k,j,:],label='%.0fs' % dtopo.times[k])
+            legend(loc='upper left')
+            title('Transect at y = %.1f\n%s' % (y0,event))
+            grid(True)
+            fname = '%s/%s_y%s.png' % (dtopo_dir,event, str(y0).replace('.','-'))
+            savefig(fname)
+            print('Created ',fname)
