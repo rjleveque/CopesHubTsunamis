@@ -294,6 +294,18 @@ def set_sea_level(sea_level):
     p.add_title('Westport at MHW after %.2f m subsidence (or sea level rise)' \
                 % sea_level)
 
+    if 0:
+        # test Rectangle
+        xd =  (-124.12 - x_mean) * 111e3 * cos(y_mean*pi/180)
+        yd =  (46.89 - y_mean) * 111e3
+        zd = 5
+        boxl = 100
+        pA = [xd-boxl, yd-boxl, zd+warpfactor]
+        pB = [xd-boxl, yd+boxl, zd+warpfactor]
+        pC = [xd+boxl, yd+boxl, zd+warpfactor]
+        debris_square = pv.Rectangle([pA,pB,pC])
+        p.add_mesh(debris_square, color='r')
+
     if 1:
         # round off entries in p.camera_position and print out, so user
         # can copy and paste into this script once good position is found:

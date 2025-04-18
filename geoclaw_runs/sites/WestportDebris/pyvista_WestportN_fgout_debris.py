@@ -10,7 +10,7 @@ import debris_tools
 from clawpack.visclaw import animation_tools
 from WestportN_debris import compute_debris_paths
 
-global etamesh, debris_spheres, debris_path_t
+global etamesh, debris_blobs, debris_path_t
 
 rundir = os.getcwd()
 event = os.path.split(rundir)[-1]
@@ -29,15 +29,16 @@ os.system('rm %s/*' % framedir)  # remove frames from previous version
 
 #tfinal = 4780.  # create animation up to this time (or end of computation)
 tfinal = 1.5*3600.
+tfinal = 35*60.  # testing
 
 # compute debris paths based on fgout, based on buildings in this extent:
-buildings_extent = [-124.129, -124.112, 46.8805, 46.8905]
+buildings_extent = [-124.129, -124.112, 46.8805, 46.8905] # near lighthouse
 #buildings_extent = None # to use all buildings
 
 debris_paths, dbnos = compute_debris_paths(tfinal, buildings_extent)
 
-#debris_spheres = len(debris_paths)*[' ']  # for plot actors
-debris_spheres = {}  # for plot actors
+#debris_blobs = len(debris_paths)*[' ']  # for plot actors
+debris_blobs = {}  # for plot actors
 
 # Instantiate object for reading fgout frames:
 fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, format, qmap)
@@ -104,7 +105,7 @@ eta = flipud(eta)
 
 make_html = False  # True to make html version of topo (requires trame)
 
-make_animation = True
+make_animation = False
 
 # select frames for fgout grid 5 every 20 seconds up to tfinal:
 fgframes = [n+1 for n in range(len(fgout_grid.times)) \
@@ -146,7 +147,7 @@ for dbno in dbnos:
     debris_path_t[dbno] = None  # to indicate this debris not yet drawn
 
 def set_frameno(fgframeno):
-    global etamesh, debris_spheres, debris_path_t
+    global etamesh, debris_blobs, debris_path_t
     #fgframeno = 6*int(floor(tmin)) + 1
     fgframeno = int(round(fgframeno))
     fgout = fgout_grid.read_frame(fgframeno)
@@ -196,13 +197,23 @@ def set_frameno(fgframeno):
             boxl = sphere_radius = 10
             zd = warpfactor * max(eta_fcn(xdebris,ydebris),
                      B_fcn(xdebris,ydebris)+sphere_radius/warpfactor)
-            #debris_sphere = pv.Sphere(radius=sphere_radius, center=(xd,yd,zd))
-            debris_sphere = pv.Box((xd-boxl,xd+boxl,yd-boxl,yd+boxl,zd-boxl,zd+boxl))
+            #debris_blob = pv.Sphere(radius=sphere_radius, center=(xd,yd,zd))
+
+            #if debris_path_t[dbno] is None:
+            if 1:
+                # draw initially as box:
+                debris_blob = pv.Box((xd-boxl,xd+boxl,yd-boxl,yd+boxl,zd-boxl,zd+boxl))
+            else:
+                # flat rectangle slightly above topo:
+                pA = [xd-boxl, yd-boxl, zd+warpfactor]
+                pB = [xd-boxl, yd+boxl, zd+warpfactor]
+                pC = [xd+boxl, yd+boxl, zd+warpfactor]
+                debris_blob = pv.Rectangle([pA,pB,pC])
             if debris_path_t[dbno] is not None:
                 # remove debris from old location:
-                p.remove_actor(debris_spheres[dbno])
+                p.remove_actor(debris_blobs[dbno])
             # draw in new location:
-            debris_spheres[dbno] = p.add_mesh(debris_sphere, color='r')
+            debris_blobs[dbno] = p.add_mesh(debris_blob, color='r')
             #print('+++ dbno = %i, redrawn at x = %.5f, y = %.5f' % (dbno,xd,yd))
         else:
             #print('+++ dbno = %i not redrawn' % dbno)
