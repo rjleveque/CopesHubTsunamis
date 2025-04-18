@@ -1,6 +1,6 @@
 from pylab import *
 
-def compute_debris_paths(tfinal):
+def compute_debris_paths(tfinal, extent=None):
 
     """
     Load in fgout frames up to time tfinal from the tsunami simulation.
@@ -71,6 +71,11 @@ def compute_debris_paths(tfinal):
     fid_building,x_building,y_building = loadtxt(fname_buildings, delimiter=',',
                                                  unpack=True)
     for k in range(len(fid_building)):
+        if extent is not None:
+            x1,x2,y1,y2 = extent
+            if x_building[k]<x1 or x_building[k]>x2 or \
+               y_building[k]<y1 or y_building[k]>y2:
+                continue  # skip this building
         dbno = fid_building[k]
         db = array([[t0, x_building[k], y_building[k], u0, v0]])
         debris_paths[dbno] = db
