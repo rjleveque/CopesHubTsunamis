@@ -22,40 +22,13 @@ from clawpack.geoclaw.data import ForceDry
 root_dir     = os.environ['CHT']
 rundir = os.getcwd()
 
-if '/home/ptha' in rundir:
-    # on cubano:
-    topo_dir = '/home/ptha/topo/topofiles'
-    dtopo_dir = '/home/ptha/dtopo/dtopofiles'
-    RRdir = root_dir + '/topo/regions'
-elif 'mmfs1' in rundir:
-    # on hyak:
-    topo_dir = os.path.abspath('/gscratch/tsunami/topo/topofiles/')
-    dtopo_dir = os.path.abspath('/gscratch/tsunami/dtopo/dtopofiles/')
-    RRdir = root_dir + '/topo/regions'
-else:
-    # on Randy's laptop  # ADJUST?
-    #topo_dir =  root_dir + '/topo/topofiles'
-    topo_dir = '/Users/rjl/topo/topofiles'
-    dtopo_dir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'
-    RRdir = root_dir + '/topo/regions'
+topo_dir = root_dir + '/topo/topofiles'
+dtopo_dir = root_dir + '/dtopo/CSZ_groundmotions/dtopofiles'
+RRdir = root_dir + '/topo/regions'
 
-
-
-if '/home/ptha' in rundir:
-    # on cubano:
-    topo_dir = '/home/ptha/topo/topofiles'
-    dtopo_dir = '/home/ptha/dtopo/dtopofiles'
-elif 'mmfs1' in rundir:
-    # on hyak:
-    topo_dir = os.path.abspath('/gscratch/tsunami/topo/topofiles/')
-    dtopo_dir = os.path.abspath('/gscratch/tsunami/dtopo/dtopofiles/')
-else:
-    # on laptop  # ADJUST!
-    #topo_dir =  root_dir + '/topo/topofiles'
-    #dtopo_dir = root_dir + '/dtopo/dtopofiles'
-    topo_dir = '/Users/rjl/topo/topofiles'
-    dtopo_dir = '/Users/rjl/git/CopesHubTsunamis/dtopo/CSZ_groundmotions/dtopofiles'
-
+# for hyak cluster:
+topodir = topodir.replace('/mmfs1/home', '/gscratch/tsunami')
+dtopodir = dtopodir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 try:
     CLAW = os.environ['CLAW']
@@ -71,7 +44,7 @@ rundir = os.getcwd()
 print('rundir = %s' % rundir)
 
 
-dtopofile = dtopo_dir + '/buried-locking-mur13-deep.dtt3'
+dtopofile = dtopo_dir + '/buried-locking-str10-middle.dtt3'
 assert os.path.isfile(dtopofile), '*** did not find dtopofile = %s' \
         % dtopofile
 
@@ -235,7 +208,8 @@ def setrun(claw_pkg='geoclaw'):
         # Specify a list of output times.
         tfinal = 1.5*3600.
         dtout = 5*60.
-        clawdata.output_times = [0.,60.] + list(np.arange(30*60., tfinal+1, dtout))
+        clawdata.output_times = [0.,60.,5*60.,10*60.] + \
+                                list(np.arange(30*60., tfinal+1, dtout))
 
     elif clawdata.output_style == 3:
         # Output every iout timesteps with a total of ntot time steps:

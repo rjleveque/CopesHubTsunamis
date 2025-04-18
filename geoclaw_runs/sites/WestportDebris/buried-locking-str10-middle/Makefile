@@ -13,20 +13,24 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 # provided "projects" or "home1" isn't in your path
 
 # on CU cluster this redirects output to scratch disk:
-SCRATCH = $(subst /projects/,/rc_scratch/,$(CURDIR))
+#SCRATCH = $(subst /projects/,/rc_scratch/,$(CURDIR))
 # on TACC this redirects output to scratch disk:
 #SCRATCH = $(subst /home1/,/scratch/,$(CURDIR))
+
+# on hyak this redirects output to scratch disk:
+SCRATCH = $(subst /mmfs1/home/,/gscratch/tsunami/,$(CURDIR))
+topo_dir = topo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 # Adjust these variables if desired:
 # ----------------------------------
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
 
-# Environment variable COPEVIS should be set to 
+# Environment variable CHT should be set to 
 # top of git repository (perhaps in shared locaation on HPC cluster)
 
 # for laptop:
-EXE ?= $(CHT)/geoclaw_runs/xgeoclaw_v511
+EXE ?= $(CHT)/geoclaw_runs/xgeoclaw_v511_smax
 
 
 SETRUN_FILE = setrun.py             # File containing function to make data
