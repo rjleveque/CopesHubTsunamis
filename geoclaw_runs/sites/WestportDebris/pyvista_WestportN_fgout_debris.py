@@ -10,7 +10,7 @@ import debris_tools
 from clawpack.visclaw import animation_tools
 from WestportN_debris import compute_debris_paths
 
-global etamesh, debris_spheres
+global etamesh, debris_spheres, debris_path_t
 
 rundir = os.getcwd()
 event = os.path.split(rundir)[-1]
@@ -27,12 +27,17 @@ framedir = '_frames'
 os.system('mkdir -p %s' % framedir)
 os.system('rm %s/*' % framedir)  # remove frames from previous version
 
-tfinal = 4780.  # create animation up to this time (or end of computation)
+#tfinal = 4780.  # create animation up to this time (or end of computation)
+tfinal = 1.5*3600.
 
-# compute debris paths based on fgout2:
-debris_paths, dbnos = compute_debris_paths(tfinal)
+# compute debris paths based on fgout, based on buildings in this extent:
+buildings_extent = [-124.129, -124.112, 46.8805, 46.8905]
+#buildings_extent = None # to use all buildings
 
-debris_spheres = len(debris_paths)*[' ']  # for plot actors
+debris_paths, dbnos = compute_debris_paths(tfinal, buildings_extent)
+
+#debris_spheres = len(debris_paths)*[' ']  # for plot actors
+debris_spheres = {}  # for plot actors
 
 # Instantiate object for reading fgout frames:
 fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, format, qmap)
@@ -99,7 +104,7 @@ eta = flipud(eta)
 
 make_html = False  # True to make html version of topo (requires trame)
 
-make_animation = False
+make_animation = True
 
 # select frames for fgout grid 5 every 20 seconds up to tfinal:
 fgframes = [n+1 for n in range(len(fgout_grid.times)) \
@@ -136,9 +141,12 @@ p.camera_position =  [(4021.4254960355893, 3013.3560518492995, 3063.976389298100
 
 p.window_size=(2300,1300)
 
+debris_path_t = {}
+for dbno in dbnos:
+    debris_path_t[dbno] = None  # to indicate this debris not yet drawn
 
 def set_frameno(fgframeno):
-    global etamesh, debris_spheres
+    global etamesh, debris_spheres, debris_path_t
     #fgframeno = 6*int(floor(tmin)) + 1
     fgframeno = int(round(fgframeno))
     fgout = fgout_grid.read_frame(fgframeno)
@@ -159,7 +167,12 @@ def set_frameno(fgframeno):
     p.add_title('Time %s after %s earthquake' % (tstr,event))
 
     # add debris particles at this time:
-    xdebris,ydebris = debris_tools.get_debris_xy(fgout.t, debris_paths, dbnos)
+    #xdebris,ydebris = debris_tools.get_debris_xy(fgout.t, debris_paths, dbnos)
+
+    new_debris_path_t = debris_tools.get_debris_path_t(fgout.t, debris_paths, dbnos)
+    # returns dict with key dbno and value (tdebris,xdebris,ydebris,udebris,vdebris)
+    # with tdebris == t (or nearest time the path exists)
+
 
     # make function that returns eta(x,y) at this time:
     eta_fcn = fgout_tools.make_fgout_fcn_xy(fgout, 'eta')
@@ -167,17 +180,35 @@ def set_frameno(fgframeno):
 
 
     #for k in range(len(xdebris)):
-    for k in range(0, len(xdebris), 1):
-        xd = -(xdebris[k]- fgout.x[-1]) * 111e3 * cos(fgout.y.mean()*pi/180)
-        yd = -(ydebris[k]- fgout.y[0]) * 111e3
-        boxl = sphere_radius = 10
-        zd = warpfactor * max(eta_fcn(xdebris[k],ydebris[k]),
-                 B_fcn(xdebris[k],ydebris[k])+sphere_radius/warpfactor)
-        #debris_sphere = pv.Sphere(radius=sphere_radius, center=(xd,yd,zd))
-        debris_sphere = pv.Box((xd-boxl,xd+boxl,yd-boxl,yd+boxl,zd-boxl,zd+boxl))
-        p.remove_actor(debris_spheres[k])
-        debris_spheres[k] = p.add_mesh(debris_sphere, color='r')
-        #print('Added sphere at (%.3f, %.3f, %.3f)' % (xd,yd,zd))
+    #for k in range(0, len(xdebris), 1):
+    for dbno in dbnos:
+        #import pdb; pdb.set_trace()
+        if (debris_path_t[dbno] is None):
+            redraw_debris = True
+        else:
+            redraw_debris = (abs(new_debris_path_t[dbno][1:5] \
+                                   - debris_path_t[dbno][1:5]).max() > 1e-5)
+        if redraw_debris:
+            # debris needs to be drawn, otherwise leave this artist alone
+            xdebris,ydebris = new_debris_path_t[dbno][1:3]
+            xd = -(xdebris- fgout.x[-1]) * 111e3 * cos(fgout.y.mean()*pi/180)
+            yd = -(ydebris- fgout.y[0]) * 111e3
+            boxl = sphere_radius = 10
+            zd = warpfactor * max(eta_fcn(xdebris,ydebris),
+                     B_fcn(xdebris,ydebris)+sphere_radius/warpfactor)
+            #debris_sphere = pv.Sphere(radius=sphere_radius, center=(xd,yd,zd))
+            debris_sphere = pv.Box((xd-boxl,xd+boxl,yd-boxl,yd+boxl,zd-boxl,zd+boxl))
+            if debris_path_t[dbno] is not None:
+                # remove debris from old location:
+                p.remove_actor(debris_spheres[dbno])
+            # draw in new location:
+            debris_spheres[dbno] = p.add_mesh(debris_sphere, color='r')
+            #print('+++ dbno = %i, redrawn at x = %.5f, y = %.5f' % (dbno,xd,yd))
+        else:
+            #print('+++ dbno = %i not redrawn' % dbno)
+            pass
+    debris_path_t = new_debris_path_t.copy()
+
 
     if not make_animation:
         # print camera position so that this can be copied and pasted
@@ -214,7 +245,7 @@ else:
     #for fgframeno in range(1,121,1):
     #for fgframeno in range(1,74,1):
     #for fgframeno in fgframes:
-    for fgframeno in range(88,181,5):
+    for fgframeno in range(1,300,5):
         set_frameno(fgframeno)
         fname_png = '%s/PyVistaFrame%s.png' % (framedir, str(fgframeno).zfill(4))
         p.screenshot(fname_png)

@@ -76,7 +76,7 @@ def compute_debris_paths(tfinal, extent=None):
             if x_building[k]<x1 or x_building[k]>x2 or \
                y_building[k]<y1 or y_building[k]>y2:
                 continue  # skip this building
-        dbno = fid_building[k]
+        dbno = int(fid_building[k])
         db = array([[t0, x_building[k], y_building[k], u0, v0]])
         debris_paths[dbno] = db
 
