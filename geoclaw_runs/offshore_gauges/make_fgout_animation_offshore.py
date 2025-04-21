@@ -30,6 +30,7 @@ def make_anim(outdir, plotdir, location, event):
 
     # Instantiate object for reading fgout frames:
     fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, format) 
+    fgout_grid.read_fgout_grids_data()
 
 
     # Plot one frame of fgout data and define the Artists that will need to

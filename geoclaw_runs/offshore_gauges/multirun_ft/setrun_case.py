@@ -672,9 +672,15 @@ def setrun(claw_pkg='geoclaw', case={}):
     #rundata.gaugedata.gauges.append([1,-122.4, 47.781, 0., 1.e10])
 
     rundata.gaugedata.file_format = 'binary32'
+<<<<<<< Updated upstream
 
     asce_gagues_file = root_dir + '/gauges/offshore_gauges/asce_values.txt'
     asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
+=======
+    
+    asce_gauges_file = root_dir + '/gauges/offshore_gauges/asce_values.txt'
+    asce_gauges = np.loadtxt(asce_gauges_file, skiprows=1)
+>>>>>>> Stashed changes
 
     #Use all the ASCE gauges for this job run
     for k in range(0,len(asce_gauges)):
@@ -683,8 +689,8 @@ def setrun(claw_pkg='geoclaw', case={}):
         gy = float(asce_gauges[k,2])
         if gy >= 40:
             rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
-    VI_gagues_file = root_dir + '/gauges/offshore_gauges/gaugesVI.txt'
-    VI_gauges = np.loadtxt(VI_gagues_file, skiprows=1)
+    VI_gauges_file = root_dir + '/gauges/offshore_gauges/gaugesVI.txt'
+    VI_gauges = np.loadtxt(VI_gauges_file, skiprows=1)
     for k in range(0,len(VI_gauges),1):
         gaugeno = int(VI_gauges[k,0])
         gx = float(VI_gauges[k,1])

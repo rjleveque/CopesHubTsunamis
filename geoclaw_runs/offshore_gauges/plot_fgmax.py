@@ -35,7 +35,7 @@ if 0:
     norm_eta = colors.BoundaryNorm(bounds_eta, cmap_eta.N)
 
 
-def make_fgmax_plot(outdir, plotdir, location, event):
+def make_fgmax_plot(outdir, plotdir, location, event, dtopofile):
 
     os.system('mkdir -p %s' % plotdir)
 
@@ -55,8 +55,18 @@ def make_fgmax_plot(outdir, plotdir, location, event):
     #plt.colorbar()
     #pc = plottools.pcolorcells(fg.X, fg.Y, zeta, cmap=cmap_eta, norm=norm_eta)
 
+    if 'instant' in event:
+        # assuming dz already applied at t = fg.tstart_max (usually 0)
+        print('*** setting Bfinal = fg.B, assuming dz applied by t = fg.tstart_max')
+        Bfinal = fg.B
+    else:
+        # since fg.B captured at t=0 when dz=0 and hence is B0
+        fg.interp_dz(dtopofile, dtopo_type=3)
+        Bfinal = fg.B + fg.dz
+
+
     hwet = numpy.where(fg.h > 0.1, fg.h, numpy.nan)
-    zeta = numpy.where(fg.B>0, hwet, fg.h+fg.B)
+    zeta = numpy.where(fg.B>0, hwet, fg.h+Bfinal)
     zeta = numpy.where(zeta >= 0., zeta, numpy.nan)
     pc = plottools.pcolorcells(fg.X, fg.Y, zeta,cmap=cmap_noaa_max)
     plt.clim(-2,10)

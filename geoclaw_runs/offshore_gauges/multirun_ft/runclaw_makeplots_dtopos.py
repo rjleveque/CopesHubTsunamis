@@ -46,8 +46,8 @@ import os,sys,glob
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = True
-make_plots = False
+run_code = False
+make_plots = True
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -97,7 +97,7 @@ else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
 # number of events to run and/or plot simultaneously:
-nprocs = 9
+nprocs = 1
 
 # Specify the list of events to loop over for geoclaw runs:
 
