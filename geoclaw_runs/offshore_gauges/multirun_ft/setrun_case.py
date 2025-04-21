@@ -350,6 +350,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # AMR parameters:
     # ---------------
     amrdata = rundata.amrdata
+    amrdata.max1d = 200  # otherwise more than 10K patches
+    amrdata.memsize = 268435455 # = 2**28 - 1
 
     # max number of refinement levels:
     #amrdata.amr_levels_max = 4
@@ -669,6 +671,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     #rundata.gaugedata.gauges.append([1,-122.4, 47.781, 0., 1.e10])
 
+    rundata.gaugedata.file_format = 'binary32'
+
     asce_gagues_file = root_dir + '/gauges/offshore_gauges/asce_values.txt'
     asce_gauges = np.loadtxt(asce_gagues_file, skiprows=1)
 
@@ -688,7 +692,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         rundata.gaugedata.gauges.append([gaugeno, gx, gy, 0, 1e9])
 
 
-    if 1:  #don't use fgmax grid
+    if 1:
         # == fgmax_grids.data values ==
         # NEW STYLE STARTING IN v5.7.0
 
@@ -733,7 +737,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
         #Add the fg max grid here at the finest level
 
-    if 0:
+    if 1:
         ###  HERE IS THE FGOUT STUFF TO EDIT (if plot_eta is set to True in
         ###  compare_gauge_max_withasce.py postprocessing, it uses fgout)
         # == fgout_grids.data values ==
