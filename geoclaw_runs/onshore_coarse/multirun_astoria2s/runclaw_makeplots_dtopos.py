@@ -73,10 +73,14 @@ scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
 # for hyak:
 scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
+FrontalThrust = True
+
 # where to find all the dtopo files:
-dtopo_dir = os.path.join(root_dir, \
-                         'dtopo/CSZ_groundmotions/dtopofiles')
-                         #'dtopo/CSZ_groundmotions/dtopofiles_FrontalThrust')
+if FrontalThrust:
+    dtopo_dir = os.path.join(root_dir, \
+                        'dtopo/CSZ_groundmotions/dtopofiles_FrontalThrust')
+else:
+    dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
 
 # for hyak:
 dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
@@ -111,6 +115,8 @@ if 1:
         ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
          'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
 
+    if not FrontalThrust:
+    all_models = [s.replace('ft','buried') for s in all_models]
 
     models = all_models
     #models = all_models[:3]
