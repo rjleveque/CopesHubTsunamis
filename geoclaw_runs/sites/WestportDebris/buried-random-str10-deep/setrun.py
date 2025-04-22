@@ -44,7 +44,7 @@ rundir = os.getcwd()
 print('rundir = %s' % rundir)
 
 
-dtopofile = dtopo_dir + '/buried-locking-str10-deep.dtt3'
+dtopofile = dtopo_dir + '/buried-random-str10-deep.dtt3'
 assert os.path.isfile(dtopofile), '*** did not find dtopofile = %s' \
         % dtopofile
 
