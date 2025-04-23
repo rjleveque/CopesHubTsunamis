@@ -258,6 +258,8 @@ def make_all_kmz_plots(events, outdirs, plotdir, name_kmz):
 
         png_filename, png_extent = make_kmz_plots(fgno, fg, plotdir, event)
 
+        png_filename = os.path.split(png_filename)[-1]
+        #print('+++ png_filename = ',png_filename)
         png_files.append(png_filename)
         png_names.append(event)
         if close_figs: close('all')
@@ -293,7 +295,7 @@ def make_all_kmz_plots(events, outdirs, plotdir, name_kmz):
     #path_kmz = os.path.join(fgmax_plotdir, name_kmz)
     #shutil.move(name_kmz, path_kmz)
     print('Created %s' % os.path.abspath(path_kmz))
-    if 1:
+    if 0:
         print('kml and png files are in: %s' % kml_dir)
     else:
         shutil.rmtree(kml_dir)
@@ -316,13 +318,13 @@ if __name__== '__main__':
 
     all_models = []
 
-    if 1:
+    if 0:
         all_models = all_models + \
             ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
              'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
         name_kmz = 'coarse_hmax_Seaside-OceanShores_buried'
 
-    if 0:
+    if 1:
         all_models = all_models + \
             ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
              'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
@@ -331,7 +333,7 @@ if __name__== '__main__':
     if len(all_models) == 12:
         # including both buried and ft:
         name_kmz = 'coarse_hmax_Seaside-OceanShores'
-        
+
     models = all_models
     #models = all_models[:3]
     events = ['%s-deep' % model for model in models] \
