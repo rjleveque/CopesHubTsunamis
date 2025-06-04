@@ -10,16 +10,15 @@ import netCDF4
 import xarray
 import time as time_module
 
-from CHTtools import event_map
 
-dry_run = False
+dry_run = True
 
 drytol = 1e-3  # set u=v=0 where h < drytol when computing from hu,hv
 
 datatype = 'f4'  # 'f4' for 4-byte float32, 'f8' for 8-byte float64
 
 
-outdirs = '/Users/rjl/git/CopesHubTsunamis/geoclaw_runs/sites/Seaside/multirun2/geoclaw_outputs'
+outdirs = '/gscratch/tsunami/rjl/CopesHubTsunamis/geoclaw_runs/sites/seaside/multirun2/geoclaw_outputs'
 
 location = 'Seaside'
 
@@ -29,13 +28,31 @@ print('nc_file = ',nc_file)
 # make a netcdf file for this one event with these gauges:
 gaugenos = range(1001,1068,1)
 
-# events:
-ievents = [1]
-event_names = [event_map[j] for j in ievents]
+
+# specify events...
+
+all_models = \
+    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+
+
+models = all_models
+events = ['%s-deep' % model for model in models] \
+       + ['%s-middle' % model for model in models] \
+       + ['%s-shallow' % model for model in models]
+
+events.sort()
+
+#events = events[9:]  # only "random" events
+events = [e for e in events if 'random-str10' in e]  # only "random-str10"
+
+# or test on a few:
+#events = ['buried-random-mur13-deep']
 
 # quantities of interest:
 gauge_qois = ['h','u','v','eta']
 iqois = range(len(gauge_qois))  # integer indices 0,1,2,3
+qois = gauge_qois
 
 # times:
 t0 = 0.
@@ -43,7 +60,7 @@ tfinal = 5400.
 dt = 5.
 tg = arange(t0, tfinal+.1*dt, dt)
 
-gauge_results = empty((len(tg),len(gaugenos),len(iqois),len(ievents)),
+gauge_results = empty((len(tg),len(gaugenos),len(qois),len(events)),
                       dtype=float)
 
 xg = nan*zeros(len(gaugenos))
@@ -53,13 +70,23 @@ tmin = inf
 tmax = -inf
 
 if dry_run:
-    print('dry_run: will check that gauge results exist for these events:')
-    print(event_names)
+    print('dry_run: will check that output directories exist for these events:')
+    print(events)
+missing_directories = False
 
-for k,ievent in enumerate(ievents):
-    event_name = event_map[ievent]
-    outdir = '%s/_output_%s'  % (outdirs,event_name)
+for k,event in enumerate(events):
+    outdir = '%s/_output_%s'  % (outdirs,event)
+    if os.path.isdir(outdir):
+        print('Found directory: ',outdir)
+    else:
+        print('Missing directory: ',outdir)
+        missing_directories = True
 
+if missing_directories:
+    raise ValueError('*** aborting due to missing directories')
+
+for k,event in enumerate(events):
+    outdir = '%s/_output_%s'  % (outdirs,event)
     for j,gaugeno in enumerate(gaugenos):
         gauge = gauges.GaugeSolution(gaugeno, outdir)
         t = gauge.t
@@ -73,7 +100,7 @@ for k,ievent in enumerate(ievents):
             yg[j] = y
         if x != xg[j] or y != yg[j]:
             print('*** x or y do not match for gaugeno %i, event %s' \
-                    % (gaugeno,event_name))
+                    % (gaugeno,event))
             print('*** x,y = %g,%g, expected %g,%g' \
                     % (x,y,xg[j],yg[j]))
 
@@ -122,17 +149,20 @@ if not dry_run:
         #gauge = rootgrp.createGroup(gauge_name)
         time = rootgrp.createDimension('time', len(tg))
         gaugeno = rootgrp.createDimension('gaugeno', len(gaugenos))
-        iqoi = rootgrp.createDimension('iqoi', len(iqois))
-        ievent = rootgrp.createDimension('ievent', len(ievents))
+        #iqoi = rootgrp.createDimension('iqoi', len(iqois))
+        qoi = rootgrp.createDimension('qoi', len(qois))
+        event = rootgrp.createDimension('event', len(events))
 
         gaugeno = rootgrp.createVariable('gaugeno','i4',('gaugeno',))
         gaugeno[:] = gaugenos
 
-        ievent = rootgrp.createVariable('ievent','i4',('ievent',))
-        ievent[:] = ievents
+        event = rootgrp.createVariable('event','str',('event',))
+        for j,e in enumerate(events):
+            event[j] = e
 
-        iqoi = rootgrp.createVariable('iqoi','i4',('iqoi',))
-        iqoi[:] = iqois
+        qoi = rootgrp.createVariable('qoi','str',('qoi',))
+        for j,q in enumerate(qois):
+            qoi[j] = q
 
         x = rootgrp.createVariable('x','f8',('gaugeno',))
         x[:] = xg
@@ -147,38 +177,7 @@ if not dry_run:
         times.units = "seconds"
 
         gauge_vals = rootgrp.createVariable('gauge_vals',datatype,
-                            ('time','gaugeno','iqoi','ievent'))
+                            ('time','gaugeno','qoi','event'))
         gauge_vals[:,:,:,:] = gauge_results
 
     print('Created %s' % nc_file)
-
-
-
-def read_allgauges_nc(ncfile):
-
-    import xarray
-
-    with xarray.open_dataset(ncfile, decode_timedelta=False) as ncdata:
-        print(ncdata.description)
-        gaugeno = ncdata.variables['gaugeno']
-        x = ncdata.variables['x']
-        y = ncdata.variables['y']
-        time = ncdata.variables['time']
-        ievent = ncdata.variables['ievent']
-        iqoi = ncdata.variables['iqoi']
-        gauge_vals = ncdata.variables['gauge_vals']
-
-        # create xarrays to pass back:
-        dims = ('time','gaugeno','iqoi','ievent')
-        coords = (time, gaugeno, iqoi, ievent)
-        gauge_vals = xarray.DataArray(gauge_vals, coords, dims)
-
-        gauge_x = xarray.DataArray(x, (gaugeno,), ('gaugeno',))
-        gauge_y = xarray.DataArray(y, (gaugeno,), ('gaugeno',))
-        gauge_t = asarray(time)  # simple numpy array
-
-    if 1:
-        print('Loaded %i times from t = %.1f to %.1f sec at %i gauges' \
-                % (len(time),time[0],time[-1],len(x)))
-
-    return gauge_x, gauge_y, gauge_t, gauge_vals
