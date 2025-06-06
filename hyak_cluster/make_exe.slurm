@@ -47,7 +47,7 @@ module load intel/oneAPI/2021.1.1
 export FC=ifort
 export FFLAGS='-O2 -qopenmp'
 export OMP_NUM_THREADS=40
-export CLAW=/gscratch/tsunami/clawpack-v5.11.0
+export CLAW=/gscratch/tsunami/clawpack-v5.12.0
 export PYTHONPATH=$PYTHONPATH:$CLAW
 export CHT=$HOME/CopesHubTsunamis  # for this project
 
@@ -55,7 +55,7 @@ date
 pwd
 echo CLAW=$CLAW
 echo CHT=$CHT
-export EXE=$CHT/hyak_cluster/xgeoclaw_v511_smax
+export EXE=$CHT/hyak_cluster/xgeoclaw_v512
 
 make new 
 date

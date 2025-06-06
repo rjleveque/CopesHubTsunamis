@@ -42,11 +42,11 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
-#dry_run = True  # If True, only print out settings, do not run GeoClaw
-dry_run = False  # If True, only print out settings, do not run GeoClaw
+dry_run = True  # If True, only print out settings, do not run GeoClaw
+#dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = False
+run_code = True
 make_plots = True
 
 # top level directory for this project:
@@ -97,7 +97,7 @@ else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
 # number of events to run and/or plot simultaneously:
-nprocs = 1
+#nprocs = 9  # now set by reading sys.argv in __main__
 
 # Specify the list of events to loop over for geoclaw runs:
 
@@ -119,12 +119,13 @@ if 1:
     events.sort()
 
     #events = events[:9]
+    events = events[9:]
 
     instant = False
     if instant:
         events = [e+'_instant' for e in events]
 
-if 1:
+if 0:
     events = ['ft-locking-mur13-deep']
 
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
@@ -133,6 +134,12 @@ dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 #print('events = ',events)
 
 if __name__ == '__main__':
+
+    import sys
+    try:
+        nprocs = int(sys.argv[1])
+    except:
+        raise Exception('*** Missing integer argument nprocs on command line')
 
     print('\n--------------------------')
     if dry_run:
