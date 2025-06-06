@@ -30,7 +30,8 @@ if 0:
     fnames_orig = [fname_orig_homog, fname_orig_3D]
 
 if 1:
-    defdir = 'audrey_250604/3D_Okada_same_grid'
+    #defdir = 'audrey_250604/3D_Okada_same_grid'
+    defdir = 'dtopofiles_3D_Okada_same_grid'  # renamed directory
 
     all_models = \
         ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
