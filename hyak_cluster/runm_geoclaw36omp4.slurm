@@ -49,6 +49,7 @@ source $HOME/.bashrc   # needed for conda setup
 export FC=ifort
 export FFLAGS='-O2 -qopenmp'
 export OMP_NUM_THREADS=4
+export NPROCS=9  # NPROCS * OMP_NUM_THREADS = ntasks-per-node
 export CLAW=/gscratch/tsunami/clawpack-v5.12.0
 export PYTHONPATH=$PYTHONPATH:$CLAW
 export CHT=$HOME/CopesHubTsunamis  # for this project
@@ -58,6 +59,6 @@ pwd
 echo CHT=$CHT
 conda activate /gscratch/tsunami/miniconda3/envs/geo5
 #python run_geoclaw_dtopos.py
-python runclaw_makeplots_dtopos.py
+python runclaw_makeplots_dtopos.py $NPROCS
 date
 
