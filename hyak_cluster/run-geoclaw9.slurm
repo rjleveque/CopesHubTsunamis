@@ -1,17 +1,19 @@
 #!/bin/bash
 
 # JOB NAME
-#SBATCH --job-name=make_exe
+#SBATCH --job-name=run9
 
 # ALLOCATION DEFINITION
 # The account and partition options should be the same
 # except in a few cases (e.g. ckpt queue, genpool queue)
-#SBATCH --account=tsunami
-#SBATCH --partition=compute
+##SBATCH --account=tsunami
+##SBATCH --partition=compute
+#SBATCH --account=amath
+#SBATCH --partition=cpu-g2
 
 # RESOURCES
 #SBATCH --nodes=1  # total number of nodes allocated
-#SBATCH --ntasks-per-node=1  # cores per node
+#SBATCH --ntasks-per-node=9  # cores per node
 
 # WALL TIME
 # Do not specify a wall time significantly more than your job needs
@@ -19,7 +21,7 @@
 #    hours:minutes:seconds e.g. 3:00:00 for 3 hours
 #    minutes
 #    days-hours
-#SBATCH --time=0:10:00
+#SBATCH --time=4:00:00
 
 # MEMORY PER NODE
 # See above "Specifying Memory Size" for options
@@ -27,8 +29,8 @@
 
 # WORKING DIRECTORY ENTRYPOINT
 # Specify the working directory for this job
-#SBATCH --output=job-exe.%j.out
-#SBATCH --error=job-exe.%j.err
+#SBATCH --output=job-run9.%j.out
+#SBATCH --error=job-run9.%j.err
 
 # Turn on email notifications
 ##SBATCH --mail-type=ALL
@@ -44,19 +46,20 @@ module load intel/oneAPI/2021.1.1
 #SBATCH --export=all
 
 # Set or reset any environment variables here:
+source $HOME/.bashrc   # needed for conda setup
 export FC=ifort
 export FFLAGS='-O2 -qopenmp'
-export OMP_NUM_THREADS=40
+export OMP_NUM_THREADS=9
 export CLAW=/gscratch/tsunami/clawpack-v5.12.0
-export PYTHONPATH=$PYTHONPATH:$CLAW
+export PYTHONPATH=$CLAW:$PYTHONPATH
+
 export CHT=$HOME/CopesHubTsunamis  # for this project
 
 date
 pwd
-echo CLAW=$CLAW
 echo CHT=$CHT
 export EXE=$CHT/hyak_cluster/xgeoclaw_v512
-
-make new 
+conda activate /gscratch/tsunami/miniconda3/envs/geo5
+make all  # makes scratch dir, data, output, plots
 date
 

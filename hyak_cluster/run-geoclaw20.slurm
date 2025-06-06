@@ -50,7 +50,7 @@ source $HOME/.bashrc   # needed for conda setup
 export FC=ifort
 export FFLAGS='-O2 -qopenmp'
 export OMP_NUM_THREADS=20
-export CLAW=/gscratch/tsunami/clawpack-v5.11.0
+export CLAW=/gscratch/tsunami/clawpack-v5.12.0
 export PYTHONPATH=$CLAW:$PYTHONPATH
 
 export CHT=$HOME/CopesHubTsunamis  # for this project
@@ -58,7 +58,7 @@ export CHT=$HOME/CopesHubTsunamis  # for this project
 date
 pwd
 echo CHT=$CHT
-export EXE=$CHT/hyak_cluster/xgeoclaw_v511_smax
+export EXE=$CHT/hyak_cluster/xgeoclaw_v512
 conda activate /gscratch/tsunami/miniconda3/envs/geo5
 make all  # makes scratch dir, data, output, plots
 date
