@@ -94,6 +94,10 @@ for fname_orig in fnames_orig:
 
     # simplify name for sensitivity study:
     fname_orig = fname_orig.replace('vert_displacements_all_xgrid_','')
+
+    # simplify name for 3DvsOkada:
+    fname_orig = fname_orig.replace('_vertdisp','')
+
     fname_orig = fname_orig + '_instant'  # since these are static displacements
 
     fname = fname_orig + '.dtt3'
