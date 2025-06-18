@@ -30,6 +30,11 @@ if 0:
     fnames_orig = [fname_orig_homog, fname_orig_3D]
 
 if 1:
+    defdir = 'jey_250613'
+    fname_orig = 'poly3d_uz_resps_McCrory2008.out'
+    fnames_orig = [fname_orig]
+
+if 0:
     #defdir = 'audrey_250604/3D_Okada_same_grid'
     defdir = 'dtopofiles_3D_Okada_same_grid'  # renamed directory
 
@@ -61,8 +66,10 @@ if 1:
 for fname_orig in fnames_orig:
     path_orig = os.path.join(defdir, fname_orig)
     fname_orig = fname_orig.replace('.txt','')  # in case the end in .txt
-    #lon,lat,z = loadtxt(path_orig, skiprows=1,usecols=[1,2,3],unpack=True)
-    lon,lat,z = loadtxt(path_orig, skiprows=1,usecols=[0,1,2],unpack=True)
+    if 0:
+        lon,lat,z = loadtxt(path_orig, skiprows=1,usecols=[1,2,3],unpack=True)
+    else:
+        lon,lat,z = loadtxt(path_orig, skiprows=1,usecols=[0,1,2],unpack=True)
 
     points = vstack((lon,lat)).T
     z_fcn = LinearNDInterpolator(points, z, fill_value=0.)
