@@ -24,13 +24,32 @@ class TsunamiModelResults(object):
     evaluation of a qoi at arbitrary points in space and time.
 
     Still under development and may change.
+
+    Methods defined for this class:
+
+    generate_2d_coordinates:
+        After 1D arrays x,y have been defined as attributes, e.g. by
+        load_results(), this is used to create 2D versions X,Y.
+        Invoked automatically when X,Y attributes are used (by @property).
+
+    load_results:
+        load tsunami simulation from a netCDF file using either 'geoclaw'
+        or 'most' format. Sets attributes such as `depth` as 3D arrays
+        with indices [i,j,k] refering to (x[i],y[j],t[k]) and
+        `B0` (inital topography) as 2D array with indices [i,j].
+
+    make_interp_fcn:
+        convert an attribute such as `depth` into a function that can be
+        evaluated at any (x,y,t) within the domain and time range in the
+        dataset. (Returns nan at points outside).
+
     """
 
     @property
     def X(self):
         r"""Two dimensional coordinate array in x direction."""
         if self._X is None:
-            self.generate_2d_coordinates(mask=False)
+            self.generate_2d_coordinates()
         return self._X
     @X.setter
     def X(self, value):
@@ -42,13 +61,21 @@ class TsunamiModelResults(object):
     def Y(self):
         r"""Two dimensional coordinate array in y direction."""
         if self._Y is None:
-            self.generate_2d_coordinates(mask=False)
+            self.generate_2d_coordinates()
         return self._Y
     @Y.setter
     def Y(self, value):
         self._extent = None
         self._Y = value
         self._y = nan
+
+    @property
+    def extent(self):
+        r"""Extent of domain"""
+        if self._extent is None:
+            self.generate_2d_coordinates()
+        return self._extent
+
 
     def __init__(self, x=None, y=None, t=None, ncfile=None, format=None):
         self.x = x
