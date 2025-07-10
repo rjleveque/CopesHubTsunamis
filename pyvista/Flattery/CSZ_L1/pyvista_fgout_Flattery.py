@@ -14,7 +14,9 @@ from clawpack.visclaw import animation_tools
 from clawpack.visclaw import colormaps, geoplot
 from time import sleep
 
-make_animation = True
+make_html = True  # True to make html version of topo (requires trame)
+
+make_animation = False
 fname_mp4 = 'Flattery_animation_CSZL1.mp4'   # used if make_animation
 
 fgno = 3  # which fgout grid
@@ -104,7 +106,9 @@ if use_texture:
 if use_texture:
     toposurf = p.add_mesh(mapped_surf,texture=texture)
 else:
-    toposurf = p.add_mesh(topowarp,cmap='gist_earth',clim=(-0.8*Bmax, 0.8*Bmax))
+    toposurf = p.add_mesh(topowarp,cmap='gist_earth',
+                          clim=(-0.8*Bmax, 0.8*Bmax),
+                          show_scalar_bar=False)
 
 if 0:
     #p.view_xy()
@@ -147,7 +151,8 @@ def set_frameno(fgframeno):
             toposurf = p.add_mesh(mapped_surf,texture=texture)
         else:
             toposurf = p.add_mesh(topowarp,cmap='gist_earth',
-                                  clim=(-0.8*Bmax, 0.8*Bmax))
+                                  clim=(-0.8*Bmax, 0.8*Bmax),
+                                  show_scalar_bar=False)
 
     # plot eta relative to deformed topo:
     eta = where(fgout.h>0.1, fgout.eta, nan)
@@ -180,7 +185,15 @@ def set_frameno(fgframeno):
     #p.screenshot('PyVista_Frame%s.png' % str(fgframeno).zfill(4))
 
 
-if not make_animation:
+if make_html:
+    frameno_html = 91
+    #frameno_html = 1
+    set_frameno(frameno_html)
+    fname_html = 'Flattery_frame%s.html' % str(frameno_html).zfill(3)
+    p.export_html(fname_html)
+    print('Created ',fname_html)
+
+elif not make_animation:
     p.add_slider_widget(set_frameno, [1,182], value=1, title='Frame',
                     pointa=(0.75,0.85), pointb=(0.95,0.85), color='gray',
                     slider_width=0.02, tube_width=0.005)
