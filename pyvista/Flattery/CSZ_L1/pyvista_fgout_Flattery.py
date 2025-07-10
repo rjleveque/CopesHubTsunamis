@@ -14,10 +14,10 @@ from clawpack.visclaw import animation_tools
 from clawpack.visclaw import colormaps, geoplot
 from time import sleep
 
-make_html = True  # True to make html version of topo (requires trame)
+make_html = False  # True to make html version of topo (requires trame)
 
-make_animation = False
-fname_mp4 = 'Flattery_animation_CSZL1.mp4'   # used if make_animation
+make_animation = True
+fname_mp4 = 'Flattery_animation_CSZL1v2.mp4'   # used if make_animation
 
 fgno = 3  # which fgout grid
 
@@ -213,5 +213,5 @@ else:
     p.close()
 
     anim = animation_tools.make_anim(framedir, fname_pattern='PyVistaFrame*.png')
-    animation_tools.make_mp4(anim, fname_mp4)
+    animation_tools.make_mp4(anim, fname_mp4, fps=6)
     print('Created ',fname_mp4)
