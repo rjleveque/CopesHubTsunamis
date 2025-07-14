@@ -73,7 +73,7 @@ scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
 # for hyak:
 scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
-FrontalThrust = False
+FrontalThrust = True
 
 # where to find all the dtopo files:
 if FrontalThrust:

@@ -318,13 +318,13 @@ if __name__== '__main__':
 
     all_models = []
 
-    if 1:
+    if 0:
         all_models = all_models + \
             ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
              'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
         name_kmz = 'Seaside-OceanShores_3s_buried'
 
-    if 0:
+    if 1:
         all_models = all_models + \
             ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
              'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
