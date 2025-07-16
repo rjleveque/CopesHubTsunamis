@@ -207,7 +207,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         #clawdata.output_t0 = True          # output at initial (or restart) time?
 
         clawdata.num_output_times = 0      # no frame output
-        clawdata.tfinal = 2.0*3600.
+        clawdata.tfinal = 1.0*3600.
         clawdata.output_t0 = False        # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
@@ -694,7 +694,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # load list of virtual gauges to use, with columns 
         #      gaugeno, x, y
         # x,y should be in decimal form, preferably cell centered on finest grid
-        gauges_file = root_dir + '/oregon_gauges_2024/VGListNewport.csv' 
+        gauges_file = root_dir + '/gauges/oregon_gauges_2024/VGListNewport.csv' 
         gauges = np.loadtxt(gauges_file, delimiter=',')
 
         for k in range(gauges.shape[0]):

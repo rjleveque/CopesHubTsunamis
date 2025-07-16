@@ -46,7 +46,7 @@ import os,sys,glob
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = False
+run_code = True
 make_plots = True
 
 # top level directory for this project:
@@ -132,8 +132,8 @@ if instant:
     events = [e+'_instant' for e in events]
 
 
-events = ['buried-random-mur13-deep_okada_instant.dtt3',
-        'buried-random-NOSUBmur13-deep_okada_instant.dtt3']
+events = ['buried-random-mur13-deep_okada_instant',
+        'buried-random-NOSUBmur13-deep_okada_instant']
 
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 
