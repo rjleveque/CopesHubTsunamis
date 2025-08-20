@@ -768,6 +768,10 @@ class Fault(object):
 
         Raises a ValueError exception if the *rupture_type* is an unknown type.
 
+        If verbose == True then the subfault number is printed as each is
+        processed to show progress.  If verbose is an integer, then it is
+        printed for the k'th subfault only if mod(k,verbose) == 0.
+
         returns a :class`DTopography` object.
         """
 
@@ -801,9 +805,12 @@ class Fault(object):
             #    dz += subfault.dtopo.dZ[0,:,:]
             for k,subfault in enumerate(self.subfaults):
                 if verbose:
-                    sys.stdout.write("%s.." % k)
-                    #sys.stdout.write("%s..\n" % k)
-                    sys.stdout.flush()
+                    if (type(verbose) is int) and (numpy.mod(k,verbose) != 0):
+                        pass
+                    else:
+                        #sys.stdout.write("%s.." % k)
+                        sys.stdout.write("%s..\n" % k)  # one per line
+                        sys.stdout.flush()
 
                 dtopo_subfault = subfault.okada(x,y,dtopo=dtopo_subfault)
                 dz += dtopo_subfault.dZ[0,:,:]
