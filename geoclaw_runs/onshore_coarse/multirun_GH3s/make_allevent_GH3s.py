@@ -320,7 +320,7 @@ if __name__== '__main__':
 
     runs_dir = os.path.abspath(scratch_dir)
 
-    #runs_dir = os.path.abspath('hyak_geoclaw_output')  # on laptop
+    runs_dir = os.path.abspath('hyak_geoclaw_outputs')  # on laptop
 
     print('+++ this_dir = ',this_dir)
     print('+++ runs_dir = ',runs_dir)
@@ -341,7 +341,7 @@ if __name__== '__main__':
 
     if len(all_models) == 12:
         # including both buried and ft:
-        name_kmz = 'coarse_hmax_Seaside-OceanShores'
+        name_kmz = 'coarse_hmax_GH3s'
 
     models = all_models
     #models = all_models[:3]
@@ -357,7 +357,7 @@ if __name__== '__main__':
     if instant:
         events = [e+'_instant' for e in events]
 
-    if 1:
+    if 0:
         #events = ['ft-locking-mur13-deep']
         events = ['buried-locking-mur13-deep']
 
