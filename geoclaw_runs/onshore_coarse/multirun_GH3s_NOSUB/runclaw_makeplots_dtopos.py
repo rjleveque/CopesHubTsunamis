@@ -83,7 +83,8 @@ else:
     dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
 
 # NOSUB versions 8/25:
-dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/audrey_250813_nosub/dtopofiles')
+#dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/audrey_250813_nosub/dtopofiles')
+dtopo_dir = os.path.join(root_dir, 'dtopo/dtopofiles_audrey_250813') # shorter symlink
 
 # for hyak:
 dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
@@ -190,7 +191,7 @@ if __name__ == '__main__':
 
         plotdir = '%s/geoclaw_plots' % runs_dir
 
-        if 0:
+        if 1:
             make_allevent_GH3s.make_all_kmz_plots(events, outdirs, 
                                                   plotdir, name_kmz)
 
