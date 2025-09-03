@@ -52,8 +52,12 @@ for k,transect in enumerate(transects):
 
     events = []
     depths = ['deep','middle','shallow']
-    rupture = 'buried-locking-str10'
+    #rupture = 'buried-locking-str10'
     #rupture = 'buried-locking-mur13'
+
+    depths = ['deep']
+    rupture = 'buried-random-mur13'
+    #rupture = 'buried-locking-mur13'  # for test2 but agrees less well!
 
 
     rupture = rupture.replace('buried-','buried_')
@@ -83,6 +87,27 @@ for k,transect in enumerate(transects):
         title('%s\nTransect of final vertical displacement at y = %.2f' \
                 % (rupture_name,y0),fontsize=15)
 
+    if 1:
+        # compare earlier versions for buried-random-mur13-deep from jey_250611:
+        # Okada applied to slips on 2012 fault (with subevents)
+        fname_dtopo = 'jey_250611/buried-random-mur13-deep_okada_instant.dtt3'
+        print('Reading ',fname_dtopo)
+        dtopo = dtopotools.DTopography(fname_dtopo, 3)
+
+        j = where(dtopo.y<y0)[0].max()
+        plot(dtopo.x,dtopo.dZ[-1,j,:],color='b',linestyle='-',
+             label='Okada on original slips (with subevents)')
+
+    if 0:
+        # Okada applied to slips on 2012 fault (no subevents)
+        fname_dtopo = 'jey_250611/buried-random-NOSUBmur13_deep_okada_instant.dtt3'
+        print('Reading ',fname_dtopo)
+        dtopo = dtopotools.DTopography(fname_dtopo, 3)
+
+        j = where(dtopo.y<y0)[0].max()
+        plot(dtopo.x,dtopo.dZ[-1,j,:],color='m',linestyle='-',
+             label='jey_250611_NOSUB')
+
     grid(True)
     dzmin = -6
     dzmax = 16
@@ -103,6 +128,6 @@ for k,transect in enumerate(transects):
     if 1:
         plotdir = 'audrey_250813_nosub/transect_plots_nosub'
         os.system('mkdir -p %s' % plotdir)
-        fname = '%s/dtopo_transects_%s_y%.0f.png' % (plotdir,rupture_name,100*y0)
+        fname = '%s/compare_orig_dtopo_transects_%s_y%.0f.png' % (plotdir,rupture_name,100*y0)
         savefig(fname)
         print('Created ',fname)
