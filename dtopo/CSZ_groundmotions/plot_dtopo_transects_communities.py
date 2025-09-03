@@ -52,10 +52,25 @@ for k,transect in enumerate(transects):
 
     events = []
     depths = ['deep','middle','shallow']
-    rupture = 'buried-locking-str10'
-    #rupture = 'buried-locking-mur13'
-    for depth in depths:
-        events.append('%s-%s_instant' % (rupture,depth))
+    if 0:
+        # original:
+        dtopo_dir = 'dtopofiles'
+        rupture = 'buried-locking-str10'
+        #rupture = 'buried-locking-mur13'
+        for depth in depths:
+            events.append('%s-%s_instant' % (rupture,depth))
+        plotdir = 'audrey_250813_nosub/transect_plots_nosub' # to compare to new ones
+
+    if 1:
+        # poly3d applied to subsampled slip (with subevents):
+        dtopo_dir = 'dtopofiles_poly3d_5km'
+        rupture = 'buried_locking_str10'
+        #rupture = 'buried_locking_mur13'
+        for depth in depths:
+            events.append('%s_%s_poly3d_5km_instant' % (rupture,depth))
+        plotdir = 'transect_plots_poly3d_5km'
+
+    os.system('mkdir -p %s' % plotdir)
 
     events = events[:3]
     linecolors = ['r','b','g']
@@ -66,8 +81,7 @@ for k,transect in enumerate(transects):
         print('Rupture name: ',event)
 
         # Read dtopo file used for GeoClaw:
-
-        fname_dtopo = 'dtopofiles/' + event + '.dtt3'
+        fname_dtopo = '%s/%s.dtt3' % (dtopo_dir, event)
         print('Reading ',fname_dtopo)
         dtopo = dtopotools.DTopography(fname_dtopo, 3)
 
@@ -94,8 +108,6 @@ for k,transect in enumerate(transects):
     legend(loc='upper right',fontsize=10,framealpha=1)
 
     if 1:
-        plotdir = 'audrey_250813_nosub/transect_plots_nosub' # to compare to new ones
-        os.system('mkdir -p %s' % plotdir)
         fname = '%s/dtopo_transects_%s_y%.0f.png' % (plotdir,rupture,100*y0)
         savefig(fname)
         print('Created ',fname)
