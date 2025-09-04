@@ -47,7 +47,7 @@ dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
-make_plots = False
+make_plots = True
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -82,10 +82,6 @@ if FrontalThrust:
 else:
     dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
 
-# NOSUB versions 8/25:
-#dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/audrey_250813_nosub/dtopofiles')
-dtopo_dir = os.path.join(root_dir, 'dtopo/dtopofiles_audrey_250813') # shorter symlink
-
 # for hyak:
 dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
@@ -107,7 +103,7 @@ else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
 # number of events to run and/or plot simultaneously:
-#nprocs = 9 # now set on command line (or in slurm script)
+#nprocs = 9 now set in main from slurm script
 
 # Specify the list of events to loop over for geoclaw runs:
 
@@ -116,8 +112,8 @@ else:
 if 1:
 
     all_models = \
-        ['ft_locking-mur13', 'ft_locking-skl16', 'ft_locking-str10',
-         'ft_random-mur13',  'ft_random-skl16',  'ft_random-str10']
+        ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
+         'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
 
     if not FrontalThrust:
         all_models = [s.replace('ft','buried') for s in all_models]
@@ -129,16 +125,16 @@ if 1:
            + ['%s-shallow' % model for model in models]
 
     events.sort()
-    events = [e+'_NOSUB_SCALED_okada' for e in events]
 
-    #events = events[:1]
+    #events = events[:9]
 
-    instant = True
+    instant = False
     if instant:
         events = [e+'_instant' for e in events]
 
-if 0:
-    events = ['buried_locking-str10-deep_NOSUB_SCALED_okada_instant']
+if 1:
+    #events = ['ft-locking-mur13-deep']
+    events = ['buried-locking-mur13-deep']
 
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 
@@ -152,7 +148,6 @@ if __name__ == '__main__':
         nprocs = int(sys.argv[1])
     except:
         raise Exception('*** Missing integer argument nprocs on command line')
-
 
     print('\n--------------------------')
     if dry_run:
@@ -180,18 +175,3 @@ if __name__ == '__main__':
 
         # run all cases using nprocs processors:
         run_many_cases_pool(caselist, nprocs, run_one_case_clawpack)
-
-        # make kmz with all fgmax plots:
-
-        import make_allevent_GH3s
-        name_kmz = 'coarse_hmax_GH3s_buried_NOSUB'
-        
-        outdirs = ['%s/geoclaw_outputs/_output_%s' % (runs_dir, event) \
-                    for event in events]
-
-        plotdir = '%s/geoclaw_plots' % runs_dir
-
-        if 1:
-            make_allevent_GH3s.make_all_kmz_plots(events, outdirs, 
-                                                  plotdir, name_kmz)
-
