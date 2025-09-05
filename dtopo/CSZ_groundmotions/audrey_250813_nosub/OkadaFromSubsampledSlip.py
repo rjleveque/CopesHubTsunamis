@@ -8,11 +8,14 @@
 # (Could be adapted to compute time-dependendent kinetic rupture based on applying Okada at each specified time to the subfaults that have ruptured up to that time, but that would require `rupture time` and `rise_time` for each subfault, which are not included currently in Jey's coarsened model.)
 #
 
+import sys
+if 'matplotlib' not in sys.modules:
+    import matplotlib
+    matplotlib.use('Agg')  # Use an image backend
 
 from pylab import *
 #from clawpack.geoclaw import dtopotools
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import copy
 import os,sys
@@ -21,6 +24,11 @@ from multiprocessing import current_process
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
+
+scratch_dir = os.environ['SCRATCH']
+output_dir = os.path.join(scratch_dir, 'okada')
+fname = os.path.join(output_dir, 'test.txt')
+open(fname,'w').writelines('testing')
 
 sys.path.insert(0, os.path.join(root_dir, 'common_code'))
 from multip_tools import run_many_cases_pool
@@ -161,7 +169,8 @@ def set_slip(fault0, event):
 
     #event_dir = datadir + 'output_files_combined'  # now includes kinematics
     #event_dir = datadir
-    event_dir = 'inputs'  #'random_mur13_deep_NOSUB_scaled_interpolated/'
+    #event_dir = '/corral/projects/NHERI/projects/7f2e74be-d7ca-4e0e-b69a-22c24840b078/CSZ_groundmotions/interpolated_non-subevent_scenarios/'
+    event_dir = os.path.join(scratch_dir,'interpolated_non-subevent_scenarios/')
 
     # switch to Jey's notation:
     #event1 = event.replace('buried-','')
@@ -232,7 +241,7 @@ def make_dtopo(fault):
     # Apply Okada to all subfaults to create deformation dtopo.dZ:
     dtopo = fault.create_dtopography(x,y,times=fault.dtopo_times,verbose=100)
 
-    fname = '%s.dtt3' % fault.event
+    fname = '%s/%s.dtt3' % (output_dir, fault.event)
     dtopo.write(fname, dtopo_type=3)
     print('Created %s with %s displacement at %i times' \
             % (fname, fault.rupture_type, len(dtopo.times)))
@@ -313,15 +322,17 @@ def make_all_cases_okada():
         ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
          'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
 
-    #models = all_models
-    models = all_models[:3]
+    models = all_models
+    #models = all_models[:3]
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
 
+    events = [e.replace('buried-','buried_') for e in events]
+    events = [e+'_NOSUB_SCALED' for e in events]
+        
     # Test on one event:
-    #events = ['buried-random-NOSUBmur13_deep']
-    events = ['buried_locking-mur13-deep_NOSUB_SCALED']
+    #events = ['buried_locking-mur13-deep_NOSUB_SCALED']
 
     # Create a list of the cases to be run:
     caselist = []
@@ -333,8 +344,8 @@ def make_all_cases_okada():
         fault = set_slip(fault0, event)
         case = {'num':k, 'fault':fault}
 
-        print("+++ in caselist, id(case['fault']) = %i, Mw = %.2f" \
-                % (id(case['fault']), case['fault'].Mw()))
+        print("+++ in caselist, event = %s,\nid(case['fault']) = %i, Mw = %.2f" \
+                % (event, id(case['fault']), case['fault'].Mw()))
 
         caselist.append(case)
 
@@ -440,7 +451,7 @@ if __name__ == '__main__':
         print('DRY RUN - settings in OkadaStatic.py')
 
     caselist = make_all_cases_okada()
-    nprocs = 1
+    nprocs = 18
     run_many_cases_pool(caselist, nprocs, run_one_case_okada)
 
     if dry_run:
