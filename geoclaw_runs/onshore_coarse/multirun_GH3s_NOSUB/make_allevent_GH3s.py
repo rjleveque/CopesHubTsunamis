@@ -29,7 +29,7 @@ save_figs = True             # make png files for figures?
 close_figs = True            # close big figures after saving?
 
 ## Also see name==main where it is read in from params.py
-#location = 'Seaside'
+#location = 'GH3s'
 
 try:
     CHT = os.environ['CHT']
@@ -311,56 +311,50 @@ if __name__== '__main__':
     this_dir = os.getcwd()
 
     # Randy's laptop:
-    scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
-                                   'scratch/CHT_runs')
+    #scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
+    #                               'scratch/CHT_runs')
     #scratch_dir = '/Users/rjl/tests/CHT_runs'
 
+    scratch_dir = os.getcwd()
     # for hyak:
     scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
     runs_dir = os.path.abspath(scratch_dir)
 
-    runs_dir = os.path.abspath('hyak_geoclaw_outputs')  # on laptop
+    #runs_dir = os.path.abspath('hyak_geoclaw_output')  # on laptop
 
     print('+++ this_dir = ',this_dir)
     print('+++ runs_dir = ',runs_dir)
 
-    all_models = []
 
     if 1:
-        all_models = all_models + \
-            ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-             'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
-        name_kmz = 'coarse_hmax_GH3s_buried'
 
-    if 0:
-        all_models = all_models + \
-            ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
-             'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
-        name_kmz = 'coarse_hmax_GH3s_ft'
+        name_kmz = 'coarse_hmax_GH3s_buried_NOSUB'
+        FrontalThrust = False
 
-    if len(all_models) == 12:
-        # including both buried and ft:
-        name_kmz = 'coarse_hmax_GH3s'
+        all_models = \
+            ['ft_locking-mur13', 'ft_locking-skl16', 'ft_locking-str10',
+             'ft_random-mur13',  'ft_random-skl16',  'ft_random-str10']
 
-    models = all_models
-    #models = all_models[:3]
-    events = ['%s-deep' % model for model in models] \
-           + ['%s-middle' % model for model in models] \
-           + ['%s-shallow' % model for model in models]
+        if not FrontalThrust:
+            all_models = [s.replace('ft','buried') for s in all_models]
 
-    events.sort()
+        models = all_models
+        #models = all_models[:3]
+        events = ['%s-deep' % model for model in models] \
+               + ['%s-middle' % model for model in models] \
+               + ['%s-shallow' % model for model in models]
 
-    #events = events[:3]
+        events.sort()
+        events = [e+'_NOSUB_SCALED_okada' for e in events]
 
-    instant = False
+
+    instant = True
     if instant:
         events = [e+'_instant' for e in events]
 
-    if 0:
-        #events = ['ft-locking-mur13-deep']
-        events = ['buried-locking-mur13-deep']
-
+    #events = events[:1]
+    #events = ['buried_random-mur13-deep_NOSUB_SCALED_okada_instant']
 
     outdirs = ['%s/geoclaw_outputs/_output_%s' % (runs_dir, event) \
                 for event in events]

@@ -156,10 +156,6 @@ def make_kmz_plots(fgno, fg, plotdir, event):
 
 
     h_wet_onshore = ma.masked_where(fg.h_onshore==0., fg.zeta_onshore)
-
-    #h_wet_onshore = where(fg.B0 > 0, 10, nan)  # testing
-    #h_wet_onshore = ma.masked_where(fg.B0 < 0, h_wet_onshore)
-
     print('fg.x, fg.y shapes: ',fg.x.shape, fg.y.shape)
     print('+++ h_wet_onshore.shape = ',h_wet_onshore.shape)
     png_filename = kml_dir+'/%s_h_onshore_max_for_kml.png' % event
@@ -299,7 +295,7 @@ def make_all_kmz_plots(events, outdirs, plotdir, name_kmz):
     #path_kmz = os.path.join(fgmax_plotdir, name_kmz)
     #shutil.move(name_kmz, path_kmz)
     print('Created %s' % os.path.abspath(path_kmz))
-    if 1:
+    if 0:
         print('kml and png files are in: %s' % kml_dir)
     else:
         shutil.rmtree(kml_dir)
@@ -320,28 +316,23 @@ if __name__== '__main__':
 
     runs_dir = os.path.abspath(scratch_dir)
 
-    runs_dir = os.path.abspath('hyak_geoclaw_outputs')  # on laptop
-
-    print('+++ this_dir = ',this_dir)
-    print('+++ runs_dir = ',runs_dir)
-
     all_models = []
-
-    if 1:
-        all_models = all_models + \
-            ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-             'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
-        name_kmz = 'coarse_hmax_GH3s_buried'
 
     if 0:
         all_models = all_models + \
+            ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+             'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+        name_kmz = 'Seaside-OceanShores_3s_buried'
+
+    if 1:
+        all_models = all_models + \
             ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
              'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
-        name_kmz = 'coarse_hmax_GH3s_ft'
+        name_kmz = 'Seaside-OceanShores_3s_ft'
 
     if len(all_models) == 12:
         # including both buried and ft:
-        name_kmz = 'coarse_hmax_GH3s'
+        name_kmz = 'Seaside-OceanShores_3s'
 
     models = all_models
     #models = all_models[:3]
@@ -361,6 +352,8 @@ if __name__== '__main__':
         #events = ['ft-locking-mur13-deep']
         events = ['buried-locking-mur13-deep']
 
+
+    #runs_dir = os.path.abspath('hyak_geoclaw_output')  # on laptop
 
     outdirs = ['%s/geoclaw_outputs/_output_%s' % (runs_dir, event) \
                 for event in events]

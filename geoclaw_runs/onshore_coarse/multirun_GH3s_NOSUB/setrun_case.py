@@ -93,8 +93,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     try:
         dtopofiles = case['dtopofiles']
     except:
-        # for make_kmls
-        dtopofiles = [[3,'/Users/rjl/git/CopesHubTsunamis/dtopo/CSZ_Bandon_noext/CSZ_M1_noext.tt3']]
+        raise Exception("case['dtopofiles'] not defined")
 
     num_dim = 2
     rundata = data.ClawRunData(claw_pkg, num_dim)
@@ -196,7 +195,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         ## ADJUST:
-        clawdata.num_output_times = 12    # no frame output, only fgmax
+        clawdata.num_output_times = 0    # no frame output, only fgmax
         clawdata.tfinal = 3*3600.
         clawdata.output_t0 = False        # output at initial (or restart) time?
 

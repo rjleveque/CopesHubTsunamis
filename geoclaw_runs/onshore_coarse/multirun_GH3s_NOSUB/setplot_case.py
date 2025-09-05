@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.abspath('..'))
 #import process_fgmax_offshore as process_fgmax
 #import make_fgout_animation_offshore as make_fgout_animation
 
-#import process_fgmax_astoria2s as process_fgmax
+import process_fgmax_astoria2s as process_fgmax
 
 def setplot(plotdata, case={}):
 
@@ -49,7 +49,7 @@ def setplot(plotdata, case={}):
             plot_gauges.make_gauge_plot(gaugenos, outdir, gauges_plotdir,
                                         location, event)
 
-        if 0:
+        if 1:
             fgmax_plotdir = plotdir + '/fgmax'
             #fg, t_hours = process_fgmax.load_fgmax(outdir)
             #process_fgmax.make_fgmax_plots(fg, fgmax_plotdir, run_name, t_hours)
