@@ -21,13 +21,14 @@ transects = [
     (40.80, [(-124.24, 'Eureka')]),
 ]
 
-plotdir = 'seismic_transect_plots'
+plotdir = 'dogami_transect_plots'  # with WGS-DOGAMI event
 os.system('mkdir -p %s' % plotdir)
 
 
 # reference events to appear on all plots:
 
-events = ['CSZ_M1', 'CSZ_M2']
+#events = ['CSZ_M1', 'CSZ_M2']
+events = ['CSZ_L1']
 ref_dtopos = []
 linecolors = ['k','m','c']
 for ke,event in enumerate(events):
@@ -36,13 +37,20 @@ for ke,event in enumerate(events):
     dtopo = dtopotools.DTopography(fname_dtopo, 3)
     ref_dtopos.append((dtopo,event,linecolors[ke],'--'))
 
+# add WGS-DOGAMI event:
+event = 'WGS-DOGAMI-Aexp-B-D-UpS-L-U-2p5'
+fname_dtopo = '/Users/rjl/BigStuff/PowellCenterTsunamis/250908_2475yr_dtopofile/WGS-DOGAMI-Aexp-B-D-UpS-L-U-2p5.dtt3'
+print('Reading ',fname_dtopo)
+dtopo = dtopotools.DTopography(fname_dtopo, 3)
+ref_dtopos.append((dtopo,event,'m','-'))
+
 if 1:
 
     all_models = \
         ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
          'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
 
-    FrontalThrust = True
+    FrontalThrust = False
 
     if not FrontalThrust:
         all_models = [s.replace('ft','buried') for s in all_models]
@@ -51,7 +59,7 @@ if 1:
         dtopo_dir = 'dtopofiles_FrontalThrust'
 
     ruptures = all_models
-    ruptures = all_models[:1]
+    #ruptures = all_models[:1]
 
     ruptures.sort()
 
