@@ -200,6 +200,11 @@ if __name__ == '__main__':
         caselist = cases_dtopos.make_all_cases_dtopos(dtopo_dir, dtopo_files,
                                         runs_dir, xgeoclaw_path, make_plots)
 
+        for case in caselist:
+            #case['restart_file'] = None   # not a restart
+            case['restart_file'] = 'auto' # restart from last fort.chk found
+
+
         # run all cases using nprocs processors:
         multip_tools.run_many_cases_pool(caselist, nprocs,
                                          clawmultip_tools.run_one_case_clawpack)

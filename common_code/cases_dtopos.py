@@ -57,6 +57,8 @@ def make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir, xgeoclaw_path,
         # setrun parameters:
         case['setrun_file'] = 'setrun_case.py'
         case['dtopofiles'] = [[3, dtopofile]]
+        case['restart_file'] = None  # None=no restart, 'auto'=from most recent
+        
 
         if make_plots:
             case['plotdir'] = plotdir

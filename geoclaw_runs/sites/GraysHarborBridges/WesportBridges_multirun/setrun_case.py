@@ -23,12 +23,21 @@ np.set_printoptions(legacy="1.25")
 from clawpack.amrclaw.data import FlagRegion
 from clawpack.geoclaw import fgmax_tools, fgout_tools
 from clawpack.geoclaw.data import ForceDry
+from clawpack.clawutil.util import fullpath_import
 
 # top level directory for this project:
-root_dir     = os.environ['CHT']
+try:
+    CHT = os.environ['CHT']
+except:
+    raise Exception("*** Must first set CHT environment variable")
+
+common_code_dir = os.path.join(CHT, 'common_code')
+restart_tools = fullpath_import(f'{common_code_dir}/restart_tools.py')
+
+
 rundir = os.getcwd()
 
-topo_dir = root_dir + '/topo/topofiles'
+topo_dir = CHT + '/topo/topofiles'
 
 # for hyak cluster:
 #topo_dir = topo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
@@ -53,13 +62,13 @@ print('Start date & time: ', datetime.datetime.now())
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
 
-input_dir            = root_dir + '/topo/input_files'
-gauges_dir           = root_dir + '/info/gauges'
+input_dir            = CHT + '/topo/input_files'
+gauges_dir           = CHT + '/info/gauges'
 
 print('topo_dir is:  ',topo_dir)
 print('input_dir is:  ',input_dir)
 print('gauges_dir is:  ',gauges_dir)
-RRdir = root_dir + '/topo/regions'
+RRdir = CHT + '/topo/regions'
 
 
 #Set fgmax_extent: want the boundaries to be cell centers, so
@@ -73,7 +82,7 @@ fgmax_extent=[-124.175, -123.94, 46.75, 46.93] # from 5/20/25 email
 
 if 1:
 
-    gauges_info_csv = root_dir + \
+    gauges_info_csv = CHT + \
         '/gauges/GraysHarborPacificCountyBridges/GraysHarborPacificCounty.csv'
     print(' ')
     print('gauges_info_csv file was: ',gauges_info_csv)
@@ -127,6 +136,18 @@ def setrun(claw_pkg='geoclaw', case={}):
     # and may vary from case to case:
 
     dtopofiles = case['dtopofiles']
+    restart_file = case['restart_file']
+
+    if restart_file == 'auto':
+        restart_file = restart_tools.find_last_checkpt(case['outdir'])
+    if restart_file is None:
+        restart = False
+    else:
+        restart = True
+        restart_time = restart_tools.time(restart_file)
+        print(f'Will restart from time t = {restart_time}')
+
+    restart = restart_file is not None       
 
     #------------------------------------------------------------------
     # Problem-specific parameters to be written to setprob.data:
@@ -204,8 +225,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # restart_file 'fort.chkNNNNN' specified below should be in
     # the OUTDIR indicated in Makefile.
 
-    clawdata.restart = False     # True to restart from prior results
-    clawdata.restart_file = ''   # File to use for restart data
+    clawdata.restart = restart             # True to restart from prior results
+    clawdata.restart_file = restart_file   # File to use for restart data
 
     # -------------
     # Output times:
