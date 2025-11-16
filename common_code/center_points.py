@@ -42,14 +42,22 @@ def adjust_xy(x_desired, y_desired, x_edge, y_edge, dx, dy, verbose=False):
     return numpy.array(x_centered), numpy.array(y_centered)
         
 def test():
-    dx = 1/(3*3600.)
-    xd = [-122.01, -122.02]
-    yd = [47.001, 47.002]
+
+    x_desired = [-122.01, -122.02]
+    y_desired = [47.001, 47.002]
+
+    # grid resolution on which to center point:
+    dx = dy = 1/(3*3600.)
+
+    # lower left edge of computational domain:
     x_edge = -123.
     y_edge = 47.
-    print('Desired x = ',xd)
-    print('Desired y = ',yd)
-    xc,yc = adjust_xy(xd,yd,x_edge,y_edge,dx,dx,True)
+
+    print('Desired x = ',x_desired)
+    print('Desired y = ',y_desired)
+
+    xc,yc = adjust_xy(x_desired,y_desired,x_edge,y_edge,dx,dy,verbose=True)
+
     print('Centered x = ',xc)
     print('Offsets in x in units of 1/3 arcsec: ', (xc-x_edge)*3*3600)
     print('Centered y = ',yc)
