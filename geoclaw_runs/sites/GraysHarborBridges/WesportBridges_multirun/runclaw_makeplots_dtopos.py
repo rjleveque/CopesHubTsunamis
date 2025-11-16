@@ -66,10 +66,6 @@ dry_run = False  # If True, only print out settings, do not run GeoClaw
 run_code = True
 make_plots = False
 
-# top level directory for this project:
-root_dir = os.environ['CHT']   # assuming environment variable set
-
-
 
 # location for big files for different computer environments:
 this_dir = os.getcwd()
@@ -92,7 +88,7 @@ else:
     scratch_dir = this_dir
 
 # where to find all the dtopo files:
-dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles')
+dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
 
 if computer == 'tacc':
     dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
@@ -110,9 +106,9 @@ os.system('mkdir -p %s' % runs_dir)
 # path to geoclaw executable:
 # (should agree with how EXE is set in Makefile used to compile)
 if run_code:
-    xgeoclaw_path = f'{root_dir}/geoclaw_runs/xgeoclaw_v5-13-1'
+    xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw_v5-13-1'
     if computer == 'tacc':
-        xgeoclaw_path = f'{root_dir}/geoclaw_runs/xgeoclaw_v5-13-1_ifx'
+        xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw_v5-13-1_ifx'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
@@ -199,11 +195,6 @@ if __name__ == '__main__':
         # make list of dictionaries with parameters for each case:
         caselist = cases_dtopos.make_all_cases_dtopos(dtopo_dir, dtopo_files,
                                         runs_dir, xgeoclaw_path, make_plots)
-
-        for case in caselist:
-            #case['restart_file'] = None   # not a restart
-            case['restart_file'] = 'auto' # restart from last fort.chk found
-
 
         # run all cases using nprocs processors:
         multip_tools.run_many_cases_pool(caselist, nprocs,

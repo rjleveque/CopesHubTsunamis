@@ -7,7 +7,7 @@ def find_last_checkpt(outdir, verbose=True):
     if len(forttck_files) == 0:
         if verbose:
             print('Found no checkpoint file')
-        restart_file = None
+        restart_file = ''
         return restart_file
         
     tchks = [float(open(f,'r').readline().split()[-1]) for f in forttck_files]

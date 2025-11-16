@@ -7,19 +7,8 @@ that will be read in by the Fortran code.
 Note: this version has case as a parameter to setrun, a dictionary used to pass
 in values that vary from case to case for doing a parameter sweep.
 """
-import sys
-import os
+import sys,os,datetime
 import numpy as np
-import datetime
-#print('+++ cwd: ',os.getcwd())
-sys.path.insert(0,'.')
-#print('+++ sys.path: ',sys.path)
-
-# if some values in .data files show up as e.g. np.float64(3600.0)
-# this will restore old behavior and just print 3600.0:
-np.set_printoptions(legacy="1.25")
-# fixed in master after v5.12.0
-
 from clawpack.amrclaw.data import FlagRegion
 from clawpack.geoclaw import fgmax_tools, fgout_tools
 from clawpack.geoclaw.data import ForceDry
@@ -35,9 +24,21 @@ common_code_dir = os.path.join(CHT, 'common_code')
 restart_tools = fullpath_import(f'{common_code_dir}/restart_tools.py')
 
 
-rundir = os.getcwd()
+# if some values in .data files show up as e.g. np.float64(3600.0)
+# this will restore old behavior and just print 3600.0:
+np.set_printoptions(legacy="1.25")
+# fixed in master after v5.12.0
 
-topo_dir = CHT + '/topo/topofiles'
+
+print('\n========================== setrun.py ==========================')
+print('Start date & time: ', datetime.datetime.now())
+
+# Set these directories where input data is found:
+
+rundir = os.getcwd()
+print('rundir = %s' % rundir)
+
+topo_dir = f'{CHT}/topo/topofiles'
 
 # for hyak cluster:
 #topo_dir = topo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
@@ -48,27 +49,9 @@ topo_dir = topo_dir.replace('/home1', '/scratch')
 # laptop:
 topo_dir = '/Users/rjl/topo/topofiles'
 
-
-try:
-    CLAW = os.environ['CLAW']
-except:
-    raise Exception("*** Must first set CLAW enviornment variable")
-
-print('\n==================================== setrun.py ====================================')
-print('Start date & time: ', datetime.datetime.now())
-
-# Set these directories where input data is found:
-
-rundir = os.getcwd()
-print('rundir = %s' % rundir)
-
-input_dir            = CHT + '/topo/input_files'
-gauges_dir           = CHT + '/info/gauges'
-
 print('topo_dir is:  ',topo_dir)
-print('input_dir is:  ',input_dir)
-print('gauges_dir is:  ',gauges_dir)
-RRdir = CHT + '/topo/regions'
+
+RRdir = f'{CHT}/topo/regions'  # for flagregion Ruled Rectangles
 
 
 #Set fgmax_extent: want the boundaries to be cell centers, so
@@ -136,18 +119,20 @@ def setrun(claw_pkg='geoclaw', case={}):
     # and may vary from case to case:
 
     dtopofiles = case['dtopofiles']
-    restart_file = case['restart_file']
 
-    if restart_file == 'auto':
+    restart = False
+    restart_file = ''
+
+    if 0:
+        # restart from previous run, if checkpt file is available:
+        # (note: requires case['outdir'] to be set by calling program)
         restart_file = restart_tools.find_last_checkpt(case['outdir'])
-    if restart_file is None:
-        restart = False
-    else:
+
+    if restart_file != '':
         restart = True
         restart_time = restart_tools.time(restart_file)
         print(f'Will restart from time t = {restart_time}')
 
-    restart = restart_file is not None       
 
     #------------------------------------------------------------------
     # Problem-specific parameters to be written to setprob.data:
@@ -181,22 +166,13 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Lower and upper edge of computational domain:
 
-    # shift so that cell centers on finest grid align with DEM:
-    sec16 = 1./(6*3600.)  # one sixth arcsecond
-
-    # Use (-127.6,-123.0,39.6,49.6) shifted by sec16
-    #BIG DOMAIN uses -137,-123,38,54
-    #For now, don't have topo out to -137 -sec16, so change a bit
-
     clawdata.lower[0] = -137            # west longitude
-    #clawdata.lower[0] = -136.75          # west longitude
     clawdata.upper[0] = -123            # east longitude
-    #clawdata.upper[0] = -122.75          # east longitude
 
     clawdata.lower[1] = 38         # south latitude
     clawdata.upper[1] = 54         # north latitude
 
-    # Number of grid cells: Coarsest grid
+    # Number of grid cells: Coarsest grid is 4 arcmin
     clawdata.num_cells[0] =  14*15  #210
     clawdata.num_cells[1] =  16*15  #240
 
@@ -512,14 +488,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     # ---------------
     # Force dry:
     # ---------------
-    if 0:
-        #None for this project
-        namey = 'force_dry_init.data'
-        force_dry_fname = os.path.join(input_dir, namey)
-        force_dry = ForceDry()
-        force_dry.tend = 1e9
-        force_dry.fname = force_dry_fname
-        rundata.qinit_data.force_dry_list.append(force_dry)
+    # None for this project
 
 
     # ---------------
@@ -740,8 +709,11 @@ if __name__ == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
     from clawpack.geoclaw import kmltools
-    rundata = setrun(*sys.argv[1:])
+
+    # run this as script via 'python setrun_case.py`
+    # to make data without any dtopofile, to check other inputs:
+    rundata = setrun('geoclaw', case={'dtopofiles':[]})
     rundata.write()
 
     # To create kml files of inputs:
-    #kmltools.make_input_data_kmls(rundata)
+    kmltools.make_input_data_kmls(rundata)
