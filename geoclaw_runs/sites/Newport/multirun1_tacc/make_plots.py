@@ -47,14 +47,25 @@ sys.path.insert(0, os.path.abspath('..'))
 import process_fgmax_Newport as process_fgmax
 import make_fgout_animation_Newport as make_fgout_animation
 
-
-# location for big files:
+# location for big files for different computer environments:
 this_dir = os.getcwd()
-# Randy's laptop:
-scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
-                               'scratch/CHT_runs')
-# for hyak:
-scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+
+if 'rjl/git' in this_dir:
+    computer = 'rjl-laptop'
+    scratch_dir = this_dir.replace('rjl/git/CopesHubTsunamis/geoclaw_runs', \
+                                   'rjl/scratch/CHT_runs')
+
+elif '/mmfs1/home' in this_dir:
+    computer = 'hyak'
+    scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+
+elif '/home1' in this_dir:
+    computer = 'tacc'
+    scratch_dir = this_dir.replace('/home1', '/scratch')
+
+else:
+    computer = 'unknown'
+    scratch_dir = this_dir
 
 # where to find output for all the runs:
 # (in a subdirectory of runs_dir named geoclaw_outputs)
@@ -63,24 +74,22 @@ runs_dir = os.path.abspath(scratch_dir)
 
 print('runs_dir = ',runs_dir)
 
-all_models = \
-    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+# specify events...
 
+depths = ['S','M','D']
 
-models = all_models
-#models = all_models[:3]
-events = ['%s-deep' % model for model in models] \
-       + ['%s-middle' % model for model in models] \
-       + ['%s-shallow' % model for model in models]
+# buried_locking events:
+all_events = [f'BL13{depth}' for depth in depths] \
+           + [f'BL10{depth}' for depth in depths] \
+           + [f'BL16{depth}' for depth in depths] \
+
+all_events += [e.replace('L','R') for e in all_events]  # add random events
+all_events += [e.replace('B','F') for e in all_events]  # add ft events
+
+events = all_events
+events.sort()
 
 events = events[:6]
-#events = ['buried-random-str10-middle','buried-random-str10-shallow']
-if 1:
-    events = [ 'buried-locking-mur13-middle',
-                 'buried-locking-mur13-shallow',
-                 'buried-locking-skl16-middle',
-                 'buried-locking-skl16-shallow']
 
 instant = False
 if instant:
@@ -89,12 +98,12 @@ if instant:
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
-#print('outdirs = ', outdirs)
+print('outdirs = ', outdirs)
 
 geoclaw_plots = os.path.abspath('%s/geoclaw_plots' % runs_dir)
 plotdirs = ['%s/_plots_%s' % (geoclaw_plots, event) for event in events]
 #plotdirs = [outdir.replace('output','plot') for outdir in outdirs]
-print('plotdirs = ', plotdirs)
+#print('plotdirs = ', plotdirs)
 
 #gaugenos = range(1001,1079,1)
 #print('Will make %i gauge plots for each event' % len(gaugenos))
@@ -106,7 +115,8 @@ def make_html_index(plotdir,event):
     html_fname = os.path.join(plotdir,'index.html')
     with open(html_fname, 'w') as f:
         f.write('<html>\n<h1>%s</h1>\n' % event)
-        f.write('\n<ul>\n<li><a href="fgmax">fgmax plots</a>\n')
+        f.write('\n<ul>\n<li><a href="fgmax1">fgmax1 plots</a>\n')
+        f.write('\n<ul>\n<li><a href="fgmax2">fgmax2 plots</a>\n')
         f.write('<li><a href="gauges">gauge plots</a>\n</ul>\n')
     print('Created ',html_fname)
 
@@ -118,7 +128,7 @@ if not dry_run:
         event = events[k]
         run_name = '%s_%s' % (location,event)
 
-        if 0:
+        if 1:
             gauges_plotdir = plotdir + '/gauges'
             os.system('mkdir -p %s' % gauges_plotdir)
             plot_gauges_site.make_all_plots_and_report(outdir, plotdir, 
@@ -127,15 +137,15 @@ if not dry_run:
 
         if 1:
             try:
-                fgmax_plotdir = plotdir + '/fgmax'
-                process_fgmax.make_all_fgmax_plots(outdir, fgmax_plotdir,
+                #fgmax_plotdir = plotdir + '/fgmax'
+                process_fgmax.make_all_fgmax_plots(outdir, plotdir,
                                                location=location, event=event)
             except:
                 print('*** problem with process_fgmax in %s, skipping' \
                       % run_name)
 
-        if 1:
+        if 0:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)
 
-        if 0:
+        if 1:
             make_html_index(plotdir,event)
