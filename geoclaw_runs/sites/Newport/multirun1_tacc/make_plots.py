@@ -131,7 +131,7 @@ if not dry_run:
         if 1:
             gauges_plotdir = plotdir + '/gauges'
             os.system('mkdir -p %s' % gauges_plotdir)
-            plot_gauges_site.make_all_plots_and_report(outdir, plotdir, 
+            plot_gauges_site.make_all_plots_and_report(outdir, gauges_plotdir, 
                              location=location, event=event,
                              gaugenos='all', sea_level=0.)
 
