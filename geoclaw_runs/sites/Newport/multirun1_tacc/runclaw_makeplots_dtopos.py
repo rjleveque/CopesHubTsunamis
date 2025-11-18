@@ -142,7 +142,7 @@ events.sort()
 
 #events = events[:9]
 #events = events[9:]
-events = events[:2]
+events = events[:6]
 
 #events = ['BR10M']
 

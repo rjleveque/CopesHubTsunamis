@@ -227,7 +227,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         clawdata.tfinal = 2.0*3600.
         clawdata.output_t0 = False        # output at initial (or restart) time?
 
-        if 1:
+        if 0:
             clawdata.num_output_times = 1
             clawdata.tfinal = 30.              # SHORT TEST
             clawdata.output_t0 = True          # output at initial (or restart) time?
