@@ -42,62 +42,73 @@ Set dry_run = False before executing to actually run GeoClaw.
 from numpy import *
 import os,sys,glob
 
+from clawpack.clawutil.util import fullpath_import
+from clawpack.clawutil import multip_tools, clawmultip_tools
+
+try:
+    CHT = os.environ['CHT']
+except:
+    raise Exception("*** Must first set CHT environment variable")
+
+common_code_dir = os.path.join(CHT, 'common_code')
+cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
+plot_gauges_site = fullpath_import(f'{common_code_dir}/plot_gauges_site.py')
+
+if 0:
+    # can now import from clawutil?
+    clawmultip_tools = fullpath_import(f'{common_code_dir}/clawmultip_tools.py')
+    multip_tools = fullpath_import(f'{common_code_dir}/multip_tools.py')
+
 #dry_run = True  # If True, only print out settings, do not run GeoClaw
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
-make_plots = True
+make_plots = False
 
-# top level directory for this project:
-root_dir = os.environ['CHT']   # assuming environment variable set
 
-sys.path.insert(0, os.path.join(root_dir, 'common_code'))
-from cases_dtopos import make_all_cases_dtopos
-
-if 0:
-    # if clawmultip_tools and multip_tools should import from clawpack:   
-    sys.path.insert(0, '/Users/rjl/git/clawpack/clawmultip/src/python/clawmultip')
-    # (Otherwise use the versions in common_code)
-
-from clawmultip_tools import run_one_case_clawpack
-from multip_tools import run_many_cases_pool
-
-# location for big files:
+# location for big files for different computer environments:
 this_dir = os.getcwd()
-# Randy's laptop:
-scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
-                               'scratch/CHT_runs')
-#scratch_dir = '/Users/rjl/tests/CHT_runs'
 
-# for hyak:
-#scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+if 'rjl/git' in this_dir:
+    computer = 'rjl-laptop'
+    scratch_dir = this_dir.replace('rjl/git/CopesHubTsunamis/geoclaw_runs', \
+                                   'rjl/scratch/CHT_runs')
 
-# for tacc:
-scratch_dir = scratch_dir.replace('/home1', '/scratch')
+elif '/mmfs1/home' in this_dir:
+    computer = 'hyak'
+    scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+
+elif '/home1' in this_dir:
+    computer = 'tacc'
+    scratch_dir = this_dir.replace('/home1', '/scratch')
+
+else:
+    computer = 'unknown'
+    scratch_dir = this_dir
 
 # where to find all the dtopo files:
-dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
+dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
 
-# for hyak:
-#dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+if computer == 'tacc':
+    dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
 
-# for tacc:
-dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
+
 print('dtopo_dir = ',dtopo_dir)
 
 # where to put output for all the runs:
 # (in a subdirectory of runs_dir named geoclaw_outputs)
 runs_dir = os.path.abspath(scratch_dir)
-#runs_dir = os.path.abspath('.')
 
 # create scratch directory for output, if it doesn't exist:
 os.system('mkdir -p %s' % runs_dir)
 
 # path to geoclaw executable:
-# (should agree with how EXE is set in Makefile)
+# (should agree with how EXE is set in Makefile used to compile)
 if run_code:
-    xgeoclaw_path = os.path.join(root_dir, 'geoclaw_runs/xgeoclaw_v5-13-1_ifx')
+    xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw_v5-13-1'
+    if computer == 'tacc':
+        xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw_v5-13-1_ifx'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
@@ -116,36 +127,31 @@ if 0:
 
 # specify events...
 
-all_models = \
-    ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-     'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+depths = ['S','M','D']
 
-FrontalThrust = False
-if FrontalThrust:
-    all_models = [m.replace('buried','ft') for m in all_models]
+# buried_locking events:
+all_events = [f'BL13{depth}' for depth in depths] \
+           + [f'BL10{depth}' for depth in depths] \
+           + [f'BL16{depth}' for depth in depths] \
 
-models = all_models
-#models = all_models[3:]
-events = ['%s-deep' % model for model in models] \
-       + ['%s-middle' % model for model in models] \
-       + ['%s-shallow' % model for model in models]
+all_events += [e.replace('L','R') for e in all_events]  # add random events
+all_events += [e.replace('B','F') for e in all_events]  # add ft events
 
+events = all_events
 events.sort()
 
 #events = events[:9]
 #events = events[9:]
-events = events[:3]
-#events = ['buried-random-str10-middle','buried-random-str10-shallow']
+events = events[:2]
+
+#events = ['BR10M']
 
 instant = False
 if instant:
     events = [e+'_instant' for e in events]
 
 
-#events = ['buried-locking-mur13-deep']
-
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
-
 
 
 dtopo_names = []
@@ -179,6 +185,7 @@ if __name__ == '__main__':
             print('    *** file not found')
     print('output will go in \n    %s/geoclaw_outputs/' % runs_dir)
     print('nprocs = %i jobs will run simultaneously' % nprocs)
+    print('OMP_NUM_THREADS = ', os.environ['OMP_NUM_THREADS'])
     print('GeoClaw executable:\n    ',xgeoclaw_path)
 
     if dry_run:
@@ -186,8 +193,9 @@ if __name__ == '__main__':
         print('--------------------------')
     else:
         # make list of dictionaries with parameters for each case:
-        caselist = make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir,
-                                         xgeoclaw_path, make_plots)
+        caselist = cases_dtopos.make_all_cases_dtopos(dtopo_dir, dtopo_files,
+                                        runs_dir, xgeoclaw_path, make_plots)
 
         # run all cases using nprocs processors:
-        run_many_cases_pool(caselist, nprocs, run_one_case_clawpack)
+        multip_tools.run_many_cases_pool(caselist, nprocs,
+                                         clawmultip_tools.run_one_case_clawpack)

@@ -7,65 +7,59 @@ that will be read in by the Fortran code.
 Note: this version has case as a parameter to setrun, a dictionary used to pass
 in values that vary from case to case for doing a parameter sweep.
 """
-
-import os
+import sys,os,datetime
 import numpy as np
 from clawpack.amrclaw.data import FlagRegion
-from clawpack.geoclaw import fgout_tools, fgmax_tools
+from clawpack.geoclaw import fgmax_tools, fgout_tools
+from clawpack.geoclaw.data import ForceDry
+from clawpack.clawutil.util import fullpath_import
+import pathlib
+
+# top level directory for this project:
+try:
+    CHT = os.environ['CHT']
+except:
+    raise Exception("*** Must first set CHT environment variable")
+
+common_code_dir = f'{CHT}/common_code'
+restart_tools = fullpath_import(f'{common_code_dir}/restart_tools.py')
+
+
+# if some values in .data files show up as e.g. np.float64(3600.0)
+# this will restore old behavior and just print 3600.0:
+np.set_printoptions(legacy="1.25")
+# fixed in master after v5.12.0
+
+
+print('\n========================== setrun.py ==========================')
+print('Start date & time: ', datetime.datetime.now())
+
 
 use_bouss_version = False  # True ==> requires code compiled with PETSc etc.
                            # might still solve SWE if bouss_equations = 0 below
 
-try:
-    CLAW = os.environ['CLAW']
-except:
-    raise Exception("*** Must first set CLAW enviornment variable")
 
-root_dir = os.environ['CHT']
-#Seaside_root_dir = os.environ['Seaside']  ### Not using. Everything relative, may use CHT
+# Set these directories where input data is found:
 
 rundir = os.getcwd()
 print('rundir = %s' % rundir)
 
-if 1:
-    # for new ground motions:
-    event = os.path.split(os.getcwd())[-1]
-    instant = ('instant' in rundir)  # is this instantaneous uplift?
-else:
-    # for T-shirt event, hardwire here:
-    event = 'SM1'
-    instant = True
+topo_dir = f'{CHT}/topo/topofiles'
 
-print('The event is  %s, instant = %s' % (event,instant))
+# for hyak cluster:
+#topo_dir = topo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
-#Note, we are forcing the outer RR to stay on, not just because of the
-#dtopo, but because we want the wave to propogate to the inner RR region
-#before letting go of the outer RR.
+# for TACC:
+topo_dir = topo_dir.replace('/home1', '/scratch')
 
-if instant:
-    tmax_dtopo_region = 15*60.  # force fine grids up to this time
-                                # 15 minutes for wave to propagate
-                                # into inner RR before letting go of
-                                # outer RR. Even in South, waves start
-                                # to propogate immediately
-    print ('assuming this is an instantaneous rupture')
-    print (' ')
+# laptop:
+#topo_dir = '/Users/rjl/topo/topofiles'
 
-else:
-    tmax_dtopo_region = 20*60.  # force fine grids up to this time
-                                # 20 minutes for wave to propagate
-                                # into inner RR in the South
-    print ('assuming this is a dynamic rupture')
-    print (' ')
+print('topo_dir is:  ',topo_dir)
+
+RRdir = f'{CHT}/topo/regions'  # for flagregion Ruled Rectangles
 
 
-    topodir = root_dir + '/topo/topofiles'
-
-    # for hyak cluster:
-    #topodir = topodir.replace('/mmfs1/home', '/gscratch/tsunami')
-
-    # for TACC:
-    topodir = topodir.replace('/home1', '/scratch')
 
 
 #------------------------------
@@ -87,19 +81,51 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     assert claw_pkg.lower() == 'geoclaw',  "Expected claw_pkg = 'geoclaw'"
 
+    num_dim = 2
+    rundata = data.ClawRunData(claw_pkg, num_dim)
+
     # The values below are expected to be in case dictionary,
     # and may vary from case to case:
 
     dtopofiles = case['dtopofiles']
 
-    num_dim = 2
-    rundata = data.ClawRunData(claw_pkg, num_dim)
+    if len(dtopofiles) > 0:
+        dtopofile = pathlib.Path(dtopofiles[0][1])
+        event = dtopofile.stem
+    else:
+        event = 'NO_DTOPO'
+
+    # We will set the initial time step dt_initial and
+    # dtopo_data.dt_max_dtopo differently for instant vs kinematic ruptures:
+
+    instant = 'instant' in event  # part of filename for static ruptures
+    if instant:
+        # instantaneous static rupture
+        dt_max_dtopo = 0.25
+        print(f'Assuming event {event} is instantaneous displacement')
+    else:
+        # kinematic rupture
+        dt_max_dtopo = 5.0
+        print(f'Assuming event {event} is kinematic displacement')
+
+    restart = False
+    restart_file = ''
+
+    if 0:
+        # restart from previous run, if checkpt file is available:
+        # (note: requires case['outdir'] to be set by calling program)
+        restart_file = restart_tools.find_last_checkpt(case['outdir'])
+
+    if restart_file != '':
+        restart = True
+        restart_time = restart_tools.time(restart_file)
+        print(f'Will restart from time t = {restart_time}')
 
 
     #------------------------------------------------------------------
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
-    
+
     #probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
 
     #------------------------------------------------------------------
@@ -139,6 +165,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     #clawdata.num_cells[1] = 3*15
 
     one_sixth = 1.0/(6.0*3600.)
+    one_sixth = 0.  # FIX
     clawdata.lower[0] = -135. - one_sixth      # west longitude
     clawdata.upper[0] = -122. - one_sixth      # east longitude
     clawdata.lower[1] = 38.5  - one_sixth      # south latitude
@@ -164,8 +191,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # Index of aux array corresponding to capacity function, if there is one:
     clawdata.capa_index = 2
 
-    
-    
+
+
     # -------------
     # Initial time:
     # -------------
@@ -175,7 +202,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Restart from checkpoint file of a previous run?
     # If restarting, t0 above should be from original run, and the
-    # restart_file 'fort.chkNNNNN' specified below should be in 
+    # restart_file 'fort.chkNNNNN' specified below should be in
     # the OUTDIR indicated in Makefile.
 
     clawdata.restart = False
@@ -214,7 +241,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         clawdata.output_step_interval = 1
         clawdata.total_steps = 1
         clawdata.output_t0 = True
-        
+
 
     clawdata.output_format = 'binary'
 
@@ -245,18 +272,14 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Initial time step for variable dt.
     # If dt_variable==0 then dt=dt_initial for all steps:
-
-    if instant: #instantaneous rupture
-        clawdata.dt_initial = 0.2
-    else:       # kinematic rupture
-        clawdata.dt_initial = 10.0
+    clawdata.dt_initial = dt_max_dtopo
 
     # Max time step to be allowed if variable dt used:
     clawdata.dt_max = 1e+99
 
     # Desired Courant number if variable dt used, and max to allow without
     # retaking step with a smaller dt:
-    clawdata.cfl_desired = 0.75
+    clawdata.cfl_desired = 0.9
     clawdata.cfl_max = 1.0
 
     # Maximum number of time steps to allow between output times:
@@ -271,11 +294,11 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Order of accuracy:  1 => Godunov,  2 => Lax-Wendroff plus limiters
     clawdata.order = 2
-    
+
     # Use dimensional splitting? (not yet available for AMR)
     clawdata.dimensional_split = 'unsplit'
-    
-    # For unsplit method, transverse_waves can be 
+
+    # For unsplit method, transverse_waves can be
     #  0 or 'none'      ==> donor cell (only normal solver used)
     #  1 or 'increment' ==> corner transport of waves
     #  2 or 'all'       ==> corner transport of 2nd order corrections too
@@ -283,8 +306,8 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Number of waves in the Riemann solution:
     clawdata.num_waves = 3
-    
-    # List of limiters to use for each wave family:  
+
+    # List of limiters to use for each wave family:
     # Required:  len(limiter) == num_waves
     # Some options:
     #   0 or 'none'     ==> no limiter (Lax-Wendroff)
@@ -295,10 +318,10 @@ def setrun(claw_pkg='geoclaw', case={}):
     clawdata.limiter = ['mc', 'mc', 'mc']
 
     clawdata.use_fwaves = True    # True ==> use f-wave version of algorithms
-    
+
     # Source terms splitting:
     #   src_split == 0 or 'none'    ==> no source term (src routine never called)
-    #   src_split == 1 or 'godunov' ==> Godunov (1st order) splitting used, 
+    #   src_split == 1 or 'godunov' ==> Godunov (1st order) splitting used,
     #   src_split == 2 or 'strang'  ==> Strang (2nd order) splitting used,  not recommended.
     clawdata.source_split = 'godunov'
 
@@ -346,7 +369,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         pass
 
     elif abs(clawdata.checkpt_style) == 2:
-        # Specify a list of checkpoint times.  
+        # Specify a list of checkpoint times.
         clawdata.checkpt_times = 1800.*np.arange(1,11,1)
 
     elif abs(clawdata.checkpt_style) == 3:
@@ -363,8 +386,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     amrdata.memsize = 2**27 - 1
 
     # max number of refinement levels:
-    #amrdata.amr_levels_max = 4
-    amrdata.amr_levels_max = 8
+    #amrdata.amr_levels_max = 6   # for 1/3" resolution
+    amrdata.amr_levels_max = 4    # for 3"
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -387,7 +410,10 @@ def setrun(claw_pkg='geoclaw', case={}):
     #refinement_ratios = [4,2,3,2,5,3,3]
 
     # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
-    refinement_ratios = [2,5,2,2,2,3,3,3]
+    #refinement_ratios = [2,5,2,2,2,3,3,3]
+
+    # dx = dy = 4', 1', 12", 3", 1", 1/3", 1/9"
+    refinement_ratios = [4,5,4,3,3,3]
 
 
     amrdata.refinement_ratios_x = refinement_ratios
@@ -419,9 +445,9 @@ def setrun(claw_pkg='geoclaw', case={}):
     amrdata.clustering_cutoff = 0.700000
 
     # print info about each regridding up to this level:
-    amrdata.verbosity_regrid = 0  
+    amrdata.verbosity_regrid = 0
 
-       
+
     # == Physics ==
     geo_data.gravity = 9.81
     geo_data.coordinate_system = 2
@@ -443,49 +469,29 @@ def setrun(claw_pkg='geoclaw', case={}):
     refinement_data.wave_tolerance = 0.5
 
     # == settopo.data values ==
-    topo_data = rundata.topo_data
+    topofiles = rundata.topo_data.topofiles
     # for topography, append lines of the form
-    #    [topotype, minlevel, maxlevel, t1, t2, fname]
-
-    #topodir = '/Users/rjl/topo/topofiles/'
-    topofiles = topo_data.topofiles
-
-    # 1-minute topo:
-    #wont need this one since 15-second below covers whole domain
-    #topofiles.append([3, topodir + '/etopo22_1min_-163_-122_38_63.asc'])
+    #    [topotype, fname]
 
     # 15-second etopo22:
-    #This will be sufficient for runs up to 5" for initial runs before
-    #inundation runs.
-    topofiles.append([3, topodir + '/etopo22_15s_-137_-121_37_55.asc'])
+    topofiles.append([3, f'{topo_dir}/etopo22_15s_-137_-121_37_55.asc'])
 
     #3-second topo:
-    topofiles.append([3, topodir + '/crm_vol8_3sec_cropped_44-47.asc'])
+    topofiles.append([3, f'{topo_dir}/crm_vol8_3sec_cropped_44-47.asc'])
 
-    #HERE, might not need
-    #2-second topo:
-    #topofiles.append([3, topodir + '/HERE'])
-
-    # 1/3-second topo: 
-    topofiles.append([3, topodir + '/NewportE_13s_mhw.asc'])
-    topofiles.append([3, topodir + '/Newport_13s_mhw.asc'])
+    # 1/3-second topo:
+    topofiles.append([3, f'{topo_dir}/NewportE_13s_mhw.asc'])
+    topofiles.append([3, f'{topo_dir}/Newport_13s_mhw.asc'])
 
     # 1/9-second topo:
-    topofiles.append([3, topodir + '/YaquinaBay_19s_mhw.asc'])
+    topofiles.append([3, f'{topo_dir}/YaquinaBay_19s_mhw.asc'])
 
     # == setdtopo.data values ==
     dtopo_data = rundata.dtopo_data
-    # for moving topography, append lines of the form :   (<= 1 allowed for now!)
-    #   [topotype, fname]
-
-    dtopo_dir = os.path.join(root_dir, 'dtopo/CSZ_groundmotions/dtopofiles')
     dtopo_data.dtopofiles = dtopofiles # from case dictionary
 
-
-    if instant: #instantaneous rupture
-        dtopo_data.dt_max_dtopo = .2
-    else:       #dynamic rupture
-        dtopo_data.dt_max_dtopo = 10.0
+    # maximum time step to use on level 1 while rupturing:
+    dtopo_data.dt_max_dtopo = dt_max_dtopo
 
 
     # == setqinit.data values ==
@@ -504,19 +510,15 @@ def setrun(claw_pkg='geoclaw', case={}):
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
 
+    # here we just use flagregions:
     flagregions = rundata.flagregiondata.flagregions  # initialized to []
-    
-    #RRdir = '/Users/rjl/git/paleo2020/topo/RuledRectangles'
-    RRdir = root_dir + '/topo/regions/'
-    
-    # Computational domain Variable Region - 4min, 2min to 24 sec:
-    # Level 3 below is 24 sec 
-    # Note that this is a rectangle specified in the new way
+
+    # Computational domain Variable Region
     # (other regions below will force/allow more refinement)
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_domain'
     flagregion.minlevel = 1
-    flagregion.maxlevel = 3
+    flagregion.maxlevel = 2
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
@@ -529,8 +531,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # Continential shelf extended to cover dtopo, 12"
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_46_51b_12sec'
-    flagregion.minlevel = 4
-    flagregion.maxlevel = 4
+    flagregion.minlevel = 3
+    flagregion.maxlevel = 3
     flagregion.t1 = 0.
     #flagregion.t2 = tmax_dtopo_region
     flagregion.t2 = 1e9
@@ -538,12 +540,12 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_46_51b.data')
     flagregions.append(flagregion)
-    
+
     # Continential shelf extended to cover dtopo, 12"
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_40_46b_12sec'
-    flagregion.minlevel = 4
-    flagregion.maxlevel = 4
+    flagregion.minlevel = 3
+    flagregion.maxlevel = 3
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 2  # Ruled Rectangle
@@ -551,45 +553,11 @@ def setrun(claw_pkg='geoclaw', case={}):
             '/RuledRectangle_Coast_40_46b.data')
     flagregions.append(flagregion)
 
+
+
     if 0:
-        # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_Coast_46_51_12sec'
-        #flagregion.minlevel = 3
-        #flagregion.maxlevel = 4
-        #flagregion.t1 = tmax_dtopo_region
-        flagregion.minlevel = 4
-        flagregion.maxlevel = 4
-        flagregion.t1 = 0.0
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 2  # Ruled Rectangle
-        flagregion.spatial_region_file = os.path.abspath(RRdir + \
-            '/RuledRectangle_Coast_46_51.data')
-        flagregions.append(flagregion)
-    
-        # Continential shelf Variable Region, 24" to 12", changed to 12" fixed
-        flagregion = FlagRegion(num_dim=2)
-        flagregion.name = 'Region_Coast_40_46_12sec'
-        #flagregion.minlevel = 3
-        #flagregion.maxlevel = 4
-        #flagregion.t1 = tmax_dtopo_region
-        flagregion.minlevel = 4
-        flagregion.maxlevel = 4
-        flagregion.t1 = 0.0
-        flagregion.t2 = 1e9
-        flagregion.spatial_region_type = 2  # Ruled Rectangle
-        flagregion.spatial_region_file = os.path.abspath(RRdir + \
-            '/RuledRectangle_Coast_40_46.data')
-        flagregions.append(flagregion)
+        # No longer have 6" level
 
-
-    if 1:
-        ### Will use this for the inundation runs. (6" slider window)
-        # Rectangular region that encompasses gauges 94-137, offshore OSVES
-        # or gauges 98-143, offshore Westport, or gauges 166-208 offshore Seaside.
-        # Or centered about Newport, plus or minus 32km, say
-        # Make this region 6" for all time to check if gauge values change
-        # This rectangle goes out to the Ruled Rectangle (without the b) above.
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_6sec'
         flagregion.minlevel = 5
@@ -606,7 +574,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         #latitudes below are for 97 in north to 144 in south
         #gauges_region = [-125.9,-124.1,46.587,47.227]
 
-        ## for Seaside, encompasses gauges 166 to 208 
+        ## for Seaside, encompasses gauges 166 to 208
         #gauges_region = [-125.65,-123.76,45.69,46.43]
         #gauges_region = [-126.00,-123.76,45.69,46.43]
 
@@ -620,56 +588,44 @@ def setrun(claw_pkg='geoclaw', case={}):
     if 1: #For Newport
 
         # Old Region 2" - fixed at 3" sec. :
-        # Level 6 is 3" sec
-        # Note that this is a rectangle specified in the new way
-        # (other regions below will force/allow more refinement)
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_3sec'
-        flagregion.minlevel = 6
-        flagregion.maxlevel = 6
+        flagregion.minlevel = 3
+        flagregion.maxlevel = 4
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
         flagregion.spatial_region = [-124.25,-123.9150,44.535,44.715]
         flagregions.append(flagregion)
 
-        # Region 1" - fixed at 1" sec 
-        # Level 7 is 1" sec
-        # Note that this is a rectangle specified in the new way
-        # (other regions below will force/allow more refinement)
+        # Region 1" - fixed at 1" sec
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_1sec'
-        flagregion.minlevel = 7
-        flagregion.maxlevel = 7
+        flagregion.minlevel = 3
+        flagregion.maxlevel = 5
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
-        flagregion.spatial_region = [-124.1495,-123.916,44.55,44.6795] 
+        flagregion.spatial_region = [-124.1495,-123.916,44.55,44.6795]
         flagregions.append(flagregion)
 
-        # Region 1/3" - fixed at 1/3" 
-        # Level 8 is 1/3" sec
-        # Note that this is a rectangle specified in the new way
-        # (other regions below will force/allow more refinement)
+        # Region 1/3" - fixed at 1/3"
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_onethird'
-        flagregion.minlevel = 8
-        flagregion.maxlevel = 8
+        flagregion.minlevel = 3
+        flagregion.maxlevel = 6
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
         flagregion.spatial_region = [-124.102,-123.9175,44.564,44.675]
         flagregions.append(flagregion)
 
-    if 0:  #set up, but not using this calculation region at the moment
-        # Region 1/9" - fixed at 1/9" 
-        # Level 9 is 1/9" sec
-        # Note that this is a rectangle specified in the new way
-        # (other regions below will force/allow more refinement)
+    if 0:  #set up, but not using this flagregion at the moment
+        # Level 7 is 1/9" sec, might need around marina?
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_oneninth'
-        flagregion.minlevel = 9
-        flagregion.maxlevel = 9
+        flagregion.minlevel = 3
+        flagregion.maxlevel = 7
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
@@ -682,14 +638,14 @@ def setrun(claw_pkg='geoclaw', case={}):
     rundata.gaugedata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
 
-    rundata.gaugedata.file_format = 'binary32'
+    rundata.gaugedata.file_format = 'binary32' # save as single precision
     rundata.gaugedata.min_time_increment = 5 # seconds min between outputs
 
     if 1:
-        # load list of virtual gauges to use, with columns 
+        # load list of virtual gauges to use, with columns
         #      gaugeno, x, y
         # x,y should be in decimal form, preferably cell centered on finest grid
-        gauges_file = root_dir + '/gauges/oregon_gauges_2024/VGListNewport.csv' 
+        gauges_file = f'{CHT}/gauges/oregon_gauges_2024/VGListNewport.csv'
         gauges = np.loadtxt(gauges_file, delimiter=',')
 
         for k in range(gauges.shape[0]):
@@ -716,31 +672,31 @@ def setrun(claw_pkg='geoclaw', case={}):
     if 1:
         # fgmax region covering Yaquina Bay and Newport, west of -124.
         fg = fgmax_tools.FGmaxGrid()
-        fg.xy_fname = root_dir + '/topo/fgmax_grids/fgmax_pts_Newport.data'
+        fg.xy_fname = f'{CHT}/topo/fgmax_grids/fgmax_pts_Newport.data'
         fg.point_style = 4
-        fg.tstart_max =  30.*60.  # when to start monitoring max values, at 20minutes 
+        fg.tstart_max =  30.*60.  # when to start monitoring max values, at 20minutes
         fg.tend_max = 1.e10       # when to stop monitoring max values
-        fg.dt_check = 5.          # target time (sec) increment between updating. 
+        fg.dt_check = 5.          # target time (sec) increment between updating.
         # monitor on finest level:
         fg.min_level_check = amrdata.amr_levels_max
         fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
         fg.interp_method = 0      # 0 ==> pw const in cells, recommended
         fgmax_grids.append(fg)    # written to fgmax_grids.data
-    
+
     if 1:
         # fgmax region covering Yaquina River, east of -124.
         fg = fgmax_tools.FGmaxGrid()
-        fg.xy_fname = root_dir + '/topo/fgmax_grids/fgmax_pts_NewportE.data'
+        fg.xy_fname = f'{CHT}/topo/fgmax_grids/fgmax_pts_NewportE.data'
         fg.point_style = 4
-        fg.tstart_max =  30.*60.  # when to start monitoring max values, at 20minutes 
+        fg.tstart_max =  30.*60.  # when to start monitoring max values, at 20minutes
         fg.tend_max = 1.e10       # when to stop monitoring max values
-        fg.dt_check = 5.          # target time (sec) increment between updating. 
+        fg.dt_check = 5.          # target time (sec) increment between updating.
         # monitor on finest level:
         fg.min_level_check = amrdata.amr_levels_max
         fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
         fg.interp_method = 0      # 0 ==> pw const in cells, recommended
         fgmax_grids.append(fg)    # written to fgmax_grids.data
-    
+
 
 
     # == fgout_grids.data values ==
@@ -748,7 +704,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     # Set rundata.fgout_data.fgout_grids to be a list of
     # objects of class clawpack.geoclaw.fgout_tools.FGoutGrid:
     fgout_grids = rundata.fgout_data.fgout_grids  # empty list initially
-    
+
     if use_bouss_version:
         q_out_vars = [1,2,3,6] # h,hu,hv,eta for bouss code
     else:
@@ -797,7 +753,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         fgout.q_out_vars = q_out_vars
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
-    if 1:
+    if 0:
         #Keep this inside the 1/3 computational grid which was
         #[-124.102,-123.9175,44.564,44.675]
 
@@ -807,7 +763,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         dx_fgout = 1/3 * 1/3600.  # degrees
         dy_fgout = dx_fgout
         dt_fgout = 15  # seconds
-        
+
         fgout = fgout_tools.FGoutGrid()
         fgout.fgno = 3
         fgout.point_style = 2  # uniform rectangular x-y grid
@@ -834,7 +790,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
         from clawpack.geoclaw.data import BoussData
         rundata.add_data(BoussData(),'bouss_data')
-        
+
         rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
         rundata.bouss_data.bouss_min_level = 1    # coarsest level to apply bouss
         rundata.bouss_data.bouss_max_level = 7    # finest level to apply bouss
@@ -843,7 +799,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         rundata.bouss_data.bouss_tstart = 60.      # time to switch from SWE
 
 
-    #  ----- For developers ----- 
+    #  ----- For developers -----
     # Toggle debugging print statements:
     amrdata.dprint = False      # print domain flags
     amrdata.eprint = False      # print err est flags
@@ -855,18 +811,18 @@ def setrun(claw_pkg='geoclaw', case={}):
     amrdata.sprint = False      # space/memory output
     amrdata.tprint = False      # time step reporting each level
     amrdata.uprint = False      # update/upbnd reporting
-    
+
     return rundata
-
-
 
 if __name__ == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
-    rundata = setrun(*sys.argv[1:])
+    from clawpack.geoclaw import kmltools
+
+    # run this as script via 'python setrun_case.py`
+    # to make data without any dtopofile, to check other inputs:
+    rundata = setrun('geoclaw', case={'dtopofiles':[]})
     rundata.write()
-    
-    #from clawpack.geoclaw import kmltools
-    #sys.path.insert(0,root_dir+'/common_code')  # works for fgmax pt style 4
-    #import kmltools
-    #kmltools.make_input_data_kmls(rundata)
+
+    # To create kml files of inputs:
+    kmltools.make_input_data_kmls(rundata)
