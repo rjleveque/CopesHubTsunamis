@@ -76,25 +76,26 @@ print('runs_dir = ',runs_dir)
 
 # specify events...
 
-depths = ['S','M','D']
+depths = ['D','M','S']
 
 # buried_locking events:
-all_events = [f'BL13{depth}' for depth in depths] \
-           + [f'BL10{depth}' for depth in depths] \
+all_events = [f'BL10{depth}' for depth in depths] \
+           + [f'BL13{depth}' for depth in depths] \
            + [f'BL16{depth}' for depth in depths] \
 
 all_events += [e.replace('L','R') for e in all_events]  # add random events
 all_events += [e.replace('B','F') for e in all_events]  # add ft events
 
 events = all_events
-events.sort()
+#events.sort()   # already sorted
 
-events = events[:6]
+events = events[16:]
 
 instant = False
 if instant:
     events = [e+'_instant' for e in events]
 
+#print('events to plot: ',events)
 
 geoclaw_outputs = os.path.abspath('%s/geoclaw_outputs' % runs_dir)
 outdirs = ['%s/_output_%s' % (geoclaw_outputs, event) for event in events]
@@ -143,6 +144,7 @@ if not dry_run:
             except:
                 print('*** problem with process_fgmax in %s, skipping' \
                       % run_name)
+                #raise
 
         if 0:
             make_fgout_animation.make_anim(outdir, plotdir, location, event)

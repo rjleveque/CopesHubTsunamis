@@ -142,9 +142,10 @@ events.sort()
 
 #events = events[:9]
 #events = events[9:]
-events = events[:6]
+events = events[12:]
 
-#events = ['BR10M']
+# rerun those with too many dt reductions when cfl=0.9:
+events = ['BL10D','FL10S']
 
 instant = False
 if instant:

@@ -279,7 +279,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Desired Courant number if variable dt used, and max to allow without
     # retaking step with a smaller dt:
-    clawdata.cfl_desired = 0.9
+    clawdata.cfl_desired = 0.8
     clawdata.cfl_max = 1.0
 
     # Maximum number of time steps to allow between output times:
@@ -386,8 +386,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     amrdata.memsize = 2**27 - 1
 
     # max number of refinement levels:
-    #amrdata.amr_levels_max = 6   # for 1/3" resolution
-    amrdata.amr_levels_max = 4    # for 3"
+    amrdata.amr_levels_max = 6   # for 1/3" resolution
+    #amrdata.amr_levels_max = 4    # for 3"
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
