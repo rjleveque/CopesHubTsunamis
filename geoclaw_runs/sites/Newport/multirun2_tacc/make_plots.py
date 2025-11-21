@@ -89,7 +89,7 @@ all_events += [e.replace('B','F') for e in all_events]  # add ft events
 events = all_events
 #events.sort()   # already sorted
 
-events = events[16:]
+events = events[:4]
 
 instant = False
 if instant:

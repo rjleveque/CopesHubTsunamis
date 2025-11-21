@@ -1,11 +1,11 @@
 # Script to copy a _plots directory to homer for viewing on the web
 
 # fix this path...
-RELDIR=CopesHubTsunamis/geoclaw_runs/sites/Newport/multirun1_tacc
-PLOTDIR=geoclaw_plots/_plots_BL13M
+RELDIR=CopesHubTsunamis/geoclaw_runs/sites/Newport/multirun2_tacc
+PLOTDIR=geoclaw_plots/_plots_BL10D
 
 # give it an ID that will be used in the directory name on homer:
-ID=251120
+ID=251121
 
 #--------------------------------------------
 # You shouldn't need to change the rest...
@@ -30,7 +30,7 @@ echo
 echo This will overwrite any _plots already at:
 echo "  "  $URL/${RELDIR}/${PLOTDIR}_tacc_${ID}
 echo 
-echo -n "Is this ok (y/n)?"
+echo -n "Is this ok (y/n)? "
 read answer
  
 if [ "$answer" != "${answer#[Yy]}" ] ;then
@@ -43,7 +43,7 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
     echo copied local directory:
     echo      ${PLOTDIR}
     echo to homer.  To view plots, open
-    echo      ${URL}/${RELDIR}/${PLOTDIR}_tacc_${ID}/_PlotIndex.html
+    echo      ${URL}/${RELDIR}/${PLOTDIR}_tacc_${ID}
      
 else
     echo Aborting

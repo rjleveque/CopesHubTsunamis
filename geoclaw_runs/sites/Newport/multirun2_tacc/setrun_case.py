@@ -466,7 +466,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     # Refinement settings
     refinement_data = rundata.refinement_data
     refinement_data.variable_dt_refinement_ratios = True
-    refinement_data.wave_tolerance = 0.5
+    refinement_data.wave_tolerance = 0.05
 
     # == settopo.data values ==
     topofiles = rundata.topo_data.topofiles
@@ -590,7 +590,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Old Region 2" - fixed at 3" sec. :
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_3sec'
-        flagregion.minlevel = 3
+        flagregion.minlevel = 4
         flagregion.maxlevel = 4
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
@@ -601,7 +601,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Region 1" - fixed at 1" sec
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_1sec'
-        flagregion.minlevel = 3
+        flagregion.minlevel = 4
         flagregion.maxlevel = 5
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
@@ -612,7 +612,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Region 1/3" - fixed at 1/3"
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_onethird'
-        flagregion.minlevel = 3
+        flagregion.minlevel = 4
         flagregion.maxlevel = 6
         flagregion.t1 = 0.
         flagregion.t2 = 1e9

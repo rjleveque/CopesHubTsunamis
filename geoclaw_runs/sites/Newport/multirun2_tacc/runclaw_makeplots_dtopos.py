@@ -127,12 +127,12 @@ if 0:
 
 # specify events...
 
-depths = ['S','M','D']
+depths = ['D','M','S']
 
 # buried_locking events:
 all_events = [f'BL13{depth}' for depth in depths] \
-           + [f'BL10{depth}' for depth in depths] \
            + [f'BL16{depth}' for depth in depths] \
+           + [f'BL10{depth}' for depth in depths] \
 
 all_events += [e.replace('L','R') for e in all_events]  # add random events
 all_events += [e.replace('B','F') for e in all_events]  # add ft events
@@ -142,10 +142,9 @@ events.sort()
 
 #events = events[:9]
 #events = events[9:]
-events = events[12:]
+events = events[:4]
 
-# rerun those with too many dt reductions when cfl=0.9:
-events = ['BL10D','FL10S']
+#events = ['BL13D','BL13M']
 
 instant = False
 if instant:
