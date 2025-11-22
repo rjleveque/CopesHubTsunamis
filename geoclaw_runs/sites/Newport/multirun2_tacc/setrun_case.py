@@ -165,7 +165,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     #clawdata.num_cells[1] = 3*15
 
     one_sixth = 1.0/(6.0*3600.)
-    one_sixth = 0.  # FIX
+    #one_sixth = 0.  # FIX
     clawdata.lower[0] = -135. - one_sixth      # west longitude
     clawdata.upper[0] = -122. - one_sixth      # east longitude
     clawdata.lower[1] = 38.5  - one_sixth      # south latitude

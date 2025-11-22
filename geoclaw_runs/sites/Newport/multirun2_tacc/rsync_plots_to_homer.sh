@@ -2,10 +2,10 @@
 
 # fix this path...
 RELDIR=CopesHubTsunamis/geoclaw_runs/sites/Newport/multirun2_tacc
-PLOTDIR=geoclaw_plots/_plots_BL10D
+PLOTDIR=geoclaw_plots/_plots_BL13D
 
 # give it an ID that will be used in the directory name on homer:
-ID=251121
+ID=251121a
 
 #--------------------------------------------
 # You shouldn't need to change the rest...
