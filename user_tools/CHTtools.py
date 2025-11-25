@@ -8,6 +8,72 @@ from pylab import *
 import xarray
 from scipy.interpolate import RegularGridInterpolator
 
+def all_events():
+    depths = ['D','M','S']
+
+    # buried_locking events:
+    all_events = [f'BL10{depth}' for depth in depths] \
+               + [f'BL13{depth}' for depth in depths] \
+               + [f'BL16{depth}' for depth in depths] \
+
+    # add random events:
+    all_events += [e.replace('L','R') for e in all_events]
+
+    # add ft events:
+    all_events += [e.replace('B','F') for e in all_events]
+
+    return all_events
+
+
+def shortname(event):
+    """
+    convert original event name like ft-locking-mur13-deep
+    to new short name like FL13D
+    """
+
+    if len(event) == 5:
+        # assume it is already a short name:
+        return event
+
+    tokens = event.replace('_','-').split('-')
+    newname = ''
+    if tokens[0] == 'buried':
+        newname += 'B'
+    elif tokens[0] == 'ft':
+        newname += 'F'
+    if tokens[1] == 'locking':
+        newname += 'L'
+    elif tokens[1] == 'random':
+        newname += 'R'
+    newname += tokens[2][-2:]  # year
+    if tokens[3] == 'deep':
+        newname += 'D'
+    elif tokens[3] == 'middle':
+        newname += 'M'
+    elif tokens[3] == 'shallow':
+        newname += 'S'
+
+    if len(newname) != 5:
+        print(f'*** problem converting {event}, newname = {newname}')
+
+    return newname
+
+def name_conversions():
+    models = \
+       ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
+        'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
+
+
+    events = ['%s-deep' % model for model in models] \
+           + ['%s-middle' % model for model in models] \
+           + ['%s-shallow' % model for model in models]
+
+    events = events + [e.replace('buried','ft') for e in events]
+    events.sort()
+    for event in events:
+        #print(f'  {event.ljust(30)} --> {shortname(event)}')
+        print(f'  {shortname(event)} = {event}')
+
 
 class TsunamiModelResults(object):
 
