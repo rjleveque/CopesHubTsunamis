@@ -560,7 +560,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
 
     flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_offshore
+    flagregion.name = 'Region_12sec'
     flagregion.minlevel = 2
     flagregion.maxlevel = 3
     flagregion.t1 = 0.0
