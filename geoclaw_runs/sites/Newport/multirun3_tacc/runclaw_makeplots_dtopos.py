@@ -144,7 +144,10 @@ events.sort()
 #events = events[9:]
 #events = events[4:12]
 
-events = ['BL10D'] + events[12:15]
+#events = ['BL10D'] + events[12:15]
+#events = events[1:12] + events[16:19]
+events = events[15:16] + events[19:]
+
 
 instant = False
 if instant:
