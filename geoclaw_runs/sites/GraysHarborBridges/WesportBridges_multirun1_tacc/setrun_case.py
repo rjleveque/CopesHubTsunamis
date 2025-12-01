@@ -216,7 +216,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.num_output_times = 0
+        clawdata.num_output_times = 8
         clawdata.tfinal = 2.0*3600.
         clawdata.output_t0 = False  # output at initial (or restart) time?
 
@@ -363,7 +363,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     amrdata = rundata.amrdata
 
     # max number of refinement levels:
-    amrdata.amr_levels_max = 8
+    #amrdata.amr_levels_max = 6   # for 1/3" resolution
+    amrdata.amr_levels_max = 4    # for 3"
 
     # List of refinement ratios at each level (length at least mxnest-1)
 
@@ -374,7 +375,11 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # Set up for 9 levels below, using only 8 for now.
     # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
-    refinement_ratios = [2,5,2,2,2,3,3,3]
+    #refinement_ratios = [2,5,2,2,2,3,3,3]
+
+    # dx = dy = 4', 1', 12", 3", 1", 1/3", 1/9"
+    refinement_ratios = [4,5,4,3,3,3]
+
     amrdata.refinement_ratios_x = refinement_ratios
     amrdata.refinement_ratios_y = refinement_ratios
     amrdata.refinement_ratios_t = refinement_ratios
@@ -511,7 +516,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_domain'
     flagregion.minlevel = 1
-    flagregion.maxlevel = 3
+    flagregion.maxlevel = 2
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
@@ -527,8 +532,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # (other regions below will force/allow more refinement)
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_12sec'
-    flagregion.minlevel = 4
-    flagregion.maxlevel = 4
+    flagregion.minlevel = 2
+    flagregion.maxlevel = 3
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
@@ -539,10 +544,10 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_46_51b_24sec_12sec'
     flagregion.minlevel = 3
-    flagregion.maxlevel = 4
+    flagregion.maxlevel = 3
     flagregion.t1 = 0.
     #flagregion.t2 = tmax_dtopo_region
-    flagregion.t2 = 1e9
+    flagregion.t2 = 1200.
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_46_51b.data')
@@ -552,15 +557,16 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_40_46b_24sec_12sec'
     flagregion.minlevel = 3
-    flagregion.maxlevel = 4
+    flagregion.maxlevel = 3
     flagregion.t1 = 0.
-    flagregion.t2 = 1e9
+    flagregion.t2 = 1200.
     flagregion.spatial_region_type = 2  # Ruled Rectangle
     flagregion.spatial_region_file = os.path.abspath(RRdir + \
             '/RuledRectangle_Coast_40_46b.data')
     flagregions.append(flagregion)
 
-    if 1:
+    if 0:
+        # No 6" grids
         ### Will use this for the inundation runs. (6" slider window)
         # Rectangular region that encompasses gauges 94-137, offshore OSVES
         # or gauges 98-143, offshore Westport, or gauges 166-208 offshore Seaside.
@@ -579,8 +585,8 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Level 6 is 3" sec
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_3sec'
-        flagregion.minlevel = 6
-        flagregion.maxlevel = 6
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 4
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
@@ -590,8 +596,8 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Level 7 is 1" sec
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_1sec'
-        flagregion.minlevel = 7
-        flagregion.maxlevel = 7
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 5
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
@@ -601,8 +607,8 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Level 8 is 1/3" sec
         flagregion = FlagRegion(num_dim=2)
         flagregion.name = 'Region_onethird'
-        flagregion.minlevel = 8
-        flagregion.maxlevel = 8
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 6
         flagregion.t1 = 0.
         flagregion.t2 = 1e9
         flagregion.spatial_region_type = 1  # Rectangle
