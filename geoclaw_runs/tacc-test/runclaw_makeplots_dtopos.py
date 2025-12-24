@@ -69,6 +69,8 @@ make_plots = True
 
 # location for big files for different computer environments:
 this_dir = os.getcwd()
+HOME = os.environ['HOME']
+SCRATCH = os.environ.get('SCRATCH',HOME)  # output to this_dir if not found
 
 if 'rjl/git' in this_dir:
     computer = 'rjl-laptop'
@@ -81,7 +83,8 @@ elif '/mmfs1/home' in this_dir:
 
 elif '/home1' in this_dir:
     computer = 'tacc'
-    scratch_dir = this_dir.replace('/home1', '/scratch')
+    #scratch_dir = this_dir.replace('/home1', '/scratch')
+    scratch_dir = this_dir.replace(HOME, SCRATCH)
 
 else:
     computer = 'unknown'
@@ -167,7 +170,7 @@ if __name__ == '__main__':
     print('\n--------------------------')
     if dry_run:
         # just print out settings, no runs...
-        print('DRY RUN - settings in run_geoclaw_dtopos.py')
+        print('DRY RUN - settings in runclaw_makeplots_dtopos.py')
 
     print('Will run GeoClaw for %i dtopo files' % len(dtopo_files))
     print('dtopo files should be in dtopo_dir:\n    ', dtopo_dir)
@@ -178,6 +181,7 @@ if __name__ == '__main__':
         if not os.path.isfile(fpath):
             print('    *** file not found')
     print('output will go in \n    %s/geoclaw_outputs/' % runs_dir)
+    print('plots will go in \n    %s/geoclaw_plots/' % runs_dir)
     print('nprocs = %i jobs will run simultaneously' % nprocs)
     print('OMP_NUM_THREADS = ', os.environ['OMP_NUM_THREADS'])
     print('GeoClaw executable:\n    ',xgeoclaw_path)
@@ -186,6 +190,10 @@ if __name__ == '__main__':
         print('Set dry_run=False and re-execute to run GeoClaw')
         print('--------------------------')
     else:
+        foutfile = f'{runs_dir}/geoclaw_outputs/fortran_output.txt'
+        poutfile = f'{runs_dir}/geoclaw_outputs/python_output.txt'
+        print(f'Fortran output will go to \n    {foutfile}')
+        print(f'Python output will go to \n    {poutfile}')
         # make list of dictionaries with parameters for each case:
         caselist = cases_dtopos.make_all_cases_dtopos(dtopo_dir, dtopo_files,
                                         runs_dir, xgeoclaw_path, make_plots)

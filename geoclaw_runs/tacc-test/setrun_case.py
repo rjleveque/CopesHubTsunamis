@@ -229,10 +229,10 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
-
-        clawdata.num_output_times = 1
-        clawdata.tfinal = 30.              # SHORT TEST
-        clawdata.output_t0 = True          # output at initial (or restart) time?
+        # Here we run for 120 seconds and produce NO time frame output:
+        clawdata.num_output_times = 0  
+        clawdata.tfinal = 120.
+        clawdata.output_t0 = False
 
     elif clawdata.output_style == 2:
         # Specify a list of output times.
@@ -484,8 +484,11 @@ def setrun(claw_pkg='geoclaw', case={}):
     # ---------------
     # Gauges:
     # ---------------
-    rundata.gaugedata.gauges = []
+    gauges = rundata.gaugedata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
+
+    # one sample gauge near hypocenter of BL10D and BL10M:
+    gauges.append([101, -126.3, 48., 0., 1e9])
 
 
     # ---------------
