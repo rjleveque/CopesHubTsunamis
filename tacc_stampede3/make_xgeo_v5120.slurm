@@ -2,10 +2,10 @@
 #SBATCH -J job-xgeo           # Job name
 #SBATCH -o job-xgeo.o%j       # Name of stdout output file
 #SBATCH -e job-xgeo.e%j       # Name of stderr error file
-#SBATCH -p skx             # Queue (partition) name
+#SBATCH -p skx-dev         # Queue (partition) name
 #SBATCH -N 1               # Total # of nodes 
 #SBATCH -n 1               # Total # of mpi tasks
-#SBATCH -t 10:00:00        # Run time (hh:mm:ss)
+#SBATCH -t 00:05:00        # Run time (hh:mm:ss)
 ##SBATCH --mail-user=username@tacc.utexas.edu
 ##SBATCH --mail-type=all    # Send email at begin and end of job
 #SBATCH -A DS-portal-rjl    # Allocation name (req'd if you have more than 1)
