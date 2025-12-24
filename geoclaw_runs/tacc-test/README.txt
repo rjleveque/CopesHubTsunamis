@@ -13,7 +13,7 @@ to create the *.data files needed by the Fortran code.
 
 Note that this setrun function has an additional argument `case`
 that is not usually in setrun.  This is a dictionary that will be passed
-in when creating the *.data files for a particular case.
+in when creating the `*.data` files for a particular case.
 For our situation, the only important entry in the dictionary is
 `dtopofiles` since the value `case['dtopofiles']` will be used in setting
 `dtopo_data.dtopofiles`.  (Also `case['outdir']` is used if doing a
@@ -39,7 +39,7 @@ record time series at a single gauge (over a very short run for illustration).
 setplot_case.py
 ----------------------------------------
 
-This file is only needed if `make_plots = True` in 
+This file is only needed if `make_plots == True` in 
 `runclaw_makeplots_dtopos.py` (see below).
 
 This file can then be similar to a standard `setplot.py` that specifies how
@@ -54,7 +54,7 @@ Similar to `setrun_case`, the setplot function in this file has an
 additional argument `case` that is used in the post-processing.
 
 The example included here creates one gauge plot and a text file in the
-_plots directory for each event.
+`_plots` directory for each event.
 
 ----------------------------------------
 runclaw_makeplots_dtopos.py
@@ -69,21 +69,25 @@ Output and plots will be sent to scratch_dir
 which is constructed to be the full path within CopesHubTsunamis but in
 $SCRATCH instead of in $HOME.
 
-For example, this directory is
+For example, if the directory containing this code is
+
     /home1/04137/rjl/CopesHubTsunamis/geoclaw_runs/tacc-test
-and output/plots will be sent to
+
+then the output/plots will be sent to
+
     /scratch/04137/rjl/CopesHubTsunamis/geoclaw_runs/tacc-test/geoclaw_outputs
     /scratch/04137/rjl/CopesHubTsunamis/geoclaw_runs/tacc-test/geoclaw_plots
-within these directories, there will be one subdirectory for each event,
-with names like _output_BL10D or _plots_BL10D
 
-Set run_code = True to run geoclaw for each event
-Set make_plots = True to make plots (or other post-processing) for each event
+within these directories, there will be one subdirectory for each event,
+with names like `_output_BL10D` or `_plots_BL10D`.
+
+Set `run_code = True` to run geoclaw for each event
+Set `make_plots = True` to make plots (or other post-processing) for each event
 
 If you have already run geoclaw on each events and only want to redo the
-post-processing, make sure you set run_code = False.
+post-processing, make sure you set `run_code = False`.
 
-If run_code is True, make sure xgeoclaw_path is properly set to the
+If `run_code` is True, make sure `xgeoclaw_path` is properly set to the
 executable (which must have been previously compiled using an appropriate
 Makefile and version of GeoClaw).
 
@@ -94,12 +98,42 @@ in f'{dtopo_dir}/{event}.dtt3'
 The sample code sets all_events to a list of 36 events and then selects only
 the first 2 for this test case.
 
-After modifying this file, test it by setting dry_run = True and then:
+After modifying this file, test it by setting `dry_run = True` and then:
+
     python runclaw_makeplots_dtopos.py 2
+
 The number 2 indicates that it should do 2 runs at a time using Python
 multiprocessing tools.
 
-If the screen output from this looks ok, change to dry_run = False
-and submit a batch run using slurm (see below).
+If the screen output from this looks ok, change to `dry_run = False`
+and submit a batch run using slurm.
+
+----------------------------------------
+slurm script for batch submission
+----------------------------------------
+
+The script `$CHT/tacc_stampede3/runm_geoclaw-test.slurm` should be
+modified to specify your allocation in place of:
+
+    #SBATCH -A DS-portal-rjl   # Allocation name (req'd if you have more than 1)
+
+This script is set up to run 2 jobs in parallel.  Since each node on
+stampede3 has 48 cores, it is set to use `OMP_NUM_THREADS=24` for each
+job.  Other scripts in `$CHT/tacc_stampede3/` are set up to run e.g.
+6 jobs in parallel with 8 threads for each.
+
+Other things you might want to change:
+
+    #SBATCH -p skx-dev         # Queue (partition) name
+
+The `skx-dev` queue is for short test jobs, for long runs you will need to
+use `skx` instead, and increase the allowed run time:
+
+    #SBATCH -t 00:10:00        # Run time (hh:mm:ss)
+
+
+Submit a batch job using the `sbatch` command.
+
+
 
 
