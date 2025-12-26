@@ -70,7 +70,6 @@ make_plots = True
 # location for big files for different computer environments:
 this_dir = os.getcwd()
 HOME = os.environ['HOME']
-SCRATCH = os.environ.get('SCRATCH',HOME)  # output to this_dir if not found
 
 if 'rjl/git' in this_dir:
     computer = 'rjl-laptop'
@@ -84,7 +83,11 @@ elif '/mmfs1/home' in this_dir:
 elif '/home1' in this_dir:
     computer = 'tacc'
     #scratch_dir = this_dir.replace('/home1', '/scratch')
-    scratch_dir = this_dir.replace(HOME, SCRATCH)
+    try:
+        SCRATCH = os.environ['SCRATCH']
+        scratch_dir = this_dir.replace(HOME, SCRATCH)
+    except:
+        scratch_dir = this_dir  # if $SCRATCH not set
 
 else:
     computer = 'unknown'
@@ -94,9 +97,11 @@ else:
 dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
 
 if computer == 'tacc':
-    dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
+    #dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
+    dtopo_dir = dtopo_dir.replace(HOME, '/work2/04137/rjl/CHTshare/')
 
 
+print('scratch_dir = ',scratch_dir)
 print('dtopo_dir = ',dtopo_dir)
 
 # where to put output for all the runs:
@@ -109,9 +114,9 @@ os.system('mkdir -p %s' % runs_dir)
 # path to geoclaw executable:
 # (should agree with how EXE is set in Makefile used to compile)
 if run_code:
-    xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw_v5-13-1'
+    xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw-v5.13.1'
     if computer == 'tacc':
-        xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw_v5-13-1_ifx'
+        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack_src/xgeoclaw-v5.13.1_ifx-oldrp'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 

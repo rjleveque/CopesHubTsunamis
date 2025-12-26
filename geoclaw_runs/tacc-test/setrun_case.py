@@ -24,6 +24,9 @@ except:
 common_code_dir = f'{CHT}/common_code'
 restart_tools = fullpath_import(f'{common_code_dir}/restart_tools.py')
 
+HOME = os.environ['HOME']
+# directory for shared topo and dtopo files:
+CHTshare = CHT.replace(HOME,'/work2/04137/rjl/CHTshare')
 
 # if some values in .data files show up as e.g. np.float64(3600.0)
 # this will restore old behavior and just print 3600.0:
@@ -38,8 +41,11 @@ print('Start date & time: ', datetime.datetime.now())
 use_bouss_version = False  # True ==> requires code compiled with PETSc etc.
                            # might still solve SWE if bouss_equations = 0 below
 
-dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
 topo_dir = f'{CHT}/topo/topofiles'
+
+# don't need dtopo_dir here since dtopofile path will be passed in
+# to setrun in case dictionary by runclaw_makeplots_dtopos.py
+#dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
 
 # location for big files for different computer environments:
 # output and plots will be sent to scratch_dir
@@ -55,14 +61,13 @@ if 'rjl/git' in this_dir:
 elif '/mmfs1/home' in this_dir:
     computer = 'hyak'
     scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
-    dtopo_dir = dtopo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
     topo_dir = topo_dir.replace('/mmfs1/home', '/gscratch/tsunami')
 
 elif '/home1' in this_dir:
     computer = 'tacc'
     scratch_dir = this_dir.replace('/home1', '/scratch')
-    dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
-    topo_dir = topo_dir.replace('/home1', '/scratch')
+    #topo_dir = topo_dir.replace('/home1', '/scratch')
+    topo_dir = f'{CHTshare}/topo/topofiles'
 
 else:
     computer = 'unknown'
@@ -71,7 +76,6 @@ else:
 
 
 print('topo_dir is:  ',topo_dir)
-print('dtopo_dir is:  ',dtopo_dir)
 
 RRdir = f'{CHT}/topo/regions'  # for flagregion Ruled Rectangles
 
