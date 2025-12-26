@@ -146,7 +146,10 @@ all_events += [e.replace('B','F') for e in all_events]  # add ft events
 events = all_events
 events.sort()
 
-events = events[:2]
+events = events[:2]   # = ['BL10D', 'BL10M']
+
+# or simply specify a list of events:
+events = ['BL10D', 'BL10M']
 
 instant = False
 if instant:
@@ -199,6 +202,7 @@ if __name__ == '__main__':
         poutfile = f'{runs_dir}/geoclaw_outputs/python_output.txt'
         print(f'Fortran output will go to \n    {foutfile}')
         print(f'Python output will go to \n    {poutfile}')
+
         # make list of dictionaries with parameters for each case:
         caselist = cases_dtopos.make_all_cases_dtopos(dtopo_dir, dtopo_files,
                                         runs_dir, xgeoclaw_path, make_plots)
