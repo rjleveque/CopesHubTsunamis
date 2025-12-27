@@ -1,0 +1,24 @@
+# to create new environment geoclaw2:
+#   mkdir -p ~/venv
+#   python -m venv ~/venv/geoclaw2
+#   source ~/venv/geoclaw2/bin/activate
+#   pip install -r requirements_geoclaw2.txt
+
+# to activate in future, (perhaps put in .bashrc):
+#   source ~/venv/geoclaw2/bin/activate
+
+numpy
+matplotlib
+netCDF4
+ipython
+scipy
+xarray
+pandas
+cartopy
+ffmpeg
+pyproj
+utm
+rasterio
+pytest
+obspy
+obspyh5
