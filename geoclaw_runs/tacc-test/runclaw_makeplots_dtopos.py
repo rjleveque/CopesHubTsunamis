@@ -52,15 +52,9 @@ except:
 
 common_code_dir = os.path.join(CHT, 'common_code')
 cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
-plot_gauges_site = fullpath_import(f'{common_code_dir}/plot_gauges_site.py')
 
-if 0:
-    # can now import from clawutil?
-    clawmultip_tools = fullpath_import(f'{common_code_dir}/clawmultip_tools.py')
-    multip_tools = fullpath_import(f'{common_code_dir}/multip_tools.py')
-
-#dry_run = True  # If True, only print out settings, do not run GeoClaw
-dry_run = False  # If True, only print out settings, do not run GeoClaw
+dry_run = True  # If True, only print out settings, do not run GeoClaw
+#dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
