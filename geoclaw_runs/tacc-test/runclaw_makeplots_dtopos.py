@@ -53,8 +53,8 @@ except:
 common_code_dir = os.path.join(CHT, 'common_code')
 cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
-#dry_run = False  # If True, only print out settings, do not run GeoClaw
+#dry_run = True  # If True, only print out settings, do not run GeoClaw
+dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
@@ -67,8 +67,7 @@ HOME = os.environ['HOME']
 
 if 'rjl/git' in this_dir:
     computer = 'rjl-laptop'
-    scratch_dir = this_dir.replace('rjl/git/CopesHubTsunamis/geoclaw_runs', \
-                                   'rjl/scratch/CHT_runs')
+    scratch_dir = this_dir.replace('rjl/git', 'rjl/scratch')
 
 elif '/mmfs1/home' in this_dir:
     computer = 'hyak'
