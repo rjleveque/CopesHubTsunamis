@@ -42,7 +42,7 @@ export CHT=$HOME/CopesHubTsunamis  # for this project
 
 # version of geoclaw to use for Python code:
 #export CLAW=$HOME/clawpack_src/clawpack-v5.13.1
-export CLAW=/home1/04137/rjl/clawpack_src/clawpack-v5.13.1
+export CLAW=/work2/04137/rjl/CHTshare/clawpack-share
 
 export PYTHONPATH=$CLAW
 

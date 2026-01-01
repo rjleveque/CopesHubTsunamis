@@ -67,8 +67,7 @@ HOME = os.environ['HOME']
 
 if 'rjl/git' in this_dir:
     computer = 'rjl-laptop'
-    scratch_dir = this_dir.replace('rjl/git/CopesHubTsunamis/geoclaw_runs', \
-                                   'rjl/scratch/CHT_runs')
+    scratch_dir = this_dir.replace('rjl/git', 'rjl/scratch')
 
 elif '/mmfs1/home' in this_dir:
     computer = 'hyak'
@@ -110,7 +109,7 @@ os.system('mkdir -p %s' % runs_dir)
 if run_code:
     xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw-v5.13.1'
     if computer == 'tacc':
-        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack_src/xgeoclaw-v5.13.1_ifx-oldrp'
+        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-share/tacc/xgeoclaw_251229'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
