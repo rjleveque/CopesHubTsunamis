@@ -94,6 +94,19 @@ def setrun(claw_pkg='geoclaw', case={}):
     OUTPUT:
         rundata - object of class ClawRunData
 
+    ----------------
+    case parameters:
+    ----------------
+
+    This version has a parameter `case` that is expected to be a dictionary
+    with the key 'dtopofile' giving the full path to the dtopofile for this
+    case. (If not, it's assumed that no dtopofile should be used.)
+
+    dtopo_type is assumed to be 3, unless case['dtopo_type'] is set otherwise
+
+    case['outdir'] is generally set but is only needed for a restart, in
+    which case it is used to determine which checkpoint file to restart from.
+
     """
 
     from clawpack.clawutil import data
@@ -103,14 +116,15 @@ def setrun(claw_pkg='geoclaw', case={}):
     num_dim = 2
     rundata = data.ClawRunData(claw_pkg, num_dim)
 
-    # The values below are expected to be in case dictionary,
-    # and may vary from case to case:
 
-    dtopofiles = case['dtopofiles']
 
-    if len(dtopofiles) > 0:
-        dtopofile = pathlib.Path(dtopofiles[0][1])
-        event = dtopofile.stem
+    # full path to dtopofile to use for this case:
+    dtopofile = case.get('dtopofile', None) # returns None if not set
+
+    dtopo_type = case.get('dtopo_type', 3)  # assume dtopo_type=3 if not set
+
+    if dtopofile is not None:
+        event = Path(dtopofile).stem  # drop path and .dtt3 extension
     else:
         event = 'NO_DTOPO'
 
@@ -126,6 +140,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # kinematic rupture
         dt_max_dtopo = 5.0
         print(f'Assuming event {event} is kinematic displacement')
+    print(f'    dt_max_dtopo = {dt_max_dtopo:.1f} seconds')
 
     restart = False
     restart_file = ''
@@ -234,7 +249,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Here we run for 120 seconds and produce NO time frame output:
-        clawdata.num_output_times = 0  
+        clawdata.num_output_times = 0
         clawdata.tfinal = 120.
         clawdata.output_t0 = False
 
@@ -466,7 +481,8 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     # == setdtopo.data values ==
     dtopo_data = rundata.dtopo_data
-    dtopo_data.dtopofiles = dtopofiles # from case dictionary
+    if dtopofile is not None:
+        dtopo_data.dtopofiles = [[dtopo_type, dtopofile]] # from case dictionary
 
     # maximum time step to use on level 1 while rupturing:
     dtopo_data.dt_max_dtopo = dt_max_dtopo
@@ -542,7 +558,7 @@ if __name__ == '__main__':
 
     # run this as script via 'python setrun_case.py`
     # to make data without any dtopofile, to check other inputs:
-    rundata = setrun('geoclaw', case={'dtopofiles':[]})
+    rundata = setrun('geoclaw', case={})
     rundata.write()
 
     # To create kml files of inputs:

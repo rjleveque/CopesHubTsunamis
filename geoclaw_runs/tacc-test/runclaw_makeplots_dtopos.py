@@ -9,7 +9,7 @@ If make_plots is False the plotting will not be done.
 
 It is assumed all parameters set in setrun are the same for all realizations,
 except for the dtopo file to use.  The setrun_case.py module contains a
-function setrun that takes case as a parameter so that case['dtopofiles']
+function setrun that takes case as a parameter so that case['dtopofile']
 can be used in setrun.
 
 For making plots, it is assumed a setplot_case.py module contains a
@@ -152,13 +152,14 @@ if instant:
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 
 
-dtopo_names = []
-for f in dtopo_files:
-    dtopo_name = os.path.splitext(os.path.split(f)[-1])[0]
-    dtopo_names.append(dtopo_name)
+if 0:
+    dtopo_names = []
+    for f in dtopo_files:
+        dtopo_name = os.path.splitext(os.path.split(f)[-1])[0]
+        dtopo_names.append(dtopo_name)
 
-#print('dtopo_files = ',dtopo_files)
-#print('dtopo_names = ',dtopo_names)
+    #print('dtopo_files = ',dtopo_files)
+    #print('dtopo_names = ',dtopo_names)
 
 if __name__ == '__main__':
 

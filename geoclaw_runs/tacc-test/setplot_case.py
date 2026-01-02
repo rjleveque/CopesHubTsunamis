@@ -15,16 +15,19 @@ root_dir = os.environ['CHT']   # assuming environment variable set
 location = 'test' # set to site location if desired to use in plots/filenames
 
 
-def setplot(plotdata, case={}):
+def setplot(plotdata, case):
 
     """
     Run the code for post-processing.
     This version does not return plotdata for making time frame plots.
     You can also add code to set plotdata and return it if desired.
+
+    case is a dictionary that will be passed in, and it is assumed that
+    this dictionary has at least the keys 'outdir', 'plotdir', 'dtopofiles'
+    with the appropriate values for one particular case (dtopofile).
     """
 
-    # these parameters should be set by runclaw_makeplots_dtopos.py
-    # when calling this setplot:
+    # these parameters should be set properly when calling this setplot:
 
     outdir = case['outdir']
     plotdir = case['plotdir']
@@ -46,4 +49,3 @@ def setplot(plotdata, case={}):
     # want to make time frame plots.
 
     return plotdata
-

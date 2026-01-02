@@ -56,7 +56,14 @@ def make_all_cases_dtopos(dtopo_dir, dtopo_files, runs_dir, xgeoclaw_path,
 
         # setrun parameters:
         case['setrun_file'] = 'setrun_case.py'
-        case['dtopofiles'] = [[3, dtopofile]]
+
+        # old version, confusing with plural since there is only one dtopofile
+        # (dtopofiles is a list with one element):
+        #case['dtopofiles'] = [[3, dtopofile]]
+
+        # new version makes it clearer there's only one dtopofile:
+        case['dtopofile'] = dtopofile
+        case['dtopo_type'] = 3   # only needs to be set if not 3 (the default)
 
         if make_plots:
             case['plotdir'] = plotdir
