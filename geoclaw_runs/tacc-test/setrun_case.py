@@ -110,6 +110,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     """
 
     from clawpack.clawutil import data
+    from pathlib import Path
 
     assert claw_pkg.lower() == 'geoclaw',  "Expected claw_pkg = 'geoclaw'"
 

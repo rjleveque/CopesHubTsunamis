@@ -27,15 +27,19 @@ def setplot(plotdata, case):
     with the appropriate values for one particular case (dtopofile).
     """
 
+    from pathlib import Path
+
     # these parameters should be set properly when calling this setplot:
 
     outdir = case['outdir']
     plotdir = case['plotdir']
-    dtopofiles = case['dtopofiles']
+    dtopofile = case['dtopofile']
 
     # extract event name:
-    dtopofile = dtopofiles[0][-1]
-    event = os.path.splitext(os.path.split(dtopofile)[-1])[0]
+    if dtopofile is not None:
+        event = Path(dtopofile).stem  # drop path and .dtt3 extension
+    else:
+        event = 'NO_DTOPO'
 
     run_name = '%s_%s' % (location,event)
     print('In setplot: run_name = ',run_name)

@@ -125,6 +125,8 @@ if 0:
     dtopo_files.sort()
 
 # specify events...
+# For naming convention, see
+#   https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
 
 depths = ['D','M','S']
 
@@ -152,14 +154,6 @@ if instant:
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 
 
-if 0:
-    dtopo_names = []
-    for f in dtopo_files:
-        dtopo_name = os.path.splitext(os.path.split(f)[-1])[0]
-        dtopo_names.append(dtopo_name)
-
-    #print('dtopo_files = ',dtopo_files)
-    #print('dtopo_names = ',dtopo_names)
 
 if __name__ == '__main__':
 
