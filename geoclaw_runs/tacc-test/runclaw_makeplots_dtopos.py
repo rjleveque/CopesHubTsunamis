@@ -37,6 +37,31 @@ Before running, make sure the following are properly set:
 
 Set dry_run = False before executing to actually run GeoClaw.
 
+Note that the call to multip_tools.run_many_cases_pool should be in __main__
+
+This script can be executed from the command line as:
+    python runclaw_makeplots_dtopos.py NPROCS
+where NPROCS is the number of jobs to run in parallel using the
+Python mulitprocessing tools.
+
+Alternatively, 
+    python runclaw_makeplots_dtopos.py NPROCS FIRST_EVENT LAST_EVENT
+will restrict the set of dtopo_files created to this subset.
+
+If `events = all_events` as in this script (all 36 CoPes Hub ground motions)
+then this can be used to run for a specified subset.
+This is useful for starting multiple jobs via slurm to run them all.
+For the naming and numbering convention, see
+    https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
+
+For example, if `events = all_events` then:
+    python runclaw_makeplots_dtopos.py 2 1 4
+will run 2 geoclaw jobs at a time in parallel on the first 4 events
+   1    BL10D    buried-locking-str10-deep
+   2    BL10M    buried-locking-str10-middle
+   3    BL10S    buried-locking-str10-shallow
+   4    BL13D    buried-locking-mur13-deep
+
 """
 
 from numpy import *
@@ -141,10 +166,11 @@ all_events += [e.replace('B','F') for e in all_events]  # add ft events
 events = all_events
 events.sort()
 
-events = events[:2]   # = ['BL10D', 'BL10M']
+#events = events[:2]   # = ['BL10D', 'BL10M']
 
 # or simply specify a list of events:
-events = ['BL10D', 'BL10M']
+#events = ['BL10D', 'BL10M']
+events = events[:8]   # TESTING
 
 instant = False
 if instant:
@@ -153,15 +179,49 @@ if instant:
 
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 
+print('+++ events: ',events)
 
 
 if __name__ == '__main__':
 
     import sys
+
+    # see the doc string at the top of this file for more details on
+    # how to run this script
+
+    # parse command line arguments:
+
+    # always expect at least one argument NPROCS, how many to run in parallel
     try:
         nprocs = int(sys.argv[1])
     except:
         raise Exception('*** Missing integer argument nprocs on command line')
+
+    # might also have arguments FIRST_EVENT LAST_EVENT
+    # in which case restrict dtopo_files set above to these events
+    # (with e.g. 1 4 meaning the first 4 events, e.g dtopo_files[0:4]):
+
+    if len(sys.argv) == 3:
+        msg = '*** unexpected number of command line arguments'
+        raise ValueError(msg)
+
+    if len(sys.argv) == 4:
+        ievent_first = int(sys.argv[2]) - 1
+        ievent_last = int(sys.argv[3])
+        print(f'+++ ievent_first = {ievent_first}, ievent_last = {ievent_last}')
+        if 0 <= ievent_first <= ievent_last:
+            # assume user wants a subset of the CoPes Hub ground motions:
+            try:
+                dtopo_files = dtopo_files[ievent_first:ievent_last]
+                print('+++ dtopo_files: ', dtopo_files)
+            except:
+                msg = f'*** dtopo_files has length {len(dtopo_files)}\n' \
+                    + f'    could not restrict to events {sys.argv[2:4]}'
+                raise ValueError(msg)
+        else:
+            msg = f'*** expected 0 < FIRST_EVENT < LAST_EVENT in arguments'
+            raise ValueError(msg)
+
 
     print('\n--------------------------')
     if dry_run:

@@ -30,6 +30,8 @@ else
     echo OMP_NUM_THREADS = $OMP_NUM_THREADS
 fi
 
+export FIRST_EVENT=$2
+export LAST_EVENT=$3
 
 # not needed, since not compiling fortran:
 #export FC=ifx
@@ -53,6 +55,6 @@ echo CLAW=$CLAW
 echo PYTHONPATH=$PYTHONPATH
 
 # commands to run:
-python runclaw_makeplots_dtopos.py $NPROCS
+python runclaw_makeplots_dtopos.py $NPROCS $FIRST_EVENT $LAST_EVENT
 
 date # record end time
