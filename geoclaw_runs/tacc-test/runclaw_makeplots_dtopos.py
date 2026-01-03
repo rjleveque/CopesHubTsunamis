@@ -46,15 +46,15 @@ Python mulitprocessing tools.
 
 Alternatively, 
     python runclaw_makeplots_dtopos.py NPROCS FIRST_EVENT LAST_EVENT
-will restrict the set of dtopo_files created to this subset.
+will restrict the set of events / dtopo_files created to this subset.
 
-If `events = all_events` as in this script (all 36 CoPes Hub ground motions)
-then this can be used to run for a specified subset.
-This is useful for starting multiple jobs via slurm to run them all.
+In this script `all_events` is set to be the set of 36 CoPes Hub ground motions
 For the naming and numbering convention, see
     https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
+The integers FIRST_EVENT  and LAST_EVENT can be used to specify a subset.
+This is useful for starting multiple jobs via slurm to run them all.
 
-For example, if `events = all_events` then:
+For example, 
     python runclaw_makeplots_dtopos.py 2 1 4
 will run 2 geoclaw jobs at a time in parallel on the first 4 events
    1    BL10D    buried-locking-str10-deep
@@ -144,22 +144,28 @@ else:
 # List of all events from CoPes Hub ground motions:
 # For naming and numbering convention, see
 #   https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
+# Note that there may be different versions of these events, so which
+# version is used depends on what directory dtopo_dir points to
 
-depths = ['D','M','S']
+try:
+    import CHTtools
+    all_events = CHTtools.all_events()  # returns the list of 36 events
+except:
+    # if CHTtools isn't found, construct the list of 36 events here:
 
-# buried_locking events:
-all_events = [f'BL10{depth}' for depth in depths] \
-           + [f'BL13{depth}' for depth in depths] \
-           + [f'BL16{depth}' for depth in depths] \
+    depths = ['D','M','S']
 
-all_events += [e.replace('L','R') for e in all_events]  # add random events
-all_events += [e.replace('B','F') for e in all_events]  # add ft events
+    # buried_locking events:
+    all_events = [f'BL10{depth}' for depth in depths] \
+               + [f'BL13{depth}' for depth in depths] \
+               + [f'BL16{depth}' for depth in depths] \
 
-events = all_events
-events.sort()
+    all_events += [e.replace('L','R') for e in all_events]  # add random events
+    all_events += [e.replace('B','F') for e in all_events]  # add ft events
 
-# For CoPes Hub work:
-# leave events as all_events and select which subset to run at command line
+    all_events.sort()
+
+# select which subset of all_events to run at command line
 # or in slurm script by specifying NPROCS FIRST_EVENT LAST_EVENT
 
 # if dtopo_dir points to a directory that has instantaneous versions
@@ -169,10 +175,7 @@ events.sort()
 
 instant = False
 if instant:
-    events = [e+'_instant' for e in events]
-
-
-dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
+    all_events = [e+'_instant' for e in events]
 
 
 
@@ -192,28 +195,29 @@ if __name__ == '__main__':
         raise Exception('*** Missing integer argument nprocs on command line')
 
     # might also have arguments FIRST_EVENT LAST_EVENT
-    # in which case restrict dtopo_files set above to these events
-    # (with e.g. 1 4 meaning the first 4 events, e.g dtopo_files[0:4]):
+    # in which case restrict all_events set above to these events
+    # (with e.g. 1 4 meaning the first 4 events, i.e. all_events[0:4]):
 
     if len(sys.argv) == 3:
         msg = '*** unexpected number of command line arguments'
         raise ValueError(msg)
 
     if len(sys.argv) == 4:
+        # user wants a subset of all_events:
         ievent_first = int(sys.argv[2]) - 1
         ievent_last = int(sys.argv[3])
-        if 0 <= ievent_first <= ievent_last:
-            # assume user wants a subset of the CoPes Hub ground motions:
-            try:
-                dtopo_files = dtopo_files[ievent_first:ievent_last]
-            except:
-                msg = f'*** dtopo_files has length {len(dtopo_files)}\n' \
-                    + f'    could not restrict to events {sys.argv[2:4]}'
-                raise ValueError(msg)
+        if 0 <= ievent_first <= ievent_last <= len(all_events):
+            events = all_events[ievent_first:ievent_last]
         else:
-            msg = f'*** expected 0 < FIRST_EVENT < LAST_EVENT in arguments'
+            msg = f'*** expected 0 < FIRST_EVENT={sys.argv[2]}' \
+                    +f' <= LAST_EVENT={sys.argv[3]}' \
+                    +f' <= {len(all_events)} = len(all_events) in arguments'
             raise ValueError(msg)
+    else:
+        # FIRST_EVENT LAST_EVENT not specified on command line:
+        events = all_events
 
+    dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,e) for e in events]
 
     print('\n--------------------------')
     if dry_run:
