@@ -141,16 +141,8 @@ else:
 
 # Specify the list of dtopo files to loop over for geoclaw runs:
 
-if 0:
-    # all files found
-    all_dtopo_files = glob.glob('%s/*tt3' % dtopo_dir)
-    dtopo_files = all_dtopo_files
-    # not the instant deformation versions:
-    dtopo_files = [f for f in all_dtopo_files if 'instant' not in f]
-    dtopo_files.sort()
-
-# specify events...
-# For naming convention, see
+# List of all events from CoPes Hub ground motions:
+# For naming and numbering convention, see
 #   https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
 
 depths = ['D','M','S']
@@ -166,11 +158,14 @@ all_events += [e.replace('B','F') for e in all_events]  # add ft events
 events = all_events
 events.sort()
 
-#events = events[:2]   # = ['BL10D', 'BL10M']
+# For CoPes Hub work:
+# leave events as all_events and select which subset to run at command line
+# or in slurm script by specifying NPROCS FIRST_EVENT LAST_EVENT
 
-# or simply specify a list of events:
-#events = ['BL10D', 'BL10M']
-events = events[:8]   # TESTING
+# if dtopo_dir points to a directory that has instantaneous versions
+# (static displacement rather than kinematic time-dependent)
+# then you could set `instant = True` to use these, provided they
+# have file names such as BL10D_instant.dtt3 (with the same numbering 1-36):
 
 instant = False
 if instant:
@@ -179,7 +174,6 @@ if instant:
 
 dtopo_files = ['%s/%s.dtt3' % (dtopo_dir,f) for f in events]
 
-print('+++ events: ',events)
 
 
 if __name__ == '__main__':
@@ -208,12 +202,10 @@ if __name__ == '__main__':
     if len(sys.argv) == 4:
         ievent_first = int(sys.argv[2]) - 1
         ievent_last = int(sys.argv[3])
-        print(f'+++ ievent_first = {ievent_first}, ievent_last = {ievent_last}')
         if 0 <= ievent_first <= ievent_last:
             # assume user wants a subset of the CoPes Hub ground motions:
             try:
                 dtopo_files = dtopo_files[ievent_first:ievent_last]
-                print('+++ dtopo_files: ', dtopo_files)
             except:
                 msg = f'*** dtopo_files has length {len(dtopo_files)}\n' \
                     + f'    could not restrict to events {sys.argv[2:4]}'
