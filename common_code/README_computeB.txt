@@ -6,7 +6,7 @@ Create the executable xgeo_computeB in this directory $CHT/common_code via:
 Then in any directory with a setrun.py that defines gauges:
 
     make data  # creates gauges.data, topo.data, etc 
-    $CHT/common_code/xgeo_computeB
+    python $CHT/common_code/computeB.py
    
 This will print out something like this for each gauge:
 
