@@ -111,8 +111,16 @@ else:
     computer = 'unknown'
     scratch_dir = this_dir
 
-# where to find all the dtopo files:
-dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
+# where to find all the dtopo files: (modified below on TACC)
+if 1:
+    # original kinematic ruptures from SPECFEM3D:
+    instant = False
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
+else:
+    # static ruptures without subevents, using Okada:
+    instant = True
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/nosubevents_251229/dtopofiles'
+
 
 if computer == 'tacc':
     #dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
@@ -173,9 +181,8 @@ except:
 # then you could set `instant = True` to use these, provided they
 # have file names such as BL10D_instant.dtt3 (with the same numbering 1-36):
 
-instant = False
 if instant:
-    all_events = [e+'_instant' for e in events]
+    all_events = [e+'_instant' for e in all_events]
 
 
 
