@@ -77,9 +77,11 @@ program computeB
                                                   " CPU time (', i2,'), "   // &
                                                   "cells updated (', i2,'),')"
 
-    integer :: i1,j1,j,ii,jj
+    integer :: i1,j1,j,ii,jj,iindex,jindex
     real(kind=8) :: x,y,xm,xp,ym,yp,topo_integral,dx,dy,aa,xcenter,ycenter
+    real(kind=8) :: xcent,ycent,xoff,yoff,mod_dry_tolerance,Bint,sea_level
     real(kind=8) :: B(0:2,0:2), xedge(0:2), yedge(0:2)
+    logical :: use_Bint
 
     ! Common block variables
     real(kind=8) :: dxmin, dymin
@@ -122,10 +124,13 @@ program computeB
     naux = 3
     rest = .false.
     earth_radius = 6367500.0d0
+    mod_dry_tolerance = 1d-4
+    sea_level = 0.d0
 
     call read_topo_settings(rest)     ! specifies topography (bathymetry) files
     call set_fgout(rest,nvar)         ! Fixed grid settings
     call set_gauges(rest, nvar, naux) ! Set gauge output
+    !write(6,*) '+++ x,y: ',gauges(1)%x,gauges(1)%y
     call set_fgmax()
 
     ! new code to compute B around each gauge:
@@ -137,9 +142,11 @@ program computeB
     do ii=1,num_gauges
         x = gauges(ii)%x
         y = gauges(ii)%y
+        !write(6,*) '+++ x,y: ',gauges(ii)%x,gauges(ii)%y
         
         i1 = int(floor((x-xlower)/dx)) - 1
         j1 = int(floor((y-ylower)/dy)) - 1
+        !write(6,*) '+++x,y,lower, i1,j1: ',x,y,xlower,ylower,i1,j1
 
         do i=0,2
             xm = xlower + (i1+i)*dx
@@ -167,10 +174,40 @@ program computeB
         write(6,*) '=============================================================================='
  662    format('Gauge ',i6,'  At x=',f12.7, '        y=',f12.7)
         write(6,662) gauges(ii)%gauge_num, x, y
- 666    format('          xcenter =',f12.7, ' ycenter =',f12.7, ' B in cell =',f10.3)
+ 666    format('          xcenter =',f12.7, ' ycenter =',f12.7)
         xcenter = 0.5d0*(xedge(1)+xedge(2))
         ycenter = 0.5d0*(yedge(1)+yedge(2))
-        write(6,666) xcenter, ycenter, B(1,1)
+        write(6,666) xcenter, ycenter
+
+        ! compute interpolated B value:
+        iindex = int(0.5d0 + (x - xedge(0))/dx) - 1  ! shifted since first cell ind=0
+        jindex = int(0.5d0 + (y - yedge(0))/dy) - 1
+        xcent = xedge(0) + (iindex + 0.5d0)*dx
+        ycent = yedge(0) + (jindex + 0.5d0)*dy
+        xoff = (x - xcent) / dx
+        yoff = (y - ycent) / dy
+692     format('+++ iindex = ',i1, ' jindex = ',i1, '  xoff = ',f6.3, '  yoff = ', f6.3)
+        !write(6,692) iindex,jindex,xoff,yoff
+        Bint = (1.d0 - xoff) * (1.d0 - yoff) * B(iindex,  jindex)         &
+                        + xoff*(1.d0 - yoff) * B(iindex+1,jindex)         &
+                      + (1.d0 - xoff) * yoff * B(iindex,  jindex+1)       &
+                               + xoff * yoff * B(iindex+1,jindex+1)
+
+        use_Bint = (B(iindex  ,jindex  ) < sea_level - mod_dry_tolerance) .and. &
+                   (B(iindex+1,jindex  ) < sea_level - mod_dry_tolerance) .and. &
+                   (B(iindex  ,jindex+1) < sea_level - mod_dry_tolerance) .and. &
+                   (B(iindex+1,jindex+1) < sea_level - mod_dry_tolerance)
+
+ 668    format('Computed cell average B in cell = ', f10.3, '  interpolated B = ', f10.3)
+        write(6,668) B(1,1), Bint
+        if (use_Bint) then
+ 690        format('With sea_level = ',f10.3, '   will use interpolated B = ', f10.3)
+            write(6,690) sea_level, Bint
+        else
+ 691        format('With sea_level = ',f10.3, '   will use cell average B = ', f10.3)
+            write(6,691) sea_level, B(1,1)
+        endif
+    
 
         ! print grid:
         write(6,*) ''
