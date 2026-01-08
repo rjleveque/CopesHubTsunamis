@@ -128,6 +128,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         event = Path(dtopofile).stem  # drop path and .dtt3 extension
     else:
         event = 'NO_DTOPO'
+        print('**** no dtopofile specified ****')
 
     # We will set the initial time step dt_initial and
     # dtopo_data.dt_max_dtopo differently for instant vs kinematic ruptures:
@@ -557,8 +558,14 @@ if __name__ == '__main__':
     import sys
     from clawpack.geoclaw import kmltools
 
-    # run this as script via 'python setrun_case.py`
-    # to make data without any dtopofile, to check other inputs:
+    # this main program is only used if you run this as a script via:
+    #   python setrun_case.py
+    # or via
+    #   make data
+    # not when runclaw_makeplots_dtopos.py is used for multiple cases
+
+    # to make data without any dtopofile, to create kmls for other inputs,
+    # set case={}:
     rundata = setrun('geoclaw', case={})
     rundata.write()
 

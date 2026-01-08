@@ -50,7 +50,7 @@ will restrict the set of events / dtopo_files created to this subset.
 
 In this script `all_events` is set to be the set of 36 CoPes Hub ground motions
 For the naming and numbering convention, see
-    https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
+    https://depts.washington.edu/ptha/CHTuser/dtopo/ground-motions/
 The integers FIRST_EVENT  and LAST_EVENT can be used to specify a subset.
 This is useful for starting multiple jobs via slurm to run them all.
 

@@ -18,10 +18,10 @@ EXE ?= $(CHT)/geoclaw_runs/xgeoclaw-v5.13.1
 # ----------------------------------
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
-SETRUN_FILE = setrun.py        # File containing function to make data
-OUTDIR = _output               # Directory for output
-SETPLOT_FILE = setplot.py      # File containing function to set plots
-PLOTDIR = _plots               # Directory for plots
+SETRUN_FILE = setrun_case.py        # File containing function to make data
+OUTDIR = _output                    # Directory for output
+SETPLOT_FILE = setplot_case.py      # File containing function to set plots
+PLOTDIR = _plots                    # Directory for plots
 
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 
