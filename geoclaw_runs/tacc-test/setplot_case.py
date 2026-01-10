@@ -23,7 +23,7 @@ def setplot(plotdata, case):
     You can also add code to set plotdata and return it if desired.
 
     case is a dictionary that will be passed in, and it is assumed that
-    this dictionary has at least the keys 'outdir', 'plotdir', 'dtopofiles'
+    this dictionary has at least the keys 'outdir', 'plotdir', 'dtopofile'
     with the appropriate values for one particular case (dtopofile).
     """
 
