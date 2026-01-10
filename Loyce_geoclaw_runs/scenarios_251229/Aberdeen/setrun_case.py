@@ -251,7 +251,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Output nout frames at equally spaced times up to tfinal:
         # Here we run for 120 seconds and produce NO time frame output:
         clawdata.num_output_times = 0
-        clawdata.tfinal = 90*60.     #a 90 minute test to get some gauges wet
+        clawdata.tfinal = 10*3600. 
         ##################clawdata.tfinal = 10*3600.
         clawdata.output_t0 = False
 

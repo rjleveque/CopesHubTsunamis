@@ -82,7 +82,7 @@ cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = False
+run_code = True
 make_plots = True
 
 
@@ -119,7 +119,8 @@ if 0:
 else:
     # static ruptures without subevents, using Okada:
     instant = True
-    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/scenarios_251229'
+    #dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/scenarios_251229'  # loyce laptop
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/nosubevents_251229/dtopofiles'
 
 if computer == 'tacc':
     #dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
