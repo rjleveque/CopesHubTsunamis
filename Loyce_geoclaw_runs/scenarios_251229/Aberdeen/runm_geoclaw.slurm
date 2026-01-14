@@ -50,6 +50,8 @@ export CLAW=/work2/04137/rjl/CHTshare/clawpack-share
 
 export PYTHONPATH=$CLAW
 
+date # record beginning time
+
 pwd
 module list
 echo CHT=$CHT

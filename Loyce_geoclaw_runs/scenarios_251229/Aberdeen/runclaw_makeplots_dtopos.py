@@ -78,8 +78,8 @@ except:
 common_code_dir = os.path.join(CHT, 'common_code')
 cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 
-#dry_run = True  # If True, only print out settings, do not run GeoClaw
-dry_run = False  # If True, only print out settings, do not run GeoClaw
+dry_run = True  # If True, only print out settings, do not run GeoClaw
+#dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
@@ -139,9 +139,9 @@ os.system('mkdir -p %s' % runs_dir)
 # path to geoclaw executable:
 # (should agree with how EXE is set in Makefile used to compile)
 if run_code:
-    xgeoclaw_path = f'{CHT}/Loyce_geoclaw_runs/xgeoclaw_v5.13_tacc'
+    xgeoclaw_path = f'{CHT}/Loyce_geoclaw_runs/xgeoclaw-CHTshare'
     if computer == 'tacc':
-        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-share/tacc/xgeoclaw_251229'
+        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw_260113'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
