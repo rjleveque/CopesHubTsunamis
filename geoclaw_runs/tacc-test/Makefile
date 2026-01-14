@@ -10,7 +10,7 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 # Environment variable CHT should be set to point to the
 # top of git repository, in order to use the same executable in all directories.
 CHT ?= $(CURDIR)
-EXE ?= $(CHT)/geoclaw_runs/xgeoclaw-v5.13.1
+EXE ?= $(CHT)/geoclaw_runs/xgeoclaw-share
 # Note ?= since on HPC machine EXE might be set in slurm script instead
 
 

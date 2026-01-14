@@ -142,7 +142,7 @@ os.system('mkdir -p %s' % runs_dir)
 if run_code:
     xgeoclaw_path = f'{CHT}/geoclaw_runs/xgeoclaw-v5.13.1'
     if computer == 'tacc':
-        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-share/tacc/xgeoclaw_251229'
+        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw_260113'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
