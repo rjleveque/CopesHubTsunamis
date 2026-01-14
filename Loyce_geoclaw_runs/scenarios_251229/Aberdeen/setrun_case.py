@@ -31,7 +31,7 @@ CHTshare = CHT.replace(HOME,'/work2/04137/rjl/CHTshare')
 
 # if some values in .data files show up as e.g. np.float64(3600.0)
 # this will restore old behavior and just print 3600.0:
-np.set_printoptions(legacy="1.25")
+# np.set_printoptions(legacy="1.25")
 # fixed in master after v5.12.0
 
 
