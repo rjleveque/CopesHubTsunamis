@@ -168,7 +168,8 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
         hmax=h.max()
         arg_hmax=h.argmax()
         tmax = t[arg_hmax]
-        hdeep_index = where(h > 0.05)[0]
+        #First wave could be a depression wave, so check abs value for arrival
+        hdeep_index = where(abs((h-h[0])) > 0.05)[0]
         if len(hdeep_index) >= 1:
             arr_index = hdeep_index[0]
             tfirst = t[arr_index]
