@@ -6,7 +6,7 @@
 #SBATCH -p skx               # Queue (partition) name
 #SBATCH -N 1                # Total # of nodes 
 #SBATCH -n 1                # Total # of mpi tasks
-#SBATCH -t 25:00:00         # Run time (hh:mm:ss)
+#SBATCH -t 15:00:00         # Run time (hh:mm:ss)
 ##SBATCH -t 00:10:00         # Run time (hh:mm:ss)
 ##SBATCH --mail-user=username@tacc.utexas.edu
 ##SBATCH --mail-type=all    # Send email at begin and end of job
