@@ -251,6 +251,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Output nout frames at equally spaced times up to tfinal:
         # Here we run for 120 seconds and produce NO time frame output:
         clawdata.num_output_times = 0
+        #clawdata.tfinal  = 20*60    #20 minute test on laptop
         clawdata.tfinal = 10*3600. 
         ##################clawdata.tfinal = 10*3600.
         clawdata.output_t0 = False
@@ -480,8 +481,9 @@ def setrun(claw_pkg='geoclaw', case={}):
     # == settopo.data values ==
 
     #Use the topo files prioritized as listed below from
-    #least likeable to more likeable
-    rundata.topo_data.override_order = True
+    #least likeable to more likeable -- dont use has problems
+    #Always set to False below
+    rundata.topo_data.override_order = False 
 
     topofiles = rundata.topo_data.topofiles
     # for topography, append lines of the form
@@ -597,7 +599,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
-    flagregion.spatial_region = [-124.295,-123.75,46.6,47.227]
+    flagregion.spatial_region = [-124.295,-123.75,46.74,47.15]
     flagregions.append(flagregion)
 
     # 3sec to 1sec region

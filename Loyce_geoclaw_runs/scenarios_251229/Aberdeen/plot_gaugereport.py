@@ -81,8 +81,9 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
     #####   Pick the gauge numbers for the report. Doing maximums also for
     #####   a smaller set of gauge numbers, so pick that smaller set also.
 
-    ### 15 Aberdeen gauges will be the big list
-    gaugeno_list=[11,33,43,56,68,137,138,354,367,368,390,509,558,561,562]
+    from clawpack.visclaw import gaugetools
+    setgauges = gaugetools.read_setgauges(outdir)
+    gaugeno_list = setgauges.gauge_numbers
 
     hmax_orig_dry=0.0; hmax_orig_wet=0.0;
     hmax_area=0.0; zetamax_area = 0.0; etamax_area=0.0; etamax_area_pquake=0.0;
@@ -204,8 +205,9 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
                 plot(t, -Blong+sea_level,'b--')
             xlabel('')
             ylabel('Flow depth (meters)')
-            title('Gauge %i long=%s, lat=%s, B0(m.)=%6.2f, B(m.)=%6.2f \n dzi(m.)=%5.2f, max h(m.)=%5.2f,\
-                 max eta post-quake(m.)=%5.2f' %(gaugeno,xlong,ylat,B0,B[-1],dzi_gauge,hmax,etamax_pquake))
+            title('Gauge %i:  long=%s, lat=%s, B0(m.)=%6.2f, B(m.)=%6.2f \n\
+                 dzi(m.)=%5.2f, max h(m.)=%5.2f, max eta post-quake(m.)=%5.2f'\
+                 %(gaugeno,xlong,ylat,B0,B[-1],dzi_gauge,hmax,etamax_pquake))
 
             ## eta is always the height of water above the fixed datum called MHW.
             subplot(212)
@@ -234,7 +236,7 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
             plot(t, s, 'b')
             xlabel('')
             ylabel('speed (m/s)')
-            title('Gauge %i long=%s, lat=%s \n s_max(m/sec)=%5.2f, hs_max(m^2/sec)=%5.2f, hss_max(m^3/sec^2)=%5.2f'\
+            title('Gauge %i:  long=%s, lat=%s \n s_max(m/sec)=%5.2f, hs_max(m^2/sec)=%5.2f, hss_max(m^3/sec^2)=%5.2f'\
                     %(gaugeno,xlong,ylat,speedmax,momentummax,mfluxmax))
             subplot(312)
             plot(t, momentum, 'b')

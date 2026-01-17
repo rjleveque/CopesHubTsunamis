@@ -78,8 +78,8 @@ except:
 common_code_dir = os.path.join(CHT, 'common_code')
 cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
-#dry_run = False  # If True, only print out settings, do not run GeoClaw
+#dry_run = True  # If True, only print out settings, do not run GeoClaw
+dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
