@@ -33,13 +33,13 @@ subroutine set_eta_init(mbc,mx,my,xlow,ylow,dx,dy,t,veta)
     real(kind=8) :: xofyl, xofyu
 
     ! parameters defining ruled rectangle containing lake / canals:
-    integer, parameter :: mbdry = 7
+    integer, parameter :: mbdry = 8
     real(kind=8), parameter,dimension(mbdry) :: &
-        ys = (/46.9472,46.952,46.9752,46.9914,47.005648,47.012,47.0206/)
+        ys = (/46.9472,46.9519,46.952,46.9752,46.9914,47.005648,47.012,47.0206/)
     real(kind=8), parameter,dimension(mbdry) :: &
-        xl = (/-124.168,-124.168,-124.168,-124.168,-124.168,-124.168,-124.168/)
+        xl = (/-124.141,-124.168,-124.168,-124.168,-124.168,-124.168,-124.168,-124.168/)
     real(kind=8), parameter,dimension(mbdry) :: &
-        xu = (/-124.1323,-124.1323,-124.1418,-124.1418,-124.1483,-124.1483,-124.1537/)
+        xu = (/-124.1323,-124.1323,-124.1323,-124.1418,-124.1418,-124.1483,-124.1483,-124.1537/)
     
     veta = sea_level  ! initialize to sea_level, update below at some (i,j)
 
