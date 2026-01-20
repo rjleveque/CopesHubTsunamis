@@ -78,21 +78,14 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
     figure(400, figsize=(8,8))
     figure(500, figsize=(8,8))
 
-    #####   Pick the gauge numbers for the report. Doing maximums also for
-    #####   a smaller set of gauge numbers, so pick that smaller set also.
-
     from clawpack.visclaw import gaugetools
     setgauges = gaugetools.read_setgauges(outdir)
     gaugeno_list = setgauges.gauge_numbers
 
-    hmax_orig_dry=0.0; hmax_orig_wet=0.0;
+    hmax_orig_dry=0.0; hmax_orig_wet=0.0; hchange_max=0.0;
     hmax_area=0.0; zetamax_area = 0.0; etamax_area=0.0; etamax_area_pquake=0.0;
+    hchange_max_area=0.0;
     speedmax_area=0.0; momentummax_area=0.0; mfluxmax_area=0.0;
-
-    hmax_orig_dry_small=0.0; hmax_orig_wet_small=0.0;
-    hmax_area_small=0.0; zetamax_area_small = 0.0; etamax_area_small=0.0;
-    etamax_area_small_pquake=0.0;
-    speedmax_area_small=0.0; momentummax_area_small=0.0; mfluxmax_area_small=0.0;
 
     # Read in topography and find the average bottom deformation
     dtopo = dtopotools.DTopography()
@@ -120,6 +113,7 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
         t = gauge.t / 60.   # convert to minutes
         q = gauge.q
         h = q[0,:]
+        h0 = h[0]
 
         if 1: ##Gets u and v set properly, and does not change h
             hcopy = copy.copy(h)
@@ -131,6 +125,7 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
         momentum = h*s
         mflux = h*s*s
         eta = q[3,:]
+        eta0 = eta[0]
 
         lent=len(t)
         B  = eta - h     
@@ -156,7 +151,8 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
             fprint(' Final bathymetry at the gauge at end of job run in meters was: %.3f' %B[-1])
             fprint(' ')
 
-        ## Now, we can calculate zeta
+        ## Now, we can calculate zeta, but not include in this gauge report. Keep
+        ## the logic here for now.
         ## If the initial bathy was in the water, zeta will be B0+h
         ## but if the inital bathy was on land, we want h
         ##
@@ -177,6 +173,9 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
         else:
             tfirst = -9999.
 
+        #Compute max water depth change from h[0], what will be needed for bridges
+        hchange_max=hmax-h[0]
+
         #Note, these two below are the same when the eta[0]<=etamax.
         #Since the first line in the file gives eta[0] pre-quake. It
         #is possible that the ground drops and floods quite a bit, but
@@ -192,7 +191,8 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
         ## Save the info for this gauge in the dictionary below for later printing
         value_dict={'B0': B0, 'B': B[-1], 'max_h': hmax, 'max_zeta': zetamax, 'max_eta': etamax,\
             'max_eta_pquake': etamax_pquake, 'max_speed': speedmax, 'max_momentum': momentummax,\
-            'max_mflux': mfluxmax, 'dzi': dzi_gauge, 'tmax': tmax, 'tfirst': tfirst}
+            'max_mflux': mfluxmax, 'dzi': dzi_gauge, 'tmax': tmax, 'tfirst': tfirst, 'h0': h0,\
+            'hchange_max': hchange_max, 'eta0': eta0}
         gaugeno_dict[gaugeno]=value_dict
 
         if 1: #Change to 0 if already have the figures
@@ -276,6 +276,8 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
             momentummax_area = momentummax
         if (mfluxmax > mfluxmax_area):
             mfluxmax_area = mfluxmax
+        if (hchange_max > hchange_max_area):
+            hchange_max_area = hchange_max
 
     # Print the maximums over the area encompassed by all the gauges used
     fprint(' ')
@@ -286,6 +288,8 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
                                                   %hmax_orig_dry )
     fprint(' Maximum value of h (flow depth) in m. over all originally wet gauges: %.3f ' \
                                                   %hmax_orig_wet )
+    fprint(' Maximum value of hmax-h0 (change in flow depth) in m. over all gauges was: %.3f ' \
+                                                  %hchange_max_area )
     fprint(' Maximum value of zeta in m., h (originally land) or h+B0 (originally wet): %.3f '\
              %zetamax_area )
     fprint(' Maximum value of eta (h+B) in m., height above MHW: %.3f' %etamax_area )
@@ -296,28 +300,28 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
     fprint(' ')
 
     ####  Write the comma separated file
-    fprint_csv('%5s, , , , , , , , , , , , ' %event)
-    fprint_csv('       ,      ,         ,       ,   max,     max,   max,    max IE,   max,    max,       max,          ,          ' )
-    fprint_csv('  Gauge,    B0,        B,    dzi,    h,     zeta,   eta,   post-eta,   s,     hs,        hss,      tmax,    tfirst' )
-    fprint_csv('   No,      (m),      (m),   (m),   (m),     (m),   (m),     (m),    (m/s),  (m*m/s),  (m^3/s^2),  (min),    (min) ')  
+    fprint_csv('%5s, , , , , , , , , , , , ' %run_name)
+    fprint_csv('       ,      ,         ,       ,      ,    max,    max,    max,    max,      max,     max,       max,         ,          ' )
+    fprint_csv('  Gauge,    B0,        B,    dzi,    h0,     h,    h-h0,   eta0,  post eta,    s,      hs,        hss,     tmax,    tfirst' )
+    fprint_csv('   No,      (m),      (m),   (m),    (m),   (m),    (m),    (m),     (m),    (m/s),  (m*m/s),  (m^3/s^2),  (min),    (min) ')  
     for key in gaugeno_dict:
         value_dict = gaugeno_dict[key]
-        fprint_csv('%5i, %8.3f, %8.3f, %5.2f, %6.2f, %6.2f, %6.2f,  %6.2f,  %6.2f,  %6.2f,  %8.2f, %8.1f, %8.1f' %(key,value_dict['B0'],\
-           value_dict['B'],value_dict['dzi'],value_dict['max_h'],value_dict['max_zeta'],\
-           value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
+        fprint_csv('%5i, %8.3f, %8.3f, %5.2f, %6.2f, %6.2f, %6.2f, %6.2f,  %6.2f,  %6.2f,  %6.2f,  %8.2f, %8.1f, %8.1f' %(key,value_dict['B0'],\
+           value_dict['B'],value_dict['dzi'],value_dict['h0'],value_dict['max_h'],value_dict['hchange_max'],\
+           value_dict['eta0'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
            value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
     fprint_csv_file.close()
     ###  End of comma separated file
 
     fprint('               SUMMARY FOR EACH OF THESE GAUGES                ' )
-    fprint('%5s, , , , , , , , , , , , ' %event)
-    fprint('       ,      ,         ,       ,   max,     max,   max,    max IE,   max,    max,       max,          ,          ' )
-    fprint('  Gauge,    B0,        B,    dzi,    h,     zeta,   eta,   post-eta,   s,     hs,        hss,      tmax,    tfirst' )
-    fprint('   No,      (m),      (m),   (m),   (m),     (m),   (m),     (m),    (m/s),  (m*m/s),  (m^3/s^2),  (min),    (min) ')  
+    fprint('%5s, , , , , , , , , , , , ' %run_name)
+    fprint('       ,      ,         ,       ,      ,    max,    max,    max,    max,      max,     max,       max,         ,          ' )
+    fprint('  Gauge,    B0,        B,    dzi,    h0,     h,    h-h0,   eta0,  post eta,    s,      hs,        hss,     tmax,    tfirst' )
+    fprint('   No,      (m),      (m),   (m),    (m),   (m),    (m),    (m),     (m),    (m/s),  (m*m/s),  (m^3/s^2),  (min),    (min) ')  
     for key in gaugeno_dict:
         value_dict = gaugeno_dict[key]
-        fprint('%5i, %8.3f, %8.3f, %5.2f, %6.2f, %6.2f, %6.2f,  %6.2f,  %6.2f,  %6.2f,  %8.2f, %8.1f, %8.1f' %(key,value_dict['B0'],\
-           value_dict['B'],value_dict['dzi'],value_dict['max_h'],value_dict['max_zeta'],\
-           value_dict['max_eta'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
+        fprint('%5i, %8.3f, %8.3f, %5.2f, %6.2f, %6.2f, %6.2f, %6.2f,  %6.2f,  %6.2f,  %6.2f,  %8.2f, %8.1f, %8.1f' %(key,value_dict['B0'],\
+           value_dict['B'],value_dict['dzi'],value_dict['h0'],value_dict['max_h'],value_dict['hchange_max'],\
+           value_dict['eta0'],value_dict['max_eta_pquake'],value_dict['max_speed'],\
            value_dict['max_momentum'],value_dict['max_mflux'],value_dict['tmax'],value_dict['tfirst']) )
     fprint_file.close()
