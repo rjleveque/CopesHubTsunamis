@@ -10,9 +10,9 @@ ID=2026-01-20
 # You shouldn't need to change the rest...
 THISDIR=$PWD
 RELDIR=${THISDIR//$HOME/}
-#echo RELDIR = $RELDIR
+echo RELDIR = $RELDIR
 SCRDIR=${THISDIR//$HOME/$SCRATCH}
-#echo SCRDIR = $SCRDIR
+echo SCRDIR = $SCRDIR
 PLOTDIR=$SCRDIR/geoclaw_plots
 
 REMOTE=public_html${RELDIR}_fromtacc_${ID}
