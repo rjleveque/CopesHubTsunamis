@@ -1,17 +1,21 @@
-# Script to copy a _plots directory to homer for viewing on the web
-
-# fix this path...
-RELDIR=CopesHubTsunamis/geoclaw_runs/CSZ_groundmotions/X
+# Script to rsync the geoclaw_plots directory on the scratch disk
+# coupled to this run directory to ptha@homer for viewing on the web.
+# Requires ssh keys set up on homer ptha account for user@tacc
 
 # give it an ID that will be used in the directory name on homer:
-ID=2024-04-13
+ID=2026-01-20
+
 
 #--------------------------------------------
 # You shouldn't need to change the rest...
- 
-FULLDIR=/scratch/04137/${USER}/${RELDIR}
-PLOTDIR=${FULLDIR}/_plots
-REMOTE=public_html/${RELDIR}_tacc_${ID}
+THISDIR=$PWD
+RELDIR=${THISDIR//$HOME/}
+#echo RELDIR = $RELDIR
+SCRDIR=${THISDIR//$HOME/$SCRATCH}
+#echo SCRDIR = $SCRDIR
+PLOTDIR=$SCRDIR/geoclaw_plots
+
+REMOTE=public_html${RELDIR}_fromtacc_${ID}
  
 echo 
 echo -------------------
@@ -20,23 +24,25 @@ echo Will try to copy
 echo "  " ${PLOTDIR}
 echo to ptha@homer.u.washington.edu:${REMOTE}
 echo 
-echo This will overwrite any _plots already at:
-echo "  "  http://depts.washington.edu/ptha/${RELDIR}_hyak_${ID}
+echo This may overwrite any _plots* directories already at:
+echo "  "  http://depts.washington.edu/ptha${RELDIR}_fromtacc_${ID}
 echo 
-echo -n "Is this ok (y/n)?"
+echo -n "Is this ok (y/n)? "
 read answer
  
 if [ "$answer" != "${answer#[Yy]}" ] ;then
 
+    chmod -R og+rX ${PLOTDIR}
+    
     rsync -avz --rsync-path="mkdir -p ${REMOTE} && rsync" \
         ${PLOTDIR} \
         ptha@homer.u.washington.edu:${REMOTE}/
      
     echo 
     echo copied local directory:
-    echo      ${PLOTDIR}
+    echo "     ${PLOTDIR}"
     echo to homer.  To view plots, open
-    echo      http://depts.washington.edu/ptha/${RELDIR}_hyak_${ID}/_plots/_PlotIndex.html
+    echo "     http://depts.washington.edu/ptha${RELDIR}_fromtacc_${ID}/"
      
 else
     echo Aborting
