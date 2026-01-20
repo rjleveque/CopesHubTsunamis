@@ -301,7 +301,7 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
 
     ####  Write the comma separated file
     fprint_csv('%5s, , , , , , , , , , , , ' %run_name)
-    fprint_csv('       ,      ,         ,       ,      ,    max,    max,    max,    max,      max,     max,       max,         ,          ' )
+    fprint_csv('       ,      ,         ,       ,      ,    max,    max,       ,    max,      max,     max,       max,         ,          ' )
     fprint_csv('  Gauge,    B0,        B,    dzi,    h0,     h,    h-h0,   eta0,  post eta,    s,      hs,        hss,     tmax,    tfirst' )
     fprint_csv('   No,      (m),      (m),   (m),    (m),   (m),    (m),    (m),     (m),    (m/s),  (m*m/s),  (m^3/s^2),  (min),    (min) ')  
     for key in gaugeno_dict:
@@ -315,7 +315,7 @@ def report(outdir,plotdir,location,event,dtopofile,run_name):
 
     fprint('               SUMMARY FOR EACH OF THESE GAUGES                ' )
     fprint('%5s, , , , , , , , , , , , ' %run_name)
-    fprint('       ,      ,         ,       ,      ,    max,    max,    max,    max,      max,     max,       max,         ,          ' )
+    fprint('       ,      ,         ,       ,      ,    max,    max,       ,    max,      max,     max,       max,         ,          ' )
     fprint('  Gauge,    B0,        B,    dzi,    h0,     h,    h-h0,   eta0,  post eta,    s,      hs,        hss,     tmax,    tfirst' )
     fprint('   No,      (m),      (m),   (m),    (m),   (m),    (m),    (m),     (m),    (m/s),  (m*m/s),  (m^3/s^2),  (min),    (min) ')  
     for key in gaugeno_dict:

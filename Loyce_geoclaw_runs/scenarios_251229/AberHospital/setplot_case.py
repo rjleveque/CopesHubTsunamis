@@ -7,7 +7,8 @@ by calling other script(s).
 """
 
 import os,sys
-import plot_gaugereport   # Loyces gauge report
+#import plot_gaugereport   # Loyces gauge report
+import plot_play_gaugereport   # Loyces gauge report
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -45,7 +46,8 @@ def setplot(plotdata, case):
     print('In setplot: run_name = ',run_name)
 
     # call post-processing script(s). This prints a .csv and a .txt file:
-    plot_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
+    #plot_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
+    plot_play_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
 
     plotdata = None
 
