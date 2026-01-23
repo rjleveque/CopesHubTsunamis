@@ -146,10 +146,10 @@ def setrun(claw_pkg='geoclaw', case={}):
         print(f'Assuming event {event} is kinematic displacement')
     print(f'    dt_max_dtopo = {dt_max_dtopo:.1f} seconds')
 
-    restart = False
+    restart = True
     restart_file = ''
 
-    if 0:
+    if restart:
         # restart from previous run, if checkpt file is available:
         # (note: requires case['outdir'] to be set by calling program)
         restart_file = restart_tools.find_last_checkpt(case['outdir'])
@@ -158,6 +158,8 @@ def setrun(claw_pkg='geoclaw', case={}):
         restart = True
         restart_time = restart_tools.time(restart_file)
         print(f'Will restart from time t = {restart_time}')
+    else:
+        restart = False
 
 
     #------------------------------------------------------------------
@@ -234,8 +236,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # restart_file 'fort.chkNNNNN' specified below should be in
     # the OUTDIR indicated in Makefile.
 
-    clawdata.restart = False
-    clawdata.restart_file = 'fort.chkbbbbb'
+    clawdata.restart = restart
+    clawdata.restart_file = restart_file
 
     tstart_finestgrid = 0. #14*60.
 

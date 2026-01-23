@@ -3,7 +3,7 @@
 # Requires ssh keys set up on homer ptha account for user@tacc
 
 # give it an ID that will be used in the directory name on homer:
-ID=2026-01-20
+ID=lma3_2026-01-20
 
 
 #--------------------------------------------
