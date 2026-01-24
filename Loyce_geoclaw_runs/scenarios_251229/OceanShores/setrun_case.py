@@ -467,11 +467,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     geo_data.sea_level = 0.0
     geo_data.dry_tolerance = 1.e-3
     geo_data.friction_forcing = True
-    try:
-        geo_data.manning_coefficient = params.manning_coefficient
-    except:
-        geo_data.manning_coefficient =.025
-
+    geo_data.manning_coefficient =.025
+    geo_data.speed_limit = 20.
     geo_data.friction_depth = 1e6
 
     # Refinement settings
