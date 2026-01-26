@@ -11,7 +11,7 @@ Before running, adjust to set:
     location to the string that will appear in the gauges .nc file
 """
 import os,sys,glob
-
+import pathlib
 from clawpack.visclaw import gaugetools
 from clawpack.clawutil.util import fullpath_import
 
@@ -27,14 +27,8 @@ except:
 
 CHTtools = fullpath_import(f'{CHTuser}/src/CHTuser/CHTtools.py')
 
-events = CHTtools.all_events()
-events = events[:4]
+location = 'Aberdeen' # to appear in .nc file name
 
-#events = ['BL10D', 'BL13D', 'BL13M']
-
-instant = True
-if instant:
-    events = [f'{e}_instant' for e in events]
 
 
 # location for big files for different computer environments:
@@ -54,14 +48,43 @@ if '/home1' in this_dir:
 # subdirectories such as _output_BL10D for individual event runs:
 geoclaw_outputs = f'{scratch_dir}/geoclaw_outputs'
 
-location = 'Aberdeen' # to appear in file name
 
-setgauges = gaugetools.read_setgauges(outdirs[0])
+if 0:
+    # specify which events to include:
+
+    events = CHTtools.all_events()
+    events = events[:4]
+
+    #events = ['BL10D', 'BL13D', 'BL13M']
+
+    instant = True
+    if instant:
+        events = [f'{e}_instant' for e in events]
+
+else:
+    # include all events found in geoclaw_outputs:
+    outdirs = glob.glob(f'{geoclaw_outputs}/_output_*')
+    events = []
+    for outdir in outdirs:
+        p = pathlib.Path(outdir)
+        name = p.stem
+        event = name.replace('_output_','')
+        events.append(event)
+
+print(f'Using {len(events)} events: ',events)
+print(f'      from {geoclaw_outputs}')
+
+
+# assume all events have same set of gauges, read from first outdir:
+outdir0 = f'{geoclaw_outputs}/_output_{events[0]}'
+setgauges = gaugetools.read_setgauges(outdir0)
 gaugenos = setgauges.gauge_numbers
 print('Found gaugenos = ',gaugenos)
 
-nc_fname = f'{location}_gauges_test.nc'
-#nc_fname = None
+# or set list of gauges to include explicitly:
+#gaugenos = [101,102]
 
-CHTtools.make_all_gauges_nc(location, events, outdirs, gaugenos,
-                                  nc_fname, dt=5)
+nc_fname = f'{location}_gauges_4events.nc'
+
+CHTtools.make_all_gauges_nc(location, events, geoclaw_outputs, gaugenos,
+                            nc_fname, dt=5)
