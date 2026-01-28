@@ -253,6 +253,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         clawdata.num_output_times = 0
         #clawdata.tfinal  = 20*60    #20 minute test on laptop
         clawdata.tfinal = 10*3600. 
+        #clawdata.tfinal = 2*3600. 
         ##################clawdata.tfinal = 10*3600.
         clawdata.output_t0 = False
 

@@ -82,7 +82,7 @@ cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = False
+run_code = True
 make_plots = True
 
 
