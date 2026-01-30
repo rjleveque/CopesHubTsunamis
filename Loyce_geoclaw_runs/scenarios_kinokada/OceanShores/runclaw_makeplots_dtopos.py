@@ -141,9 +141,9 @@ os.system('mkdir -p %s' % runs_dir)
 # path to geoclaw executable:
 # (should agree with how EXE is set in Makefile used to compile)
 if run_code:
-    xgeoclaw_path = f'{CHT}/Loyce_geoclaw_runs/xgeoclaw-CHTshare'
+    xgeoclaw_path = f'{CHT}/Loyce_geoclaw_runs/xgeoclaw-CHTshare-OS_canals'
     if computer == 'tacc':
-        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw_260113'
+        xgeoclaw_path = '/work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw-OS_canals_260118'
 else:
     xgeoclaw_path = None  # do not run GeoClaw code
 
