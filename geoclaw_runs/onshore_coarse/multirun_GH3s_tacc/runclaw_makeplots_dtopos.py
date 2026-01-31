@@ -78,8 +78,8 @@ except:
 common_code_dir = os.path.join(CHT, 'common_code')
 cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
-#dry_run = False  # If True, only print out settings, do not run GeoClaw
+#dry_run = True  # If True, only print out settings, do not run GeoClaw
+dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
@@ -177,6 +177,8 @@ except:
 
 # select which subset of all_events to run at command line
 # or in slurm script by specifying NPROCS FIRST_EVENT LAST_EVENT
+
+#all_events = ['BL13D','BL10D']
 
 # if dtopo_dir points to a directory that has instantaneous versions
 # (static displacement rather than kinematic time-dependent)
