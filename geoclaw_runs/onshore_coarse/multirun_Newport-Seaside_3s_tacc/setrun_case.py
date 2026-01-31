@@ -67,7 +67,7 @@ elif '/home1' in this_dir:
     computer = 'tacc'
     scratch_dir = this_dir.replace('/home1', '/scratch')
     #topo_dir = topo_dir.replace('/home1', '/scratch')
-    topo_dir = f'{CHTshare}/topo/topofiles'
+    topo_dir = f'{CHTshare}/topo/topofiles_from_hyak'
 
 else:
     computer = 'unknown'

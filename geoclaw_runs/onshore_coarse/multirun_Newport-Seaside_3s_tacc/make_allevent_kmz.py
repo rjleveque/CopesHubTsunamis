@@ -34,6 +34,31 @@ try:
 except:
     raise Exception("*** Set CHT enviornment variable to repository top")
 
+# location for big files for different computer environments:
+this_dir = os.getcwd()
+HOME = os.environ['HOME']
+
+if 'rjl/git' in this_dir:
+    computer = 'rjl-laptop'
+    scratch_dir = this_dir.replace('rjl/git', 'rjl/scratch')
+
+elif '/mmfs1/home' in this_dir:
+    computer = 'hyak'
+    scratch_dir = this_dir.replace('/mmfs1/home', '/gscratch/tsunami')
+
+elif '/home1' in this_dir:
+    computer = 'tacc'
+    #scratch_dir = this_dir.replace('/home1', '/scratch')
+    try:
+        SCRATCH = os.environ['SCRATCH']
+        scratch_dir = this_dir.replace(HOME, SCRATCH)
+    except:
+        scratch_dir = this_dir  # if $SCRATCH not set
+
+else:
+    computer = 'unknown'
+    scratch_dir = this_dir
+
 use_force_dry = False
 if use_force_dry:
     fname_force_dry = os.path.join(input_dir, 'force_dry_init.data')
@@ -299,63 +324,51 @@ def make_all_kmz_plots(events, outdirs, plotdir, name_kmz):
         shutil.rmtree(kml_dir)
     os.chdir(savedir)
 
+
+# List of all events from CoPes Hub ground motions:
+# For naming and numbering convention, see
+#   https://depts.washington.edu/ptha/CHTuser/dtopo/groundmotions/
+# Note that there may be different versions of these events, so which
+# version is used depends on what directory dtopo_dir points to
+
+try:
+    import CHTtools
+    all_events = CHTtools.all_events()  # returns the list of 36 events
+except:
+    # if CHTtools isn't found, construct the list of 36 events here:
+
+    depths = ['D','M','S']
+
+    # buried_locking events:
+    all_events = [f'BL10{depth}' for depth in depths] \
+               + [f'BL13{depth}' for depth in depths] \
+               + [f'BL16{depth}' for depth in depths] \
+
+    all_events += [e.replace('L','R') for e in all_events]  # add random events
+    all_events += [e.replace('B','F') for e in all_events]  # add ft events
+
+    all_events.sort()
+
+
+# if dtopo_dir points to a directory that has instantaneous versions
+# (static displacement rather than kinematic time-dependent)
+# then you could set `instant = True` to use these, provided they
+# have file names such as BL10D_instant.dtt3 (with the same numbering 1-36):
+
+instant = False
+
+if instant:
+    all_events = [e+'_instant' for e in all_events]
+
+events = all_events[:4]
+
+name_kmz = 'Newport-Seaside_3s_4events'
+
 if __name__== '__main__':
 
-    # location for outdirs:
-    this_dir = os.getcwd()
-
-    # Randy's laptop:
-    scratch_dir = this_dir.replace('git/CopesHubTsunamis/geoclaw_runs', \
-                                   'scratch/CHT_runs')
-    #scratch_dir = '/Users/rjl/tests/CHT_runs'
-
-    # for hyak:
-    scratch_dir = scratch_dir.replace('/mmfs1/home', '/gscratch/tsunami')
-
-    runs_dir = os.path.abspath(scratch_dir)
-
-    all_models = []
-
-    if 1:
-        all_models = all_models + \
-            ['buried-locking-mur13', 'buried-locking-skl16', 'buried-locking-str10',
-             'buried-random-mur13',  'buried-random-skl16',  'buried-random-str10']
-        name_kmz = 'Newport-Seaside_3s_buried'
-
-    if 0:
-        all_models = all_models + \
-            ['ft-locking-mur13', 'ft-locking-skl16', 'ft-locking-str10',
-             'ft-random-mur13',  'ft-random-skl16',  'ft-random-str10']
-        name_kmz = 'Newport-Seaside_3s_ft'
-
-    if len(all_models) == 12:
-        # including both buried and ft:
-        name_kmz = 'Newport-Seaside_3s'
-
-    models = all_models
-    #models = all_models[:3]
-    events = ['%s-deep' % model for model in models] \
-           + ['%s-middle' % model for model in models] \
-           + ['%s-shallow' % model for model in models]
-
-    events.sort()
-
-    #events = events[:3]
-
-    instant = False
-    if instant:
-        events = [e+'_instant' for e in events]
-
-    if 0:
-        #events = ['ft-locking-mur13-deep']
-        events = ['buried-locking-mur13-deep']
-
-
-    #runs_dir = os.path.abspath('hyak_geoclaw_output')  # on laptop
-
-    outdirs = ['%s/geoclaw_outputs/_output_%s' % (runs_dir, event) \
+    outdirs = ['%s/geoclaw_outputs/_output_%s' % (scratch_dir, event) \
                 for event in events]
 
-    plotdir = '%s/geoclaw_plots' % runs_dir
+    plotdir = '%s/geoclaw_plots' % scratch_dir
 
     make_all_kmz_plots(events, outdirs, plotdir, name_kmz)
