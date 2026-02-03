@@ -384,7 +384,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     # so that at most 2 checkpoint files exist at any time, useful when
     # doing frequent checkpoints of large problems.
 
-    clawdata.checkpt_style = -2
+    clawdata.checkpt_style = 0
 
     if clawdata.checkpt_style == 0:
         # Do not checkpoint at all

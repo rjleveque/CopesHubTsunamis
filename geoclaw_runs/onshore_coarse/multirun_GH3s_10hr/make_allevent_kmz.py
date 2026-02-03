@@ -360,9 +360,9 @@ instant = False
 if instant:
     all_events = [e+'_instant' for e in all_events]
 
-events = all_events[:4]
+events = all_events[:18]
 
-name_kmz = 'GH3s_4events_kinokada_10hrs'
+name_kmz = 'GH3s_18events_kinokada_10hrs'
 
 if __name__== '__main__':
 
