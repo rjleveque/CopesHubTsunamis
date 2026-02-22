@@ -274,7 +274,7 @@ def make_all_kmz_plots(events, outdirs, plotdir, name_kmz):
     png_names = []
     for event,outdir in zip(events,outdirs):
 
-        fname_B0 = os.path.abspath('../Newport-Seaside_B0/Newport-Seaside_3s_fgmax1_B0.asc')
+        fname_B0 = os.path.abspath('../GH3s_B0/GH3s_fgmax1_B0.asc')
 
         print('Will read fgmax results from outdir = \n  ', outdir)
         fg, t_hours = load_fgmax(outdir,fgno,fname_B0)
@@ -362,7 +362,7 @@ if instant:
 
 events = all_events[:18]
 
-name_kmz = 'Newport-Seaside_3s_12events'
+name_kmz = 'GH3s_18events_kinokada_10hrs'
 
 if __name__== '__main__':
 

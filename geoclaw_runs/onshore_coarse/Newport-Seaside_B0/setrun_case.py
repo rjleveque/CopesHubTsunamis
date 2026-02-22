@@ -1,6 +1,11 @@
 """
 Module to set up run time parameters for Clawpack.
 
+MODIFIED TO COMPUTE B0 via 'make data; make output'
+Check that all regions and fgmax grids turn on at t=0:
+    tstart_finestgrid = 0.
+    fg.tstart_max =  0.
+
 The values set in the function setrun are then written out to data files
 that will be read in by the Fortran code.
 
@@ -255,7 +260,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Output nout frames at equally spaced times up to tfinal:
         ## ADJUST:
         clawdata.num_output_times = 0    # no frame output, only fgmax
-        clawdata.tfinal = 3*3600.
+        clawdata.tfinal = 1.  #3600.  # for B0
         clawdata.output_t0 = False        # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
@@ -617,7 +622,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     # coastal region for fgmax:
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_3sec'
-    flagregion.minlevel = 4
+    flagregion.minlevel = 6 #4  # for B0
     flagregion.maxlevel = 6
     flagregion.t1 = 0.0
     flagregion.t2 = 1e9

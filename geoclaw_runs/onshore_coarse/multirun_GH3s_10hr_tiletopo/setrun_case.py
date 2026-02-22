@@ -67,7 +67,7 @@ elif '/home1' in this_dir:
     computer = 'tacc'
     scratch_dir = this_dir.replace('/home1', '/scratch')
     #topo_dir = topo_dir.replace('/home1', '/scratch')
-    topo_dir = f'{CHTshare}/topo/topofiles_from_hyak'
+    topo_dir = f'{CHTshare}/topo/topofiles'
 
 else:
     computer = 'unknown'
@@ -254,8 +254,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         ## ADJUST:
-        clawdata.num_output_times = 0    # no frame output, only fgmax
-        clawdata.tfinal = 3*3600.
+        clawdata.num_output_times = 0     # no frame output, only fgmax
+        clawdata.tfinal = 10*3600.
         clawdata.output_t0 = False        # output at initial (or restart) time?
 
     elif clawdata.output_style == 2:
@@ -384,7 +384,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     # so that at most 2 checkpoint files exist at any time, useful when
     # doing frequent checkpoints of large problems.
 
-    clawdata.checkpt_style = -2
+    clawdata.checkpt_style = 0
 
     if clawdata.checkpt_style == 0:
         # Do not checkpoint at all
@@ -414,6 +414,24 @@ def setrun(claw_pkg='geoclaw', case={}):
     amrdata.amr_levels_max = 6
 
     # List of refinement ratios at each level (length at least mxnest-1)
+
+    # dx = dy = 1deg, 6', 3', 45", 9", 3", 1", 1/3"":
+    # refinement_ratios = [10,2,4,5,3,3,3]
+
+    # dx = dy = 1deg, 6', 1', 15"
+    #refinement_ratios = [10,6,4]
+
+    # dx = dy = 1deg, 6', 30", 7.5"
+    #refinement_ratios = [10,12,4]
+
+    # dx = dy = 1deg, 6', 30", 15", 5"
+    #refinement_ratios = [10,12,2,3]
+
+    # dx = dy = 4', 1', 30", 15", 5", 1", 1/3", 1/9"
+    #refinement_ratios = [4,2,2,3,5,3,3]
+
+    # dx = dy = 4', 1', 30", 10", 5", 1", 1/3", 1/9"
+    #refinement_ratios = [4,2,3,2,5,3,3]
 
     # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
     refinement_ratios = [2,5,2,2,2,3,3,3]
@@ -490,30 +508,17 @@ def setrun(claw_pkg='geoclaw', case={}):
 
 
     if 1:
-        # 3-second topo:
-        topofiles.append([3, topo_dir + '/crm_vol8_3sec_cropped_44-47.asc'])
+        # 2-second topo:
+        #topofiles.append([3, topo_dir + '/astoria_2s_mhw.asc'])
+        topofiles.append([3, topo_dir + '/GH_tiles_2021_2s.asc'])
 
+    if 0:
+        # 1/3-second topo:
+        topofiles.append([3, topo_dir + '/GH_13sec.asc'])
+        topofiles.append([3, topo_dir + '/WB_13sec.asc'])
 
-    # 2sec topo files coarsened from 1/9" navd88 tiles and adjusted
-    # to approximate mhw by subtracting 2.1m from Z:
-
-    topo2sec_files = \
-        ['ncei19_n45x00_w124x00_amhw_2021_2sec.asc',
-         'ncei19_n44x75_w124x00_amhw_2021_2sec.asc',
-         'ncei19_n45x25_w124x00_px_amhw_2019_2sec.asc',
-         'ncei19_n46x00_w124x00_px_amhw_2019_2sec.asc',
-         'ncei19_n46x25_w124x00_px_amhw_2019_2sec.asc',
-         'ncei19_n45x75_w124x25_px_amhw_2019_2sec.asc',
-         'ncei19_n44x75_w124x25_amhw_2021_2sec.asc',
-         'ncei19_n45x50_w124x25_px_amhw_2019_2sec.asc',
-         'ncei19_n45x00_w124x25_amhw_2021_2sec.asc',
-         'ncei19_n45x25_w124x25_px_amhw_2019_2sec.asc',
-         'ncei19_n46x25_w124x25_px_amhw_2019_2sec.asc',
-         'ncei19_n46x00_w124x25_px_amhw_2019_2sec.asc',
-         'ncei19_n45x50_w124x00_px_amhw_2019_2sec.asc',
-         'ncei19_n45x75_w124x00_px_amhw_2019_2sec.asc']
-    for fname in topo2sec_files:
-        topofiles.append([3, os.path.join(topo_dir, fname)])
+    #topofiles.append([3, '/Users/rjl/topo/WA/astoria_13_mhw_2012/GH_13sec.asc'])
+    #topofiles.append([3, '/Users/rjl/topo/WA/astoria_13_mhw_2012/WB_13sec.asc'])
 
 
     # == setdtopo.data values ==
@@ -543,6 +548,8 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     flagregions = rundata.flagregiondata.flagregions  # initialized to []
 
+    #RRdir = '/Users/rjl/git/paleo2020/topo/RuledRectangles'
+    #RRdir = root_dir + '/topo/regions/'
 
     # Computational domain Variable Region - 4min, 2min to 24 sec:
     # Level 3 below is 24 sec
@@ -606,29 +613,136 @@ def setrun(claw_pkg='geoclaw', case={}):
     # New Continential shelf around onshore region, 12"
     flagregion = FlagRegion(num_dim=2)
     flagregion.name = 'Region_Coast_near_onshore_12sec'
-    flagregion.minlevel = 3  #4
-    flagregion.maxlevel = 3  #4
+    flagregion.minlevel = 3
+    flagregion.maxlevel = 4
     flagregion.t1 = 0.
     flagregion.t2 = tmax_dtopo_region
     flagregion.spatial_region_type = 1  # Rectangle
-    flagregion.spatial_region = [-125.9, -123.8, 44.0, 48]
+    flagregion.spatial_region = [-125.9, -123.8, 46, 48]
     flagregions.append(flagregion)
 
-    # coastal region for fgmax:
-    flagregion = FlagRegion(num_dim=2)
-    flagregion.name = 'Region_3sec'
-    flagregion.minlevel = 4
-    flagregion.maxlevel = 6
-    flagregion.t1 = 0.0
-    flagregion.t2 = 1e9
-    flagregion.spatial_region_type = 1  # Rectangle for now
+    if 0:
+        # Continential shelf Variable Region, 24" to 12", changed to 6" experiment
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_Coast_46_51_6sec'
+        #flagregion.minlevel = 3
+        #flagregion.maxlevel = 4
+        #flagregion.t1 = tmax_dtopo_region
+        flagregion.minlevel = 5
+        flagregion.maxlevel = 5
+        flagregion.t1 = 0.0
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 2  # Ruled Rectangle
+        flagregion.spatial_region_file = os.path.abspath(RRdir + \
+                '/RuledRectangle_Coast_46_51.data')
+        flagregions.append(flagregion)
 
-    ## Newport to Seaside
-    onshore_extent = [-124.1,-123.8,44.5,46.] # also used for fgmax grid
-    coast_near_onshore_region = [-124.15,-123.75,44.45,46.05]
+        # Continential shelf Variable Region, 24" to 12", changed to 6" experiment
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_Coast_40_46_6sec'
+        #flagregion.minlevel = 3
+        #flagregion.maxlevel = 4
+        #flagregion.t1 = tmax_dtopo_region
+        flagregion.minlevel = 5
+        flagregion.maxlevel = 5
+        flagregion.t1 = 0.0
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 2  # Ruled Rectangle
+        flagregion.spatial_region_file = os.path.abspath(RRdir + \
+                '/RuledRectangle_Coast_40_46.data')
+        flagregions.append(flagregion)
 
-    flagregion.spatial_region = coast_near_onshore_region
-    flagregions.append(flagregion)
+
+    if 1:
+        ### Will use this for the inundation runs. (6" slider window)
+        # Rectangular region that encompasses gauges 94-137, offshore OSVES
+        # or gauges 98-143, offshore Westport, or gauges 166-208 offshore Seaside.
+        # Or centered about Newport, plus or minus 32km, say
+        # Make this region 6" for all time to check if gauge values change
+        # from when these gauges were in the 3,4 region above and had at most 12"
+        # This rectangle goes out to the Ruled Rectangle (without the b) above.
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_6sec'
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 5
+        flagregion.t1 = 0.0
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 1  # Rectangle for now
+
+        ## for Ocean Shores, encompasses gauges 94 to 137
+        #latitudes below are for 93 in north to 138 in south
+        #gauges_region = [-125.9,-124.1,46.66,47.287]
+
+        ## Grays Harbor:
+        onshore_extent = [-124.22,-123.65,46.78,47.08]
+        coast_near_onshore_region = [-124.75,-123.65,46.5,47.2]
+
+        flagregion.spatial_region = coast_near_onshore_region
+        flagregions.append(flagregion)
+
+    if 0: #will need to fix the regions below for each collaboratory
+          # dx = dy = 4', 2', 24", 12", 6", 3", 1", 1/3", 1/9"
+
+        # Westport Variable Region - 24sec to 12sec to 3sec:
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_Westport_24-12-6sec'
+        flagregion.minlevel = 3
+        flagregion.maxlevel = 6
+        flagregion.t1 = 0.
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 1  # Rectangle
+        flagregion.spatial_region = [-124.29, -123.655, 46.325, 47.159]
+        flagregions.append(flagregion)
+
+        # fixedgrid Region - require  6" grids, allow 3" and  1":
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'fixedgrid_6-3-1sec'
+        flagregion.minlevel = 5
+        flagregion.maxlevel = 7
+        flagregion.t1 = tstart_finestgrid
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 1  # Rectangle
+        flagregion.spatial_region = [-124.185,-123.935,46.785,46.935]
+        flagregions.append(flagregion)
+
+    if 1:
+        # Grays Harbor Region - allow  3" grids, require 12sec at least:
+        flagregion = FlagRegion(num_dim=2)
+        flagregion.name = 'Region_Grays_12-6-3sec'
+        flagregion.minlevel = 4
+        flagregion.maxlevel = 6
+        flagregion.t1 = tstart_finestgrid
+        flagregion.t2 = 1e9
+        flagregion.spatial_region_type = 1  # Rectangle
+        flagregion.spatial_region = [-124.23, -123.6, 46.7, 47.12]
+        onshore_extent = [-124.22,-123.65,46.78,47.08]
+        flagregions.append(flagregion)
+
+        if 0:
+            #Will need a 8x8 perhaps
+            # fixedgrid Region - require  1/3":
+            flagregion = FlagRegion(num_dim=2)
+            flagregion.name = 'fixedgrid_13sec'
+            flagregion.minlevel = 8
+            flagregion.maxlevel = 8
+            flagregion.t1 = tstart_finestgrid
+            flagregion.t2 = 1e9
+            flagregion.spatial_region_type = 1  # Rectangle
+            flagregion.spatial_region = [-124.185,-123.935,46.785,46.935]
+            flagregions.append(flagregion)
+
+        if 0:
+            #Will need an 9x9 perhaps
+            # fixedgrid Region - require  1/9":
+            flagregion = FlagRegion(num_dim=2)
+            flagregion.name = 'fixedgrid_19sec'
+            flagregion.minlevel = 9
+            flagregion.maxlevel = 9
+            flagregion.t1 = tstart_finestgrid
+            flagregion.t2 = 1e9
+            flagregion.spatial_region_type = 1  # Rectangle
+            flagregion.spatial_region = [-124.185,-123.935,46.785,46.935]
+            flagregions.append(flagregion)
 
 
     # ---------------
@@ -698,7 +812,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         fg.tend_max = 1.e10       # when to stop monitoring max values
         fg.dt_check = 10.         # target time (sec) increment between updating
         #fg.min_level_check = 5   # monitor on finest level for a 5 level run
-        fg.min_level_check = 3    # Coastal regions are 3,4 after tmax sec
+        fg.min_level_check = 4    # Coastal regions are 3,4 after tmax sec
         fg.arrival_tol = 1.e-1    # tolerance for flagging arrival
         fg.interp_method = 0      # 0 ==> pw const in cells, recommended
         fgmax_grids.append(fg)    # written to fgmax_grids.data

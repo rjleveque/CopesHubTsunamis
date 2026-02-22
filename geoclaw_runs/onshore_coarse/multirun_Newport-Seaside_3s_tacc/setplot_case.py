@@ -33,9 +33,8 @@ def setplot(plotdata, case={}):
 
     outdir = case['outdir']
     plotdir = case['plotdir']
-    dtopofiles = case['dtopofiles']
+    dtopofile = case['dtopofile']
 
-    dtopofile = dtopofiles[0][-1]
     event = os.path.splitext(os.path.split(dtopofile)[-1])[0]
 
     run_name = '%s_%s' % (location,event)
