@@ -78,8 +78,8 @@ except:
 common_code_dir = os.path.join(CHT, 'common_code')
 cases_dtopos = fullpath_import(f'{common_code_dir}/cases_dtopos.py')
 
-dry_run = True  # If True, only print out settings, do not run GeoClaw
-#dry_run = False  # If True, only print out settings, do not run GeoClaw
+dry_run =  False  # If True, only print out settings, do not run GeoClaw
+#dry_run = True  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
 run_code = True
@@ -87,7 +87,7 @@ make_plots = False
 
 
 # location for big files for different computer environments:
-this_dir = os.getcwd()
+rundir = this_dir = os.getcwd()
 HOME = os.environ['HOME']
 
 if 'rjl/git' in this_dir:
@@ -258,6 +258,10 @@ if __name__ == '__main__':
         # make list of dictionaries with parameters for each case:
         caselist = cases_dtopos.make_all_cases_dtopos(dtopo_dir, dtopo_files,
                                         runs_dir, xgeoclaw_path, make_plots)
+
+        # probably don't need this since rundir defined at top of setplot_case.py
+        for case in caselist:
+            case['rundir'] = rundir  # pass in to setplot_case to find B0 file
 
         # run all cases using nprocs processors:
         multip_tools.run_many_cases_pool(caselist, nprocs,

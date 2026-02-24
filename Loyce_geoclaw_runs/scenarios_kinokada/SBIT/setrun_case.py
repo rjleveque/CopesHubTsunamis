@@ -249,13 +249,14 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
-        # Here we run for 120 seconds and produce NO time frame output:
-        clawdata.num_output_times = 0
+        # Doing output frames every 15 minutes
+        clawdata.num_output_times = 24
+        #clawdata.tfinal = 4          #4 sec to find B0 with no dtopo
         #clawdata.tfinal  = 20*60    #20 minute test on laptop
         #clawdata.tfinal = 10*3600. 
-        clawdata.tfinal = 2*3600. 
+        clawdata.tfinal = 6*3600. 
         ##################clawdata.tfinal = 10*3600.
-        clawdata.output_t0 = False
+        clawdata.output_t0 = True
 
     elif clawdata.output_style == 2:
         # Specify a list of output times. Params will have the times.
@@ -395,7 +396,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     elif abs(clawdata.checkpt_style) == 2:
         # Specify a list of checkpoint times.
-        clawdata.checkpt_times = 5*3600*np.arange(1,4,1)
+        clawdata.checkpt_times = 3*3600*np.arange(1,4,1)
 
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)
@@ -747,6 +748,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         fg.y1 = fgmax_extent[2] #+ dx_fine/2.
         fg.y2 = fgmax_extent[3] #- dx_fine/2.
         fg.dx = dx_fine
+        #fg.tstart_max = 0                    #start here when finding B0
         fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
         fg.tend_max = 1.e10         # when to stop monitoring max values
         fg.dt_check = 5.           # target time (sec) increment between updating
