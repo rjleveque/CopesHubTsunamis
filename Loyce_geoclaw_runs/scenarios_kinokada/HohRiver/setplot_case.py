@@ -16,7 +16,7 @@ from clawpack.geoclaw import topotools
 
 import plot_gaugereport   # Loyces gauge report
 import process_fgmax      # Loyces process_fgmax
-import make_fgout_Hoh    # Loyces make_fgout_SBIT
+import make_fgout_Hoh     # Loyces make_fgout_SBIT
 
 # top level directory for this project:
 root_dir = os.environ['CHT']   # assuming environment variable set
@@ -51,35 +51,48 @@ topominmax[1] = (-100., 100.)
 shrink_colorbar[1] = get_cbshrink(fig_extent[1])
 
 fig_name[2] = 'Coast'
-fig_extent[2] = (-127.00,-123.80,45.88,47.6)
+fig_extent[2] = (-127.00,-123.80,45.88,48.0)
 var_minmax[2] = (-10.,10.)
 topominmax[2] = (-100., 100.)
 shrink_colorbar[2] = get_cbshrink(fig_extent[2])
 
-fig_name[3] = 'Shoalwater 3" to 1" Area'
-fig_extent[3] = (-124.175, -123.87, 46.65, 46.755)
+fig_name[3] = 'Hoh 3" to 1" Area'
+fig_extent[3] = (-124.5, -124.367, 47.725, 47.767)
 var_minmax[3] = (-8.,8.)
 topominmax[3] = (-10.,25.)
 shrink_colorbar[3] = get_cbshrink(fig_extent[3])
 
-fig_name[4] = 'Shoalwater 1/3" Area'
-fig_extent[4] = (-124.1,-123.965, 46.680, 46.735)
+fig_name[4] = 'Hoh 1/3" Area'
+fig_extent[4] = (-124.45,-124.3725, 47.725, 47.7525)
 var_minmax[4] = (-8.,8.)
 topominmax[4] = (-10.,25.)
+
 shrink_colorbar[4] = get_cbshrink(fig_extent[4])
 
-fig_name[5] = 'Fgmax 1/3" Area'
-fig_extent[5] = (-124.0375,-123.99, 46.7075, 46.735)
+fig_name[5] = 'Hoh Fgmax 1/3" Area'
+fig_extent[5] = (-124.435,-124.4025,47.74,47.75)
 var_minmax[5] = (-8.,8.)
 topominmax[5] = (-10.,25.)
 shrink_colorbar[5] = get_cbshrink(fig_extent[5])
 
+fig_name[6] = 'Ruby Beach 1/3" Area'
+fig_extent[6] = (-124.417,-124.41, 47.7075, 47.7125)
+var_minmax[6] = (-8.,8.)
+topominmax[6] = (-10.,25.)
+shrink_colorbar[6] = get_cbshrink(fig_extent[6])
 
-nfigs=[1,2,3,4,5]
+fig_name[7] = 'Kalaloch 1/3" Area'
+fig_extent[7] = (-124.377,-124.3675, 47.6, 47.6075)
+var_minmax[7] = (-8.,8.)
+topominmax[7] = (-10.,25.)
+shrink_colorbar[7] = get_cbshrink(fig_extent[7])
+
+
+nfigs=[1,2,3,4,5,6,7]
 
 plt_sites = {}
-#This is Gauge 3 at intersection of SR 105 and Tokeland Road
-plt_sites[1] = ('3', -124.02037037, 46.72462963)
+#This is Gauge 7 at the Chief Klia Wellness Center
+plt_sites[1] = ('7', -124.41314815, 47.74101852)
 
 print('\n============= setplot.py ==========================')
 print('Start date & time: ', datetime.datetime.now())
@@ -136,7 +149,7 @@ def setplot(plotdata, case):
         print('process_fgmax finished')
 
         # call the fgout animation
-        make_fgout_SBIT.make_anim(outdir,plotdir,location,event)
+        make_fgout_Hoh.make_anim(outdir,plotdir,location,event)
         print('make_fgout_SBIT finished')
 
     # Make time frames

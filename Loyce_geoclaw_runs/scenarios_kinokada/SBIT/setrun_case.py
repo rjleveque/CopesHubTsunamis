@@ -682,20 +682,50 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     if 1:
         #Centered version of the desired 14 gauges above
+
+        #Eagle Hill Rd high ground entrance
         gauges.append([1, -124.02916667, 46.72805556, 0, 1e+09])
+
+        #Eagle Hill Rd and SR 105
         gauges.append([2, -124.02796296, 46.72685185, 0, 1e+09])
+
+        #Tokeland Rd and SR 105
         gauges.append([3, -124.02037037, 46.72462963, 0, 1e+09])
+
+        #Shoalwater Bay Gynasium
         gauges.append([4, -124.01379630, 46.72194444, 0, 1e+09])
+
+        #Shoalwater Bay Gynasium Trail Middle
         gauges.append([5, -124.01453704, 46.72370370, 0, 1e+09])
+
+        #Shoalwater Bay Gynasium Trail and SR 105
         gauges.append([6, -124.01342593, 46.72583333, 0, 1e+09])
+
+        #Trail to Teal Duck Slough, closer to SR 105
         gauges.append([7, -124.01037037, 46.72787037, 0, 1e+09])
+
+        #Trail to High Ground past Duck Slough Road and SR 105
         gauges.append([8, -124.00407407, 46.72796296, 0, 1e+09])
+
+        #High Ground past Duck Slough Road (clearcut)
         gauges.append([9, -124.00527778, 46.72842593, 0, 1e+09])
+
+        #Shoalwater Bay Tribal Court
         gauges.append([10, -124.01657407, 46.72138889, 0, 1e+09])
+
+        #Shoalwater Bay Food Bank
         gauges.append([11, -124.01518519, 46.72111111, 0, 1e+09])
+
+        #Tradewinds on the Bay
         gauges.append([12, -124.01305556, 46.71768519, 0, 1e+09])
+
+        #Auntie Lee and Blackberry Lane entrance
         gauges.append([13, -123.99083333, 46.71027778, 0, 1e+09])
+
+        #South Beach Regional fire Authority
         gauges.append([14, -123.99592593, 46.71111111, 0, 1e+09])
+
+        #Shoalwater Museum
         gauges.append([15, -124.02111111, 46.72425926, 0, 1e+09])
 
     #For Bridges

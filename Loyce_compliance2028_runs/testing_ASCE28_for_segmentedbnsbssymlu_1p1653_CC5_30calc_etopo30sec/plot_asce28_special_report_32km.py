@@ -10,6 +10,9 @@ The gauge locations changed from before.
  Hoquiam 2025, Gauges 98 to 142
  Hoquiam 2028, Gauges 127 to 163
 
+ Ocean Shores 2024, Gauges 94 to 137
+ Ocean Shores 2028, Gauges 124 to 159
+
 """
 
 # for making plots on remote machine:
@@ -88,8 +91,8 @@ gstart32=[]; gend32=[];
 xlim1=[]; xlim2=[]; xlim3=[]; xlim4=[];
 xticks1=[]; xticks2=[]; xticks3=[]; xticks4=[]; xticks5=[]; xticks6=[];
 
-gauges_to_plot=list(range(1,551))  #Plot all 551
-#gauges_to_plot=[]
+#gauges_to_plot=list(range(1,551))  #Plot all 551
+gauges_to_plot=[]
 if 1:   ##New 2028 Gauge numbering, see if now compliant at Westport
     ### For Westport 2025 VES
     structure_name.append('WP')
@@ -126,6 +129,31 @@ if 1:   ##New 2028 Gauge numbering, see if now compliant at Westport
     xticks4.append(lat[147])
     xticks5.append(lat[155])
     xticks6.append(lat[162])
+
+    ### 2028 standards
+    ### For Ocean Shores new Elementary Option 1 VES
+    structure_name.append('OSVES')
+    #latitude =46.9827
+    #centered in the footprint, Elementary option 1
+    #latitude =46.98187
+    latitude = 46.978796296296295
+    structure_lat.append(latitude)
+    print ('latitude of the Ocean Shores new VES structure was: ',latitude)
+    print (' ')
+    gstart32.append(124); gend32.append(159);
+    print ('starting and ending 2028 gauge numbers for +-32 report are 124 and 159')
+    print (' ')
+    xlim1.append(lat[121])
+    xlim2.append(lat[143])
+    xticks1.append(lat[123])
+    xticks2.append(lat[132])
+    xticks3.append(lat[141])
+
+    xlim3.append(lat[140])
+    xlim4.append(lat[160])
+    xticks4.append(lat[142])
+    xticks5.append(lat[150])
+    xticks6.append(lat[158])
 
 
 #### Could add more structures here if desired

@@ -251,11 +251,11 @@ def setrun(claw_pkg='geoclaw', case={}):
         # Output nout frames at equally spaced times up to tfinal:
         # Doing output frames every 15 minutes
         clawdata.num_output_times = 24
+        #clawdata.num_output_times = 0
         clawdata.tfinal = 4          #4 sec to find B0 with no dtopo
         #clawdata.tfinal  = 20*60    #20 minute test on laptop
         #clawdata.tfinal = 10*3600. 
-        #clawdata.tfinal = 6*3600. 
-        ##################clawdata.tfinal = 10*3600.
+        clawdata.tfinal = 6*3600. 
         clawdata.output_t0 = True
 
     elif clawdata.output_style == 2:
@@ -491,12 +491,8 @@ def setrun(claw_pkg='geoclaw', case={}):
     # 15-second etopo22:
     topofiles.append([3, f'{topo_dir}/etopo22_15s_-137_-121_37_55.asc'])
 
-    # 3 arcsec topo:
-    topofiles.append([3, f'{topo_dir}/nw_pacific_3sec_WA_100m_gauges.asc'])
-
     # 1 arcsec topo:
-    topofiles.append([3, f'{topo_dir}/n47x75_w124x50_cropped_1s.asc'])
-    topofiles.append([3, f'{topo_dir}/n48x00_w124x50_1s.asc'])
+    topofiles.append([3, f'{topo_dir}/crm8a.asc'])
     
     # 1/3 arcsec topo:
     topofiles.append([3, f'{topo_dir}/HohKalaloch_13s_mhw.asc'])
@@ -626,7 +622,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
-    flagregion.spatial_region = [-124.5,-124.41, 47.705,47.725]
+    flagregion.spatial_region = [-124.5,-124.4075, 47.705,47.725]
     flagregions.append(flagregion)
 
     # 3sec to 1sec regionc, encloses Kalaloch
@@ -638,7 +634,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
-    flagregion.spatial_region = [-124.44,-124.366, 47.59,47.62]
+    flagregion.spatial_region = [-124.44,-124.366, 47.58,47.62]
     flagregions.append(flagregion)
 
 
@@ -663,7 +659,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
-    flagregion.spatial_region = [-124.417,-124.4107,47.7095,47.711]
+    flagregion.spatial_region = [-124.417,-124.41,47.7075,47.7125]
     flagregions.append(flagregion)
 
     # Kalaloch 1/3sec region 
@@ -675,7 +671,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     flagregion.t1 = 0.
     flagregion.t2 = 1e9
     flagregion.spatial_region_type = 1  # Rectangle
-    flagregion.spatial_region = [-124.377,-124.369,47.6025,47.6075]
+    flagregion.spatial_region = [-124.377,-124.3675,47.6,47.6075]
     flagregions.append(flagregion)
 
 
@@ -871,6 +867,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     #if the decimal part is a multiple of .1, or .01, .005, or .0025 for
     #example based on how the computational domain was shifted.  This
 
+    #Hoh Reservation
     fgmax_extent=[-124.435,-124.4025,47.74,47.75]
     if 1:
         # Points on a uniform 2d grid:
@@ -882,12 +879,60 @@ def setrun(claw_pkg='geoclaw', case={}):
         fg.y1 = fgmax_extent[2] #+ dx_fine/2.
         fg.y2 = fgmax_extent[3] #- dx_fine/2.
         fg.dx = dx_fine
-        fg.tstart_max = 0                    #start here when finding B0
-        #fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
+        #fg.tstart_max = 0                    #start here when finding B0
+        fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
         fg.tend_max = 1.e10         # when to stop monitoring max values
         fg.dt_check = 5.           # target time (sec) increment between updating
                                     # max values
                             # which levels to monitor max on
+        fg.min_level_check = amrdata.amr_levels_max
+        fg.arrival_tol = 1.e-2      # tolerance for flagging arrival
+
+        fg.interp_method = 0      # 0 ==> pw const in cells, recommended
+        fgmax_grids.append(fg)    # written to fgmax_grids.data
+
+    #Ruby Beach
+    fgmax_extent2 = [-124.415,-124.41,47.7075,47.7125]
+    if 1:
+        # Points on a uniform 2d grid:
+        dx_fine = 1./(3*3600.)  # grid resolution at finest level
+        fg = fgmax_tools.FGmaxGrid()
+        fg.point_style = 2  # uniform rectangular x-y grid
+        fg.x1 = fgmax_extent2[0] #+ dx_fine/2.
+        fg.x2 = fgmax_extent2[1] #- dx_fine/2.
+        fg.y1 = fgmax_extent2[2] #+ dx_fine/2.
+        fg.y2 = fgmax_extent2[3] #- dx_fine/2.
+        fg.dx = dx_fine
+        #fg.tstart_max = 0                    #start here when finding B0
+        fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
+        fg.tend_max = 1.e10         # when to stop monitoring max values
+        fg.dt_check = 5.           # target time (sec) increment between updating
+                                    # max values
+                            # which levels to monitor max on
+        fg.min_level_check = amrdata.amr_levels_max
+        fg.arrival_tol = 1.e-2      # tolerance for flagging arrival
+
+        fg.interp_method = 0      # 0 ==> pw const in cells, recommended
+        fgmax_grids.append(fg)    # written to fgmax_grids.data
+
+    #Kalaloch
+    fgmax_extent3 = [-124.375,-124.3675,47.6,47.6075]
+    if 1:
+        # Points on a uniform 2d grid:
+        dx_fine = 1./(3*3600.)  # grid resolution at finest level
+        fg = fgmax_tools.FGmaxGrid()
+        fg.point_style = 2  # uniform rectangular x-y grid
+        fg.x1 = fgmax_extent3[0] #+ dx_fine/2.
+        fg.x2 = fgmax_extent3[1] #- dx_fine/2.
+        fg.y1 = fgmax_extent3[2] #+ dx_fine/2.
+        fg.y2 = fgmax_extent3[3] #- dx_fine/2.
+        fg.dx = dx_fine
+        #fg.tstart_max = 0                    #start here when finding B0
+        fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
+        fg.tend_max = 1.e10         # when to stop monitoring max values
+        fg.dt_check = 5.            # target time (sec) increment between updating
+                                    # max values
+                                    # which levels to monitor max on
         fg.min_level_check = amrdata.amr_levels_max
         fg.arrival_tol = 1.e-2      # tolerance for flagging arrival
 
@@ -923,7 +968,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         fgout.y1 = 47.725 + one_sixth
         fgout.y2 = 47.7525 - one_sixth
         fgout.tstart = 0.0
-        fgout.tend = 3*3600
+        fgout.tend = 2*3600
         fgout.nout = int(np.round(fgout.tend/20)) + 1
         fgout_grids.append(fgout)    # written to fgout_grids.data
 
