@@ -126,7 +126,7 @@ def setplot(plotdata, case):
     run_name = '%s_%s' % (location,event)
     print('In setplot: run_name = ',run_name)
 
-    if 1:
+    if 0:
         # call post-processing plot_gaugereport. This prints a .csv and a .txt file:
         plot_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
         print('plot_gaugereport finished')
@@ -135,9 +135,12 @@ def setplot(plotdata, case):
         process_fgmax.fgreport(rundir, outdir, plotdir, location, event, dtopofile, run_name)
         print('process_fgmax finished')
 
+    if 1:
         # call the fgout animation
         make_fgout_SBIT.make_anim(outdir,plotdir,location,event)
         print('make_fgout_SBIT finished')
+
+    return None  # to suppress time plots
 
     # Make time frames
     from clawpack.visclaw import colormaps, geoplot

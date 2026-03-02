@@ -9,6 +9,10 @@ if 'matplotlib' not in sys.modules:
     import matplotlib
     matplotlib.use('Agg')  # Use an image backend
 
+import matplotlib.pyplot as plt
+import imageio_ffmpeg
+plt.rcParams['animation.ffmpeg_path'] = imageio_ffmpeg.get_ffmpeg_exe()
+
 from pylab import *
 import os,sys,glob
 from clawpack.visclaw import plottools, geoplot, gridtools
@@ -296,7 +300,8 @@ def make_anim(outdir, plotdir, location, event):
     if fname_mp4:
         fps = 5
         print('Making mp4...')
-        writer = animation.writers['ffmpeg'](fps=fps)
+        #writer = animation.writers['ffmpeg'](fps=fps)
+        writer = animation.FFMpegWriter(fps=fps)
         anim.save(fname_mp4, writer=writer)
         print("Created %s" % fname_mp4)
 
