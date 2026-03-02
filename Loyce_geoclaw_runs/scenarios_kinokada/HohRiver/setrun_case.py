@@ -250,12 +250,13 @@ def setrun(claw_pkg='geoclaw', case={}):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Doing output frames every 15 minutes
-        clawdata.num_output_times = 24
+        clawdata.num_output_times = 12
         #clawdata.num_output_times = 0
-        clawdata.tfinal = 4          #4 sec to find B0 with no dtopo
+        #clawdata.tfinal = 4          #4 sec to find B0 with no dtopo
         #clawdata.tfinal  = 20*60    #20 minute test on laptop
         #clawdata.tfinal = 10*3600. 
         clawdata.tfinal = 6*3600. 
+        #clawdata.tfinal = 1*3600. 
         clawdata.output_t0 = True
 
     elif clawdata.output_style == 2:
@@ -396,7 +397,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     elif abs(clawdata.checkpt_style) == 2:
         # Specify a list of checkpoint times.
-        clawdata.checkpt_times = 3*3600*np.arange(1,4,1)
+        clawdata.checkpt_times = 2*3600*np.arange(1,4,1)
 
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)

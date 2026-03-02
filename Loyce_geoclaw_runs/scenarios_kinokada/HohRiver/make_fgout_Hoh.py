@@ -9,6 +9,10 @@ if 'matplotlib' not in sys.modules:
     import matplotlib
     matplotlib.use('Agg')  # Use an image backend
 
+import matplotlib.pyplot as plt
+import imageio_ffmpeg
+plt.rcParams['animation.ffmpeg_path'] = imageio_ffmpeg.get_ffmpeg_exe()
+
 from pylab import *
 import os,sys,glob
 from clawpack.visclaw import plottools, geoplot, gridtools
