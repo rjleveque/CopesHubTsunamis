@@ -288,7 +288,7 @@ def fgreport(fgno,rundir,outdir,plotdir,location,event,dtopofile,run_name):
     # file that can be used to open all three.
 
     if 1:
-        kml_dir = fgmax_plotdir + '/' + 'B0_name' +'_' + 'kmlfiles'
+        kml_dir = fgmax_plotdir + '/' + B0_name +'_' + 'kmlfiles'
         print('Will send kml file and plots to kml_dir = \n  ', kml_dir)
         os.system('mkdir -p %s' % kml_dir);
 

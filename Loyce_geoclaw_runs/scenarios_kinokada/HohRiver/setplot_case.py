@@ -163,7 +163,7 @@ def setplot(plotdata, case):
     if 0:
         # call the fgout animation
         make_fgout_Hoh.make_anim(outdir,plotdir,location,event)
-        print('make_fgout_SBIT finished')
+        print('make_fgout_Hoh finished')
 
     # Make time frames
     from clawpack.visclaw import colormaps, geoplot
