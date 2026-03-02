@@ -144,11 +144,23 @@ def setplot(plotdata, case):
         plot_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
         print('plot_gaugereport finished')
 
-        # call post-processing process_fgmax
-        process_fgmax.fgreport(rundir, outdir, plotdir, location, event, dtopofile, run_name)
-        print('process_fgmax finished')
-
     if 1:
+        # call post-processing process_fgmax for fgno=1
+        fgno=1
+        process_fgmax.fgreport(fgno,rundir, outdir, plotdir, location, event, dtopofile, run_name)
+        print('process_fgmax finished for fgno=1')
+
+        # call post-processing process_fgmax for fgno=2
+        fgno=2
+        process_fgmax.fgreport(fgno,rundir, outdir, plotdir, location, event, dtopofile, run_name)
+        print('process_fgmax finished for fgno=2')
+
+        # call post-processing process_fgmax for fgno=3
+        fgno=3
+        process_fgmax.fgreport(fgno,rundir, outdir, plotdir, location, event, dtopofile, run_name)
+        print('process_fgmax finished for fgno=3')
+
+    if 0:
         # call the fgout animation
         make_fgout_Hoh.make_anim(outdir,plotdir,location,event)
         print('make_fgout_SBIT finished')
@@ -226,9 +238,10 @@ def setplot(plotdata, case):
             pylab.gca().set_aspect(1./pylab.cos(47.74 * pylab.pi/180.))
             t = current_data.t
 
-            ### Gauge 3 is the interesection of SR 105 and Tokeland Rd
-            gaugetools.plot_gauge_locations(current_data.plotdata,gaugenos=[3], \
-                format_string='ko',markersize=1.0,fontsize=6.,add_labels=True)
+            ### Gauge 7 is the Chief Klia Wellness Center
+            if (ifig < 6):
+                gaugetools.plot_gauge_locations(current_data.plotdata,gaugenos=[7], \
+                    format_string='ko',markersize=1.0,fontsize=6.,add_labels=True)
 
             if t == 0:
                 #addgauges(current_data,ifig=ifig)
@@ -237,10 +250,11 @@ def setplot(plotdata, case):
                     site_lbl=plt_sites[isite][0];
                     X1 = fig_extent[ifig][0]; X2 = fig_extent[ifig][1];
                     Y1 = fig_extent[ifig][2]; Y2 = fig_extent[ifig][3]
-                    if X1 < xplt < X2 and Y1 < yplt < Y2:
-                        plt.plot(plt_sites[isite][1],plt_sites[isite][2],'k.',markersize=0.5)
-                        plt.text(plt_sites[isite][1],plt_sites[isite][2],plt_sites[isite][0]+' ',\
-                        fontweight='normal',fontsize=4.,ha='right')
+                    if (ifig < 6):
+                        if X1 < xplt < X2 and Y1 < yplt < Y2:
+                            plt.plot(plt_sites[isite][1],plt_sites[isite][2],'k.',markersize=0.5)
+                            plt.text(plt_sites[isite][1],plt_sites[isite][2],plt_sites[isite][0]+' ',\
+                            fontweight='normal',fontsize=4.,ha='right')
         plotaxes.afteraxes = fixup
 
         # Water
@@ -424,9 +438,15 @@ def setplot(plotdata, case):
         otherfigure = plotdata.new_otherfigure(name='max speed',
                         fname='fgmax_plots/speed.png')
 
-    fname_kmz = 'fgmax_results_%s_%s.kmz' % (location,event)
+    fname_kmz = 'fgmax_results_Hoh_%s.kmz' % event
     otherfigure = plotdata.new_otherfigure(name=fname_kmz,
-                    fname='_other_figures/kmlfiles/%s' % fname_kmz)
+                    fname='_other_figures/Hoh_kmlfiles/%s' % fname_kmz)
+    fname_kmz = 'fgmax_results_Ruby_%s.kmz' % event
+    otherfigure = plotdata.new_otherfigure(name=fname_kmz,
+                    fname='_other_figures/Ruby_kmlfiles/%s' % fname_kmz)
+    fname_kmz = 'fgmax_results_Kalaloch_%s.kmz' % event
+    otherfigure = plotdata.new_otherfigure(name=fname_kmz,
+                    fname='_other_figures/Kalaloch_kmlfiles/%s' % fname_kmz)
 
 
     # Plots of timing (CPU and wall time):

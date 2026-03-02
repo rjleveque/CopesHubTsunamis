@@ -33,16 +33,18 @@ print ('root_dir printed by process_fgmax was: ',root_dir)
 print ('rundir printed by process_fgmax was: ',rundir)
 print (' ')
 
-def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
+def fgreport(fgno,rundir,outdir,plotdir,location,event,dtopofile,run_name):
 
     input_dir = os.path.join(rundir, 'input_files')
     fgmax_plotdir = plotdir + '/_other_figures'
     if not os.path.isdir(fgmax_plotdir):
-        os.mkdir(fgmax_fgmax_plotdir)
+        os.mkdir(fgmax_plotdir)
 
     save_figs = True             # make png files for figures?
     close_figs = True            # close big figures after saving?
 
+    print ('-----')
+    print('fgno is: ',fgno)
     print('Will read fgmax results from outdir = \n  ', outdir)
     print('Will send plots to fgmax_plotdir = \n  ', fgmax_plotdir)
     print('fgreport believes rundir is: ',rundir)
@@ -92,14 +94,20 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
     fg = fgmax_tools.FGmaxGrid()
     fgmax_input_file_name = outdir + '/fgmax_grids.data'
     print('fgmax input file: \n  %s' % fgmax_input_file_name)
-    fg.read_fgmax_grids_data(fgno=1, data_file=fgmax_input_file_name)
+    fg.read_fgmax_grids_data(fgno=fgno, data_file=fgmax_input_file_name)
     fg.read_output(outdir=outdir, indexing='xy')
     fg.tstart_max
 
 
     # ### Read B0 from special run:
 
-    fname = input_dir + '/%s_B0.asc' %location
+    if (fgno==1):
+        B0_name = 'Hoh'
+    elif (fgno==2):
+        B0_name = 'Ruby'
+    else:
+        B0_name = 'Kalaloch'
+    fname = input_dir + '/%s_B0.asc' %B0_name
     topoB0 = topotools.Topography()
     topoB0.read(fname, topo_type=3)
     B0 = topoB0.Z
@@ -171,7 +179,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
     plotZ(fg.B, show_cb=True)
     title('GeoClaw B after quake');
     tight_layout()
-    savefigp('geoclaw_topo.png')
+    savefigp(B0_name + '_' + 'geoclaw_topo.png')
 
 
     onshore = fg.B0 >  0.
@@ -216,7 +224,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
     xticks(rotation=20)
     title('Maximum onshore flow depth over %.2f hours' % t_hours)
     #plot([xves],[yves],'kx',markersize=10)
-    savefigp('h_onshore.png')
+    savefigp(B0_name + '_' + 'h_onshore.png')
 
     #### Plot maximum speed
     #bounds_speed = np.array([1e-6,0.5,1.0,1.5,2,3,4.5,6])
@@ -243,7 +251,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
     xticks(rotation=20)
     title('Maximum speed over %.2f hours' % t_hours)
     #plot([xves],[yves],'kx',markersize=10)
-    savefigp('speed.png')
+    savefigp(B0_name + '_' + 'speed.png')
 
     #### Plot maximum eta_offshore
     #bounds_eta = array([0,0.5,1.0,1.5,2,4.0,6.0])
@@ -268,7 +276,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
     xticks(rotation=20)
     title('Maximum offshore surface eta over %.2f hours' % t_hours)
     #plot([xves],[yves],'kx',markersize=10)
-    savefigp('eta_offshore.png')
+    savefigp(B0_name + '_' + 'eta_offshore.png')
 
     ### Plots for Google Earth overlays
     # 
@@ -280,7 +288,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
     # file that can be used to open all three.
 
     if 1:
-        kml_dir = fgmax_plotdir + '/kmlfiles'
+        kml_dir = fgmax_plotdir + '/' + 'B0_name' +'_' + 'kmlfiles'
         print('Will send kml file and plots to kml_dir = \n  ', kml_dir)
         os.system('mkdir -p %s' % kml_dir);
 
@@ -346,7 +354,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
         cb_names = ['colorbar_depth', 'colorbar_speed',
                     'colorbar_eta']
 
-        name = 'fgmax_%s_%s' % (location,event)
+        name = 'fgmax_%s_%s' % (B0_name,event)
         fname = os.path.join(kml_dir, name+'.kml')
         kmltools.png2kml(png_extent,png_files=png_files,png_names=png_names, 
                          name=name,fname=fname,
@@ -362,7 +370,7 @@ def fgreport(rundir,outdir,plotdir,location,event,dtopofile,run_name):
         for file in files:
             print('    %s' % os.path.split(file)[-1])
 
-            fname_kmz = 'fgmax_results_%s_%s.kmz' % (location,event)
+            fname_kmz = 'fgmax_results_%s_%s.kmz' % (B0_name,event)
             with zipfile.ZipFile(fname_kmz, 'w') as zip:
                 for file in files:
                     zip.write(file) 
