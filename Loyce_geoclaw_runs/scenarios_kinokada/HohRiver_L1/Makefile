@@ -7,21 +7,24 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 #   make .help
 # at the unix prompt.
 
-# Environment variable CHT should be set to point to the
-# top of git repository, in order to use the same executable in all directories.
-CHT ?= $(CURDIR)
-EXE ?= $(CHT)/Loyce_geoclaw_runs/xgeoclaw-CHTshare
-# Note ?= since on HPC machine EXE might be set in slurm script instead
+
+# on laptop, set SCRATCH to CURDIR so _output is in run directory
+SCRATCH = $(CURDIR)
+
+# on TACC this redirects output to scratch disk: 
+SCRATCH = $(subst /home1/,/scratch/,$(CURDIR))
 
 
 # Adjust these variables if desired:
 # ----------------------------------
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
+EXE = /work2/04137/rjl/CHTshare/clawpack-CHTshare/tacc/xgeoclaw_260113
+
 SETRUN_FILE = setrun_case.py        # File containing function to make data
-OUTDIR = _output                    # Directory for output
+OUTDIR = $(SCRATCH)/_output         # Directory for output
 SETPLOT_FILE = setplot_case.py      # File containing function to set plots
-PLOTDIR = _plots                    # Directory for plots
+PLOTDIR = $(SCRATCH)/_plots         # Directory for plots
 
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 

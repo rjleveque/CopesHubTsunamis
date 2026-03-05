@@ -16,36 +16,17 @@
 
 date # record start time
 
-# Set NPROCS from sbatch command and compute OMP_NUM_THREADS
-# so that NPROCS * OMP_NUM_THREADS <= 48 (number of cores per node)
 
-export NPROCS=$1
-if [ "$NPROCS" = "" ]; then
-    echo "SLURM ERROR -- Must specify NPROCS in sbatch command"
-    exit 1
-elif [ "$NPROCS" -gt 48 ]; then
-    echo "SLURM ERROR -- Must specify NPROCS <= 48"
-    exit 1
-else
-    export OMP_NUM_THREADS=$(( 48 / NPROCS ))
-    echo NPROCS = $NPROCS
-    echo OMP_NUM_THREADS = $OMP_NUM_THREADS
-fi
+export OMP_NUM_THREADS = 48  # for a single run with 1 dtopo file
 
-export FIRST_EVENT=$2
-export LAST_EVENT=$3
-
-# not needed, since not compiling fortran:
+# Note: executable xgeoclaw to use for Fortran is set by Makefile
+# These are not needed, since not compiling fortran:
 #export FC=ifx
 #export FFLAGS='-O2 -qopenmp'
 
 export CHT=$HOME/CopesHubTsunamis  # for this project
 
-# Note: executable xgeoclaw to use for Fortran is set by
-#       xgeoclaw_path in runclaw_makeplots_dtopos.py
-
 # version of geoclaw to use for Python code:
-#export CLAW=$HOME/clawpack_src/clawpack-v5.13.1
 export CLAW=/work2/04137/rjl/CHTshare/clawpack-share
 
 export PYTHONPATH=$CLAW
@@ -59,6 +40,9 @@ echo CLAW=$CLAW
 echo PYTHONPATH=$PYTHONPATH
 
 # commands to run:
-python runclaw_makeplots_dtopos.py $NPROCS $FIRST_EVENT $LAST_EVENT
+make scrdir  # create scratch directory
+make data    # using setrun_case.py
+make output  # using EXE set in Makefile
+make plots   # using setplot_case.py
 
 date # record end time
