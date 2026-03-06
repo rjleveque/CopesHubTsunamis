@@ -249,7 +249,7 @@ def setrun(claw_pkg='geoclaw', case={}):
         clawdata.num_output_times = 12
         #clawdata.num_output_times = 0
         #clawdata.tfinal = 4          #4 sec to find B0 with no dtopo
-        #clawdata.tfinal  = 20*60    #20 minute test on laptop
+        #clawdata.tfinal  = 2*60       #2 minute test to see if all is setup ok
         #clawdata.tfinal = 10*3600. 
         clawdata.tfinal = 6*3600. 
         #clawdata.tfinal = 1*3600. 
@@ -393,7 +393,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     elif abs(clawdata.checkpt_style) == 2:
         # Specify a list of checkpoint times.
-        clawdata.checkpt_times = 2*3600*np.arange(1,4,1)
+        clawdata.checkpt_times = 3*3600*np.arange(1,4,1)
 
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)
@@ -1010,9 +1010,10 @@ if __name__ == '__main__':
     #rundata = setrun('geoclaw', case={})
 
     # to make data with a specific single dtopofile:
+    case={}
     case['dtopofile'] = f'{CHTshare}/dtopo/CSZ_Tshirts/CSZ_L1-extended-pmel.tt3'
     case['dtopo_type'] = 3
-    rundata = setrun('geoclaw', case={})
+    rundata = setrun('geoclaw', case=case)
 
     rundata.write()
 
