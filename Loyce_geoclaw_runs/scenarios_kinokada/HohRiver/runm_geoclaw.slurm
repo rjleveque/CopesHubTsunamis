@@ -2,11 +2,11 @@
 #SBATCH -J job-run          # Job name
 #SBATCH -o job-run.o%j      # Name of stdout output file
 ##SBATCH -e job-run.e%j      # Name of stderr error file
-#SBATCH -p skx-dev          # Queue (partition) name
-##SBATCH -p skx              # Queue (partition) name
+##SBATCH -p skx-dev          # Queue (partition) name
+#SBATCH -p skx              # Queue (partition) name
 #SBATCH -N 1                # Total # of nodes 
 #SBATCH -n 1                # Total # of mpi tasks
-#SBATCH -t 02:00:00        # Run time (hh:mm:ss)
+#SBATCH -t 20:00:00        # Run time (hh:mm:ss)
 ##SBATCH -t 20:00:00         # Run time (hh:mm:ss)
 ##SBATCH --mail-user=username@tacc.utexas.edu
 ##SBATCH --mail-type=all    # Send email at begin and end of job

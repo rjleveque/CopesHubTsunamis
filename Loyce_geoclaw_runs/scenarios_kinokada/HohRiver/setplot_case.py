@@ -139,7 +139,7 @@ def setplot(plotdata, case):
     run_name = '%s_%s' % (location,event)
     print('In setplot: run_name = ',run_name)
 
-    if 0:
+    if 1:
         # call post-processing plot_gaugereport. This prints a .csv and a .txt file:
         plot_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
         print('plot_gaugereport finished')
@@ -160,7 +160,7 @@ def setplot(plotdata, case):
         process_fgmax.fgreport(fgno,rundir, outdir, plotdir, location, event, dtopofile, run_name)
         print('process_fgmax finished for fgno=3')
 
-    if 0:
+    if 1:
         # call the fgout animation
         make_fgout_Hoh.make_anim(outdir,plotdir,location,event)
         print('make_fgout_Hoh finished')
