@@ -493,7 +493,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     topofiles.append([3, f'{topo_dir}/etopo22_15s_-137_-121_37_55.asc'])
 
     # 1 arcsec topo:
-    topofiles.append([3, f'{topo_dir}/crm8a.asc'])
+    topofiles.append([3, f'{topo_dir}/crm8a_minus2m.asc'])
     
     # 1/3 arcsec topo:
     topofiles.append([3, f'{topo_dir}/Quillayute_13s.asc'])
