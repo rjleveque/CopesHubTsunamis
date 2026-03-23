@@ -29,10 +29,14 @@ location = 'Hoh' # set to site location if desired to use in plots/filenames
 # for a single dtopo run, need to set case dictionary here:
 # set here for TACC:
 CHTshare = '/work2/04137/rjl/CHTshare/CopesHubTsunamis'
-case_single['outdir'] = rundir.replace('/home1/','/scratch/')
-case_single['plotdir'] = plotdir.replace('/home1/','/scratch/')
+
+case_single={}
+case_single['outdir'] = rundir.replace('/home1/','/scratch/') + '/_output'
+plotdir = case_single['plotdir'] = rundir.replace('/home1/','/scratch/') + '/_plots'
 case_single['dtopofile'] = f'{CHTshare}/dtopo/CSZ_Tshirts/CSZ_L1-extended-pmel.tt3'
 
+print('case_single = ', case_single)
+os.system(f'mkdir -p {plotdir}/_other_figues')
 
 
 def get_cbshrink(extent):

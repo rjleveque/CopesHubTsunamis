@@ -129,7 +129,11 @@ def setrun(claw_pkg='geoclaw', case={}):
     # We will set the initial time step dt_initial and
     # dtopo_data.dt_max_dtopo differently for instant vs kinematic ruptures:
 
-    instant = 'instant' in event  # part of filename for static ruptures
+    #instant = 'instant' in event  # part of filename for static ruptures
+
+    # L1 is instant:
+    instant = True
+
     if instant:
         # instantaneous static rupture
         dt_max_dtopo = 0.25
@@ -393,7 +397,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     elif abs(clawdata.checkpt_style) == 2:
         # Specify a list of checkpoint times.
-        clawdata.checkpt_times = 3*3600*np.arange(1,4,1)
+        clawdata.checkpt_times = 1*3600*np.arange(1,12,1)
 
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)
