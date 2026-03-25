@@ -55,50 +55,33 @@ y = arange(40,50.0001,dy)
 
 print('Will create dtopo on arrays of shape %i by %i ...' % (len(x),len(y)))
 
+def load_fault(Nfault, event=None):
+    """
+    Nfault is a letter, 'M' for megathrust of 'A' thru 'F' for frontal faults
 
-# ## Read in the fault geometry:
+    If event is None, the fault will have subfault geometries set but
+    no slip, rake, etc. values
+    """
 
-faults_triangles = {}
-faults_vertices = {}
-faults = {}
+    fault = dtopotools.Fault(coordinate_specification='triangular')
+    fault.rupture_type = rupture_type
+    fault.subfaults = []
 
-# for megathrust fault M:
-datadir = '/Users/rjl/git/CopesHubTsunamis/dtopo/CSZ_groundmotions/scenarios_251229/source_models/'
+    if Nfault == 'M':
+        #datadir = '/Users/rjl/git/CopesHubTsunamis/dtopo/CSZ_groundmotions/scenarios_251229/source_models/'
+        geom_dir = '../scenarios_251229/jey_interp_code_forrandy/'
+        triangles = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.tri')
+        vertices = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.ned')
 
-geom_dir = '../scenarios_251229/jey_interp_code_forrandy/'
-faults_triangles['M'] \
-          = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.tri')  # list of triangles, 3 vertices
-faults_vertices['M'] \
-          = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.ned')  # list of vertices, lon-lat of each
+        # convert depth to positive depth in meters:
+        vertices[:,3] = -1000*vertices[:,3]
 
-#vertices[:,1] = vertices[:,1] - 360.  # shift to longitude W (not needed)
-# convert depth to positive depth in meters:
-faults_vertices['M'][:,3] = -1000*faults_vertices['M'][:,3]
+    else:
+        geom_dir = './gmsh_faults'
+        triangles = loadtxt(f'{geom_dir}/FT{Nfault}.tri')
+        vertices = loadtxt(f'{geom_dir}/FT{Nfault}.ned')
+        # depth is already positive and in meters
 
-# for frontal faults A through F:
-geom_dir = './gmsh_faults'
-
-frontal_faults = 'ABCDEF'
-#frontal_faults = 'A'  # to test
-
-for Nfault in frontal_faults:
-    faults_triangles[Nfault] = loadtxt(f'{geom_dir}/FT{Nfault}.tri')
-    faults_vertices[Nfault] = loadtxt(f'{geom_dir}/FT{Nfault}.ned')
-    #faults_vertices[Nfault][:,3] = -1000*faults_vertices[Nfault][:,3]
-
-
-
-# Create Fault with geometry, no slip yet:
-
-fault0 = dtopotools.Fault(coordinate_specification='triangular')
-fault0.rupture_type = rupture_type
-fault0.subfaults = []
-
-#for Nfault in 'MABCDEF':
-for Nfault in 'M' + frontal_faults:
-
-    triangles = faults_triangles[Nfault]
-    vertices = faults_vertices[Nfault]
     nsubfaults = triangles.shape[0]
 
     for j in range(nsubfaults):
@@ -111,60 +94,203 @@ for Nfault in 'M' + frontal_faults:
         node3 = vertices[jv,1:4]
         node_list = [node1, node2, node3]
         subfault0.set_corners(node_list,projection_zone='10')
-        fault0.subfaults.append(subfault0)
+        fault.subfaults.append(subfault0)
 
-    print(f'Included fault {Nfault} model with {nsubfaults} subfaults')
+    print(f'Loaded fault {Nfault} model with {nsubfaults} subfaults')
+
+    if 0:
+        # Check that orientation of triangles are all correct:
+        numpos = 0.
+        for s in fault0.subfaults:
+            c = array(s.corners)[:3,:2]
+            A = vstack([c[:,0], c[:,1], array([1,1,1])]).T
+            detA = np.linalg.det(A)
+            if detA > 0:
+                numpos += 1
+        if numpos > 0:
+            print('*** Warning, %i of the %i subfaults have counterclockwise orientation' \
+                    % (numpos, nsubfaults))
+        else:
+            print('All subfault triangles have clockwise orientation')
 
 
-    # ## Check that orientation of triangles are all correct:
+    if event is not None:
+        # Also set the slips on the subfaults
 
-    numpos = 0.
-    for s in fault0.subfaults:
-        c = array(s.corners)[:3,:2]
-        A = vstack([c[:,0], c[:,1], array([1,1,1])]).T
-        detA = np.linalg.det(A)
-        if detA > 0:
-            numpos += 1
-    if numpos > 0:
-        print('*** Warning, %i of the %i subfaults have counterclockwise orientation' \
-                % (numpos, nsubfaults))
-    else:
-        print('All subfault triangles have clockwise orientation')
+        if Nfault = 'M':
+            event_dir = './jey_interpolated_sources_frontalthrust'
 
-print(f'Created fault0 with total of {len(fault0.subfaults)} subfaults,')
-print('        without yet specifying slip for particular event')
+            # switch to Jey's notation:
 
+            event_jey = \
+                f'{event}_nosubs_scaleMoment_avgabovebelowslab_orig_smoothbelow9900m_correct'
+
+            basename = f'resampled_source_saved_{event_jey}.out'
+
+        else:
+            assert Nfault in 'ABCDEF', f'*** unrecognized Nfault = {Nfault}'
+
+            event_dir = './jey_interpolated_sources_frontalthrust'
+            event_dash = event.replace('ft_', 'ft-')
+            basename = f'resampled_source_{event_dash}_{Nfault}.out'
+
+        print('+++ in load_fault, loading slips for event = ', event)
+        print('+++ event_dir = ',event_dir)
+        print('+++ basename = ',basename)
+
+        # don't need slip in dip and strike directions separately, only magnitude
+
+        fname = f'mag_slip_{basename}'
+        mag_slip = loadtxt(os.path.join(event_dir, fname))[:,2]
+
+        print(f'Loaded fault {Nfault}, {len(mag_slip)} subfaults with ')
+        print(f'       maximum slip {abs(mag_slip).max():.2f}')
+
+        fname = f'rake_{basename}'
+        rake = loadtxt(os.path.join(event_dir, fname))[:,2]
+
+        assert len(rake) == nsubfaults, \
+            f'*** For subfault {Nfault}, len(rake) = {len(rake)},' \
+            + f'  Expected nsubfaults = {nsubfaults}'
+
+        if rupture_type == 'kinematic':
+            fname = f'rupt_time_{basename}'
+            rupt_time = loadtxt(os.path.join(event_dir, fname))[:,2]
+            fname = f'rise_time_{basename}'
+            rise_time = loadtxt(os.path.join(event_dir, fname))[:,2]
+            rupt_tfinal = (rupt_time + rise_time).max()
+
+        for j in range(nsubfaults):
+            subfault = fault.subfaults[j]
+            subfault.rake = rake[j]
+            subfault.slip = mag_slip[j]
+            subfault.mu = mu
+            if rupture_type == 'kinematic':
+                subfault.rupture_time = rupt_time[j]
+                subfault.rise_time = rise_time[j]
+                subfault.rise_shape = 'quadratic'  # correct?
+                subfault.rise_time_starting = None # correct?
+
+        slips = array([s.slip for s in fault.subfaults])
+        print('+++ max slip = %.2fm' % slips.max())
+        print('Set slip, created fault with Mw = %.2f' % fault.Mw())
+
+    return fault
 
 if 0:
-    # ## Plot triangulation in 3D:
-    fig = plt.figure(figsize=(15,10))
-    #ax = fig.add_subplot(121, projection='3d')
-    ax = fig.add_axes([.05,.05,.9,.9], projection='3d')
 
-    for s in fault0.subfaults:
-        c = s.corners
-        c.append(c[0])
-        c = np.array(c)
-        ax.plot(c[:,0],c[:,1],-c[:,2]/1000.,color='b')
-    ax.view_init(10,60)
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
-    ax.set_zlabel('Depth (km)')
-    ax.set_title('Triangular subfaults')
+    # put all faults together
 
-    #ax = fig.add_subplot(122)
-    #ax = fig.add_axes([.75,.05,.2,.9])
-    fig = figure(figsize=(10,15))
-    ax = axes()
-    for s in fault0.subfaults:
-        c = s.corners
-        c.append(c[0])
-        c = np.array(c)
-        ax.plot(c[:,0],c[:,1], 'b')
-    ax.set_aspect(1./np.cos(45*np.pi/180.))
-    ax.set_xlabel('Longitude')
-    ax.set_ylabel('Latitude')
-    ax.set_title('Plan view');
+    # ## Read in the fault geometry:
+
+    faults_triangles = {}
+    faults_vertices = {}
+    faults = {}
+
+    # megathrust fault M
+
+    datadir = '/Users/rjl/git/CopesHubTsunamis/dtopo/CSZ_groundmotions/scenarios_251229/source_models/'
+
+    geom_dir = '../scenarios_251229/jey_interp_code_forrandy/'
+    faults_triangles['M'] \
+              = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.tri')  # list of triangles, 3 vertices
+    faults_vertices['M'] \
+              = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.ned')  # list of vertices, lon-lat of each
+
+    #vertices[:,1] = vertices[:,1] - 360.  # shift to longitude W (not needed)
+    # convert depth to positive depth in meters:
+    faults_vertices['M'][:,3] = -1000*faults_vertices['M'][:,3]
+
+    # for frontal faults A through F:
+    geom_dir = './gmsh_faults'
+
+    frontal_faults = 'ABCDEF'
+    #frontal_faults = 'A'  # to test
+
+    for Nfault in frontal_faults:
+        faults_triangles[Nfault] = loadtxt(f'{geom_dir}/FT{Nfault}.tri')
+        faults_vertices[Nfault] = loadtxt(f'{geom_dir}/FT{Nfault}.ned')
+        #faults_vertices[Nfault][:,3] = -1000*faults_vertices[Nfault][:,3]
+
+
+
+    # Create Fault with geometry, no slip yet:
+
+    fault0 = dtopotools.Fault(coordinate_specification='triangular')
+    fault0.rupture_type = rupture_type
+    fault0.subfaults = []
+
+    #for Nfault in 'MABCDEF':
+    for Nfault in 'M' + frontal_faults:
+
+        triangles = faults_triangles[Nfault]
+        vertices = faults_vertices[Nfault]
+        nsubfaults = triangles.shape[0]
+
+        for j in range(nsubfaults):
+            subfault0 = dtopotools.SubFault()
+            jv = int(triangles[j,1]) - 1
+            node1 = vertices[jv,1:4]
+            jv = int(triangles[j,2]) - 1
+            node2 = vertices[jv,1:4]
+            jv = int(triangles[j,3]) - 1
+            node3 = vertices[jv,1:4]
+            node_list = [node1, node2, node3]
+            subfault0.set_corners(node_list,projection_zone='10')
+            fault0.subfaults.append(subfault0)
+
+        print(f'Included fault {Nfault} model with {nsubfaults} subfaults')
+
+
+        # ## Check that orientation of triangles are all correct:
+
+        numpos = 0.
+        for s in fault0.subfaults:
+            c = array(s.corners)[:3,:2]
+            A = vstack([c[:,0], c[:,1], array([1,1,1])]).T
+            detA = np.linalg.det(A)
+            if detA > 0:
+                numpos += 1
+        if numpos > 0:
+            print('*** Warning, %i of the %i subfaults have counterclockwise orientation' \
+                    % (numpos, nsubfaults))
+        else:
+            print('All subfault triangles have clockwise orientation')
+
+    print(f'Created fault0 with total of {len(fault0.subfaults)} subfaults,')
+    print('        without yet specifying slip for particular event')
+
+
+    if 0:
+        # ## Plot triangulation in 3D:
+        fig = plt.figure(figsize=(15,10))
+        #ax = fig.add_subplot(121, projection='3d')
+        ax = fig.add_axes([.05,.05,.9,.9], projection='3d')
+
+        for s in fault0.subfaults:
+            c = s.corners
+            c.append(c[0])
+            c = np.array(c)
+            ax.plot(c[:,0],c[:,1],-c[:,2]/1000.,color='b')
+        ax.view_init(10,60)
+        ax.set_xlabel('Longitude')
+        ax.set_ylabel('Latitude')
+        ax.set_zlabel('Depth (km)')
+        ax.set_title('Triangular subfaults')
+
+        #ax = fig.add_subplot(122)
+        #ax = fig.add_axes([.75,.05,.2,.9])
+        fig = figure(figsize=(10,15))
+        ax = axes()
+        for s in fault0.subfaults:
+            c = s.corners
+            c.append(c[0])
+            c = np.array(c)
+            ax.plot(c[:,0],c[:,1], 'b')
+        ax.set_aspect(1./np.cos(45*np.pi/180.))
+        ax.set_xlabel('Longitude')
+        ax.set_ylabel('Latitude')
+        ax.set_title('Plan view');
 
 
 # ## Functions for setting up an event and applying Okada:
@@ -197,12 +323,10 @@ def set_slip(fault0, event):
 
     # don't need slip in dip and strike directions separately, only magnitude
 
-    fname = \
-        f'mag_slip_resampled_source_saved_{event_jey}.out'
+    fname = f'mag_slip_resampled_source_saved_{event_jey}.out'
     mag_slip = loadtxt(os.path.join(event_dir, fname))[:,2]
 
-    fname = \
-        f'rake_resampled_source_saved_{event_jey}.out'
+    fname = f'rake_resampled_source_saved_{event_jey}.out'
     rake = loadtxt(os.path.join(event_dir, fname))[:,2]
 
     if rupture_type == 'kinematic':
@@ -254,6 +378,19 @@ def set_slip(fault0, event):
         assert len(rake) == nsubfaults, \
             f'*** For subfault {Nfault}, len(rake) = {len(rake)},' \
             + f'  Expected nsubfaults = {nsubfaults}'
+
+        if rupture_type == 'kinematic':
+            fname = f'rupt_time_resampled_source_{event_dash}_{Nfault}.out'
+            rupt_time = loadtxt(os.path.join(event_dir, fname))[:,2]
+            fname = f'rise_time_resampled_source_{event_dash}_{Nfault}.out'
+            rise_time = loadtxt(os.path.join(event_dir, fname))[:,2]
+            rupt_tfinal = (rupt_time + rise_time).max()
+            #fault.dtopo_times = arange(0, rupt_tfinal+10, 10)  # every 10 seconds
+        else:
+            fault.dtopo_times = [0.]  # only compute static displacement (instant)
+
+        print('+++ fault.rupture_type = %s, fault.dtopo_times = %s' \
+                    % (fault.rupture_type, fault.dtopo_times))
 
         for j in range(nsubfaults):
             subfault = fault.subfaults[js]
