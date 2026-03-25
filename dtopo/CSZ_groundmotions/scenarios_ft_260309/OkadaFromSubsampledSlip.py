@@ -41,8 +41,9 @@ mu = 30e9  # rigidity = shear modulus (in Pascals)
 # where to find files:
 if '/home1/' in os.getcwd():
     # on TACC
-    proj_dir = '/corral/projects/NHERI/projects/7f2e74be-d7ca-4e0e-b69a-22c24840b078/CSZ_groundmotions/scenarios_for_tsunami_modeling/'
-    geom_dir_M = f'{proj_dir}/scenarios_251229/jey_interp_code_forrandy'
+    #proj_dir = '/corral/projects/NHERI/projects/7f2e74be-d7ca-4e0e-b69a-22c24840b078/CSZ_groundmotions/scenarios_for_tsunami_modeling/'
+    proj_dir = '/work2/04137/rjl/stampede3/scenarios_for_tsunami_modeling'  # when running on stampede
+    geom_dir_M = f'{proj_dir}/jey_interp_code_forrandy'
     geom_dir = f'{proj_dir}/source_models/gmsh_faults'
     event_dir = f'{proj_dir}/source_models/jey_interpolated_sources_frontalthrust'
 else:
@@ -243,8 +244,8 @@ def make_all_cases_okada():
         ['ft_locking-mur13', 'ft_locking-skl16', 'ft_locking-str10',
          'ft_random-mur13',  'ft_random-skl16',  'ft_random-str10']
 
-    #models = all_models
-    models = all_models[:1]
+    models = all_models
+    #models = all_models[:1]
     events = ['%s-deep' % model for model in models] \
            + ['%s-middle' % model for model in models] \
            + ['%s-shallow' % model for model in models]
@@ -369,9 +370,9 @@ if __name__ == '__main__':
     caselist = make_all_cases_okada()
     print('Will run for events:')
     for case in caselist:
-        print(f'    {case['fault'].event}')
+        print(f"    {case['fault'].event}")
 
-    nprocs = 3
+    nprocs = 18
     run_many_cases_pool(caselist, nprocs, run_one_case_okada)
 
     if dry_run:
