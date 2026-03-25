@@ -38,6 +38,18 @@ mu = 30e9  # rigidity = shear modulus (in Pascals)
 # Note: the value of mu doesn't matter in Okada solution, only for computing Mw
 # Okada depends only on Poisson ratio which is set to 0.25 by default.
 
+# where to find files:
+if '/home1/' in os.getcwd():
+    # on TACC
+    proj_dir = '/corral/projects/NHERI/projects/7f2e74be-d7ca-4e0e-b69a-22c24840b078/CSZ_groundmotions/scenarios_for_tsunami_modeling/'
+    geom_dir_M = f'{proj_dir}/scenarios_251229/jey_interp_code_forrandy'
+    geom_dir = f'{proj_dir}/source_models/gmsh_faults'
+    event_dir = f'{proj_dir}/source_models/jey_interpolated_sources_frontalthrust'
+else:
+    # RJL laptop
+    geom_dir_M = '../scenarios_251229/jey_interp_code_forrandy'
+    geom_dir = './gmsh_faults'
+    event_dir = './jey_interpolated_sources_frontalthrust'
 
 def load_fault(Nfault, event=None):
     """
@@ -54,16 +66,16 @@ def load_fault(Nfault, event=None):
     fault.subfaults = []
 
     if Nfault == 'M':
-        geom_dir = '../scenarios_251229/jey_interp_code_forrandy/'
-        triangles = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.tri')
-        vertices = loadtxt(geom_dir+'JK_cas_fine_mesh_updip_modified.ned')
+        #geom_dir = '../scenarios_251229/jey_interp_code_forrandy/'
+        triangles = loadtxt(f'{geom_dir_M}/JK_cas_fine_mesh_updip_modified.tri')
+        vertices = loadtxt(f'{geom_dir_M}/JK_cas_fine_mesh_updip_modified.ned')
 
         # convert depth to positive depth in meters:
         vertices[:,3] = -1000*vertices[:,3]
 
     else:
         assert Nfault in 'ABCDEF', f'*** unrecognized Nfault = {Nfault}'
-        geom_dir = './gmsh_faults'
+        #geom_dir = './gmsh_faults'
         triangles = loadtxt(f'{geom_dir}/FT{Nfault}.tri')
         vertices = loadtxt(f'{geom_dir}/FT{Nfault}.ned')
         # depth is already positive and in meters
@@ -105,7 +117,7 @@ def load_fault(Nfault, event=None):
         print(f'+++ setting slips for event {event}')
 
         if Nfault == 'M':
-            event_dir = './jey_interpolated_sources_frontalthrust'
+            #event_dir = './jey_interpolated_sources_frontalthrust'
 
             event_jey = \
                 f'{event}_nosubs_scaleMoment_avgabovebelowslab_orig_smoothbelow9900m_correct'
@@ -117,13 +129,13 @@ def load_fault(Nfault, event=None):
         else:
             assert Nfault in 'ABCDEF', f'*** unrecognized Nfault = {Nfault}'
 
-            event_dir = './jey_interpolated_sources_frontalthrust'
+            #event_dir = './jey_interpolated_sources_frontalthrust'
             event_dash = event.replace('ft_', 'ft-')
             basename = f'resampled_source_{event_dash}_{Nfault}.out'
 
-        #print('+++ in load_fault, loading slips for event = ', event)
-        #print('+++ event_dir = ',event_dir)
-        #print('+++ basename = ',basename)
+        print('+++ in load_fault, loading slips for event = ', event)
+        print('+++ event_dir = ',event_dir)
+        print('+++ basename = ',basename)
 
         # don't need slip in dip and strike directions separately, only magnitude
 
