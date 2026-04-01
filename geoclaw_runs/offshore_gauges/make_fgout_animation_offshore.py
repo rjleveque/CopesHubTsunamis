@@ -23,7 +23,7 @@ format = 'binary'  # format of fgout grid output
 
 #fgframes = range(1,241)  # frames of fgout solution to use in animation
 #fgframes = range(1,81)  # 40 minutes
-fgframes = range(1,82,2)
+fgframes = range(1,482,10)
 
 def make_anim(outdir, plotdir, location, event):
     figsize = (5,8)
