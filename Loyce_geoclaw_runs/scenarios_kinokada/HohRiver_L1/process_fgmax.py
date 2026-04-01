@@ -102,7 +102,8 @@ def fgreport(fgno,rundir,outdir,plotdir,location,event,dtopofile,run_name):
     # ### Read B0 from special run:
 
     if (fgno==1):
-        B0_name = 'Hoh'
+        #B0_name = 'Hoh'
+        B0_name = 'Hoh_forL1'
     elif (fgno==2):
         B0_name = 'Ruby'
     else:

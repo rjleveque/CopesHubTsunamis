@@ -250,7 +250,7 @@ def setrun(claw_pkg='geoclaw', case={}):
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Doing output frames every 15 minutes
-        clawdata.num_output_times = 12
+        clawdata.num_output_times = 24
         #clawdata.num_output_times = 0
         #clawdata.tfinal = 4          #4 sec to find B0 with no dtopo
         #clawdata.tfinal  = 2*60       #2 minute test to see if all is setup ok
@@ -868,8 +868,9 @@ def setrun(claw_pkg='geoclaw', case={}):
     #if the decimal part is a multiple of .1, or .01, .005, or .0025 for
     #example based on how the computational domain was shifted.  This
 
-    #Hoh Reservation
-    fgmax_extent=[-124.435,-124.4025,47.74,47.75]
+    #Hoh Reservation, made bigger for L1 run in the Hoh fgmax region
+    #fgmax_extent=[-124.435,-124.4025,47.74,47.75]
+    fgmax_extent=[-124.435,-124.395,47.735,47.75]
     if 1:
         # Points on a uniform 2d grid:
         dx_fine = 1./(3*3600.)  # grid resolution at finest level

@@ -83,7 +83,7 @@ topominmax[4] = (-10.,25.)
 shrink_colorbar[4] = get_cbshrink(fig_extent[4])
 
 fig_name[5] = 'Hoh Fgmax 1/3" Area'
-fig_extent[5] = (-124.435,-124.4025,47.74,47.75)
+fig_extent[5] = (-124.435,-124.395,47.735,47.75)
 var_minmax[5] = (-8.,8.)
 topominmax[5] = (-10.,25.)
 shrink_colorbar[5] = get_cbshrink(fig_extent[5])
