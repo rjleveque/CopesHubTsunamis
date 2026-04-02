@@ -36,7 +36,7 @@ plotdir = case_single['plotdir'] = rundir.replace('/home1/','/scratch/') + '/_pl
 case_single['dtopofile'] = f'{CHTshare}/dtopo/CSZ_Tshirts/CSZ_L1-extended-pmel.tt3'
 
 print('case_single = ', case_single)
-os.system(f'mkdir -p {plotdir}/_other_figues')
+os.system(f'mkdir -p {plotdir}/_other_figures')
 
 
 def get_cbshrink(extent):
