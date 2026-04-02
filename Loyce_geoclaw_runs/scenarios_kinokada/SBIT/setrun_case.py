@@ -779,7 +779,8 @@ def setrun(claw_pkg='geoclaw', case={}):
         fg.y2 = fgmax_extent[3] #- dx_fine/2.
         fg.dx = dx_fine
         #fg.tstart_max = 0                    #start here when finding B0
-        fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
+        #fg.tstart_max =  clawdata.t0 + 120   # when to start monitoring max values
+        fg.tstart_max =  clawdata.t0 + 20*60.   # when to start monitoring max values
         fg.tend_max = 1.e10         # when to stop monitoring max values
         fg.dt_check = 5.           # target time (sec) increment between updating
                                     # max values

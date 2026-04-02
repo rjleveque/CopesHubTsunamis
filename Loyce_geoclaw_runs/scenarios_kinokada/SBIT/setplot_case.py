@@ -126,11 +126,12 @@ def setplot(plotdata, case):
     run_name = '%s_%s' % (location,event)
     print('In setplot: run_name = ',run_name)
 
-    if 0:
+    if 1:
         # call post-processing plot_gaugereport. This prints a .csv and a .txt file:
         plot_gaugereport.report(outdir, plotdir, location, event, dtopofile, run_name)
         print('plot_gaugereport finished')
 
+    if 1:
         # call post-processing process_fgmax
         process_fgmax.fgreport(rundir, outdir, plotdir, location, event, dtopofile, run_name)
         print('process_fgmax finished')

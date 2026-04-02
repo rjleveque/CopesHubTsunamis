@@ -82,7 +82,7 @@ dry_run =  False  # If True, only print out settings, do not run GeoClaw
 #dry_run = True  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = False
+run_code = True
 make_plots = True
 
 
@@ -117,12 +117,11 @@ if 1:
     #dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
     instant = False
     # kinematic Okada versions of ruptures without subevents:
-    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/nosubevents_251229/dtopofiles'
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec_nosubevents_kinokada/dtopofiles'
 else:
     # static ruptures without subevents, using Okada:
     instant = True
-    #dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/scenarios_251229'  # loyce laptop
-    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/nosubevents_251229/dtopofiles'
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec_nosubevents_kinokada/dtopofiles'
 
 if computer == 'tacc':
     #dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
