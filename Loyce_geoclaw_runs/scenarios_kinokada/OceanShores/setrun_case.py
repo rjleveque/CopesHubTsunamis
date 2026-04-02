@@ -398,7 +398,7 @@ def setrun(claw_pkg='geoclaw', case={}):
 
     elif abs(clawdata.checkpt_style) == 2:
         # Specify a list of checkpoint times.
-        clawdata.checkpt_times = 5*3600*np.arange(1,4,1)
+        clawdata.checkpt_times = 3*3600*np.arange(1,4,1)
 
     elif abs(clawdata.checkpt_style) == 3:
         # Checkpoint every checkpt_interval timesteps (on Level 1)
