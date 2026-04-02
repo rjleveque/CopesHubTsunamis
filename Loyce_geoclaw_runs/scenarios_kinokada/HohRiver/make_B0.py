@@ -3,10 +3,13 @@ import os,sys
 from clawpack.geoclaw import topotools
 from clawpack.geoclaw import fgmax_tools
 
-### There are 3 fgmax files
-fgname=['Hoh_B0.asc','Ruby_B0.asc','Kalaloch_B0.asc']
+### There are 3 fgmax files for the Copes Hub Runs
+#fgname=['Hoh_B0.asc','Ruby_B0.asc','Kalaloch_B0.asc']
 
-outdir0 = '_outputB0'
+### Made a new Hoh file for L1, as it needed to be bigger
+fgname=['Hoh_forL1_B0.asc']
+
+outdir0 = '_output_B0_forL1'
 
 print('Using output from outdir0 = ',outdir0)
 
@@ -15,7 +18,8 @@ fgmax_input_file_name = outdir0 + '/fgmax_grids.data'
 print('fgmax input file: \n  %s' % fgmax_input_file_name)
 
 ###### Loop over the fgmax grids
-for fgno in [1,2,3]:
+#for fgno in [1,2,3]:
+for fgno in [1]:
     fg0 = fgmax_tools.FGmaxGrid()
     fg0.read_fgmax_grids_data(fgno=fgno, data_file=fgmax_input_file_name)
 
