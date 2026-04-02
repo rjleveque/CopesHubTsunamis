@@ -6,8 +6,8 @@
 #SBATCH -p skx              # Queue (partition) name
 #SBATCH -N 1                # Total # of nodes 
 #SBATCH -n 1                # Total # of mpi tasks
-#SBATCH -t 20:00:00        # Run time (hh:mm:ss)
-##SBATCH -t 20:00:00         # Run time (hh:mm:ss)
+##SBATCH -t 2:00:00          # Run time (hh:mm:ss)
+#SBATCH -t 20:00:00         # Run time (hh:mm:ss)
 ##SBATCH --mail-user=username@tacc.utexas.edu
 ##SBATCH --mail-type=all    # Send email at begin and end of job
 #SBATCH -A DS-portal-lma3   # Allocation name (req'd if you have more than 1)

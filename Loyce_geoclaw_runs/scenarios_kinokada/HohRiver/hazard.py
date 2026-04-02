@@ -7,9 +7,11 @@ matplotlib.use('Agg')  # Use an image backend
 #########  FIX for TACC
 #The program should be run from location_dir on the command line: python hazard.py > output_hazard.txt
 #On tacc, need to get location_dir set to the directory where geoclaw_plots is (on the scratch directory).
-root_dir = os.environ['CHT']
-location_dir = root_dir +\
-     '/Loyce_geoclaw_runs/scenarios_kinokada/HohRiver'	
+#root_dir = os.environ['CHT']
+#location_dir = root_dir +\
+#     '/Loyce_geoclaw_runs/scenarios_kinokada/HohRiver'
+
+location_dir = os.getcwd()
 ########
 
 #########  Set these parameters

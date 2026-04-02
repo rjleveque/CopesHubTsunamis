@@ -117,16 +117,16 @@ if 1:
     #dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec/dtopofiles'
     instant = False
     # kinematic Okada versions of ruptures without subevents:
-    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/nosubevents_251229/dtopofiles'
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec_nosubevents_kinokada/dtopofiles'
 else:
     # static ruptures without subevents, using Okada:
     instant = True
-    #dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/scenarios_251229'  # loyce laptop
-    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/nosubevents_251229/dtopofiles'
+    dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/dtopo30sec_nosubevents_kinokada/dtopofiles'
 
 if computer == 'tacc':
     #dtopo_dir = dtopo_dir.replace('/home1', '/scratch')
     dtopo_dir = dtopo_dir.replace(HOME, '/work2/04137/rjl/CHTshare/')
+
 
 print('scratch_dir = ',scratch_dir)
 print('dtopo_dir = ',dtopo_dir)
