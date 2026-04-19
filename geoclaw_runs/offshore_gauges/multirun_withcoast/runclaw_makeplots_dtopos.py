@@ -88,8 +88,8 @@ if 0:
 dry_run = False  # If True, only print out settings, do not run GeoClaw
 
 # what to do:
-run_code = False
-make_plots = True
+run_code = True 
+make_plots = False
 
 
 # location for big files for different computer environments:
