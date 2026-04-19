@@ -66,7 +66,7 @@ nogauges = len(ID)
 
 ####   WILL BE CHANGING THE MEANING.  Looking over all the gauge reports,
 ####   Will need to know all the distinct achieved levels for a particular
-####   gauge.  Each gauge was run with 36 events (well, 18 here), so that
+####   gauge.  Each gauge was run with 36 events, so that
 ####   is the maximum that the no_hbar_vals can be for each gauge.  Could
 ####   be a different number for each gauge though.
 #      Set the no_hbar_vals and the hbar_vals, will not have to be the same 
@@ -204,7 +204,7 @@ def prob(qoi,P,ID,event_stem,instant):
             #This is the achieved inundation for gauge igauge from event j
             qoi_thisgauge = qoi[igauge,j]  
 
-            #Calculate the probability of exceedance fpr all the achieved values,
+            #Calculate the probability of exceedance for all the achieved values,
             #including 0.0 and .2 beyond the largest achieved value.
 
             pbar_thisgauge = zeros(no_hbar_vals)
