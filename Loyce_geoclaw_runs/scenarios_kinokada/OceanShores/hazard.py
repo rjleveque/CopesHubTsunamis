@@ -126,7 +126,7 @@ for j in range(noevents):
     ### numbering at 0 with python.  Here qoi_column=6 corresponded to hmh0
     ### in the gauges report.
 
-    qoi[:,j]=loadtxt(report_file,delimiter=',',skiprows=4,usecols=(6),\
+    qoi[:,j]=loadtxt(report_file,delimiter=',',skiprows=4,usecols=(qoi_column),\
                     unpack=True)
 
     #make subdirectory under location_hazard_csv for info for each event
