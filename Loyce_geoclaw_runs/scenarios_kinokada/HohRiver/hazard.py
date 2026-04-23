@@ -124,9 +124,9 @@ for j in range(noevents):
     ### for this event j for all gauges (one gauge per row of qoi) by
     ### choosing the correct column using usecols.  Columns start their
     ### numbering at 0 with python.  Here qoi_column=6 corresponded to hmh0
-    ### in the gauges report.
+    ### in the gauges report, and qoi_column=5 corresponds to hmax
 
-    qoi[:,j]=loadtxt(report_file,delimiter=',',skiprows=4,usecols=(6),\
+    qoi[:,j]=loadtxt(report_file,delimiter=',',skiprows=4,usecols=(qoi_column),\
                     unpack=True)
 
     #make subdirectory under location_hazard_csv for info for each event
