@@ -172,6 +172,7 @@ def prob(qoi,P,ID,event_stem,instant):
         achieved=zeros(noevents)
         achieved=qoi[igauge,:]
         achieved=sort(achieved)
+        len_achieved=len(achieved)
         last = achieved[-1] + .2         #go .2 inundation more than the max achieved
         if (achieved[0] == 0.0):
             no_hbar_vals = noevents + 1
