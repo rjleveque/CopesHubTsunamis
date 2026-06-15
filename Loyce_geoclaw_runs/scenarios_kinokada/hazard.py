@@ -18,7 +18,7 @@ location_dir = os.getcwd()
 #location_dir = root_dir +\
 #     '/Loyce_geoclaw_runs/scenarios_kinokada/OS_tacc_26-02-04'	
 
-location = 'Hoh'
+location = 'OceanShores'
 
 ### Set the names of the earthquake events for analysis
 event_stem1=['BL10D','BL10M','BL10S','BL13D',\
@@ -35,8 +35,8 @@ event_stem = event_stem1 + event_stem2 + event_stem3 + event_stem4
 ### where the qoi (quantity of interest) is for the probability analysis
 ### Columns are numbered 0, 1, 2, etc.  Column 5 is hmax, for example. 
 ### Column 6 is hmax-h0
-qoi_column = 5
-qoi_title = 'Exceedance levels of hmax in meters'
+qoi_column = 6
+qoi_title = 'Exceedance levels of hmax-h0 in meters'
 ##########
 
 ########### Should not have to change below this line,
@@ -124,9 +124,9 @@ for j in range(noevents):
     ### for this event j for all gauges (one gauge per row of qoi) by
     ### choosing the correct column using usecols.  Columns start their
     ### numbering at 0 with python.  Here qoi_column=6 corresponded to hmh0
-    ### in the gauges report, and qoi_column=5 corresponds to hmax
+    ### in the gauges report.
 
-    qoi[:,j]=loadtxt(report_file,delimiter=',',skiprows=4,usecols=(qoi_column),\
+    qoi[:,j]=loadtxt(report_file,delimiter=',',skiprows=4,usecols=(6),\
                     unpack=True)
 
     #make subdirectory under location_hazard_csv for info for each event
@@ -172,7 +172,6 @@ def prob(qoi,P,ID,event_stem,instant):
         achieved=zeros(noevents)
         achieved=qoi[igauge,:]
         achieved=sort(achieved)
-        len_achieved=len(achieved)
         last = achieved[-1] + .2         #go .2 inundation more than the max achieved
         if (achieved[0] == 0.0):
             no_hbar_vals = noevents + 1
