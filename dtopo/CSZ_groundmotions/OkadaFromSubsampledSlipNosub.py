@@ -4,11 +4,28 @@
 """
 $CHT/dtopo/CSZ_groundmotions/OkadaFromSubsampledSlipNosub.py
 
-Refactored code to handle Frontal Thrust events with 6 frontal faults
-labeled A,B,C,D,E,F as well as the megathrust (now called Fault 'M'),
-or the buried ruptures which only have the megathurst.
+Code to apply the static and/or kinematic Okada method to generate
+seafloor deformation files (in the form of GeoClaw dtopo files).
+The kinematic deformation is computed by applying the Okada model
+to each subfault and introducing the resulting seafloor deformation
+into the total time-dependent deformation based on the rupture time
+and rise time of the subfault.  The static deformation is the final
+deformation based on combining the deformation due to the full slip
+of each subfault.
 
-To run for a set of events, modify make_cases to specify the set of events
+This is applied to a version of the 36 Cascadia CoPes Hub sources
+that have been modified to remove the subevents originally introduced
+for high-frequency seismic shaking, but that led to non-physical
+uplift/subsidence values in some coastal regions. The slip on these
+subevents was redistributed to obtain sources more appropriate
+for tsunami modeling, as described in [citation].
+See also https://depts.washington.edu/ptha/CHTuser/docs/seismic-and-tsunami-sources/
+
+This code handles both the Frontal Thrust events with 6 frontal faults
+labeled A,B,C,D,E,F as well as the megathrust (now called Fault 'M'),
+and the buried ruptures which only have the megathurst.
+
+To run for a set of events, modify make_cases to specify the set of events,
 and also specify rupture_type, to make 'static' or 'kinematic'.
 
 The resulting dtopo files will be put in dtopo_dir and will have names like:
@@ -35,12 +52,28 @@ This code requires the following directories and input files:
         rake_FL10D_M.out
         rupture_time_FL10D_M.out
         rise_time_FL10D_M.out
-        mag_slip_FL10D_#.out  for # in 'ABCDEF'
-        rake_FL10D_#.out
-        rupture_time_FL10D_#.out
-        rise_time_FL10D_#.out
+        mag_slip_FL10D_X.out      for X in 'ABCDEF'
+        rake_FL10D_X.out          for X in 'ABCDEF'
+        rupture_time_FL10D_X.out  for X in 'ABCDEF'
+        rise_time_FL10D_X.out     for X in 'ABCDEF'
         and similarly for 7 other F events
 
+The following values should be checked before running:
+ - data_dir, geom_dir, event_dir, dtopo_dir (paths to directories)
+ - dry_run, test_subset (for testing)
+ - rupture_type  ('static' or 'kinematic')
+ - dx, dy and spatial extent of output dtopo grid (set in make_dtopo)
+ - dt_dtopo (time increment for kinematic dtopo, set in make_dtopo)
+ - list of events to work on (set in make_all_cases_okada)
+ - nprocs (in main, number of events to do in parallel)
+
+
+Functions included:
+ - load_fault
+ - combine_faults
+ - make_dtopo
+ - make_all_cases_okada
+ - run_one_case_okada
 
 """
 
@@ -61,8 +94,9 @@ CHTtools = fullpath_import(f'{CHTuser}/src/CHTuser/CHTtools.py')
 CHT = os.environ['CHT']   # assuming environment variable set
 multip_tools = fullpath_import(f'{CHT}/common_code/multip_tools.py')
 
+rupture_type = 'kinematic'  # set to 'static' or 'kinematic'
 
-dry_run = True  # if True, just print event names
+dry_run = False  # if True, just print event names
 test_subset = True  # if True, use a subset of subfaults so it runs quickly
 
 # where to find input files:
@@ -75,8 +109,9 @@ dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/CSZ_subsampled_dtopofiles'
 os.system(f'mkdir -p {dtopo_dir}')
 
 mu = 30e9  # rigidity = shear modulus (in Pascals)
-# Note: the value of mu doesn't matter in Okada solution, only for computing Mw
-# Okada depends only on Poisson ratio which is set to 0.25 by default.
+# Note: the value of mu doesn't matter in Okada solution,
+#       only for computing Mw.  Okada depends only on Poisson ratio
+#       which is set to 0.25 by default.
 
 def load_fault(Nfault, event=None):
     """
@@ -228,11 +263,11 @@ def make_dtopo(fault):
     else:
         assert fault.rupture_type in ['kinematic','dynamic'], \
                 f'*** Unrecognized rupture_type = {fault.rupture_type}'
-
+        dt_dtopo = 10 # time increment for kinematic snapshots (seconds)
         rupt_times = array([s.rupture_time for s in fault.subfaults])
         rise_times = array([s.rise_time for s in fault.subfaults])
         rupt_tfinal = (rupt_times + rise_times).max()
-        fault.dtopo_times = arange(0, rupt_tfinal+10, 10)  # every 10 seconds
+        fault.dtopo_times = arange(0, rupt_tfinal+dt_dtopo, dt_dtopo)
 
     # Apply Okada to all subfaults to create deformation dtopo.dZ:
     dtopo = fault.create_dtopography(x,y,times=fault.dtopo_times,verbose=100)
@@ -282,7 +317,7 @@ def make_all_cases_okada():
             fault = combine_faults('MABCDEF', event=event)
 
         # Set desired rupture_type 'kinematic' or 'static':
-        fault.rupture_type = 'kinematic'
+        fault.rupture_type = rupture_type  # set at top of file
 
         try:
             fault.event = CHTtools.shortname(event) # e.g. convert to 'FL13D'
