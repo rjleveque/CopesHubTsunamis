@@ -2,7 +2,7 @@
 # coding: utf-8
 
 """
-$CHT/dtopo/CSZ_groundmotions/OkadaFromSubsampledSlipNosub.py
+OkadaFromSubsampledSlipNosub.py
 
 Code to apply the static and/or kinematic Okada method to generate
 seafloor deformation files (in the form of GeoClaw dtopo files).
@@ -62,6 +62,7 @@ The following values should be checked before running:
  - data_dir, geom_dir, event_dir, dtopo_dir (paths to directories)
  - dry_run, test_subset (for testing)
  - rupture_type  ('static' or 'kinematic')
+ - events (list of events to process, set in make_all_cases_okada)
  - dx, dy and spatial extent of output dtopo grid (set in make_dtopo)
  - dt_dtopo (time increment for kinematic dtopo, set in make_dtopo)
  - list of events to work on (set in make_all_cases_okada)
@@ -75,37 +76,38 @@ Functions included:
  - make_all_cases_okada
  - run_one_case_okada
 
+Requires:
+
+The Clawpack software provides the Okada model and tools to construct the
+dtopo files.  See www.clawpack.org to install.
+
 """
 
 from pylab import *
 from clawpack.geoclaw import dtopotools
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+
 import numpy as np
 import copy
 import os,sys
 from multiprocessing import current_process
-
-from clawpack.clawutil.util import fullpath_import
-CHTuser = os.environ['CHTuser']
-CHTtools = fullpath_import(f'{CHTuser}/src/CHTuser/CHTtools.py')
-
-# top level directory for this project:
-CHT = os.environ['CHT']   # assuming environment variable set
-multip_tools = fullpath_import(f'{CHT}/common_code/multip_tools.py')
+from clawpack.clawutil import multip_tools
 
 rupture_type = 'kinematic'  # set to 'static' or 'kinematic'
 
-dry_run = False  # if True, just print event names
+dry_run = True  # if True, just print event names and paths
 test_subset = True  # if True, use a subset of subfaults so it runs quickly
 
 # where to find input files:
-data_dir = f'{CHT}/dtopo/CSZ_groundmotions/'
+#data_dir = f'{CHT}/dtopo/CSZ_groundmotions/'  # for CHT project
+data_dir = '.'
 geom_dir = f'{data_dir}/CSZ_subsampled_geometry'
 event_dir = f'{data_dir}/CSZ_subsampled_events'
 
 # where to put output files:
-dtopo_dir = f'{CHT}/dtopo/CSZ_groundmotions/CSZ_subsampled_dtopofiles'
+dtopo_dir = f'{data_dir}/CSZ_subsampled_dtopofiles'
+
 os.system(f'mkdir -p {dtopo_dir}')
 
 mu = 30e9  # rigidity = shear modulus (in Pascals)
@@ -128,7 +130,7 @@ def load_fault(Nfault, event=None):
     fault.subfaults = []
 
     if Nfault == 'M':
-        # Megathrust (same geometry for buried and ft events)
+        # Megathrust (same geometry for buried and frontal thrust events)
         triangles = loadtxt(f'{geom_dir}/Megathrust.tri')
         vertices = loadtxt(f'{geom_dir}/Megathrust.ned')
 
@@ -176,12 +178,10 @@ def load_fault(Nfault, event=None):
 
     if event is not None:
         # Also set the slips on the subfaults
-        print(f'+++ setting slips for event {event}')
+        #print(f'+++ setting slips for event {event}')
 
-        event_short = CHTtools.shortname(event)
-
-        basename = f'{event_short}_{Nfault}.out'
-        print('+++ basename = ',basename)
+        basename = f'{event}_{Nfault}.out'
+        #print('+++ basename = ',basename)
 
         # don't need slip in dip and strike directions separately, only magnitude
 
@@ -229,8 +229,6 @@ def combine_faults(Nfaults='MABCDEF', event=None):
     If event is None, the fault will have subfault geometries set but
     no slip, rake, etc. values.
     """
-
-    print(f'+++ combining faults {Nfaults}')
 
     fault = load_fault(Nfaults[0], event)
 
@@ -287,50 +285,50 @@ def make_all_cases_okada():
 
     """
 
-    ft_models = \
-        ['ft_locking-mur13', 'ft_locking-skl16', 'ft_locking-str10',
-         'ft_random-mur13',  'ft_random-skl16',  'ft_random-str10']
+    # make a list of all 36 event names:
 
-    buried_models = \
-        ['buried_locking-mur13', 'buried_locking-skl16', 'buried_locking-str10',
-         'buried_random-mur13',  'buried_random-skl16',  'buried_random-str10']
+    depths = ['D','M','S']
 
-    models = buried_models + ft_models  # or specify a subset
+    # buried_locking events:
+    all_events = [f'BL10{depth}' for depth in depths] \
+               + [f'BL13{depth}' for depth in depths] \
+               + [f'BL16{depth}' for depth in depths] \
 
-    events = ['%s-deep' % model for model in models] \
-           + ['%s-middle' % model for model in models] \
-           + ['%s-shallow' % model for model in models]
+    # add random events:
+    all_events += [e.replace('L','R') for e in all_events]
 
-    # Test on a few events:
-    events = ['buried_locking-str10-deep','ft_locking-str10-deep']
+    # add frontal thrust events:
+    all_events += [e.replace('B','F') for e in all_events]
+
+    all_events.sort()
+
+    events = all_events  # 36 events
+
+    # Or test on a few events, e.g.:
+    #events = ['BL10S','FL10D']
+    events = all_events[:2]  # only run on first two
 
     # Create a list of the cases to be run:
     caselist = []
 
     for k,event in enumerate(events):
 
-        if event[:6] == 'buried':
-            # only the Megathrust:
+        if event[0] == 'B':
+            # buried event has only the Megathrust:
             fault = load_fault('M', event=event)
         else:
-            print(f'+++ will combine_faults for event = {event}')
+            # frontal thrust event has other faults:
             fault = combine_faults('MABCDEF', event=event)
 
         # Set desired rupture_type 'kinematic' or 'static':
         fault.rupture_type = rupture_type  # set at top of file
 
-        try:
-            fault.event = CHTtools.shortname(event) # e.g. convert to 'FL13D'
-        except:
-            fault.event = event
+        fault.event = event
 
         if fault.rupture_type == 'static':
             fault.event = fault.event + '_instant'
 
         case = {'num':k, 'fault':fault}
-
-        print("+++ in caselist, id(case['fault']) = %i, Mw = %.2f" \
-                % (id(case['fault']), case['fault'].Mw()))
 
         caselist.append(case)
 
@@ -427,6 +425,14 @@ if __name__ == '__main__':
     print('Will run for events:')
     for case in caselist:
         print(f"    {case['fault'].event}")
+
+    print('dtopo files will go to: ',dtopo_dir)
+
+    if test_subset:
+        # only for testing
+        print('WARNING: Using a small subset of subfaults for testing')
+        print('         Will not give correct dtopo files!')
+
 
     nprocs = 2
     multip_tools.run_many_cases_pool(caselist, nprocs, run_one_case_okada)
