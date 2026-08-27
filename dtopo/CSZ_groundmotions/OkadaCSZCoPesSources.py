@@ -2,7 +2,10 @@
 # coding: utf-8
 
 """
-OkadaFromSubsampledSlipNosub.py
+OkadaCSZCoPesSources.py
+
+Used to generate seafloor deformation files from fault parameters,
+to go with the data to be published on DesignSafe PRJ-6459 [add citation].
 
 Code to apply the static and/or kinematic Okada method to generate
 seafloor deformation files (in the form of GeoClaw dtopo files).
@@ -43,8 +46,10 @@ This code requires the following directories and input files:
 
     CSZ_events/
         BL10D_megathrust_source_model.csv
+        and similar files for the other 17 buried scenarios
 
         FL10D_X_source_model.csv    for X in 'ABCDEF'
+        and similar files for the other 17 frontal_thrust scenarios
 
 The following values should be checked before running:
  - data_dir, geom_dir, event_dir, dtopo_dir (paths to directories)
@@ -256,8 +261,18 @@ def make_dtopo(fault):
     # Apply Okada to all subfaults to create deformation dtopo.dZ:
     dtopo = fault.create_dtopography(x,y,times=fault.dtopo_times,verbose=100)
 
-    fname = f'{dtopo_dir}/{fault.event}.dtt3'
-    dtopo.write(fname, dtopo_type=3)
+    if 1:
+        # make standard ascii .dtt3 files:
+        # (for format, see https://www.clawpack.org/dtopo.html)
+        fname = f'{dtopo_dir}/{fault.event}.dtt3'
+        dtopo.write(fname, dtopo_type=3)
+    else:
+        # make much smaller compressed netCDF files directly:
+        # (this requires GeoClaw >= 5.16.0)
+        fname_nc_compressed = f'{dtopo_dir}/{fault.event}.nc'
+        dtopo.write(fname_nc_compressed, dtopo_type=4, compression=True)
+        print('Created ', f'{event}.nc')
+
     print('Created %s with %s displacement at %i times' \
             % (fname, fault.rupture_type, len(dtopo.times)))
     return dtopo
