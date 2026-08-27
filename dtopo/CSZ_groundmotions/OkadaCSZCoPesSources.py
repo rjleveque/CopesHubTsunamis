@@ -1,0 +1,430 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+"""
+OkadaFromSubsampledSlipNosub.py
+
+Code to apply the static and/or kinematic Okada method to generate
+seafloor deformation files (in the form of GeoClaw dtopo files).
+The kinematic deformation is computed by applying the Okada model
+to each subfault and introducing the resulting seafloor deformation
+into the total time-dependent deformation based on the rupture time
+and rise time of the subfault.  The static deformation is the final
+deformation based on combining the deformation due to the full slip
+of each subfault.
+
+This is applied to a version of the 36 Cascadia CoPes Hub sources
+that have been modified to remove the subevents originally introduced
+for high-frequency seismic shaking, but that led to non-physical
+uplift/subsidence values in some coastal regions. The slip on these
+subevents was redistributed to obtain sources more appropriate
+for tsunami modeling, as described in [citation in prep].
+See also https://depts.washington.edu/ptha/CHTuser/docs/seismic-and-tsunami-sources/
+
+This code handles both the Frontal Thrust events with 6 frontal faults
+labeled A,B,C,D,E,F as well as the megathrust (now called Fault 'M'),
+and the buried ruptures which only have the megathurst.
+
+To run for a set of events, modify make_cases to specify the set of events,
+and also specify rupture_type, to make 'static' or 'kinematic'.
+
+The resulting dtopo files will be put in dtopo_dir and will have names like:
+    BL10D.dtt3          for 'kinematic'
+    BL10D_instant.dtt3  for 'static'
+
+This code requires the following directories and input files:
+    (as subdirectories of data_dir, as specified in the code)
+
+    CSZ_geometry/
+        megathrust_mesh.tri  # triangles for Megathurst fault M
+        megathrust_mesh.ned  # connectivity for M
+        FTA.tri ... FTF.tri for frontal thrust faults A ... F
+        FTA.ned ... FTF.ned for frontal thrust faults A ... F
+
+    CSZ_events/
+        BL10D_megathrust_source_model.csv
+
+        FL10D_X_source_model.csv    for X in 'ABCDEF'
+
+The following values should be checked before running:
+ - data_dir, geom_dir, event_dir, dtopo_dir (paths to directories)
+ - dry_run, test_subset (for testing)
+ - rupture_type  ('static' or 'kinematic')
+ - events (list of events to process, set in make_all_cases_okada)
+ - dx, dy and spatial extent of output dtopo grid (set in make_dtopo)
+ - dt_dtopo (time increment for kinematic dtopo, set in make_dtopo)
+ - list of events to work on (set in make_all_cases_okada)
+ - nprocs (in main, number of events to do in parallel)
+
+
+Functions included:
+ - load_fault
+ - combine_faults
+ - make_dtopo
+ - make_all_cases_okada
+ - run_one_case_okada
+
+Requires:
+
+The Clawpack software provides the Okada model and tools to construct the
+dtopo files.  See www.clawpack.org to install.
+
+"""
+
+from pylab import *
+from clawpack.geoclaw import dtopotools
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+import numpy as np
+import pandas as pd
+import copy
+import os,sys
+from multiprocessing import current_process
+from clawpack.clawutil import multip_tools
+
+rupture_type = 'kinematic'  # set to 'static' or 'kinematic'
+
+dry_run = True  # if True, just print event names and paths
+test_subset = True  # if True, use a subset of subfaults so it runs quickly
+
+# where to find input files:
+data_dir = '.'#
+geom_dir = f'{data_dir}/CSZ_geometry'
+event_dir = f'{data_dir}/CSZ_events'
+
+# where to put output files:
+dtopo_dir = f'{data_dir}/CSZ_dtopofiles'
+
+os.system(f'mkdir -p {dtopo_dir}')
+
+mu = 30e9  # rigidity = shear modulus (in Pascals)
+# Note: the value of mu doesn't matter in Okada solution,
+#       only for computing Mw.  Okada depends only on Poisson ratio
+#       which is set to 0.25 by default.
+
+def load_fault(Nfault, event=None):
+    """
+    Nfault is a letter, 'M' for megathrust of 'A' thru 'F' for frontal faults
+
+    If event is None, the fault will have subfault geometries set but
+    no slip, rake, etc. values.
+
+    This loads one fault and is called repeated from combine_faults defined
+    below to create a single set of subfaults for 'M' and the frontal faults.
+    """
+
+    fault = dtopotools.Fault(coordinate_specification='triangular')
+    fault.subfaults = []
+
+    if Nfault == 'M':
+        # Megathrust (same geometry for buried and frontal thrust events)
+        triangles = np.loadtxt(f'{geom_dir}/megathrust_mesh.tri')
+        vertices = np.loadtxt(f'{geom_dir}/megathrust_mesh.ned')
+
+        # convert depth to positive depth in meters:
+        vertices[:,3] = -1000*vertices[:,3]
+
+    else:
+        # one of the frontal faults, only used for ft events
+        assert Nfault in 'ABCDEF', f'*** unrecognized Nfault = {Nfault}'
+        triangles = np.loadtxt(f'{geom_dir}/FT{Nfault}.tri')
+        vertices = np.loadtxt(f'{geom_dir}/FT{Nfault}.ned')
+        # depth is already positive and in meters
+
+    nsubfaults = triangles.shape[0]
+
+    for j in range(nsubfaults):
+        subfault0 = dtopotools.SubFault()
+        jv = int(triangles[j,1]) - 1
+        node1 = vertices[jv,1:4]
+        jv = int(triangles[j,2]) - 1
+        node2 = vertices[jv,1:4]
+        jv = int(triangles[j,3]) - 1
+        node3 = vertices[jv,1:4]
+        node_list = [node1, node2, node3]
+        subfault0.set_corners(node_list,projection_zone='10')
+        fault.subfaults.append(subfault0)
+
+    print(f'Loaded fault {Nfault} model with {nsubfaults} subfaults')
+
+    if 0:
+        # Check that orientation of triangles are all correct:
+        numpos = 0.
+        for s in fault0.subfaults:
+            c = array(s.corners)[:3,:2]
+            A = vstack([c[:,0], c[:,1], array([1,1,1])]).T
+            detA = np.linalg.det(A)
+            if detA > 0:
+                numpos += 1
+        if numpos > 0:
+            print('*** Warning, %i of the %i subfaults have counterclockwise orientation' \
+                    % (numpos, nsubfaults))
+        else:
+            print('All subfault triangles have clockwise orientation')
+
+
+    if event is not None:
+        # Also set the slips on the subfaults
+        #print(f'+++ setting slips for event {event}')
+
+        if Nfault == 'M':
+            basename = f'{event}_megathrust_source_model.csv'
+
+        else:
+            basename = f'{event}_{Nfault}_source_model.csv'
+
+        df_eq_mod = pd.read_csv(os.path.join(event_dir, basename))
+        mag_slip = df_eq_mod.slip.values
+        rupt_time = df_eq_mod.rupt_time.values
+        rise_time = df_eq_mod.rise_time.values
+        rake = df_eq_mod.rake.values
+
+        #print('+++ basename = ',basename)
+
+        # don't need slip in dip and strike directions separately, only magnitude
+
+        # assert len(rake) == nsubfaults, \
+        #     f'*** For subfault {Nfault}, len(rake) = {len(rake)},' \
+        #     + f'  Expected nsubfaults = {nsubfaults}'
+
+        rupt_tfinal = (rupt_time + rise_time).max()
+
+        for j in range(nsubfaults):
+            subfault = fault.subfaults[j]
+            subfault.rake = rake[j]
+            subfault.slip = mag_slip[j]
+            subfault.mu = mu
+            subfault.rupture_time = rupt_time[j]
+            subfault.rise_time = rise_time[j]
+            subfault.rise_shape = 'quadratic'  # correct?
+            subfault.rise_time_starting = None # correct?
+
+        #slips = array([s.slip for s in fault.subfaults])
+        print(f'For event {event}, fault {Nfault} has maximum slip ' \
+            + f'{abs(mag_slip).max():.2f} and Mw = {fault.Mw():.3f}')
+
+    return fault
+
+
+def combine_faults(Nfaults='MABCDEF', event=None):
+    """
+    Make a single fault that includes the subfaults from
+        the megathrust (if 'M' in Nfaults)
+        plus any frontal faults listed in Nfaults
+
+    If event is None, the fault will have subfault geometries set but
+    no slip, rake, etc. values.
+    """
+
+    fault = load_fault(Nfaults[0], event)
+
+    for Nfault in Nfaults[1:]:
+        next_fault = load_fault(Nfault, event)
+        # append all the subfaults of next_fault to those of fault:
+        fault.subfaults = fault.subfaults + next_fault.subfaults
+
+    print(f'After combining, fault has {len(fault.subfaults)} subfaults ' \
+        + f'with Mw = {fault.Mw():.3f}')
+
+    return fault
+
+
+def make_dtopo(fault):
+
+    # Grid for dtopo vertical deformations:
+    dx = dy = 30/3600.  # spatial resolution for dtopo file
+    #x,y = fault0.create_dtopo_xy(dx=dx)  # choose automatically
+
+    # use same x,y as in dtopo files made from ground motions:
+    x = np.arange(-128.5, -122.4999, dx)
+    y = np.arange(40,50.0001,dy)
+
+    print('Will create dtopo on arrays of shape %i by %i ...' % (len(x),len(y)))
+
+    if fault.rupture_type == 'static':
+        fault.dtopo_times = [1.]  # only compute static displacement (instant)
+    else:
+        assert fault.rupture_type in ['kinematic','dynamic'], \
+                f'*** Unrecognized rupture_type = {fault.rupture_type}'
+        dt_dtopo = 10 # time increment for kinematic snapshots (seconds)
+        rupt_times = np.array([s.rupture_time for s in fault.subfaults])
+        rise_times = np.array([s.rise_time for s in fault.subfaults])
+        rupt_tfinal = (rupt_times + rise_times).max()
+        fault.dtopo_times = np.arange(0, rupt_tfinal+dt_dtopo, dt_dtopo)
+
+    # Apply Okada to all subfaults to create deformation dtopo.dZ:
+    dtopo = fault.create_dtopography(x,y,times=fault.dtopo_times,verbose=100)
+
+    fname = f'{dtopo_dir}/{fault.event}.dtt3'
+    dtopo.write(fname, dtopo_type=3)
+    print('Created %s with %s displacement at %i times' \
+            % (fname, fault.rupture_type, len(dtopo.times)))
+    return dtopo
+
+
+def make_all_cases_okada():
+    """
+    Output: *caselist*, a list of cases to be run.
+    Each case should be dictionary of any parameters needed to set up an
+    individual case.  These will be used by run_one_case.
+
+    """
+
+    # make a list of all 36 event names:
+
+    depths = ['D','M','S']
+
+    # buried_locking events:
+    all_events = [f'BL10{depth}' for depth in depths] \
+               + [f'BL13{depth}' for depth in depths] \
+               + [f'BL16{depth}' for depth in depths] \
+
+    # add random events:
+    all_events += [e.replace('L','R') for e in all_events]
+
+    # add frontal thrust events:
+    all_events += [e.replace('B','F') for e in all_events]
+
+    all_events.sort()
+
+    events = all_events  # 36 events
+
+    # Or test on a few events, e.g.:
+    #events = ['BL10S','FL10D']
+    events = all_events[:2]  # only run on first two
+
+    # Create a list of the cases to be run:
+    caselist = []
+
+    for k,event in enumerate(events):
+
+        if event[0] == 'B':
+            # buried event has only the Megathrust:
+            fault = load_fault('M', event=event)
+        else:
+            # frontal thrust event has other faults:
+            fault = combine_faults('MABCDEF', event=event)
+
+        # Set desired rupture_type 'kinematic' or 'static':
+        fault.rupture_type = rupture_type  # set at top of file
+
+        fault.event = event
+
+        if fault.rupture_type == 'static':
+            fault.event = fault.event + '_instant'
+
+        case = {'num':k, 'fault':fault}
+
+        caselist.append(case)
+
+    return caselist
+
+
+def run_one_case_okada(case):
+    """
+    Input *case* should be a dictionary with any parameters needed to set up
+    and run a specific case.
+    """
+
+    num = case['num']
+    fault = case['fault']
+    event = fault.event
+    print('Now running case %i with event %s' % (num,event))
+
+    # This part shows how to redirect stdout so output from any
+    # print statements go to a unique file...
+    import sys
+    import datetime
+
+    redirect_output = True
+
+    message = ""
+    stdout_fname = 'case%s_out.txt' % case['num']
+    try:
+        stdout_file = open(stdout_fname, 'w')
+        message = message +  "Python output from this case will go to %s\n" \
+                            % stdout_fname
+    except:
+        print(message)
+        raise Exception("Cannot open file %s" % stdout_fname)
+
+    print(message) # constructed first to avoid interleaving prints
+
+    if redirect_output:
+        sys_stdout = sys.stdout
+        sys.stdout = stdout_file
+        # send any errors to the same file:
+        sys_stderr = sys.stderr
+        sys.stderr = stdout_file
+
+    print('\n==============================')
+    timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
+    print('Working on case %s, started at %s' % (case['num'],timenow))
+
+    p = current_process()
+    print('Process running this case: ', p)
+
+    fault = case['fault']
+
+    if test_subset:
+        # Test on smaller set of subfaults:
+
+        #testfault = dtopotools.Fault(coordinate_specification='triangular')
+        testfault = copy.deepcopy(fault)
+        testfault.subfaults = []
+        for s in fault.subfaults:
+            if 45.4<s.latitude<45.6 and -126<s.longitude<-125:
+                testfault.subfaults.append(s)
+        print('Created testfault with %i subfaults' % len(testfault.subfaults))
+        testfault.event = '%s_subset_test' % event
+        fault = testfault
+
+
+    print('+++ fault.event = ',fault.event)
+    print('+++ fault.Mw = %.3f' % fault.Mw())
+    print('There are %i subfaults in this model' % len(fault.subfaults))
+
+    slips = np.array([s.slip for s in fault.subfaults])
+    print('+++ max slip = %.2fm' % slips.max())
+
+    if not dry_run:
+        # Apply Okada model:
+        dtopo = make_dtopo(fault)
+
+    timenow = datetime.datetime.today().strftime('%Y-%m-%d at %H:%M:%S')
+    print('Done with case %s at %s' % (case['num'],timenow))
+
+    if redirect_output:
+        # Reset stdout and stdout:
+        sys.stdout = sys_stdout
+        sys.stderr = sys_stderr
+
+if __name__ == '__main__':
+
+    print('\n--------------------------')
+    if dry_run:
+        # just print out settings, no runs...
+        print('DRY RUN - settings in OkadaCSZCoPesSources.py')
+
+    caselist = make_all_cases_okada()
+    print('Will run for events:')
+    for case in caselist:
+        print(f"    {case['fault'].event}")
+
+    print('dtopo files will go to: ',dtopo_dir)
+
+    if test_subset:
+        # only for testing
+        print('WARNING: Using a small subset of subfaults for testing')
+        print('         Will not give correct dtopo files!')
+
+
+    nprocs = 2
+    multip_tools.run_many_cases_pool(caselist, nprocs, run_one_case_okada)
+
+    if dry_run:
+        print('Set dry_run=False and re-execute to make dtopo files')
+        print('--------------------------')
+
+    print("Done... See files caseN_out.txt for python output from each case")
