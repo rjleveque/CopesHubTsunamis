@@ -2,7 +2,7 @@
 """
 Convert ground motions into dtopo files
 
-15-arcsecond resolution with new naming convention, e.g.
+30-arcsecond resolution with new naming convention, e.g.
      FL13D = ft-locking-mur13-deep
 dt = 10 seconds
 format '%.2f' (cm resolution)
@@ -24,7 +24,7 @@ from IPython.display import HTML
 #import dtopotools # local version, makes smaller files
 
 
-dtopo_dir = './dtopofiles'
+dtopo_dir = './dtopofiles_261106'  # new ft versions from Audrey's seismic
 os.system('mkdir -p %s' % dtopo_dir)
 print('Output will go in %s' % dtopo_dir)
 
@@ -73,7 +73,8 @@ if 1:
     events = [f'buried-locking-str10-{depth}' for depth in depths]
     events += [f'buried-locking-mur13-{depth}' for depth in depths]
     events += [f'buried-locking-skl16-{depth}' for depth in depths]
-    events += [e.replace('buried','ft') for e in events]
+    #events += [e.replace('buried','ft') for e in events]
+    events = [e.replace('buried','ft') for e in events]  # only ft events
     events += [e.replace('locking','random') for e in events]
 
 if 0:
@@ -117,7 +118,7 @@ for event in events:
     if event[:2] == 'bu':
         zdisp_dir = '../time_dependent_zdisp'  # for buried ruptures
     elif event[:2] == 'ft':
-        zdisp_dir = '../time_dependent_zdisp_FrontalThrust'
+        zdisp_dir = '../time_dependent_zdisp_FrontalThrust2026'
     waveforms = obspy.read('%s/XGRID_%s_Z.h5' % (zdisp_dir,event))
 
     waveforms = waveforms.sort(['station'])
