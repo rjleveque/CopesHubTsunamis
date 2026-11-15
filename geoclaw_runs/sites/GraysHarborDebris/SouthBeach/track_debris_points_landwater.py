@@ -7,40 +7,28 @@ Set up for SouthBeach area, with initial debris given by:
 """
 from pylab import *
 
-def compute_debris_paths(fgframenos, fgno, outdir='_output', 
-                         output_format='binary32', extent=None):
+def compute_debris_paths(fgout_frames, extent=None):
 
     """
-    Load in fgout frames up to time tfinal from the tsunami simulation
-    fgout files in the directory specified by outdir.
-
     Initial debris locations are then set, along with parameters such
     as mass and grounding depth.
 
     Code from debris_tools is used to move the debris based on the velocities
     loaded from the fgout frames.
+
+    Returns debris_paths, dbnos_water, dbnos_land
     """
+
     #import debris_tools
     from geoclaw_debris import debris_tools
+    
     from clawpack.geoclaw import fgout_tools
     from scipy.interpolate import interp1d
 
-    qmap = 'geoclaw'  # defines mapping for fgout variables
 
-    fgno = 1
-    fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, output_format, qmap)
-    fgout_grid.read_fgout_grids_data(fgno)
-    print('Looking for output in ',outdir)
-
-    # use all frames up to time tfinal:
-    #fgframenos = [n+1 for n in range(len(fgout_grid.times)) \
-    #               if fgout_grid.times[n] <= tfinal]
-
-
-    fgframe = fgframenos[0] # initial frame for fgout grid 
-    fgout = fgout_grid.read_frame(fgframe)
 
     # Deterime time t of first fgout frame, to initialize particles
+    fgout = fgout_frames[0]
     t0 = fgout.t
     fgout_extent = fgout.extent_edges
 
@@ -108,7 +96,7 @@ def compute_debris_paths(fgframenos, fgno, outdir='_output',
     # Compute debris path for each particle by using all the fgout frames
     # in the list fgframenos (first frame should be one used to set t0 above):
 
-    debris_paths = debris_tools.make_debris_paths(fgframenos, fgout_grid,
+    debris_paths = debris_tools.make_debris_paths_fromframes(fgout_frames,
                                 debris_paths, dbnos, drag_factor, grounding_depth, grounding_speed)
 
     # done computing debris paths

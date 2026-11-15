@@ -6,10 +6,15 @@ from matplotlib import colors
 from clawpack.visclaw import animation_tools
 from clawpack.geoclaw import fgout_tools
 from track_debris_points_landwater import compute_debris_paths
-from geoclaw_debris import debris_tools
 
-
-fgno = 1
+try:
+    from geoclaw_debris import debris_tools
+except:
+    msg = '*** You need to add the directory geoclaw_debris/src to your ' \
+          'Python path, from this repo:\n' \
+          '     https://github.com/rjleveque/geoclaw_debris'
+    raise ImportError(msg)
+        
 
 if 0:
     graphics_dir = '/Users/rjl/git/WestportMaritime/graphics/'
@@ -18,33 +23,54 @@ if 0:
 else:
     bgimage = None
 
-qoi = 'h'  # 'h' or 'speed'
+fgno = 1
+qoi = 'h'  # 'h' or 'speed' (currently set up only for 'h')
 
-#event = 'BL10S'
-event = 'BR10M'
+event = 'BL10S'
+#event = 'BR10M'
 outdir = f'_output_{event}'
 
 output_format = 'binary'  # format of fgout grid output
 qmap = 'geoclaw'  # defines mapping for fgout variables
 
 
-# List of frames to use for making debris paths and animation:
-fgframes = range(20,40,10)
-#fgframes = range(1,180,2)
-
 fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, output_format, qmap)
 fgout_grid.read_fgout_grids_data(fgno)
 
-# read all specified fgout frames (could modify to read single netCDF version):
-# TODO
 
-fgout0 = fgout_grid.read_frame(fgframes[0])
+if 1:
+    # List of frames to use for making debris paths and animation:
+    #fgframenos = range(20,60,2)
+    fgframenos = range(1,180,2)
+else:
+    # use all frames up to time tfinal:
+    #tfinal = fgout_grid.times.max()  # all fgout times
+    tfinal = 3600.
+    fgframenos = [n+1 for n in range(len(fgout_grid.times)) \
+                   if fgout_grid.times[n] <= tfinal]
+    
+# read all specified fgout frames (can modify to read single netCDF version):
+
+if 1:
+    fgout_frames = []
+    for fgframeno in fgframenos:
+        fgout = fgout_grid.read_frame(fgframeno)
+        fgout_frames.append(fgout)
+else:
+    # read ALL frames from file.nc:
+    fname_nc = '/path/to/file.nc'
+    all_fgout_frames = fgout_tools.read_netcdf(fname_nc, fgout_grid=None,
+                                               verbose=True)
+    fgout_frames = []
+    for fgframeno in fgframenos:
+        fgout_frames.append(all_fgout_frames[fgframeno])
+
+
+fgout0 = fgout_frames[0]
 t0 = fgout0.t
 fgout_extent = fgout0.extent_edges
 
-debris_paths, dbnos_water, dbnos_land = compute_debris_paths(fgframes,
-                                                fgno, outdir,
-                                                output_format,
+debris_paths, dbnos_water, dbnos_land = compute_debris_paths(fgout_frames,
                                                 extent=None)
 
 if 1:
@@ -110,8 +136,11 @@ if 1:
 
 
 
-    def update(fgframe):
-        fgout = fgout_grid.read_frame(fgframe)
+    def update(fg_index):
+        #fgout = fgout_grid.read_frame(fgframe)
+        print(f'+++ fg_index: {fg_index}')
+        #import pdb; pdb.set_trace()
+        fgout = fgout_frames[fg_index]
         t = fgout.t
         im.set_data(flipud(fgout.h.T))
 
@@ -146,8 +175,10 @@ if 1:
         title_text.set_text(f'Water depth {(t/60):.2f} minutes after quake')
 
     print('Making anim...')
+    anim_frames = len(fgframenos)  # same set of frames used for tracking
+    #anim_frames = range(0, len(fgframenos), 2)  # subset for animation
     anim = animation.FuncAnimation(fig, update,
-                          frames=fgframes, interval=200, blit=False)
+                          frames=anim_frames, interval=200, blit=False)
 
     fname_mp4 = f'landwater_tracers_{event}_new.mp4'
     fps = 5
