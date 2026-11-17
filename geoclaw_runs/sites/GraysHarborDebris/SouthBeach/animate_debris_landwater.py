@@ -28,22 +28,37 @@ if 0:
 else:
     bgimage = None
 
+loc = 'SouthBeach'
 fgno = 1
 
 event = 'BL10S'
 #event = 'BR10M'
-outdir = f'_output_{event}'
 
-output_format = 'binary'  # format of fgout grid output
 
 
 # load all fgout frames:
-# Note this requires a modified fgout_tools.py since this function is not
-# currently in the GeoClaw v5.14.0 version
 
 qois = ['h', 'u', 'v', 'B']  # arrays to return
-x,y,t,qois,qoi_arrays = fgout_tools.load_fgout_qois(fgno, outdir,
-                                                     output_format, qois)
+
+if 0:
+    # Load directly from fgout files in outdir.
+    # Note this requires a modified fgout_tools.py since this function is not
+    # currently in the GeoClaw v5.14.0 version
+
+    outdir = f'_output_{event}'
+    output_format = 'binary'  # format of fgout grid output
+
+    x,y,t,qois,qoi_arrays = fgout_tools.load_fgout_qois(fgno, outdir,
+                                                        output_format, qois)
+
+else:
+    # Load from netCDF file that was previously created by loading all
+    # fgout files and then calling fgout_tools.write_netcdf()
+    # e.g. see combine_fgout_nc.py
+
+    fname_nc=f'{loc}_fgout_arrays_{event}.nc'
+    x,y,t,qois,qoi_arrays = fgout_tools.read_netcdf_arrays(fname_nc, qois,
+                                                           verbose=True)
 
 X,Y = meshgrid(x,y,indexing='ij')  # should agree with fgout X and Y
 
