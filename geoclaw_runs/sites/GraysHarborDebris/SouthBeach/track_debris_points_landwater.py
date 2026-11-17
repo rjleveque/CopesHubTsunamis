@@ -7,7 +7,7 @@ Set up for SouthBeach area, with initial debris given by:
 """
 from pylab import *
 
-def compute_debris_paths(fgout_frames, extent=None):
+def compute_debris_paths(db_times, qoi_fcns):
 
     """
     Initial debris locations are then set, along with parameters such
@@ -21,20 +21,21 @@ def compute_debris_paths(fgout_frames, extent=None):
 
     #import debris_tools
     from geoclaw_debris import debris_tools
-    
-    from clawpack.geoclaw import fgout_tools
+
+    #from clawpack.geoclaw import fgout_tools
+    from geoclaw_debris import fgout_tools
+
     from scipy.interpolate import interp1d
 
 
 
-    # Deterime time t of first fgout frame, to initialize particles
-    fgout = fgout_frames[0]
-    t0 = fgout.t
-    fgout_extent = fgout.extent_edges
+    # First time, to initialize particles
+    t0 = db_times[0]
 
     # initial topography (used to determine land / water points):
     # assumed to be same as B in fgout frames (no subsidence)
-    B0_fcn = fgout_tools.make_fgout_fcn_xy(fgout, 'B')
+    B0_fcn = lambda x,y: qoi_fcns['B'](x,y,t0)  # function of (x,y) alone
+
 
     # define beach region for placing initial particles only on beach:
 
@@ -96,8 +97,9 @@ def compute_debris_paths(fgout_frames, extent=None):
     # Compute debris path for each particle by using all the fgout frames
     # in the list fgframenos (first frame should be one used to set t0 above):
 
-    debris_paths = debris_tools.make_debris_paths_fromframes(fgout_frames,
-                                debris_paths, dbnos, drag_factor, grounding_depth, grounding_speed)
+    debris_paths = debris_tools.make_debris_paths_fcnxyt(db_times,
+                                            qoi_fcns, 
+                                            debris_paths, dbnos, drag_factor, grounding_depth, grounding_speed)
 
     # done computing debris paths
     # ------------------------------

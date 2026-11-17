@@ -2,10 +2,15 @@
 from pylab import *
 import matplotlib.animation as animation
 from matplotlib import colors
+from scipy.interpolate import RegularGridInterpolator
 
 from clawpack.visclaw import animation_tools
-from clawpack.geoclaw import fgout_tools
+
+#from clawpack.geoclaw import fgout_tools
+from geoclaw_debris import fgout_tools # modified version
+
 from track_debris_points_landwater import compute_debris_paths
+
 
 try:
     from geoclaw_debris import debris_tools
@@ -17,69 +22,66 @@ except:
         
 
 if 0:
-    graphics_dir = '/Users/rjl/git/WestportMaritime/graphics/'
-    fgout_extent = [-124.16, -124.08, 46.885, 46.92]  # Westport
-    bgimage = [imread(graphics_dir+'fgout11CT.png'), fgout_extent]
+    graphics_dir = '.'
+    fgout_extent = [-124.165, -123.97, 46.73, 46.92] # SouthBeach
+    bgimage = [imread(f'{graphics_dir}/SouthBeach_img.jpg'), fgout_extent]
 else:
     bgimage = None
 
 fgno = 1
-qoi = 'h'  # 'h' or 'speed' (currently set up only for 'h')
 
 event = 'BL10S'
 #event = 'BR10M'
 outdir = f'_output_{event}'
 
 output_format = 'binary'  # format of fgout grid output
-qmap = 'geoclaw'  # defines mapping for fgout variables
 
 
-fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, output_format, qmap)
-fgout_grid.read_fgout_grids_data(fgno)
+# load all fgout frames:
+# Note this requires a modified fgout_tools.py since this function is not
+# currently in the GeoClaw v5.14.0 version
 
+qois = ['h', 'u', 'v', 'B']  # arrays to return
+x,y,t,qois,qoi_arrays = fgout_tools.load_fgout_qois(fgno, outdir,
+                                                     output_format, qois)
 
-if 1:
-    # List of frames to use for making debris paths and animation:
-    #fgframenos = range(20,60,2)
-    fgframenos = range(1,180,2)
+X,Y = meshgrid(x,y,indexing='ij')  # should agree with fgout X and Y
+
+if 0:
+    # List of times to use for making debris paths (and animation):
+    #db_i = range(20,60,10)
+    db_i = range(0,180,2)
+    db_times = t[db_i]
 else:
-    # use all frames up to time tfinal:
-    #tfinal = fgout_grid.times.max()  # all fgout times
-    tfinal = 3600.
-    fgframenos = [n+1 for n in range(len(fgout_grid.times)) \
-                   if fgout_grid.times[n] <= tfinal]
-    
-# read all specified fgout frames (can modify to read single netCDF version):
+    # use all frames:
+    db_times = t
 
-if 1:
-    fgout_frames = []
-    for fgframeno in fgframenos:
-        fgout = fgout_grid.read_frame(fgframeno)
-        fgout_frames.append(fgout)
-else:
-    # read ALL frames from file.nc:
-    fname_nc = '/path/to/file.nc'
-    all_fgout_frames = fgout_tools.read_netcdf(fname_nc, fgout_grid=None,
-                                               verbose=True)
-    fgout_frames = []
-    for fgframeno in fgframenos:
-        fgout_frames.append(all_fgout_frames[fgframeno])
+print(f'Will move debris using these discrete times: \n{db_times}')
 
 
-fgout0 = fgout_frames[0]
-t0 = fgout0.t
-fgout_extent = fgout0.extent_edges
+# make interpolating functions, e.g. qoi_fcns['h'] for depth at (x,y,t)
+qoi_fcns = {}
+for qoi in qois:
+    qoi_fcns[qoi] =fgout_tools.make_qoi_fcn_xyt(x,y,t,qoi_arrays[qoi])
 
-debris_paths, dbnos_water, dbnos_land = compute_debris_paths(fgout_frames,
-                                                extent=None)
+
+fgout_extent = [x.min(), x.max(), y.min(), y.max()]
+
+debris_paths, dbnos_water, dbnos_land = compute_debris_paths(db_times,
+                                                             qoi_fcns)
 
 if 1:
     # make plots and animation:
-    fgout = fgout0
-    B0 = fgout0.B  # assumes no subsidence
+
+    qoi = 'h'  # 'h' or 'speed' (currently set up only for 'h')
+
+    B0 = qoi_fcns['B'](X, Y, db_times[0])
+    h0 = qoi_fcns['h'](X, Y, db_times[0])
+    t0 = db_times[0]
+
     Bshore = 0.  # FIX
 
-    ylat = fgout.Y.mean()  # for aspect ratio of plots
+    ylat = Y.mean()  # for aspect ratio of plots
 
     fig,ax = subplots(figsize=(7,7))
     if bgimage:
@@ -110,39 +112,38 @@ if 1:
 
         norm_depth = colors.BoundaryNorm(bounds_depth, cmap_depth.N)
 
-        im = imshow(flipud(fgout0.h.T), extent=fgout_extent,
+        im = imshow(flipud(h0.T), extent=fgout_extent,
                     cmap=cmap_depth, norm=norm_depth)
         cb = colorbar(im, extend='max', shrink=0.7)
         cb.set_label('meters')
-        contour(fgout.X, fgout.Y, B0, [Bshore], colors='g', linewidths=0.5)
+        contour(X, Y, B0, [Bshore], colors='g', linewidths=0.5)
 
         gca().set_aspect(1./cos(ylat*pi/180.))
         ticklabel_format(useOffset=False)
         xticks(rotation=20)
 
-        t = fgout.t
-        title_text= title(f'Water depth {t/60:.2f} minutes after quake')
+        title_text= title(f'Water depth {t0/60:.2f} minutes after quake')
 
 
-        points_water, = debris_tools.plot_debris(fgout.t, debris_paths,
+        points_water, = debris_tools.plot_debris(t0, debris_paths,
                                                 dbnos_water, ax,
                                                 color='b',
                                                 marker='s',markersize=0.5)
         
-        points_land, = debris_tools.plot_debris(fgout.t, debris_paths,
+        points_land, = debris_tools.plot_debris(t0, debris_paths,
                                                 dbnos_land, ax,
                                                 color='r',
                                                 marker='s',markersize=0.5)
 
 
 
-    def update(fg_index):
-        #fgout = fgout_grid.read_frame(fgframe)
-        print(f'+++ fg_index: {fg_index}')
-        #import pdb; pdb.set_trace()
-        fgout = fgout_frames[fg_index]
-        t = fgout.t
-        im.set_data(flipud(fgout.h.T))
+    def update(t):
+        """
+        Update the data in the plot for a new time
+        """
+
+        h = qoi_fcns['h'](X, Y, t)
+        im.set_data(flipud(h.T))
 
         xd = []
         yd = []
@@ -175,12 +176,12 @@ if 1:
         title_text.set_text(f'Water depth {(t/60):.2f} minutes after quake')
 
     print('Making anim...')
-    anim_frames = len(fgframenos)  # same set of frames used for tracking
-    #anim_frames = range(0, len(fgframenos), 2)  # subset for animation
+    #anim_times = db_times  # same set of times used for tracking
+    anim_times = db_times[::2]
     anim = animation.FuncAnimation(fig, update,
-                          frames=anim_frames, interval=200, blit=False)
+                          frames=anim_times, interval=200, blit=False)
 
-    fname_mp4 = f'landwater_tracers_{event}_new.mp4'
+    fname_mp4 = f'landwater_tracers_{event}_new_xyt.mp4'
     fps = 5
     print('Making mp4...')
     animation_tools.make_mp4(anim, fname_mp4, fps)
